@@ -1,4 +1,4 @@
-// 自动生成的组件声明
+// Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
     NAffix: (typeof import('naive-ui'))['NAffix']
@@ -71,6 +71,8 @@ declare module 'vue' {
     NInput: (typeof import('naive-ui'))['NInput']
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
+    NKeyboardInteractive: (typeof import('naive-ui'))['NKeyboardInteractive']
+    NKeyboardInteractiveItem: (typeof import('naive-ui'))['NKeyboardInteractiveItem']
     NInputNumber: (typeof import('naive-ui'))['NInputNumber']
     NInputOtp: (typeof import('naive-ui'))['NInputOtp']
     NLayout: (typeof import('naive-ui'))['NLayout']

@@ -185,6 +185,11 @@ export const zhDocRoutes = [
 ]
 
 export const enComponentRoutes = [
+  {
+    path: 'keyboard-interactive',
+    component: () =>
+      import('../../src/keyboard-interactive/demos/enUS/index.demo-entry.md')
+  },
   // 组件
   {
     path: 'layout',
@@ -607,6 +612,11 @@ export const enComponentRoutes = [
 ]
 
 export const zhComponentRoutes = [
+  {
+    path: 'keyboard-interactive',
+    component: () =>
+      import('../../src/keyboard-interactive/demos/zhCN/index.demo-entry.md')
+  },
   // 组件
   {
     path: 'layout',

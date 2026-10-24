@@ -33,7 +33,7 @@ function renderNewTag(isZh) {
 
 function renderItemExtra(rawItem, isZh) {
   if (!rawItem.enSuffix || !isZh) {
-    return rawItem.isNew ? renderNewTag : undefined
+    return rawItem.isNew ? () => renderNewTag(isZh) : undefined
   }
   const renderEn = () =>
     h(
@@ -327,6 +327,12 @@ export function createComponentMenuOptions({ lang, theme }) {
       en: 'Data Input Components',
       type: 'group',
       children: [
+        {
+          en: 'Keyboard Interactive',
+          zh: '键盘交互',
+          path: '/keyboard-interactive',
+          isNew: true
+        },
         {
           en: 'Auto Complete',
           zh: '自动填充',

@@ -35,6 +35,7 @@ import {
   defineComponent,
   h,
   inject,
+  onBeforeUnmount,
   onMounted,
   provide,
   ref,
@@ -51,6 +52,7 @@ import {
   useInjectionInstanceCollection,
   warn
 } from '../../_utils'
+import { keyboardInteractiveInjectionKey } from '../../keyboard-interactive/src/context'
 import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -155,6 +157,8 @@ export default defineComponent({
   props: formItemProps,
   slots: Object as SlotsType<FormItemSlots>,
   setup(props) {
+    const keyboardElementRef = ref<HTMLElement | null>(null)
+    const keyboardInteractive = inject(keyboardInteractiveInjectionKey, null)
     useInjectionInstanceCollection(
       formItemInstsInjectionKey,
       'formItems',
@@ -446,6 +450,12 @@ export default defineComponent({
       internalValidate,
       invalidateLabelWidth
     }
+    const unregisterKeyboardItem = keyboardInteractive?.registerFormItem({
+      element: keyboardElementRef,
+      getPath: () => props.path,
+      validate: async () => (await internalValidate(null)).valid
+    })
+    onBeforeUnmount(() => unregisterKeyboardItem?.())
     onMounted(invalidateLabelWidth)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
@@ -528,6 +538,7 @@ export default defineComponent({
       )
     })
     return {
+      keyboardElementRef,
       labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
@@ -604,6 +615,7 @@ export default defineComponent({
 
     return (
       <div
+        ref="keyboardElementRef"
         class={[
           `${mergedClsPrefix}-form-item`,
           this.themeClass,
