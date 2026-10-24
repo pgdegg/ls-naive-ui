@@ -113,7 +113,7 @@ export function genWebTypes(): void {
           if (ignoredPropNames.includes(propName))
             return
           if (propName.startsWith('on') && /[A-Z]/.test(propName[2])) {
-            // is event
+            // 是事件
             const event: Event = {
               name: kebabCase(propName.slice(2)),
               'doc-url': docUrl
@@ -138,7 +138,7 @@ export function genWebTypes(): void {
         }
       )
 
-      // Add the rest of the props and events from docs
+      // 添加文档中剩余的 props 和事件
       for (const name in docProps) {
         const prop: Prop = {
           name,
@@ -377,7 +377,7 @@ export function genWebTypes(): void {
     if (!docs)
       return
     if (docs.parameters) {
-      // For slot
+      // 用于 slot
       const type = strip(strip(docs.parameters, '`'), '(', ')')
       const objDefStart = type ? type.indexOf('{') : -1
       if (objDefStart >= 0) {
@@ -385,7 +385,7 @@ export function genWebTypes(): void {
       }
     }
     if (docs.type) {
-      // For props and events
+      // 用于 props 和事件
       target.type = strip(docs.type, '`').replaceAll('\\|', '|')
     }
     if (docs.description) {

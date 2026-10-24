@@ -1,6 +1,6 @@
 /**
- * Type-only JSX checks for themeOverrides.
- * Asserted by `tsc -p tsconfig.test.json`; runtime test is a no-op.
+ * 针对 themeOverrides 的纯类型 JSX 检查。
+ * 由 `tsc -p tsconfig.test.json` 断言；运行时测试为空操作。
  */
 import { describe, it } from 'vitest'
 import { Fragment, h } from 'vue'
@@ -15,7 +15,7 @@ describe('themeOverrides types', () => {
   it('accepts valid overrides and rejects invalid keys', () => {
     void (() => (
       <>
-        {/* leaf theme, no peers */}
+        {/* 叶子主题，没有 peers */}
         <NButton
           themeOverrides={{
             heightTiny: '1px',
@@ -24,12 +24,12 @@ describe('themeOverrides types', () => {
         />
         <NButton
           themeOverrides={{
-            // @ts-expect-error invalid theme override key
+            // @ts-expect-error 无效的主题覆盖键
             notARealThemeVar: '1px'
           }}
         />
 
-        {/* theme with peers */}
+        {/* 带有 peers 的主题 */}
         <NTabs
           themeOverrides={{
             colorSegment: '#fff',
@@ -41,13 +41,13 @@ describe('themeOverrides types', () => {
         <NTabs
           themeOverrides={{
             peers: {
-              // @ts-expect-error invalid theme peer key
+              // @ts-expect-error 无效的主题 peer 键
               NotARealThemePeer: {}
             }
           }}
         />
 
-        {/* many peers */}
+        {/* 多个 peers */}
         <NDataTable
           themeOverrides={{
             actionDividerColor: '#eee',
@@ -59,7 +59,7 @@ describe('themeOverrides types', () => {
           }}
         />
 
-        {/* empty self vars + peer */}
+        {/* 空的 self 变量 + peer */}
         <NEllipsis
           themeOverrides={{
             peers: {
@@ -68,14 +68,14 @@ describe('themeOverrides types', () => {
           }}
         />
 
-        {/* shared typography theme */}
+        {/* 共享的 typography 主题 */}
         <NText
           themeOverrides={{
             aTextColor: '#000'
           }}
         />
 
-        {/* provider */}
+        {/* 提供者 */}
         <NMessageProvider
           themeOverrides={{
             closeBorderRadius: '2px'

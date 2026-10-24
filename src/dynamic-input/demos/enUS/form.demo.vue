@@ -38,11 +38,11 @@ function onCreate() {
     >
       <div style="display: flex">
         <!--
-          Usually, the path change will cause the form-item verification content
-          or rules to be changed, so naive-ui will clear the existing
-          verification effect. But this example is a special case, as we know
-          the changes in path will not change form-item verification result and
-          rules, so set ignore-path-change on form-item
+          通常，path 的变化会导致 form-item 的验证内容
+          或规则发生变化，因此 naive-ui 会清除已有的
+          验证效果。但本示例属于特殊情况：我们明确知道
+          path 的变化不会改变 form-item 的验证结果和
+          规则，因此在 form-item 上设置 ignore-path-change
         -->
         <n-form-item
           ignore-path-change
@@ -56,7 +56,7 @@ function onCreate() {
             @keydown.enter.prevent
           />
           <!--
-           Since pressing enter on the input element will cause the button in the form to be clicked, the default behavior is prevented
+           由于在 input 元素中按回车会触发表单内的 button 被点击，因此阻止了默认行为
           -->
         </n-form-item>
         <div style="height: 34px; line-height: 34px; margin: 0 8px">

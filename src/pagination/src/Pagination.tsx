@@ -200,7 +200,7 @@ export default defineComponent({
       uncontrolledPageSizeRef
     )
     const mergedPageCountRef = computed(() => {
-      // item count has high priority, for it can affect prefix slot rendering
+      // itemCount 优先级更高，因为它会影响 prefix slot 的渲染
       const { itemCount } = props
       if (itemCount !== undefined) {
         return Math.max(1, Math.ceil(itemCount / mergedPageSizeRef.value))
@@ -333,7 +333,7 @@ export default defineComponent({
         call(_onUpdatePage, page)
       if (onUpdatePage)
         call(onUpdatePage, page)
-      // deprecated
+      // 已废弃
       if (onChange)
         call(onChange, page)
       uncontrolledPageRef.value = page
@@ -353,12 +353,12 @@ export default defineComponent({
         call(_onUpdatePageSize, pageSize)
       if (onUpdatePageSize)
         call(onUpdatePageSize, pageSize)
-      // deprecated
+      // 已废弃
       if (onPageSizeChange)
         call(onPageSizeChange, pageSize)
       uncontrolledPageSizeRef.value = pageSize
-      // update new page when overflows.
-      // we may have different update strategy, but i've no time to impl it
+      // 页码溢出时更新到新的页码。
+      // 本可以有不同的更新策略，但我没时间实现
       if (mergedPageCountRef.value < mergedPageRef.value) {
         doUpdatePage(mergedPageCountRef.value)
       }
@@ -577,7 +577,7 @@ export default defineComponent({
     }
   },
   render() {
-    // it's ok to expand all prop here since no slots' deps
+    // 这里展开所有 prop 没问题，因为没有 slot 依赖
     const {
       $slots,
       mergedClsPrefix,
@@ -810,10 +810,9 @@ export default defineComponent({
                           {contentNode}
                         </div>
                       )
-                      // Do not reuse NPopselect between a page button and the
-                      // fast-jump ellipsis. Patching a popover that still owns a
-                      // large virtualized option list into a plain page button
-                      // can throw during insertBefore.
+                      // 不要在普通页码按钮和快速跳转省略号之间复用 NPopselect。
+                      // 把一个仍持有大量虚拟化选项列表的 popover 强行补丁到
+                      // 普通页码按钮上，可能在 insertBefore 时抛错。
                       if (type === 'page' || !pageItem.options) {
                         return itemNode
                       }

@@ -79,7 +79,7 @@ export const dynamicTagsProps = {
   },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
@@ -212,7 +212,7 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts 体积：仅使用字符串 ref，类型在 render 中未使用
       inputInstRef: inputInstRef as unknown,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,

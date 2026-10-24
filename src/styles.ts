@@ -1,4 +1,4 @@
-// danger zone, internal styles
+// 危险区，内部样式
 export { scrollbarDark } from './_internal/scrollbar/styles'
 export { scrollbarRtl as unstableScrollbarRtl } from './_internal/scrollbar/styles'
 export { internalSelectMenuDark } from './_internal/select-menu/styles'

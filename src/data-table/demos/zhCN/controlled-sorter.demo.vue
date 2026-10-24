@@ -92,7 +92,7 @@ const pagination = { pageSize: 5 }
 
 function handleSorterChange(sorter: DataTableSortState) {
   columnsRef.value.forEach((column: DataTableBaseColumn<RowData>) => {
-    /** column.sortOrder !== undefined means it is uncontrolled */
+    /** column.sortOrder !== undefined 表示该列不受控 */
     if (column.sortOrder === undefined)
       return
     if (!sorter) {

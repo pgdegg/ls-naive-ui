@@ -181,7 +181,7 @@ describe('n-mention', () => {
     wrapper.unmount()
   })
 
-  // Test with problems
+  // 测试存在问题
   // it('should work with `on-search` prop', async () => {
   //   const onSearch = vi.fn()
   //   const wrapper = mount(NMention, {

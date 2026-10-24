@@ -1,7 +1,7 @@
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { c, cB, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-opacity-spinning
 // --n-size

@@ -32,7 +32,7 @@ export default defineConfig({
     ...createDemoPlugin()
   ],
   resolve: {
-    // In production site build, we want to import naive-ui from node_modules
+    // 在生产站点构建中，我们希望从 node_modules 导入 naive-ui
     alias:
       process.env.NODE_ENV !== 'production'
         ? [

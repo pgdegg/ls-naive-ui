@@ -57,7 +57,7 @@ function useAdjustedTo(
   })
 }
 
-// teleport disabled key
+// teleport 禁用 key
 useAdjustedTo.tdkey = teleportDisabled
 useAdjustedTo.propTo = {
   type: [String, Object, Boolean] as PropType<HTMLElement | string | boolean>,

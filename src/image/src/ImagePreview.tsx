@@ -197,7 +197,7 @@ export default defineComponent({
       }
     }
 
-    // avoid image move outside viewport
+    // 避免图片被拖出视口
     function getDerivedOffset(moveStrategy?: MoveStrategy): {
       offsetX: number
       offsetY: number
@@ -708,8 +708,8 @@ export default defineComponent({
                     onAfterLeave={this.handleAfterLeave}
                     appear={this.appear}
                     // BUG:
-                    // onEnter will be called twice, I don't know why
-                    // Maybe it is a bug of vue
+                    // onEnter 会被调用两次，我不知道为什么
+                    // 可能是 vue 的 bug
                     onEnter={this.syncTransformOrigin}
                     onBeforeLeave={this.syncTransformOrigin}
                   >

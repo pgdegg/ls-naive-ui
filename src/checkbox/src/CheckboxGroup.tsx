@@ -78,7 +78,7 @@ export const checkboxGroupProps = {
       ) => void
     >
   >,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<
     MaybeArray<(value: Array<string | number>) => void> | undefined
   >
@@ -153,7 +153,7 @@ export default defineComponent({
             nTriggerFormInput()
             nTriggerFormChange()
             uncontrolledValueRef.value = groupValue
-            // deprecated
+            // 已废弃
             if (onChange)
               call(onChange, groupValue)
           }
@@ -174,7 +174,7 @@ export default defineComponent({
               })
             }
             if (onChange)
-              call(onChange, groupValue) // deprecated
+              call(onChange, groupValue) // 已废弃
             uncontrolledValueRef.value = groupValue
             nTriggerFormInput()
             nTriggerFormChange()
@@ -196,7 +196,7 @@ export default defineComponent({
             })
           }
           if (onChange)
-            call(onChange, [checkboxValue]) // deprecated
+            call(onChange, [checkboxValue]) // 已废弃
           uncontrolledValueRef.value = [checkboxValue]
           nTriggerFormInput()
           nTriggerFormChange()
@@ -215,7 +215,7 @@ export default defineComponent({
             })
           }
           if (onChange)
-            call(onChange, []) // deprecated
+            call(onChange, []) // 已废弃
           uncontrolledValueRef.value = []
           nTriggerFormInput()
           nTriggerFormChange()

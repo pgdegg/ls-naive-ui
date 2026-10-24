@@ -6,7 +6,7 @@ import * as globalComponents from '../src/components'
 
 const TYPE_ROOT = process.cwd()
 
-// XButton is for tsx type checking, shouldn't be exported
+// XButton 用于 tsx 类型检查，不应被导出
 const excludeComponents: string[] = ['NxButton']
 
 function exist(path: string): boolean {

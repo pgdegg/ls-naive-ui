@@ -48,10 +48,10 @@ const esAR: NLocale = {
     startDatetimePlaceholder: 'Fecha y hora de inicio',
     endDatetimePlaceholder: 'Fecha y hora final',
     monthBeforeYear: true,
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
-    // 0 is Monday / 0 es Lunes
+    // 0 是星期一 / 0 es Lunes
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hoy'
   },
@@ -65,7 +65,7 @@ const esAR: NLocale = {
     sourceTitle: 'Fuente',
     targetTitle: 'Objetivo'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',
@@ -124,7 +124,7 @@ const esAR: NLocale = {
     tipZoomIn: 'Acercar',
     tipDownload: 'Descargar',
     tipClose: 'Cerrar (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom to original size'
   },
   Heatmap: {

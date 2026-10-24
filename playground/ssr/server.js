@@ -8,18 +8,18 @@ const { default: App } = require('./app')
 
 const server = express()
 
-// serve js
+// 提供 js
 server.use((req, res, next) => {
   if (req.path.endsWith('.js')) {
-    // the file will be in dist folder after build
-    // so no `dist` is required in path.resolve
+    // 构建后该文件会位于 dist 目录中
+    // 因此 path.resolve 中不需要 `dist`
     res.send(fs.readFileSync(path.resolve(__dirname, 'client.js'), 'utf8'))
   } else {
     next()
   }
 })
 
-// serve html
+// 提供 html
 server.use((req, res, next) => {
   if (req.path.endsWith('.js')) {
     next()

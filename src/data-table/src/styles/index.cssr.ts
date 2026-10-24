@@ -5,7 +5,7 @@ import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_util
 
 const fixedColumnStyle = createFixedColumnStyle()
 
-// vars:
+// 主题变量：
 // --n-font-size
 // --n-th-padding
 // --n-td-padding
@@ -52,10 +52,10 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --n-loading-color
 // --n-opacity-loading
 
-// --n-box-shadow-before used in Body.tsx
-// --n-box-shadow-after used in Body.tsx
+// --n-box-shadow-before 用于 Body.tsx
+// --n-box-shadow-after 用于 Body.tsx
 
-// --indent-offset for ellipsis & expand trigger
+// --indent-offset 用于 ellipsis 和 expand trigger
 export default c([
   cB('data-table', `
     width: 100%;
@@ -103,8 +103,8 @@ export default c([
             `, [
               c('>', [
                 cB('data-table-base-table-body', 'flex-basis: 0;', [
-                  // last-child means there is no empty icon
-                  // body is a scrollbar, we need to override height 100%
+                  // last-child 表示没有空状态图标
+                  // body 是一个滚动条，需要覆盖 height: 100%
                   c('&:last-child', 'flex-grow: 1;')
                 ])
               ])
@@ -397,8 +397,8 @@ export default c([
       cM('last-row', `
         border-bottom: 0 solid var(--n-merged-border-color);
       `, [
-        // make sure there is no overlap between bottom border and
-        // fixed column box shadow
+        // 确保底部边框与
+        // 固定列的阴影之间不发生重叠
         c('&::after', `
           bottom: 0 !important;
         `),

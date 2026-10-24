@@ -84,9 +84,9 @@ export default defineComponent({
         data-index={index}
         aria-hidden={!isActive}
         style={style}
-        // We use ts-ignore for vue-tsc, since it seems to patch native event
-        // for vue components
-        // @ts-expect-error vue's tsx has type for capture events
+        // 我们针对 vue-tsc 使用 ts-ignore，
+        // 因为它似乎会为 Vue 组件修补原生事件
+        // @ts-expect-error vue 的 tsx 对捕获事件有类型定义
         onClickCapture={this.handleClick}
       >
         {slots.default?.({

@@ -215,7 +215,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    // We don't change value unless blur or confirm is called
+    // 除非触发 blur 或 confirm，否则我们不会改变 value
     const pendingValueRef: Ref<Value | null> = ref(null)
     watchEffect(() => {
       pendingValueRef.value = mergedValueRef.value
@@ -475,7 +475,7 @@ export default defineComponent({
           })
         }
       }
-      // We need to handle the conflict with normal date value input
+      // 我们需要处理与普通日期值输入之间的冲突
       // const { value: mergedValue } = mergedValueRef
       // if (props.type === 'date' && !Array.isArray(mergedValue)) {
       //   const nextValue = getDerivedTimeFromKeyboardEvent(mergedValue, e)
@@ -485,7 +485,7 @@ export default defineComponent({
     function handleInputKeydown(e: KeyboardEvent): void {
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
-        // closeCalendar will be called in handleDeactivated
+        // closeCalendar 将在 handleDeactivated 中被调用
       }
     }
     function handleClear(): void {
@@ -494,7 +494,7 @@ export default defineComponent({
       doClear()
     }
     function handlePanelClear(): void {
-      // close will be called inside panel
+      // close 将在面板内部被调用
       inputInstRef.value?.deactivate()
       doClear()
     }
@@ -520,7 +520,7 @@ export default defineComponent({
       })
     }
 
-    // --- Panel update value
+    // --- 面板更新值
     function handlePanelUpdateValue(
       value: Value | null,
       doUpdate: boolean
@@ -541,7 +541,7 @@ export default defineComponent({
         { doConfirm: true }
       )
     }
-    // --- Refresh
+    // --- 刷新
     function deriveInputState(): void {
       const { value } = pendingValueRef
       if (isRangeRef.value) {
@@ -586,7 +586,7 @@ export default defineComponent({
         )
       }
     }
-    // --- Input deactivate & blur
+    // --- 输入 deactivate & blur
     function handleInputActivate(): void {
       if (!mergedShowRef.value) {
         openCalendar()
@@ -609,9 +609,9 @@ export default defineComponent({
         returnFocus: false
       })
     }
-    // --- Input
+    // --- 输入
     function handleSingleUpdateValue(v: string): void {
-      // TODO, fix conflict with clear
+      // TODO，修复与 clear 的冲突
       if (v === '') {
         doUpdateValue(null, { doConfirm: false })
         pendingValueRef.value = null
@@ -637,7 +637,7 @@ export default defineComponent({
       { source }: { source: 0 | 1 | 'clear' }
     ): void {
       if (v[0] === '' && v[1] === '') {
-        // clear or just delete all the inputs
+        // 清除，或者直接删除全部输入内容
         doUpdateValue(null, { doConfirm: false })
         pendingValueRef.value = null
         rangeStartInputValueRef.value = ''
@@ -677,7 +677,7 @@ export default defineComponent({
         ;[rangeStartInputValueRef.value, rangeEndInputValueRef.value] = v
       }
     }
-    // --- Click
+    // --- 点击
     function handleTriggerClick(e: MouseEvent): void {
       if (mergedDisabledRef.value)
         return
@@ -687,13 +687,13 @@ export default defineComponent({
         openCalendar()
       }
     }
-    // --- Focus
+    // --- 聚焦
     function handleInputFocus(e: FocusEvent): void {
       if (mergedDisabledRef.value)
         return
       doFocus(e)
     }
-    // --- Calendar
+    // --- 日历
     function openCalendar(): void {
       if (mergedDisabledRef.value || mergedShowRef.value)
         return
@@ -720,25 +720,25 @@ export default defineComponent({
         }
       }
     }
-    // If new value is valid, set calendarTime and refresh display strings.
-    // If new value is invalid, do nothing.
+    // 如果新值有效，设置 calendarTime 并刷新展示字符串。
+    // 如果新值无效，则不做任何处理。
     watch(pendingValueRef, () => {
       deriveInputState()
     })
-    // init
+    // 初始化
     deriveInputState()
 
     watch(mergedShowRef, (value) => {
       if (!value) {
-        // close & restore original value
-        // it won't conflict with props.value change
-        // since when prop is passed, it is already
-        // up to date.
+        // 关闭并恢复原始值
+        // 它不会与 props.value 的变更冲突
+        // 因为传入 prop 时，它本身已经
+        // 是最新的。
         pendingValueRef.value = mergedValueRef.value
       }
     })
 
-    // use pending value to do validation
+    // 使用 pending 值进行校验
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
@@ -848,11 +848,11 @@ export default defineComponent({
         '--n-panel-box-shadow': panelBoxShadow,
         '--n-panel-text-color': panelTextColor,
 
-        // panel header
+        // 面板头部
         '--n-panel-header-padding': panelHeaderPadding,
         '--n-panel-header-divider-color': panelHeaderDividerColor,
 
-        // panel calendar
+        // 面板日历
         '--n-calendar-left-padding': calendarLeftPadding,
         '--n-calendar-right-padding': calendarRightPadding,
         '--n-calendar-title-color-hover': calendarTitleColorHover,
@@ -869,12 +869,12 @@ export default defineComponent({
         '--n-calendar-days-text-color': calendarDaysTextColor,
         '--n-calendar-divider-color': calendarDividerColor,
 
-        // panel action
+        // 面板操作区
         '--n-panel-action-padding': panelActionPadding,
         '--n-panel-extra-footer-padding': panelExtraFooterPadding,
         '--n-panel-action-divider-color': panelActionDividerColor,
 
-        // panel item
+        // 面板项
         '--n-item-font-size': itemFontSize,
         '--n-item-border-radius': itemBorderRadius,
         '--n-item-size': itemSize,
@@ -888,16 +888,16 @@ export default defineComponent({
         '--n-item-text-color-disabled': itemTextColorDisabled,
         '--n-item-text-color-active': itemTextColorActive,
 
-        // scroll item
+        // 滚动项
         '--n-scroll-item-width': scrollItemWidth,
         '--n-scroll-item-height': scrollItemHeight,
         '--n-scroll-item-border-radius': scrollItemBorderRadius,
 
-        // panel arrow
+        // 面板箭头
         '--n-arrow-size': arrowSize,
         '--n-arrow-color': arrowColor,
 
-        // icon in trigger
+        // 触发器中的图标
         '--n-icon-color': iconColor,
         '--n-icon-color-disabled': iconColorDisabled
       }
@@ -921,10 +921,10 @@ export default defineComponent({
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       pendingValue: pendingValueRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，render 中未使用类型
       panelInstRef: panelInstRef as unknown,
       triggerElRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，render 中未使用类型
       inputInstRef: inputInstRef as unknown,
       isMounted: useIsMounted(),
       displayTime: singleInputValueRef,

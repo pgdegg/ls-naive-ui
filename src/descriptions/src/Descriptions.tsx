@@ -50,7 +50,7 @@ export const descriptionsProps = {
 } as const
 
 export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
-/** @deprecated You should use `DescriptionsProps` */
+/** @deprecated 你应该使用 `DescriptionsProps` */
 export type DescriptionProps = DescriptionsProps
 
 export interface DescriptionsSlots {

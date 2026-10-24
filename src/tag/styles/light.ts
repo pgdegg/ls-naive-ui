@@ -50,7 +50,7 @@ function self(vars: ThemeCommonVars) {
     fontSizeMedium: fontSizeSmall,
     fontSizeLarge: fontSizeMedium,
     fontWeightStrong,
-    // checked
+    // 选中状态
     textColorCheckable: textColor2,
     textColorHoverCheckable: textColor2,
     textColorPressedCheckable: textColor2,
@@ -61,7 +61,7 @@ function self(vars: ThemeCommonVars) {
     colorChecked: primaryColor,
     colorCheckedHover: primaryColorHover,
     colorCheckedPressed: primaryColorPressed,
-    // default
+    // 默认
     border: `1px solid ${borderColor}`,
     textColor: textColor2,
     color: tagColor,

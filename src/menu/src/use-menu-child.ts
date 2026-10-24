@@ -107,7 +107,7 @@ export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
     if (NSubmenu && typeof NSubmenu.paddingLeftRef.value === 'number') {
       return (isGroup ? indent / 2 : indent) + NSubmenu.paddingLeftRef.value
     }
-    // Shouldn't reach here
+    // 不应该走到这里
     return 0
   })
   const iconMarginRightRef = computed(() => {

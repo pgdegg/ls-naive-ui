@@ -118,7 +118,7 @@ export const autoCompleteProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  // deprecated
+  // 已废弃
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
@@ -347,13 +347,13 @@ export default defineComponent({
     return {
       focus: exposedMethods.focus,
       blur: exposedMethods.blur,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       inputInstRef: inputInstRef as unknown,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       menuInstRef: menuInstRef as unknown,
       triggerElRef,
       treeMate: treeMateRef,

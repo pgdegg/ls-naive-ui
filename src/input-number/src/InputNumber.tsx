@@ -99,7 +99,7 @@ export const inputNumberProps = {
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 }
 
@@ -157,11 +157,11 @@ export default defineComponent({
       }
     })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
-    // dom ref
+    // DOM 引用
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
     const addButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
-    // value
+    // 值
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -219,7 +219,7 @@ export default defineComponent({
           if (
             mergedValue === null
             || precision === undefined
-            // precision overflow
+            // 精度溢出
             || getPrecision(mergedValue) > precision
           ) {
             displayedValueRef.value = format(mergedValue, undefined)
@@ -230,8 +230,8 @@ export default defineComponent({
         }
       }
       else {
-        // null can pass the validator check
-        // so mergedValue is a number
+        // null 可以通过 validator 校验
+        // 所以 mergedValue 是一个数字
         displayedValueRef.value = String(mergedValue)
       }
     }
@@ -300,13 +300,13 @@ export default defineComponent({
           if (mergedMax !== null && nextValue > mergedMax) {
             if (!doUpdateIfValid || isInputing)
               return false
-            // if doUpdateIfValid=true, we try to make it a valid value
+            // 如果 doUpdateIfValid=true，尝试使其成为一个有效值
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
             if (!doUpdateIfValid || isInputing)
               return false
-            // if doUpdateIfValid=true, we try to make it a valid value
+            // 如果 doUpdateIfValid=true，尝试使其成为一个有效值
             nextValue = mergedMin
           }
           if (props.validator && !props.validator(nextValue))
@@ -364,8 +364,8 @@ export default defineComponent({
     }
     function doBlur(e: FocusEvent): void {
       if (e.target === inputInstRef.value?.wrapperElRef) {
-        // hit input wrapper
-        // which means not activated
+        // 命中 input wrapper
+        // 意味着尚未激活
         return
       }
       const value = deriveValueFromDisplayedValue({
@@ -374,23 +374,23 @@ export default defineComponent({
         isInputing: false,
         fixPrecision: true
       })
-      // If valid, update event has been emitted
-      // make sure e.target.value is correct in blur callback
+      // 如果有效，update 事件已经触发
+      // 确保 blur 回调中 e.target.value 是正确的
       if (value !== false) {
         const inputElRef = inputInstRef.value?.inputElRef
         if (inputElRef) {
           inputElRef.value = String(value || '')
         }
-        // If value is not changed, the displayed value may be greater than or
-        // less than the current value. The derived value is reformatted so the
-        // value is not changed. We can simply derive a new displayed value
+        // 如果值没有变化，展示值可能大于或小于当前
+        // 值。推导出的值会被重新格式化，所以值没有变化。
+        // 我们可以直接推导出一个新的展示值
         if (mergedValueRef.value === value) {
           deriveDisplayedValueFromValue()
         }
       }
       else {
-        // If not valid, nothing will be emitted, so derive displayed value from
-        // origin value
+        // 如果无效，不会触发任何事件，因此从原始值
+        // 推导展示值
         deriveDisplayedValueFromValue()
       }
       const { onBlur } = props
@@ -398,8 +398,8 @@ export default defineComponent({
       if (onBlur)
         call(onBlur, e)
       nTriggerFormBlur()
-      // User may change value in blur callback, we make sure it will be
-      // displayed. Sometimes mergedValue won't be viewed as changed
+      // 用户可能在 blur 回调中修改值，我们确保它会被
+      // 展示出来。有时 mergedValue 不会被视为已变化
       void nextTick(() => {
         deriveDisplayedValueFromValue()
       })
@@ -542,8 +542,8 @@ export default defineComponent({
     function handleKeyDown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
-          // hit input wrapper
-          // which means not activated
+          // 命中 input wrapper
+          // 意味着尚未激活
           return
         }
         const value = deriveValueFromDisplayedValue({
@@ -621,7 +621,7 @@ export default defineComponent({
     return {
       ...exposedMethods,
       rtlEnabled: rtlEnabledRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       inputInstRef: inputInstRef as unknown,
       minusButtonInstRef: minusButtonInstRef as unknown,
       addButtonInstRef: addButtonInstRef as unknown,
@@ -647,7 +647,7 @@ export default defineComponent({
       handleMinusMousedown,
       handleKeyDown,
       handleUpdateDisplayedValue,
-      // theme
+      // 主题
       mergedTheme: themeRef,
       inputThemeOverrides: {
         paddingSmall: '0 8px 0 10px',

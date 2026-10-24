@@ -33,7 +33,7 @@ function asModal(style: CProperties): CNode {
   return c(({ props: { bPrefix } }) => `&${bPrefix || prefix}modal`, style)
 }
 
-// child block
+// 子 block
 const cCB: typeof cB = ((...args: any[]) => {
   return c('>', [(cB as any)(...args)])
 }) as any

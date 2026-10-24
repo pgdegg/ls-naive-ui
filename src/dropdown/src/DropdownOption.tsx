@@ -304,7 +304,7 @@ export default defineComponent({
               data-dropdown-option
               class={`${clsPrefix}-dropdown-option-body__label`}
             >
-              {/* TODO: Workaround, menu compatible */}
+              {/* TODO: 临时方案，与 menu 兼容 */}
               {renderLabel
                 ? renderLabel(rawNode)
                 : render(rawNode[this.labelField] ?? rawNode.title)}

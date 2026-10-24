@@ -86,8 +86,8 @@ export default defineComponent({
       const { value: trigger } = triggerRef
       if (trigger) {
         const { lineClamp } = props
-        // we need to apply style here, since the dom may be updated in
-        // nextTick, measure dom size will derive wrong result
+        // 需要在这里应用样式，因为 dom 可能在 nextTick 中才被更新，
+        // 此时测量 dom 尺寸会得到错误的结果
         syncEllipsisStyle(trigger)
         if (lineClamp !== undefined) {
           tooltipDisabled = trigger.scrollHeight <= trigger.offsetHeight
@@ -104,7 +104,7 @@ export default defineComponent({
       }
       return tooltipDisabled
     }
-    // HACK: restore it after vue-jsx-vapor can handle it correctly
+    // HACK：等 vue-jsx-vapor 能正确处理后再恢复它
     function handleClick(): void {
       if (props.expandTrigger !== 'click')
         return
@@ -136,7 +136,7 @@ export default defineComponent({
         ref="triggerRef"
         onClick={handleClick}
         onMouseenter={
-          // get tooltip disabled will derive cursor style
+          // 获取 tooltip 是否禁用会推导出 cursor 样式
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
         }
       >
@@ -159,7 +159,7 @@ export default defineComponent({
         syncTriggerClass(trigger, lineClampClass, 'remove')
       }
       for (const key in latestStyle) {
-        // guard can make it a little faster
+        // 守卫判断可以让它稍快一些
         if ((trigger.style as any)[key] !== (latestStyle as any)[key]) {
           ;(trigger.style as any)[key] = (latestStyle as any)[key]
         }
@@ -197,7 +197,7 @@ export default defineComponent({
       mergedTheme,
       triggerRef,
       triggerInnerRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在 render 中未使用
       tooltipRef: tooltipRef as unknown,
       renderTrigger,
       getTooltipDisabled

@@ -23,7 +23,7 @@ export type FormItemRuleValidator = (
   ...args: FormItemRuleValidatorParams
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
-// In src of async-validator, any non-promise of asyncValidator will be abandoned
+// 在 async-validator 的源码中，asyncValidator 返回的任何非 Promise 值都会被丢弃
 export type FormItemRuleAsyncValidator = (
   ...args: FormItemRuleValidatorParams
 ) => Promise<void> | undefined

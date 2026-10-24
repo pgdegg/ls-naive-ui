@@ -9,7 +9,7 @@ import { useLocale } from '../../_mixins'
 export const timeProps = {
   time: {
     type: [Number, Date] as PropType<number | Date>,
-    default: undefined // For unix or non unix mode, it should be different default value
+    default: undefined // 在 unix 或非 unix 模式下，它应有不同的默认值
   },
   type: {
     type: String as PropType<'relative' | 'date' | 'datetime'>,
@@ -17,7 +17,7 @@ export const timeProps = {
   },
   to: {
     type: [Number, Date] as PropType<number | Date>,
-    default: undefined // the same as `time` prop
+    default: undefined // 与 `time` prop 相同
   },
   unix: Boolean,
   format: String,

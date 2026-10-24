@@ -210,10 +210,10 @@ export default defineComponent({
         }
       })
       links.sort((a, b) => {
-        // ascend top
+        // 按 top 升序
         if (a.top > b.top) {
           return 1
-          // descend height
+          // 按 height 降序
         }
         else if (a.top === b.top && a.height < b.height) {
           return -1

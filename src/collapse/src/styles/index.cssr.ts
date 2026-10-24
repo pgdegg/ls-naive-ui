@@ -1,7 +1,7 @@
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-font-size
 // --n-bezier
 // --n-text-color

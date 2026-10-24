@@ -33,9 +33,9 @@ export function useRtl(
     watchEffect(() => {
       const { value: clsPrefix } = clsPrefixRef
       const id = `${clsPrefix}${mountId}Rtl`
-      // if it already exists, we only need to watch clsPrefix, although in most
-      // of time it's unnecessary... However we can at least listen less
-      // handlers, which is great.
+      // 如果它已经存在，我们只需要监听 clsPrefix，尽管在大多数时候
+      // 这是不必要的……不过我们至少可以少监听一些
+      // handler，这很好。
       if (exists(id, ssrAdapter))
         return
       const { value: componentRtlState } = componentRtlStateRef

@@ -176,7 +176,7 @@ export const popoverBaseProps = {
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
-  // events
+  // 事件
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
@@ -184,7 +184,7 @@ export const popoverBaseProps = {
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
   >,
-  // internal
+  // 内部
   internalDeactivateImmediately: Boolean,
   internalSyncTargetWithParent: Boolean,
   internalInheritedEventHandlers: {
@@ -196,7 +196,7 @@ export const popoverBaseProps = {
     type: Array as PropType<string[]>,
     default: () => []
   },
-  // deprecated
+  // 已废弃
   onShow: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void> | undefined
   >,
@@ -271,7 +271,7 @@ export default defineComponent({
     }
     const isMountedRef = useIsMounted()
     const binderInstRef = ref<BinderInst | null>(null)
-    // setup show
+    // 初始化 show
     const controlledShowRef = computed(() => props.show)
     const uncontrolledShowRef = ref(props.defaultShow)
     const mergedShowWithoutDisabledRef = useMergedState(
@@ -296,7 +296,7 @@ export default defineComponent({
         return false
       return mergedShowWithoutDisabledRef.value
     }
-    // setup show-arrow
+    // 初始化 show-arrow
     const compatibleShowArrowRef = useCompitable(props, ['arrow', 'showArrow'])
     const mergedShowArrowRef = computed(() => {
       if (props.overlap)
@@ -310,7 +310,7 @@ export default defineComponent({
     const positionManuallyRef = useMemo(() => {
       return props.x !== undefined && props.y !== undefined
     })
-    // methods
+    // 方法
     function doUpdateShow(value: boolean): void {
       const {
         'onUpdate:show': _onUpdateShow,
@@ -409,11 +409,11 @@ export default defineComponent({
         }
       }
     }
-    // will be called in popover-content
+    // 将在 popover-content 中调用
     function handleMouseMoveOutside(): void {
       handleMouseLeave()
     }
-    // will be called in popover-content
+    // 将在 popover-content 中调用
     function handleClickOutside(e: MouseEvent): void {
       if (!getMergedShow())
         return
@@ -470,11 +470,11 @@ export default defineComponent({
       }
     })
     const returned = {
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts 体积：render 中只用到字符串 ref，类型用不上
       binderInstRef: binderInstRef as unknown,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
-      // if to show popover body
+      // 是否显示 popover 主体
       uncontrolledShow: uncontrolledShowRef,
       mergedShowArrow: mergedShowArrowRef,
       getMergedShow,
@@ -507,7 +507,7 @@ export default defineComponent({
         }
         if ((triggerVNode.type as any)?.__popover__) {
           popoverInside = true
-          // We assume that there's no DOM event handlers on popover element
+          // 我们假定 popover 元素上没有 DOM 事件处理器
           if (!triggerVNode.props) {
             triggerVNode.props = {
               internalSyncTargetWithParent: true,
@@ -578,9 +578,9 @@ export default defineComponent({
       >
         {{
           default: () => {
-            // We need to subscribe it. Sometimes rerender won't ge triggered.
-            // `mergedShowConsideringDisabledProp` is not the final disabled status.
-            // In ellpisis it's dynamic.
+            // 我们需要订阅它。有时重渲染不会被触发。
+            // `mergedShowConsideringDisabledProp` 并非最终的禁用状态。
+            // 在 ellpisis 场景下它是动态的。
             void this.mergedShowConsideringDisabledProp
             const mergedShow = this.getMergedShow()
             return [

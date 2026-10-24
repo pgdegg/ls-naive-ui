@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-// use absolute path to make sure no circular ref of style
+// 使用绝对路径，确保样式不会出现循环引用
 // this -> modal-index -> modal-style
 import { defineComponent, h, ref } from 'vue'
 import { call, omit } from '../../_utils'
@@ -13,7 +13,7 @@ export const NModalEnvironment = defineComponent({
       type: String,
       required: true
     },
-    // private
+    // 私有
     onInternalAfterLeave: {
       type: Function as PropType<(key: string) => void>,
       required: true

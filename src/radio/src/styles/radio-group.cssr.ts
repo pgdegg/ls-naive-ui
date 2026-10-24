@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-button-border-color
 // --n-button-border-color-active

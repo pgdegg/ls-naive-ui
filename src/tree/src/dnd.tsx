@@ -28,8 +28,8 @@ export function renderDropMark({
   else {
     const cssPosition = position === 'before' ? 'top' : 'bottom'
     style[cssPosition] = 0
-    // The left prop should be modified when tree's style is changed
-    // Maybe it is possible to use content left
+    // 当树的样式改变时，left 属性需要相应调整
+    // 或许可以改用 content 的 left
     style.left = `${el.offsetLeft + 6 - offsetLevel * indent}px`
     style.height = '2px'
     style.backgroundColor = 'var(--n-drop-mark-color)'

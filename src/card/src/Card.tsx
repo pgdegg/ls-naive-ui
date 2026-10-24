@@ -172,7 +172,7 @@ export default defineComponent({
         '--n-close-color-pressed': closeColorPressed,
         '--n-border-color': borderColor,
         '--n-box-shadow': boxShadow,
-        // size
+        // 尺寸（size）
         '--n-padding-top': paddingTop,
         '--n-padding-bottom': paddingBottom,
         '--n-padding-left': paddingLeft,

@@ -12,7 +12,7 @@ const oppositePlacement = {
 
 const arrowSize = 'var(--n-arrow-height) * 1.414'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-bezier-ease-in
 // --n-bezier-ease-out
@@ -89,7 +89,7 @@ export default c([
         pointer-events: all;
       `)
     ]),
-    // body transition
+    // 主体过渡动画
     c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
       opacity: 0;
       transform: scale(.85);

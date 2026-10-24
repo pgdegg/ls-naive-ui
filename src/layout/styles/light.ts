@@ -41,7 +41,7 @@ export function self(vars: ThemeCommonVars) {
     siderToggleButtonIconColorInverted: textColor2,
     siderToggleBarColor: composite(bodyColor, scrollbarColor),
     siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
-    // hack for inverted background
+    // 针对反色背景的 hack
     __invertScrollbar: 'true'
   }
 }

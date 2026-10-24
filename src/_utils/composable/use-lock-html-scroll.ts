@@ -9,7 +9,7 @@ let originalOverflowY: string = ''
 export const lockHtmlScrollRightCompensationRef = ref('0px')
 
 export function useLockHtmlScroll(lockRef: Ref<boolean>): void {
-  // not browser
+  // 非浏览器环境
   if (typeof document === 'undefined')
     return
   const el = document.documentElement

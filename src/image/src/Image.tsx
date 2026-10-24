@@ -102,7 +102,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      // 如果设置了 lazy 和 intersectionObserverOptions，则使用 IntersectionObserver
       if (props.lazy && props.intersectionObserverOptions) {
         let unobserve: (() => void) | undefined
         const stopWatchHandle = watchEffect(() => {
@@ -153,7 +153,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts：仅用字符串 ref，类型在 render 中未使用
       previewInstRef: previewInstRef as unknown,
       imageRef,
       mergedPreviewSrc: mergedPreviewSrcRef,
@@ -209,7 +209,7 @@ export default defineComponent({
             onClick: this.mergedOnClick,
             onError: this.mergedOnError,
             onLoad: this.mergedOnLoad,
-            // If interseciton observer options is set, do not use native lazy
+            // 如果设置了 IntersectionObserver 选项，则不使用原生懒加载
             loading:
               isImageSupportNativeLazy
               && lazy

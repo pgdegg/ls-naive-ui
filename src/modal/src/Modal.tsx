@@ -72,7 +72,7 @@ export const modalProps = {
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
   draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
-  // events
+  // 事件
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
@@ -87,14 +87,14 @@ export const modalProps = {
   onPositiveClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
-  // private
+  // private → 私有占位
   internalDialog: Boolean,
   internalModal: Boolean,
   internalAppear: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // deprecated
+  // 已废弃
   overlayStyle: [String, Object] as PropType<string | CSSProperties>,
   onBeforeHide: Function as PropType<() => void>,
   onAfterHide: Function as PropType<() => void>,
@@ -174,7 +174,7 @@ export default defineComponent({
         call(onUpdateShow, show)
       if (_onUpdateShow)
         call(_onUpdateShow, show)
-      // deprecated
+      // 已废弃
       if (onHide && !show)
         onHide(show)
     }
@@ -221,7 +221,7 @@ export default defineComponent({
       const { onBeforeLeave, onBeforeHide } = props
       if (onBeforeLeave)
         call(onBeforeLeave)
-      // deprecated
+      // 已废弃
       if (onBeforeHide)
         onBeforeHide()
     }
@@ -229,7 +229,7 @@ export default defineComponent({
       const { onAfterLeave, onAfterHide } = props
       if (onAfterLeave)
         call(onAfterLeave)
-      // deprecated
+      // 已废弃
       if (onAfterHide)
         onAfterHide()
     }
@@ -295,7 +295,7 @@ export default defineComponent({
       isMounted: isMountedRef,
       containerRef,
       presetProps: computed(() => {
-        // TODO: remove as any after vue fix the issue introduced in 3.2.27
+        // TODO：待 vue 修复 3.2.27 引入的问题后移除 as any
         return keep(props, forwardedPresetPropsKeys) as any
       }),
       handleEsc,

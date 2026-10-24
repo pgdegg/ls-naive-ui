@@ -12,18 +12,18 @@ import { terseCssr } from './terse-cssr'
     __DEV__: 'process.env.NODE_ENV !== \'production\''
   })
   await replaceDefine([srcDir], {
-    // the sequence is crucial
+    // 顺序至关重要
     '\'lodash\'': '\'lodash-es\''
   })
 
-  // complete require and import source path
+  // 补全 require 和 import 的源路径
   await completePath(['es'])
 
-  // generate web-types.json for webstorm & vetur
-  // web-types.json is only a very loose description for auto-complete
-  // vscode is a much better choice
+  // 为 webstorm & vetur 生成 web-types.json
+  // web-types.json 只是对自动补全的非常宽松的描述
+  // vscode 是一个更好的选择
   genWebTypes()
 
-  // Fail the build if dts/output embeds host filesystem paths.
+  // 如果 dts/output 中嵌入了宿主机文件系统路径，则使构建失败
   await checkArtifacts()
 })()

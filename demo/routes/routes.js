@@ -1,5 +1,5 @@
 export const enDocRoutes = [
-  // basic docs
+  // 基础文档
   {
     path: 'introduction',
     component: () => import('../pages/docs/introduction/enUS/index.md')
@@ -92,7 +92,7 @@ export const enDocRoutes = [
 ]
 
 export const zhDocRoutes = [
-  // basic docs
+  // 基础文档
   {
     path: 'introduction',
     component: () => import('../pages/docs/introduction/zhCN/index.md')
@@ -185,7 +185,7 @@ export const zhDocRoutes = [
 ]
 
 export const enComponentRoutes = [
-  // components
+  // 组件
   {
     path: 'layout',
     component: () => import('../../src/layout/demos/enUS/index.demo-entry.md')
@@ -607,7 +607,7 @@ export const enComponentRoutes = [
 ]
 
 export const zhComponentRoutes = [
-  // components
+  // 组件
   {
     path: 'layout',
     component: () => import('../../src/layout/demos/zhCN/index.demo-entry.md')

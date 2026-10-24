@@ -59,7 +59,7 @@ export const dynamicInputProps = {
     default: 0
   },
   value: Array as PropType<any[]>,
-  // TODO: make it robust for different types
+  // TODO: 使其对不同类型更健壮
   defaultValue: {
     type: Array as PropType<any[]>,
     default: () => []
@@ -71,7 +71,7 @@ export const dynamicInputProps = {
   keyField: String,
   itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
-  // for preset pair
+  // 用于 pair preset
   keyPlaceholder: {
     type: String,
     default: ''
@@ -80,7 +80,7 @@ export const dynamicInputProps = {
     type: String,
     default: ''
   },
-  // for preset input
+  // 用于 input preset
   placeholder: {
     type: String,
     default: ''
@@ -92,7 +92,7 @@ export const dynamicInputProps = {
   onRemove: Function as PropType<(index: number) => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  // deprecated
+  // 已废弃
   onClear: Function as PropType<() => void>,
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
@@ -191,7 +191,7 @@ export default defineComponent({
       const newValue = Array.from(mergedValue ?? [])
       const originalItem = newValue[index]
       newValue[index] = value
-      // update dataKeyMap
+      // 更新 dataKeyMap
       if (
         originalItem
         && value
@@ -202,7 +202,7 @@ export default defineComponent({
           ? toRaw(originalItem)
           : originalItem
         const rawNew = isProxy(value) ? toRaw(value) : value
-        // inherit key is value position is not change
+        // 若值的位置未变化则继承 key
         const originalKey = globalDataKeyMap.get(rawOriginal as WeakKey)
         if (originalKey !== undefined) {
           globalDataKeyMap.set(rawNew as WeakKey, originalKey)

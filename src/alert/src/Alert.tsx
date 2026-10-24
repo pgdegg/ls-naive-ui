@@ -159,7 +159,7 @@ export default defineComponent({
     const doAfterLeave = (): void => {
       const {
         onAfterLeave,
-        onAfterHide // deprecated
+        onAfterHide // 已废弃
       } = props
       if (onAfterLeave)
         onAfterLeave()
@@ -204,7 +204,7 @@ export default defineComponent({
                 this.themeClass,
                 this.closable && `${mergedClsPrefix}-alert--closable`,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
-                // fix: https://github.com/tusen-ai/naive-ui/issues/4588
+                // 修复: https://github.com/tusen-ai/naive-ui/issues/4588
                 !this.title
                 && this.closable
                 && `${mergedClsPrefix}-alert--right-adjust`,

@@ -171,7 +171,7 @@ export function formItemRule(props: FormItemSetupProps) {
             rules.push(...formRule)
           }
           else {
-            // terminate object must be a form item rule
+            // 最终取到的对象必须是 form item rule
             rules.push(formRule as FormItemRule)
           }
         }
@@ -182,7 +182,7 @@ export function formItemRule(props: FormItemSetupProps) {
   const hasRequiredRuleRef = computed(() => {
     return mergedRulesRef.value.some(rule => rule.required)
   })
-  // deprecated
+  // 已废弃
   const mergedRequiredRef = computed(() => {
     return hasRequiredRuleRef.value || props.required
   })

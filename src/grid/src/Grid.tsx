@@ -37,7 +37,7 @@ export const gridProps = {
   },
   itemResponsive: Boolean,
   collapsed: Boolean,
-  // may create grid rows < collapsedRows since a item may take all the row
+  // 可能会创建比 collapsedRows 更多的 grid 行，因为某个 item 可能占满整行
   collapsedRows: {
     type: Number,
     default: 1
@@ -122,7 +122,7 @@ export default defineComponent({
       }
     )
 
-    // for SSR, fix bug https://github.com/tusen-ai/naive-ui/issues/2462
+    // 为 SSR 修复 bug https://github.com/tusen-ai/naive-ui/issues/2462
     const isSsrRef = ref(false)
     const contentElRef = ref<HTMLElement>()
     onMounted(() => {
@@ -191,8 +191,8 @@ export default defineComponent({
     const renderContent = (): VNode => {
       this.overflow = false
 
-      // render will be called twice when mounted, I can't figure out why
-      // 2 jobs will be pushed into job queues with same id, and then be flushed
+      // 挂载时 render 会被调用两次，我不清楚原因
+      // 两个具有相同 id 的 job 会被推入任务队列，然后被一起刷新
       const rawChildren = flatten(getSlot(this))
 
       const childrenAndRawSpan: Array<{
@@ -221,8 +221,8 @@ export default defineComponent({
           return
         }
 
-        // We don't want v-show to control display, so we need to stripe it
-        // here, nor it may mess child's style
+        // 我们不希望 v-show 来控制 display，所以需要在这里将其移除，
+        // 否则它可能会扰乱子节点的样式
         child.dirs = child.dirs?.filter(({ dir }) => dir !== vShow) || null
 
         if (child.dirs?.length === 0) {
@@ -279,7 +279,7 @@ export default defineComponent({
               responsiveQuery
             ) ?? 0
           )
-          // it could be 0 sometimes (v-show = false)
+          // 它有时可能为 0（v-show = false）
           const childSpan = Math.min(rawChildSpan + childOffset, responsiveCols)
           if (!child.props) {
             child.props = {
@@ -309,7 +309,7 @@ export default defineComponent({
         }
         if (done) {
           if (child.props) {
-            // suffix node's privateShow may be true
+            // suffix 节点的 privateShow 可能为 true
             if (child.props.privateShow !== true) {
               child.props.privateShow = false
             }

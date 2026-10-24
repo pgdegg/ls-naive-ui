@@ -60,7 +60,7 @@ export const collapseProps = {
   onUpdateExpandedNames: [Function, Array] as PropType<
     MaybeArray<OnUpdateExpandedNames>
   >,
-  // deprecated
+  // 已废弃
   onExpandedNamesChange: {
     type: [Function, Array] as PropType<
       MaybeArray<OnUpdateExpandedNames> | undefined

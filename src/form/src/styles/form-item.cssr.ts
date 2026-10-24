@@ -1,7 +1,7 @@
 import { fadeDownTransition } from '../../../_styles/transitions/fade-down.cssr'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-line-height
 // --n-blank-height
 // --n-feedback-padding

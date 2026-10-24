@@ -74,7 +74,7 @@ export default defineComponent({
   },
   setup(props) {
     const displayedRef = ref(!!props.show)
-    const bodyRef = ref<HTMLElement | null>(null) // used for detached content
+    const bodyRef = ref<HTMLElement | null>(null) // 用于分离内容
     const NDrawer = inject(drawerInjectionKey)!
 
     let startPosition = 0
@@ -243,8 +243,8 @@ export default defineComponent({
     const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          /* Keep the wrapper dom. Make sure the drawer has a host.
-          Nor the detached content will disappear without transition */
+          /* 保留 wrapper 的 DOM。确保 drawer 有一个宿主，
+          否则分离内容会在没有过渡动画的情况下消失 */
           <div role="none">
             <VFocusTrap
               disabled={!this.showMask || !this.trapFocus}
@@ -275,8 +275,8 @@ export default defineComponent({
                                 && `${mergedClsPrefix}-drawer--rtl`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                                 /**
-                                 * When the mouse is pressed to resize the drawer,
-                                 * disable text selection
+                                 * 按住鼠标调整 drawer 大小时，
+                                 * 禁用文本选择
                                  */
                                 this.isDragging
                                 && `${mergedClsPrefix}-drawer--unselectable`,

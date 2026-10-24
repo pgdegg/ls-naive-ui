@@ -16,7 +16,7 @@ function getExtname(url: string = ''): string {
 
 const imageExtensionRegex = /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i
 
-// Do not need File object
+// 不需要 File 对象
 export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (file.type) {
     return isImageFileType(file.type)
@@ -138,9 +138,9 @@ export function createSettledFileInfo(
 }
 
 /**
- * This is a rather simple version. I may fix it later to make it more accurate.
- * I've looked at https://github.com/broofa/mime, however it doesn't has a esm
- * version, so I can't simply use it.
+ * 这是一个相当简单的版本，我之后可能会修复它，使其更精确。
+ * 我参考过 https://github.com/broofa/mime，但它没有 ESM
+ * 版本，因此我无法直接使用它。
  */
 export function matchType(
   name: string,
@@ -156,12 +156,12 @@ export function matchType(
     .filter(Boolean)
   return acceptAtoms.some((acceptAtom) => {
     if (acceptAtom.startsWith('.')) {
-      // suffix
+      // 后缀
       if (name.endsWith(acceptAtom))
         return true
     }
     else if (acceptAtom.includes('/')) {
-      // mime type
+      // MIME 类型
       const [type, subtype] = mimeType.split('/')
       const [acceptType, acceptSubtype] = acceptAtom.split('/')
       if (acceptType === '*' || (type && acceptType && acceptType === type)) {
@@ -174,7 +174,7 @@ export function matchType(
       }
     }
     else {
-      // invalid type
+      // 无效类型
       return true
     }
     return false

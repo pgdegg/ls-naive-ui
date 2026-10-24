@@ -24,7 +24,7 @@ export function ensureValidVNode(
 }
 
 /**
- * We shouldn't use the following functions with slot flags `_: 1, 2, 3`
+ * 当 slot flags 为 `_: 1, 2, 3` 时不应使用以下函数
  */
 export function resolveSlot(
   slot: Slot | undefined,
@@ -42,7 +42,7 @@ export function resolveSlotWithTypedProps<T>(
 }
 
 /**
- * Resolve slot with wrapper if content exists, no fallback
+ * 内容存在时用 wrapper 解析 slot，无 fallback
  */
 export function resolveWrappedSlot(
   slot: Slot | undefined,
@@ -53,7 +53,7 @@ export function resolveWrappedSlot(
 }
 
 /*
- * Resolve slot with wrapper if content exists, no fallback
+ * 内容存在时用 wrapper 解析 slot，无 fallback
  */
 export function resolveWrappedSlotWithProps(
   slot: Slot | undefined,

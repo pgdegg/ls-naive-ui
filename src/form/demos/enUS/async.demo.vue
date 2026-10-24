@@ -28,7 +28,7 @@ const rules = {
       validator: (rule: FormItemRule, value: string) => {
         return new Promise<void>((resolve, reject) => {
           if (value !== 'testName') {
-            reject(new Error('error name')) // reject with error message
+            reject(new Error('error name')) // 携带错误信息调用 reject
           }
           else {
             resolve()

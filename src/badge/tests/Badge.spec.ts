@@ -139,7 +139,7 @@ describe('n-badge', () => {
     const wrapper = mount(NBadge, {
       props: { value: -5 }
     })
-    // Negative values are treated like zero, so badge is hidden by default
+    // 负值按零处理，因此 badge 默认隐藏
     expect(wrapper.find('.n-badge-sup').exists()).toBe(false)
     wrapper.unmount()
   })
@@ -148,7 +148,7 @@ describe('n-badge', () => {
     const wrapper = mount(NBadge, {
       props: { value: -5, showZero: true }
     })
-    // When showZero is true, negative values are shown
+    // 当 showZero 为 true 时，负值会显示
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
     wrapper.unmount()
   })

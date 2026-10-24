@@ -21,10 +21,10 @@ import PanelHeader from './panelHeader'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
- * Date Panel
- * Update picker value on:
- * 1. item click
- * 2. clear click
+ * 日期面板
+ * 在以下时机更新选择器值：
+ * 1. 点击项
+ * 2. 点击清除
  */
 export default defineComponent({
   name: 'DatePanel',
@@ -238,7 +238,7 @@ export default defineComponent({
                     ]
                   )
                 : null}
-              {/** we don't need a confirm button for date picking */}
+              {/** 日期选择不需要确认按钮 */}
             </div>
           </div>
         ) : null}

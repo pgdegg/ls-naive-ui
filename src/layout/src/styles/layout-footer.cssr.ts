@@ -1,6 +1,6 @@
 import { cB, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-color
 // --n-border-color

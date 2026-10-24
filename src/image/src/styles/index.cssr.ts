@@ -2,7 +2,7 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { c, cB, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-toolbar-icon-color
 // --n-toolbar-color
 // --n-toolbar-border-radius

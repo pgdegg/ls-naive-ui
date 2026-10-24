@@ -23,7 +23,7 @@ export const codeProps = {
   inline: Boolean,
   wordWrap: Boolean,
   showLineNumbers: Boolean,
-  // In n-log, we only need to mount code's style for highlight
+  // 在 n-log 中，我们只需要挂载 code 的样式用于高亮
   internalFontSize: Number,
   internalNoHighlight: Boolean
 }
@@ -124,7 +124,7 @@ export default defineComponent({
           fontSize,
           fontWeightStrong,
           lineNumberTextColor,
-          // extracted from hljs atom-one-light.scss
+          // 提取自 hljs atom-one-light.scss
           'mono-3': $1,
           'hue-1': $2,
           'hue-2': $3,

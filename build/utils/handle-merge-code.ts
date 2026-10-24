@@ -23,7 +23,7 @@ export function handleMergeCode(options: MergeCodeOptions): void {
   const { parts, mergedParts, isVue } = options
   const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
-    // ts and js
+    // ts 和 js
     if (parts.template) {
       mergedParts.tsCode += `<template>${parts.template}</template>`
       mergedParts.jsCode += `<template>${parts.template}</template>`
@@ -53,7 +53,7 @@ ${tsToJs(parts.script)}
     }
   }
   else {
-    // only js when md or vue file
+    // md 或 vue 文件时只有 js
     if (parts.template) {
       mergedParts.jsCode += isVue
         ? `<template>${parts.template}</template>`

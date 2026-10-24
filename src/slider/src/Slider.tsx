@@ -38,7 +38,7 @@ export interface ClosestMark {
   index: number
 }
 
-// ref: https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
+// 参考：https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
 const eventButtonLeft = 0
 
 export const sliderProps = {
@@ -116,7 +116,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    // dom ref
+    // DOM ref
     const handleRailRef = ref<HTMLElement | null>(null)
     const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
     const [followerRefs, setFollowerRefs] = useRefs<
@@ -124,7 +124,7 @@ export default defineComponent({
     >()
     const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
 
-    // data ref
+    // 数据 ref
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
     const precisionRef = computed(() => {
@@ -165,13 +165,13 @@ export default defineComponent({
       return marks ? Object.keys(marks).map(Number.parseFloat) : null
     })
 
-    // status ref
+    // 状态 ref
     const activeIndexRef = ref(-1)
     const previousIndexRef = ref(-1)
     const hoverIndexRef = ref(-1)
     const draggingRef = ref(false)
 
-    // style ref
+    // 样式 ref
     const dotTransitionDisabledRef = ref(false)
     const styleDirectionRef = computed(() => {
       const { vertical, reverse } = props
@@ -309,7 +309,7 @@ export default defineComponent({
       }
     }
 
-    // value conversion
+    // 数值转换
     function sanitizeValue(
       value: number,
       currentValue: number,
@@ -333,8 +333,8 @@ export default defineComponent({
         return currentValue
       const { value: precision } = precisionRef
       let closestMark
-      // if it is a stepping, priority will be given to the marks
-      // on the rail, otherwise take the nearest one
+      // 若处于步进状态，优先选取轨道上已有的刻度
+      // 否则取最近的刻度
       if (stepping) {
         const currentStep = Number((currentValue / step).toFixed(precision))
         const actualStep = Math.floor(currentStep)
@@ -387,7 +387,7 @@ export default defineComponent({
         const diff = markValues[index] - currentValue
         const distance = Math.abs(diff)
         if (
-          // find marks in the same direction
+          // 查找同一方向上的刻度
           (buffer === undefined || diff * buffer > 0)
           && (closestMark === null || distance < closestMark.distance)
         ) {
@@ -419,7 +419,7 @@ export default defineComponent({
       return percentageToValue(percentage)
     }
 
-    // dom event handle
+    // DOM 事件处理
     function handleRailKeyDown(e: KeyboardEvent): void {
       if (mergedDisabledRef.value || !props.keyboard)
         return
@@ -454,7 +454,7 @@ export default defineComponent({
           ? currentValue
           : currentValue + step * ratio
       doDispatchValue(
-        // Avoid the number of value does not change when `step` is null
+        // 避免 `step` 为 null 时数值不发生变化
         sanitizeValue(nextValue, currentValue, ratio > 0 ? 1 : -1),
         activeIndex
       )
@@ -473,7 +473,7 @@ export default defineComponent({
         ? (getClosestMark(pointValue, values)?.index ?? -1)
         : 0
       if (activeIndex !== -1) {
-        // avoid triggering scrolling on touch
+        // 避免在触摸操作时触发滚动
         event.preventDefault()
         focusActiveHandle(activeIndex)
         startDragging()
@@ -524,7 +524,7 @@ export default defineComponent({
     }
     function handleHandleFocus(index: number): void {
       activeIndexRef.value = index
-      // Wake focus style
+      // 唤起聚焦样式
       if (!mergedDisabledRef.value) {
         hoverIndexRef.value = index
       }

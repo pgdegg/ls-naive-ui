@@ -250,13 +250,13 @@ describe('n-dynamic-tags', () => {
     await wrapper.find('.n-button').trigger('click')
     const input = wrapper.find('input')
     await input.setValue('程序员')
-    // Pressing Enter to confirm an IME conversion fires keydown while
-    // composition is still active; it must not commit the tag.
+    // 在 IME 组词状态下按回车确认上屏会触发 keydown，此时
+    // composition 仍处于激活状态，绝不能提交标签。
     await input.trigger('compositionstart')
     await input.trigger('keydown', { key: 'Enter' })
     expect(onUpdateValue).not.toHaveBeenCalled()
     expect(wrapper.findAll('.n-tag').length).toBe(1)
-    // After composition ends, Enter commits the tag as usual.
+    // composition 结束后，Enter 会像往常一样提交标签。
     await input.trigger('compositionend')
     await input.trigger('keydown', { key: 'Enter' })
     expect(onUpdateValue).toHaveBeenCalledWith(['教师', '程序员'])

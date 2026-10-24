@@ -1,6 +1,6 @@
 import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-icon-color
 // --n-bezier
 // --n-icon-margin-top

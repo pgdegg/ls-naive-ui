@@ -152,7 +152,7 @@ export interface CarouselSlots {
   dots?: (props: CarouselDotSlotProps) => VNode[]
 }
 
-// only one carousel is allowed to trigger touch globally
+// 全局只允许一个 carousel 触发触摸
 let globalDragging = false
 
 export default defineComponent({
@@ -161,13 +161,13 @@ export default defineComponent({
   slots: Object as SlotsType<CarouselSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
-    // Dom
+    // DOM 元素
     const selfElRef = ref<HTMLDivElement | null>(null)
     const slidesElRef = ref<HTMLDivElement | null>(null)
     const slideElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
-    // Computed states
+    // 计算状态
     const verticalRef = computed(() => props.direction === 'vertical')
     const sizeAxisRef = computed(() => (verticalRef.value ? 'height' : 'width'))
     const spaceAxisRef = computed(() =>
@@ -175,29 +175,29 @@ export default defineComponent({
     )
     const sequenceLayoutRef = computed(() => props.effect === 'slide')
     const duplicatedableRef = computed(
-      // duplicate the copy operation in `slide` mode,
-      // because only its DOM is sequence layout
+      // 在 `slide` 模式下重复复制操作，
+      // 因为只有它的 DOM 是顺序布局
       () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
     )
-    // user wants to control the transition animation
+    // 用户希望自行控制过渡动画
     const userWantsControlRef = computed(() => props.effect === 'custom')
 
-    // used to calculate total views
+    // 用于计算总可视页数
     const displaySlidesPerViewRef = computed(() =>
       !sequenceLayoutRef.value || props.centeredSlides ? 1 : props.slidesPerView
     )
-    // used to calculate the size of each slide
+    // 用于计算每个幻灯片的尺寸
     const realSlidesPerViewRef = computed(() =>
       userWantsControlRef.value ? 1 : props.slidesPerView
     )
-    // we automatically calculate total view for special slides per view
+    // 针对特殊的每页幻灯片数，自动计算总可视页数
     const autoSlideSizeRef = computed(
       () =>
         displaySlidesPerViewRef.value === 'auto'
         || (props.slidesPerView === 'auto' && props.centeredSlides)
     )
 
-    // Carousel size
+    // 轮播尺寸
     const perViewSizeRef = ref({ width: 0, height: 0 })
     const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
@@ -224,7 +224,7 @@ export default defineComponent({
       return slidesEls.map(() => slideSize)
     })
 
-    // The translate required to reach each slide
+    // 切换到每个幻灯片所需的位移量
     const slideTranlatesRef = computed(() => {
       const { value: slideSizes } = slideSizesRef
       if (!slideSizes.length)
@@ -243,7 +243,7 @@ export default defineComponent({
       })
     })
 
-    // Styles
+    // 样式
     const isMountedRef = ref(false)
     const transitionStyleRef = computed(() => {
       const { transitionStyle } = props
@@ -272,8 +272,8 @@ export default defineComponent({
         }
       }
       if (userWantsControlRef.value) {
-        // We center each slide when user wants to control the transition animation,
-        // so there is no need to calculate the offset
+        // 当用户希望自行控制过渡动画时，我们让每个幻灯片居中，
+        // 因此无需计算偏移量
         return slidesEls.map((_, i) => getSlideSize(i))
       }
       const { effect, spaceBetween } = props
@@ -291,7 +291,7 @@ export default defineComponent({
       }, [])
     })
 
-    // Total
+    // 总数
     const totalViewRef = computed(() => {
       const { value: slidesPerView } = displaySlidesPerViewRef
       const { length: totalSlides } = slideElsRef.value
@@ -319,7 +319,7 @@ export default defineComponent({
       getDisplayTotalView(totalViewRef.value, duplicatedableRef.value)
     )
 
-    // Index
+    // 索引
     const defaultRealIndex = getRealIndex(
       props.defaultIndex,
       duplicatedableRef.value
@@ -339,7 +339,7 @@ export default defineComponent({
       getRealIndex(mergedDisplayIndexRef.value, duplicatedableRef.value)
     )
 
-    // Reality methods
+    // 真实索引相关方法
     function toRealIndex(index: number): void {
       index = clampValue(index, 0, totalViewRef.value - 1)
       const displayIndex = getDisplayIndex(
@@ -380,8 +380,8 @@ export default defineComponent({
       return realIndexRef.value === getSlideIndex(slideOrIndex)
     }
 
-    // Display methods
-    // They are used to deal with the actual values displayed on the UI
+    // 展示相关方法
+    // 用于处理 UI 上实际显示的值
     function isDisplayActive(index: number): boolean {
       return mergedDisplayIndexRef.value === index
     }
@@ -392,7 +392,7 @@ export default defineComponent({
       return getRealNextIndex() === null
     }
 
-    // To
+    // 跳转
     let expectedTransitionDirection = 0
     function to(index: number): void {
       const realIndex = clampValue(
@@ -422,7 +422,7 @@ export default defineComponent({
       }
     }
 
-    // Translate to
+    // 位移切换
     let inTransition = false
 
     function prevIfSlideTransitionEnd(): void {
@@ -434,7 +434,7 @@ export default defineComponent({
         next()
     }
 
-    // record the translate of each slide, so that it can be restored at touch
+    // 记录每个幻灯片的位移，以便在触摸结束时恢复
     let previousTranslate = 0
     const translateStyleRef = ref({}) as Ref<CSSProperties>
     function updateTranslate(translate: number, speed = 0): void {
@@ -466,7 +466,7 @@ export default defineComponent({
     }
     function getTranslate(index: number): number {
       let translate
-      // Deal with auto slides pre view
+      // 处理 auto 每页幻灯片数的情况
       if (index >= totalViewRef.value - 1) {
         translate = getLastViewTranslate()
       }
@@ -489,7 +489,7 @@ export default defineComponent({
           const { value: slideSizes } = slideSizesRef
           overallSize = lastTranslate + slideSizes[slideSizes.length - 1][axis]
         }
-        // Bring the last slide to the edge
+        // 将最后一张幻灯片贴合到边缘
         return overallSize - perViewSize
       }
       else {
@@ -498,7 +498,7 @@ export default defineComponent({
       }
     }
 
-    // Provide
+    // 提供上下文
     const carouselContext: CarouselContextValue = {
       currentIndexRef: mergedDisplayIndexRef,
       to,
@@ -555,7 +555,7 @@ export default defineComponent({
         return normalizeStyle(styles)
       }
     }
-    // Drag
+    // 拖拽
     let dragStartX = 0
     let dragStartY = 0
     let dragOffset = 0
@@ -574,7 +574,7 @@ export default defineComponent({
       }
     }
 
-    // Autoplay
+    // 自动播放
     let autoplayTimer: number | null = null
     function stopAutoplay(): void {
       if (autoplayTimer) {
@@ -667,7 +667,7 @@ export default defineComponent({
         const timeElapsed = Date.now() - dragStartTime
         const { value: axis } = sizeAxisRef
         const perViewSize = perViewSizeRef.value[axis]
-        // more than 50% width or faster than 0.4px per ms
+        // 位移超过宽度的 50%，或速度快于 0.4px/ms
         if (dragOffset > perViewSize / 2 || dragOffset / timeElapsed > 0.4) {
           prev()
         }
@@ -781,7 +781,7 @@ export default defineComponent({
       resetDragStatus()
       stopAutoplay()
     })
-    // Fix index when remounting
+    // 重新挂载时修正索引
     onUpdated(() => {
       const { value: slidesEls } = slideElsRef
       const { value: slideVNodes } = slideVNodesRef
@@ -856,7 +856,7 @@ export default defineComponent({
     watch(sequenceLayoutRef, (value) => {
       if (!value) {
         inTransition = false
-        // if the current mode does not support translate, reset the position of the wrapper
+        // 如果当前模式不支持位移，重置容器的位置
         updateTranslate((previousTranslate = 0))
       }
       else {
@@ -984,8 +984,8 @@ export default defineComponent({
       slides = addDuplicateSlides(slides)
     }
     this.slideVNodes.value = slides
-    // When users need to customize the size of the slide,
-    // we listen to them to fix the current translate
+    // 当用户需要自定义幻灯片尺寸时，
+    // 我们监听它们以修正当前位移
     if (this.autoSlideSize) {
       slides = slides.map(slide => (
         <VResizeObserver onResize={this.handleSlideResize}>

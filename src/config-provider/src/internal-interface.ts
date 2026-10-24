@@ -223,7 +223,7 @@ export interface GlobalThemeWithoutCommon {
   Row?: RowTheme
   Marquee?: MarqueeTheme
   Heatmap?: HeatmapTheme
-  // internal
+  // 内部
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
 }
@@ -393,7 +393,7 @@ export interface ConfigProviderInjection {
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
   mergedThemeHashRef: Ref<string>
-  // non-reactive
+  // 非响应式
   inlineThemeDisabled: boolean
   preflightStyleDisabled: boolean
   styleMountTarget: ParentNode | undefined

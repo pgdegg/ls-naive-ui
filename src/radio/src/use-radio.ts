@@ -30,7 +30,7 @@ export const radioBaseProps = {
   'onUpdate:checked': [Function, Array] as PropType<
     undefined | MaybeArray<(value: boolean) => void>
   >,
-  // deprecated
+  // 已废弃
   checkedValue: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -156,9 +156,9 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   }
   function handleRadioInputChange(): void {
     toggle()
-    // Restore element check prop's value to current state, since if doesn't
-    // reflect current VNode. If not, bug will happens in component with element
-    // that has internal state such as <input />.
+    // 将元素 check prop 的值恢复为当前状态，因为它并不
+    // 反映当前 VNode。否则，在包含内部状态元素（如 <input />）的
+    // 组件中会出现 bug。
     if (inputRef.value) {
       inputRef.value.checked = renderSafeCheckedRef.value
     }

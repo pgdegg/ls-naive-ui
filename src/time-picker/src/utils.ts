@@ -188,7 +188,7 @@ export function getFixValue(value: number): string {
   return `00${value}`.slice(-2)
 }
 
-// TODO: refactor the logic, it's somehow a patch logic
+// TODO: 重构这段逻辑，它在某种程度上算是一种补丁逻辑
 export function getTimeUnits(
   defaultValue: string[],
   stepOrList: MaybeArray<number> | undefined,

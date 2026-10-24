@@ -21,7 +21,7 @@ export const stepProps = {
   title: String,
   description: String,
   disabled: Boolean,
-  // index will be filled by parent steps, not user
+  // index 由父级 steps 填充，而非用户传入
   internalIndex: {
     type: Number,
     default: 0
@@ -186,9 +186,9 @@ export default defineComponent({
     const splitorNode = <div class={`${mergedClsPrefix}-step-splitor`} />
 
     const indicatorNode = (
-      // We need a key here to prevent reconcile progress from affecting styling.
-      // A DOM can be reused so if it is used both for A component & B component,
-      // the styling transition bewteen two components may be incorrect.
+      // 这里需要一个 key，防止 reconcile 过程影响样式。
+      // DOM 节点可能被复用，如果同一个 DOM 同时用于 A 组件和 B 组件，
+      // 两个组件之间的样式过渡可能不正确。
       <div class={`${mergedClsPrefix}-step-indicator`} key={contentPlacement}>
         <div class={`${mergedClsPrefix}-step-indicator-slot`}>
           <NIconSwitchTransition>

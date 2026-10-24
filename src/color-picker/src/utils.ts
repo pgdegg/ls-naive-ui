@@ -37,7 +37,7 @@ export function deriveDefaultValue(
   }
   if (__DEV__)
     warn('color-picker', 'props.modes is invalid.')
-  // in case of invalid modes
+  // 以防 modes 非法
   return '#000000'
 }
 
@@ -164,25 +164,25 @@ const convert = {
 } as const
 
 /**
- * Convert color value by mode
+ * 按模式转换颜色值
  */
-// overload 1: known type of color conversion
-// we have built-in color conversion
-// return value can be determined as `string`
+// 重载 1：颜色转换类型已知
+// 有内置的颜色转换
+// 返回值可以确定为 `string`
 export function convertColor(
   value: string,
   mode: ColorPickerMode,
   originalMode: ColorPickerMode
 ): string
-// overload 2: unknown type of color conversion
-// the color value may be invalid
-// so the return value may be `null`
+// 重载 2：颜色转换类型未知
+// 颜色值可能非法
+// 因此返回值可能为 `null`
 export function convertColor(
   value: string,
   mode: ColorPickerMode,
   originalMode?: null
 ): string | null
-// implementation
+// 实现
 export function convertColor(
   value: string,
   mode: ColorPickerMode,

@@ -39,7 +39,7 @@ export function useKeyboard({
 } {
   const { value: mergedSelectedKeys } = mergedSelectedKeysRef
 
-  // If it's used in tree-select, make it take over pending state
+  // 若在 tree-select 中使用，则由其接管待选中状态
   const treeSelectInjection = inject(treeSelectInjectionKey, null)
   const pendingNodeKeyRef = treeSelectInjection
     ? treeSelectInjection.pendingNodeKeyRef
@@ -150,7 +150,7 @@ export function useKeyboard({
           handleSwitcherClick(pendingNode)
         }
         else {
-          // Tha same as ArrowDown
+          // 与 ArrowDown 相同
           fIndex += 1
           while (fIndex < fNodes.length) {
             if (!fNodes[fIndex].disabled) {

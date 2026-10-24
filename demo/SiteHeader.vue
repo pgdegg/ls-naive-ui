@@ -17,7 +17,7 @@ import { i18n, useIsMobile, useIsTablet } from './utils/composables'
 import { repoUrl } from './utils/github-url'
 import { findMenuValue } from './utils/route'
 
-// match substr
+// 匹配子串
 function match(pattern, string) {
   if (!pattern.length)
     return true
@@ -73,17 +73,17 @@ export default defineComponent({
     // i18n
     const { t } = i18n(locales)
 
-    // theme
+    // 主题
     const themeNameRef = useThemeName()
     const themeLabelMapRef = computed(() => ({
       dark: t('light'),
       light: t('dark')
     }))
 
-    // locale
+    // 语言
     const localeNameRef = useLocaleName()
 
-    // menu
+    // 菜单
     const menuOptionsRef = computed(() => {
       return [
         {
@@ -113,7 +113,7 @@ export default defineComponent({
       return null
     })
 
-    // mobile options
+    // 移动端选项
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
     const mobileMenuOptionsRef = computed(() => {
@@ -197,7 +197,7 @@ export default defineComponent({
       }
     }
 
-    // display mode
+    // 显示模式
     const displayModeRef = useDisplayMode()
     const displayModeLabelMap = {
       common: 'Debug',
@@ -212,7 +212,7 @@ export default defineComponent({
       }
     }
 
-    // config provider
+    // 配置提供者
     const configProviderNameRef = useConfigProviderName()
     const cfgProviderLabelMapRef = computed(() => ({
       tusimple: t('defaultTheme'),
@@ -227,7 +227,7 @@ export default defineComponent({
       }
     }
 
-    // search
+    // 搜索
     const searchableOptionsRef = useFlattenedDocOptions()
     const searchPatternRef = ref('')
     const searchOptionsRef = computed(() => {
@@ -268,7 +268,7 @@ export default defineComponent({
       router.push(value)
     }
 
-    // common
+    // 通用
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
     function handleLogoClick() {
@@ -279,7 +279,7 @@ export default defineComponent({
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
     }
 
-    // responsive menu
+    // 响应式菜单
     const menuInstRef = ref()
     let lastWindowInnerWidth = window.innerWidth
     window.addEventListener('resize', () => {
@@ -301,34 +301,34 @@ export default defineComponent({
       isMobile: isMobileRef,
       isTablet: isTabletRef,
       repoUrl,
-      // theme
+      // 主题
       theme: themeNameRef,
       handleThemeUpdate,
       themeLabelMap: themeLabelMapRef,
-      // displayMode
+      // 显示模式
       displayMode: displayModeRef,
       displayModeLabelMap,
       handleDisplayModeUpdate,
-      // locale
+      // 语言
       locale: localeNameRef,
       localeLabelMap,
       handleLocaleUpdate,
-      // configProvider
+      // 配置提供者
       configProviderName: configProviderNameRef,
       cfgProviderLabelMap: cfgProviderLabelMapRef,
       handleConfigProviderUpdate,
-      // search
+      // 搜索
       searchPattern: searchPatternRef,
       searchOptions: searchOptionsRef,
       handleSearch,
-      // menu
+      // 菜单
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
-      // mobile & tablet menu
+      // 移动端与平板菜单
       mobileMenuOptions: mobileMenuOptionsRef,
       handleUpdateMobileMenu,
       mobileMenuValue: mobileMenuValueRef,
-      // common
+      // 通用
       handleLogoClick,
       style: computed(() => {
         return isMobileRef.value
@@ -381,7 +381,7 @@ export default defineComponent({
         blur-after-select
         @select="handleSearch"
       />
-      <!-- TODO: add it -->
+      <!-- TODO: 待添加 -->
       <!-- template #suffix>
         <span style="color: var(--placeholder-color)">⌘ + K</span>
       </template -->

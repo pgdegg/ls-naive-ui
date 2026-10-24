@@ -18,9 +18,9 @@ export default defineComponent({
       type: String,
       required: true
     },
-    // private
+    // 私有
     onInternalAfterLeave: Function as PropType<(key: string) => void>,
-    // deprecated
+    // 已废弃
     onHide: Function,
     onAfterHide: Function
   },
@@ -56,7 +56,7 @@ export default defineComponent({
         window.clearTimeout(timerId)
         timerId = null
       }
-      // deprecated
+      // 已废弃
       if (onHide)
         onHide()
     }
@@ -73,11 +73,11 @@ export default defineComponent({
         onAfterLeave()
       if (onInternalAfterLeave)
         onInternalAfterLeave(internalKey)
-      // deprecated
+      // 已废弃
       if (onAfterHide)
         onAfterHide()
     }
-    // deprecated
+    // 已废弃
     function deactivate(): void {
       hide()
     }

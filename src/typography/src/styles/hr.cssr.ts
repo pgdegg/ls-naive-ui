@@ -1,6 +1,6 @@
 import { cB } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-color
 export default cB('hr', `
   margin: 12px 0;

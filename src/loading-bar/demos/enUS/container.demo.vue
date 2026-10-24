@@ -8,7 +8,7 @@ You can set mount target of loading by `to` prop.
 import { NButton, NSpace, useLoadingBar } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
 
-// Define the LoadingBarTrigger component
+// 定义 LoadingBarTrigger 组件
 const LoadingBarTrigger = defineComponent(() => {
   const loadingBar = useLoadingBar()
   return () => {

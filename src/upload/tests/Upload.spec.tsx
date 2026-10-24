@@ -133,7 +133,7 @@ describe('n-upload', () => {
       props: {
         listType: 'image',
         createThumbnailUrl,
-        // It should be aligned with prop's default implementation
+        // 应与 prop 的默认实现保持一致
         shouldUseThumbnailUrl: () => true
       }
     })
@@ -323,9 +323,9 @@ describe('n-upload', () => {
     expect(triggerDisabledElement.exists()).toBe(true)
   })
   it('should work with custom-request sync onError for multiple files', async () => {
-    // Regression test for issue #7366:
-    // custom-request synchronous onError should mark ALL files as error,
-    // not just the last one.
+    // 针对 issue #7366 的回归测试：
+    // custom-request 同步 onError 应将所有文件标记为 error，
+    // 而不仅仅是最后一个文件。
     const onUpdateFileList = vi.fn()
     const wrapper = mount(NUpload, {
       props: {

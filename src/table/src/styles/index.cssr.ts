@@ -1,6 +1,6 @@
 import { c, cB, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-td-color
 // --n-td-color-modal

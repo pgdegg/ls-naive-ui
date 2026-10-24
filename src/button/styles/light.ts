@@ -55,29 +55,29 @@ export function self(vars: ThemeCommonVars) {
     fontSizeMedium,
     fontSizeLarge,
     opacityDisabled,
-    // secondary
+    // 次要（secondary）
     colorOpacitySecondary: '0.16',
     colorOpacitySecondaryHover: '0.22',
     colorOpacitySecondaryPressed: '0.28',
     colorSecondary: buttonColor2,
     colorSecondaryHover: buttonColor2Hover,
     colorSecondaryPressed: buttonColor2Pressed,
-    // tertiary
+    // 第三级（tertiary）
     colorTertiary: buttonColor2,
     colorTertiaryHover: buttonColor2Hover,
     colorTertiaryPressed: buttonColor2Pressed,
-    // quaternary
+    // 第四级（quaternary）
     colorQuaternary: '#0000',
     colorQuaternaryHover: buttonColor2Hover,
     colorQuaternaryPressed: buttonColor2Pressed,
-    // default type
+    // 默认类型（default）
     color: '#0000',
     colorHover: '#0000',
     colorPressed: '#0000',
     colorFocus: '#0000',
     colorDisabled: '#0000',
     textColor: textColor2,
-    textColorTertiary: textColor3, // tertiary
+    textColorTertiary: textColor3, // 第三级（tertiary）
     textColorHover: primaryColorHover,
     textColorPressed: primaryColorPressed,
     textColorFocus: primaryColorHover,
@@ -98,7 +98,7 @@ export function self(vars: ThemeCommonVars) {
     borderFocus: `1px solid ${primaryColorHover}`,
     borderDisabled: `1px solid ${borderColor}`,
     rippleColor: primaryColor,
-    // primary
+    // 主要（primary）
     colorPrimary: primaryColor,
     colorHoverPrimary: primaryColorHover,
     colorPressedPrimary: primaryColorPressed,
@@ -125,7 +125,7 @@ export function self(vars: ThemeCommonVars) {
     borderFocusPrimary: `1px solid ${primaryColorHover}`,
     borderDisabledPrimary: `1px solid ${primaryColor}`,
     rippleColorPrimary: primaryColor,
-    // info
+    // 信息（info）
     colorInfo: infoColor,
     colorHoverInfo: infoColorHover,
     colorPressedInfo: infoColorPressed,
@@ -152,7 +152,7 @@ export function self(vars: ThemeCommonVars) {
     borderFocusInfo: `1px solid ${infoColorHover}`,
     borderDisabledInfo: `1px solid ${infoColor}`,
     rippleColorInfo: infoColor,
-    // success
+    // 成功（success）
     colorSuccess: successColor,
     colorHoverSuccess: successColorHover,
     colorPressedSuccess: successColorPressed,
@@ -179,7 +179,7 @@ export function self(vars: ThemeCommonVars) {
     borderFocusSuccess: `1px solid ${successColorHover}`,
     borderDisabledSuccess: `1px solid ${successColor}`,
     rippleColorSuccess: successColor,
-    // warning
+    // 警告（warning）
     colorWarning: warningColor,
     colorHoverWarning: warningColorHover,
     colorPressedWarning: warningColorPressed,
@@ -206,7 +206,7 @@ export function self(vars: ThemeCommonVars) {
     borderFocusWarning: `1px solid ${warningColorHover}`,
     borderDisabledWarning: `1px solid ${warningColor}`,
     rippleColorWarning: warningColor,
-    // error
+    // 错误（error）
     colorError: errorColor,
     colorHoverError: errorColorHover,
     colorPressedError: errorColorPressed,

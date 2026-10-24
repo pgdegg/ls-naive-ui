@@ -70,11 +70,11 @@ export type SelectTreeMate = TreeMate<
   SelectIgnoredOption
 >
 
-// Public interfaces
+// 公共接口
 export type SelectOption = SelectBaseOption<string | number>
 export type SelectGroupOption
   = | (SelectGroupOptionBase & {
-    /** @deprecated should use key and label instead */
+    /** @deprecated 应改用 key 和 label */
     name?: string
   })
   | (SelectGroupOptionBase & {

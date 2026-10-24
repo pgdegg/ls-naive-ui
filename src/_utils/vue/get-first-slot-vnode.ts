@@ -13,7 +13,7 @@ export function getFirstSlotVNode(
     return null
   }
   const slotContent = flatten(slot(props))
-  // vue will normalize the slot, so slot must be an array
+  // vue 会对 slot 做规范化处理，所以 slot 一定是一个数组
   if (slotContent.length === 1) {
     return slotContent[0]
   }
@@ -32,7 +32,7 @@ export function getFirstSlotVNodeWithTypedProps<T>(
     return null
   }
   const slotContent = flatten(slot(props))
-  // vue will normalize the slot, so slot must be an array
+  // vue 会对 slot 做规范化处理，所以 slot 一定是一个数组
   if (slotContent.length === 1) {
     return slotContent[0]
   }

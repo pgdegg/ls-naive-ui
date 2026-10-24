@@ -10,7 +10,7 @@ const codeDark: CodeTheme = {
       textColor: textColor2,
       fontSize,
       fontWeightStrong,
-      // extracted from hljs atom-one-dark.scss
+      // 提取自 hljs atom-one-dark.scss
       'mono-3': '#5c6370',
       'hue-1': '#56b6c2',
       'hue-2': '#61aeee',
@@ -20,7 +20,7 @@ const codeDark: CodeTheme = {
       'hue-5-2': '#be5046',
       'hue-6': '#d19a66',
       'hue-6-2': '#e6c07b',
-      // line-number styles
+      // 行号样式
       lineNumberTextColor: textColor3
     }
   }

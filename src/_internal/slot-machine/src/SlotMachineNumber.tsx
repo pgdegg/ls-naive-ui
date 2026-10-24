@@ -9,7 +9,7 @@ export default defineComponent({
       required: true
     },
     value: {
-      // could be '+', 1, 2, ...
+      // 可以是 '+', 1, 2, ...
       type: [Number, String] as PropType<string | number>,
       required: true
     },
@@ -38,7 +38,7 @@ export default defineComponent({
         ? `${props.clsPrefix}-base-slot-machine-old-number--${scrollAnimationDirectionRef.value}-scroll`
         : null
     })
-    // BUG: may be typescript bug
+    // BUG：可能是 typescript 的 bug
     watch(toRef(props, 'value'), (value, oldValue) => {
       oldNumberRef.value = oldValue
       newNumberRef.value = value

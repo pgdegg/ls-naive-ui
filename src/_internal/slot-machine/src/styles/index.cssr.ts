@@ -59,7 +59,7 @@ export default c([
       max-width: .6em;
     `, [
       fadeUpWidthExpandTransition({ duration: '.2s' }),
-      // use 0s, not 0
+      // 用 0s，而不是 0
       fadeInWidthExpandTransition({ duration: '.2s', delay: '0s' }),
       cB('base-slot-machine-old-number', `
         display: inline-block;

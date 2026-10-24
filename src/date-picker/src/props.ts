@@ -119,6 +119,6 @@ export const datePickerProps = {
   onPrevMonth: Function as PropType<() => void>,
   onNextYear: Function as PropType<() => void>,
   onPrevYear: Function as PropType<() => void>,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const

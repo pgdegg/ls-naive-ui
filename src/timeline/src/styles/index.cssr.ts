@@ -2,7 +2,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 const lineHeight = 1.25
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-circle-border
 // --n-content-font-size

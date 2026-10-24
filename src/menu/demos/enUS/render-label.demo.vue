@@ -92,10 +92,10 @@ function renderMenuLabel(option: MenuOption) {
 }
 
 function renderMenuIcon(option: MenuOption) {
-  // return render placeholder for indent
+  // 返回用于保持缩进的渲染占位符
   if (option.key === 'sheep-man')
     return true
-  // return falsy, don't render icon placeholder
+  // 返回 falsy 值，不再渲染图标及占位符
   if (option.key === 'food')
     return null
   return h(NIcon, null, { default: () => h(BookmarkOutline) })

@@ -1226,7 +1226,7 @@ describe('props.columns', () => {
 
     it('should show header and empty with default props', () => {
       const wrapper = mount(() => <NDataTable columns={columns} data={[]} />)
-      // auto layout empty tables are treated as x-scrollable
+      // auto 布局的空表格会被视为可横向滚动
       expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
       wrapper.unmount()
     })
@@ -1336,7 +1336,7 @@ describe('props.columns', () => {
       const wrapper = mount(() => (
         <NDataTable columns={columns} data={[]} virtual-scroll />
       ))
-      // virtual list is disabled while empty, header stays in body
+      // 空数据时虚拟列表会被禁用，表头保留在 body 中
       expectHeaderAndEmpty(wrapper)
       wrapper.unmount()
     })

@@ -11,8 +11,8 @@ export default defineComponent({
     onAfterLeave: Function,
     onAfterEnter: Function,
     width: Boolean,
-    // reverse mode is only used in tree
-    // it make it from expanded to collapsed after mounted
+    // reverse 模式仅在 tree 中使用
+    // 它使其在挂载后从展开状态变为折叠状态
     reverse: Boolean
   },
   setup(props, { slots }) {

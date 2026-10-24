@@ -90,7 +90,7 @@ function testGlobalSize(
 const SML = ['small', 'medium', 'large'] as const
 
 describe('n-config-provider componentOptions', () => {
-  // ---- Size configs ----
+  // ---- 尺寸配置 ----
 
   it('should work with AutoComplete global size', () => {
     testGlobalSize(NAutoComplete, 'AutoComplete', '.n-input', SML)
@@ -333,7 +333,7 @@ describe('n-config-provider componentOptions', () => {
     })
   })
 
-  // ---- Non-size configs ----
+  // ---- 非尺寸配置 ----
 
   it('should work with DatePicker global timePickerSize', async () => {
     for (const size of SML) {
@@ -537,7 +537,7 @@ describe('n-config-provider componentOptions', () => {
     wrapper.unmount()
   })
 
-  // ---- Priority test ----
+  // ---- 优先级测试 ----
 
   it('prop size should override global size', () => {
     const wrapper = mount(NConfigProvider, {

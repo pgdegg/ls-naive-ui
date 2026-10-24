@@ -121,7 +121,7 @@ const trTR: NLocale = {
     tipZoomIn: 'Yakınlaştır',
     tipDownload: 'indir',
     tipClose: 'Kapat (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Orijinal boyuta yakınlaştır'
   },
   Heatmap: {

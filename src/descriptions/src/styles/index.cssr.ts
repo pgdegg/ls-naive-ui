@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-th-padding
 // --n-td-padding
 // --n-font-size

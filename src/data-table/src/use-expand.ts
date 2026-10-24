@@ -28,7 +28,7 @@ export function useExpand(
     }
   })
   const expandableRef = useMemo(() => {
-    // It's not reactive
+    // 它不是响应式的
     let expandable: Expandable<any> | undefined
     for (const col of props.columns) {
       if (col.type === 'expand') {

@@ -66,9 +66,9 @@ export const checkboxProps = {
     MaybeArray<OnUpdateChecked>
   >,
   onUpdateChecked: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>,
-  // private
+  // 私有
   privateInsideTable: Boolean,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>
 }
 
@@ -200,7 +200,7 @@ export default defineComponent({
           call(onUpdateChecked as OnUpdateCheckedImpl, nextChecked, e)
         }
         if (onChange)
-          call(onChange as OnUpdateCheckedImpl, nextChecked, e) // deprecated
+          call(onChange as OnUpdateCheckedImpl, nextChecked, e) // 已废弃
         nTriggerFormInput()
         nTriggerFormChange()
         uncontrolledCheckedRef.value = nextChecked

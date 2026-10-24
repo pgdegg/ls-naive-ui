@@ -1,4 +1,4 @@
-// rubbish code here
+// 这里是一堆垃圾代码
 
 import { NSpace, NTag } from 'naive-ui'
 import { h } from 'vue'

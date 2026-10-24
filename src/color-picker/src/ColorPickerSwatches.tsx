@@ -5,15 +5,15 @@ import { computed, defineComponent, h } from 'vue'
 import { warn } from '../../_utils'
 import { convertColor, getModeFromValue } from './utils'
 
-// Try to normalize the color values to ensure that they are valid CSS colors
+// 尝试将颜色值规范化，以确保它们是合法的 CSS 颜色
 function normalizeColor(color: string, mode: ColorPickerMode | null): string {
   if (mode === 'hsv') {
     const [h, s, v, a] = hsva(color)
     return toRgbaString([...hsv2rgb(h, s, v), a])
   }
-  // For the mode that is not in preset, we keep the original value.
-  // For color names, they are legal to CSS, so we don’t deal with them,
-  // and only standardize them when outputting.
+  // 对于预设中不存在的模式，保留原始值。
+  // 颜色名称对 CSS 而言是合法的，因此不做处理，
+  // 仅在输出时才将其标准化。
   return color
 }
 
@@ -67,14 +67,14 @@ export default defineComponent({
     function normalizeOutput(parsed: ParsedColor): string {
       const { mode: modeProp } = props
       let { value, mode: swatchColorMode } = parsed
-      // color name is converted to hex
+      // 颜色名称会被转换为 hex
       if (!swatchColorMode) {
         swatchColorMode = 'hex'
         if (/^[a-zA-Z]+$/.test(value)) {
           value = getHexFromName(value)
         }
         else {
-          // for invalid color, we make it black
+          // 对于非法的颜色，将其置为黑色
           warn('color-picker', `color ${value} in swatches is invalid.`)
           value = '#000000'
         }
@@ -83,7 +83,7 @@ export default defineComponent({
       if (swatchColorMode === modeProp)
         return value
 
-      // swatch value to current mode value
+      // 将色块值转换为当前模式的值
       return convertColor(value, modeProp, swatchColorMode)
     }
 

@@ -74,13 +74,13 @@ export const popoverBodyProps = {
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
-  // private
+  // 私有
   internalDeactivateImmediately: Boolean,
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   internalTrapFocus: Boolean,
   internalOnAfterLeave: Function as PropType<() => void>,
-  // deprecated
+  // 已废弃
   minWidth: Number,
   maxWidth: Number
 }
@@ -249,8 +249,8 @@ export default defineComponent({
       NPopover.setBodyInstance(null)
     })
     watch(toRef(props, 'show'), (value) => {
-      // If no animation, no transition component will be applied to the
-      // component. So we need to trigger follower manaully.
+      // 如果没有动画，就不会给组件应用 transition 组件。
+      // 因此需要手动触发 follower。
       if (props.animated)
         return
       if (value) {
@@ -444,9 +444,9 @@ export default defineComponent({
       }
       else {
         contentNode = renderBody(
-          // The popover class and overlap class must exists, they will be used
-          // to place the body & transition animation.
-          // Shadow class exists for reuse box-shadow.
+          // popover 类和 overlap 类必须存在，它们会被用来
+          // 放置主体和过渡动画。
+          // Shadow 类存在是为了复用 box-shadow。
           [
             `${mergedClsPrefix}-popover-shared`,
             rtlEnabledRef?.value && `${mergedClsPrefix}-popover--rtl`,
@@ -470,7 +470,7 @@ export default defineComponent({
       namespace: namespaceRef,
       isMounted: NPopover.isMountedRef,
       zIndex: NPopover.zIndexRef,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts 体积：render 中只用到字符串 ref，类型用不上
       followerRef: followerRef as unknown,
       adjustedTo: useAdjustedTo(props),
       followerEnabled: followerEnabledRef,
@@ -500,8 +500,8 @@ export default defineComponent({
               <Transition
                 name="popover-transition"
                 appear={this.isMounted}
-                // Don't use watch to enable follower, since the transition may
-                // make position sync timing very subtle and buggy.
+                // 不要用 watch 来启用 follower，因为 transition 可能
+                // 让位置同步的时机变得非常微妙且容易出 bug。
                 onEnter={() => {
                   this.followerEnabled = true
                 }}

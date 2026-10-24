@@ -24,7 +24,7 @@ export interface ThemeProps<T, O = ExtractThemeOverrides<T>> {
 
 export type ExtractThemeVars<T>
   = T extends Theme<unknown, infer U, unknown>
-    ? unknown extends U // self is undefined, ThemeVars is unknown
+    ? unknown extends U // self 为 undefined，ThemeVars 为 unknown
       ? Record<string, unknown>
       : U
     : Record<string, unknown>
@@ -38,7 +38,7 @@ export type ExtractPeerOverrides<T>
       }
     : T
 
-// V is peers theme
+// V 是 peers 主题
 export type ExtractMergedPeerOverrides<T>
   = T extends Theme<unknown, unknown, infer V>
     ? {
@@ -112,7 +112,7 @@ function useTheme<T extends Theme<string, any, any>>(
     }
   }
   const mergedThemeRef = computed(() => {
-    // keep props to make theme overrideable
+    // 保留 props 使主题可以被覆盖
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<T>,
@@ -143,7 +143,7 @@ function useTheme<T extends Theme<string, any, any>>(
       selfCommonOverrides
     )
     const mergedSelf = merge(
-      // {}, executed every time, no need for empty obj
+      // 无需传入空对象 {}，因为每次执行 merge 都会新建一个
       (self || globalSelf || defaultTheme.self)?.(
         mergedCommon
       ) as ExtractThemeVars<T>,

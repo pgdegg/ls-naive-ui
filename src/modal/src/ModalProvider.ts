@@ -33,7 +33,7 @@ export type ModalReactive = {
 } & ModalOptions
 
 // FIXME
-// If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
+// 如果 style 使用 CSSProperties 类型，typescript 4.4.2 会抛出大量错误
 // Fxxx
 type TypeSafeModalReactive = ModalReactive & {
   class?: any

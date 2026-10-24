@@ -1,6 +1,6 @@
 import { c, cB, cE } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-title-font-size
 // --n-title-text-color
 // --n-font-size

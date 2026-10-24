@@ -107,9 +107,9 @@ export interface RangePanelChildComponentRefs {
 }
 
 export interface PanelChildComponentRefs {
-  monthScrollbarRef: Ref<ScrollbarInst | null> // Only exists when type is month
+  monthScrollbarRef: Ref<ScrollbarInst | null> // 仅当 type 为 month 时存在
   yearScrollbarRef: Ref<ScrollbarInst | null>
-  // year, virtual scroll
+  // year，虚拟滚动
   yearVlRef: Ref<VirtualListInst | null>
 }
 
@@ -120,7 +120,7 @@ export interface PanelRef
   $el: HTMLElement
 }
 
-// 0 is Monday
+// 0 表示周一
 export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export type DatePickerInjection = {
@@ -196,7 +196,7 @@ export type IsSingleTimeDisabled = (date: number) => TimeValidator
 export type IsRangeTimeDisabled = (
   date: number,
   position: 'start' | 'end',
-  value: [number, number] // date must exist to have time validation
+  value: [number, number] // 日期必须存在才能进行时间校验
 ) => TimeValidator
 
 export type DatePickerGetDefaultTime = (timestamp: number) => string

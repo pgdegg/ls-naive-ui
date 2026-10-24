@@ -4,7 +4,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 const iconSwitchTransitionNode = iconSwitchTransition()
 
-// vars:
+// 变量：
 // --n-arrow-color
 // --n-bezier
 // --n-font-size

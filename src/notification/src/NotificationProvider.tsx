@@ -103,7 +103,7 @@ export default defineComponent({
       const key = createId()
       const destroy = (): void => {
         leavingKeySet.add(key)
-        // If you push n + 1 message when max is n, notificationRefs[key] maybe not be set
+        // 如果 max 为 n，在第 n + 1 条消息 push 时，notificationRefs[key] 可能还没有被设置
         if (notificationRefs[key]) {
           notificationRefs[key].hide()
         }
@@ -176,7 +176,7 @@ export default defineComponent({
       mergedThemeRef: themeRef,
       wipTransitionCountRef
     })
-    // deprecated
+    // 已废弃
     function open(options: NotificationOptions): NotificationReactive {
       return create(options)
     }

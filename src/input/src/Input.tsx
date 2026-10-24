@@ -130,7 +130,7 @@ export const inputProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  /** private */
+  /** 私有 */
   textDecoration: [String, Array] as PropType<string | [string, string]>,
   attrSize: {
     type: Number,
@@ -156,7 +156,7 @@ export const inputProps = {
     type: Boolean,
     default: true
   },
-  /** deprecated */
+  /** 已废弃 */
   showPasswordToggle: Boolean
 }
 
@@ -195,7 +195,7 @@ export default defineComponent({
     if (isSafari) {
       useStyle('-input-safari', safariStyle, mergedClsPrefixRef)
     }
-    // dom refs
+    // DOM 引用
     const wrapperElRef = ref<HTMLElement | null>(null)
     const textareaElRef = ref<HTMLTextAreaElement | null>(null)
     const textareaMirrorElRef = ref<HTMLElement | null>(null)
@@ -207,16 +207,16 @@ export default defineComponent({
     >(null)
     const focusedInputCursorControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
-    // local
+    // 本地
     const { localeRef } = useLocale('Input')
-    // value
+    // 值
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
-    // form-item
+    // 表单项
     const formItem = useFormItem(props, {
       mergedSize: (NFormItem) => {
         const { size } = props
@@ -232,13 +232,13 @@ export default defineComponent({
       }
     })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
-    // states
+    // 状态
     const focusedRef = ref(false)
     const hoverRef = ref(false)
     const isComposingRef = ref(false)
     const activatedRef = ref(false)
     let syncSource: string | null = null
-    // placeholder
+    // 占位符
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
       const { placeholder, pair } = props
       if (pair) {
@@ -279,11 +279,11 @@ export default defineComponent({
           || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
-    // focus
+    // 聚焦
     const mergedFocusRef = useMemo(() => {
       return props.internalForceFocus || focusedRef.value
     })
-    // clear
+    // 清除
     const showClearButton = useMemo(() => {
       if (
         mergedDisabledRef.value
@@ -336,7 +336,7 @@ export default defineComponent({
       ]
     })
     const textAreaScrollContainerWidthRef = ref<number | undefined>(undefined)
-    // textarea autosize
+    // 文本域自动高度
     const updateTextAreaStyle = (): void => {
       if (props.type === 'textarea') {
         const { autosize } = props
@@ -374,19 +374,19 @@ export default defineComponent({
         }
       }
     }
-    // word count
+    // 字数统计
     const maxlengthRef = computed(() => {
       const { maxlength } = props
       return maxlength === undefined ? undefined : Number(maxlength)
     })
     onMounted(() => {
-      // sync mirror if is not pair
+      // 若非配对输入则同步镜像
       const { value } = mergedValueRef
       if (!Array.isArray(value)) {
         syncMirror(value)
       }
     })
-    // other methods
+    // 其他方法
     const vm = getCurrentInstance()!.proxy!
     function doUpdateValue(
       value: [string, string],
@@ -481,7 +481,7 @@ export default defineComponent({
       if (onWrapperBlur)
         call(onWrapperBlur, e)
     }
-    // methods
+    // 方法
     function handleCompositionStart(): void {
       isComposingRef.value = true
     }
@@ -541,8 +541,8 @@ export default defineComponent({
           }
         }
       }
-      // force update to sync input's view with value
-      // if not set, after input, input value won't sync with dom input value
+      // 强制更新，使输入框视图与值保持同步
+      // 若不设置，输入后输入框的值将无法与 DOM 输入框的值同步
       vm.$forceUpdate()
       if (!isIncomingValueValid) {
         void nextTick(focusedInputCursorControl.restoreCursor)
@@ -627,7 +627,7 @@ export default defineComponent({
           || e.relatedTarget === wrapperElRef.value)
       ) {
         /**
-         * activeElement transfer inside the input, do nothing
+         * activeElement 转移到输入框内部，无需处理
          */
       }
       else {
@@ -679,9 +679,9 @@ export default defineComponent({
               && top + height - resizeHandleSize < e.clientY
               && e.clientY < top + height
             ) {
-              // touching resize handle, just let it go.
-              // resize won't take focus, maybe there is a better way to do this.
-              // hope someone can figure out a better solution
+              // 触摸到缩放手柄时，直接放行。
+              // 缩放不会获取焦点，也许存在更好的做法。
+              // 希望有人能想出更好的方案
               return
             }
           }
@@ -990,7 +990,7 @@ export default defineComponent({
         '--n-text-color-disabled': textColorDisabled,
         '--n-box-shadow-focus': boxShadowFocus,
         '--n-loading-color': loadingColor,
-        // form warning
+        // 表单警告
         '--n-caret-color-warning': caretColorWarning,
         '--n-color-focus-warning': colorFocusWarning,
         '--n-box-shadow-focus-warning': boxShadowFocusWarning,
@@ -998,7 +998,7 @@ export default defineComponent({
         '--n-border-focus-warning': borderFocusWarning,
         '--n-border-hover-warning': borderHoverWarning,
         '--n-loading-color-warning': loadingColorWarning,
-        // form error
+        // 表单错误
         '--n-caret-color-error': caretColorError,
         '--n-color-focus-error': colorFocusError,
         '--n-box-shadow-focus-error': boxShadowFocusError,
@@ -1006,7 +1006,7 @@ export default defineComponent({
         '--n-border-focus-error': borderFocusError,
         '--n-border-hover-error': borderHoverError,
         '--n-loading-color-error': loadingColorError,
-        // clear-button
+        // 清除按钮
         '--n-clear-color': clearColor,
         '--n-clear-size': clearSize,
         '--n-clear-color-hover': clearColorHover,
@@ -1033,16 +1033,16 @@ export default defineComponent({
 
     return {
       ...exposedProps,
-      // DOM ref
+      // DOM 引用
       wrapperElRef,
       inputElRef,
       inputMirrorElRef,
       inputEl2Ref,
       textareaElRef,
       textareaMirrorElRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在渲染中未使用
       textareaScrollbarInstRef: textareaScrollbarInstRef as unknown,
-      // value
+      // 值
       rtlEnabled: rtlEnabledRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -1063,7 +1063,7 @@ export default defineComponent({
       placeholderStyle: placeholderStyleRef,
       mergedStatus: mergedStatusRef,
       textAreaScrollContainerWidth: textAreaScrollContainerWidthRef,
-      // methods
+      // 方法
       handleTextAreaScroll,
       handleCompositionStart,
       handleCompositionEnd,
@@ -1153,7 +1153,7 @@ export default defineComponent({
         onKeyup={this.handleWrapperKeyup}
         onKeydown={this.handleWrapperKeydown}
       >
-        {/* textarea & basic input */}
+        {/* 文本域与基础输入框 */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
           {resolveWrappedSlot(
             $slots.prefix,
@@ -1392,7 +1392,7 @@ export default defineComponent({
                   ) : null
             })}
         </div>
-        {/* pair input */}
+        {/* 配对输入框 */}
         {this.pair ? (
           <span class={`${mergedClsPrefix}-input__separator`}>
             {resolveSlot($slots.separator, () => [this.separator])}
@@ -1462,7 +1462,7 @@ export default defineComponent({
             })}
           </div>
         ) : null}
-        {/* border */}
+        {/* 边框 */}
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__border`} />
         ) : null}

@@ -1,7 +1,7 @@
 import type { VNode, VNodeChild } from 'vue'
 import { Comment, createTextVNode, Fragment } from 'vue'
 
-// o(n) flatten
+// o(n) 扁平化
 export function flatten(
   vNodes: VNodeChild[],
   filterCommentNode: boolean = true,

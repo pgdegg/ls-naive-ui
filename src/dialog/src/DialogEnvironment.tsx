@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { ModalDraggableOptions } from '../../modal/src/interface'
-// use absolute path to make sure no circular ref of style
+// 使用绝对路径以确保样式没有循环引用
 // this -> modal-index -> modal-style
 import { defineComponent, h, normalizeClass, ref } from 'vue'
 import { keep } from '../../_utils'
@@ -46,7 +46,7 @@ export const NDialogEnvironment = defineComponent({
       required: true
     },
     to: [String, Object] as PropType<string | HTMLElement>,
-    // private
+    // 私有
     onInternalAfterLeave: {
       type: Function as PropType<(key: string) => void>,
       required: true

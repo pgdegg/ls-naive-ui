@@ -4,9 +4,9 @@ import { defineComponent, h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import { NDrawer, NDrawerContent } from '../index'
 
-// It seems due to special handling of transition in naive-ui, the drawer's DOM
-// won't disappear even if its `show` prop is false. No time to find out the
-// exact reason, so I create a util here.
+// 由于 naive-ui 对 transition 的特殊处理，即使 drawer 的 `show` prop
+// 为 false，其 DOM 似乎也不会消失。没时间查明具体原因，
+// 所以在这里创建了一个工具函数。
 function expectDrawerExists(): void {
   const drawer = document.querySelector('.n-drawer')
   if (drawer !== null)
@@ -219,7 +219,7 @@ describe('n-drawer', () => {
       configurable: true,
       value: 251
     })
-    // placement top
+    // placement 为 top
     let wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'top', resizable: true, defaultHeight: 251 }
@@ -256,7 +256,7 @@ describe('n-drawer', () => {
 
     wrapper.unmount()
 
-    // placement bottom
+    // placement 为 bottom
     wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'bottom', resizable: true, defaultHeight: 251 }
@@ -293,7 +293,7 @@ describe('n-drawer', () => {
 
     wrapper.unmount()
 
-    // placement left
+    // placement 为 left
     wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'left', resizable: true, defaultWidth: 251 }
@@ -330,7 +330,7 @@ describe('n-drawer', () => {
 
     wrapper.unmount()
 
-    // placement right
+    // placement 为 right
     wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'right', resizable: true, defaultWidth: 251 }

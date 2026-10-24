@@ -11,7 +11,7 @@ import type {
 
 export type Key = string | number
 
-// Aligned with MenuOption props, has some redundant fields
+// 与 MenuOption 的 props 对齐，有一些冗余字段
 export type DropdownOption = MenuOption
 export type DropdownGroupOption = MenuGroupOption
 export type DropdownDividerOption = MenuDividerOption

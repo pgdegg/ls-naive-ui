@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-border-radius
 // --n-height

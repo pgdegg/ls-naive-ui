@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-color
 // --n-ripple-color
 // --n-bezier
@@ -15,7 +15,7 @@ export default c([
       opacity: 0.6
     },
     to: {
-      // don't use exact 5px since chrome will display the animation with glitches
+      // 不要用精确的 5px，否则 chrome 显示该动画时会出现瑕疵
       boxShadow: '0 0 0.5px 4.5px var(--n-ripple-color)',
       opacity: 0
     }

@@ -65,7 +65,7 @@ export default defineComponent({
     )
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const now = Date.now()
-    // ts => timestamp
+    // ts => 时间戳
     const monthTsRef = ref(startOfMonth(props.defaultValue ?? now).valueOf())
     const uncontrolledValueRef = ref<number | null>(props.defaultValue || null)
     const mergedValueRef = useMergedState(
@@ -294,7 +294,7 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
+              // 'notInCurrentMonth' 和 'disabled' 都是禁用样式，但 'disabled' 的光标为 not-allowed
               const notInCurrentMonth = !inCurrentMonth
               const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()

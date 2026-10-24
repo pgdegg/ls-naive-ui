@@ -136,7 +136,7 @@ export const menuProps = {
     default: 'bottom'
   },
   responsive: Boolean,
-  // deprecated
+  // 已废弃
   items: Array as PropType<Array<MenuOption | MenuGroupOption>>,
   onOpenNamesChange: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   onSelect: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -295,7 +295,7 @@ export default defineComponent({
       if (onUpdateExpandedKeys) {
         call(onUpdateExpandedKeys as OnUpdateKeysImpl, value)
       }
-      // deprecated
+      // 已废弃
       if (onExpandedNamesChange) {
         call(onExpandedNamesChange as OnUpdateKeysImpl, value)
       }
@@ -560,7 +560,7 @@ export default defineComponent({
     })
     function renderCounter(): VNodeChild {
       if (ellipsisFromIndexRef.value === -1) {
-        // Only a placeholder
+        // 仅为占位符
         return (
           <NSubmenu
             root
@@ -611,7 +611,7 @@ export default defineComponent({
         ? undefined
         : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在渲染中未使用
       overflowRef: overflowRef as unknown,
       counterRef,
       updateCounter: () => {},

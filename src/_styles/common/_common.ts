@@ -23,7 +23,7 @@ export default {
 
   lineHeight: '1.6',
 
-  heightMini: '16px', // private now, it's too small
+  heightMini: '16px', // 现在是私有的，它太小了
   heightTiny: '22px',
   heightSmall: '28px',
   heightMedium: '34px',

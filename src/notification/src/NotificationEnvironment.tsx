@@ -39,7 +39,7 @@ export const NotificationEnvironment = defineComponent({
   name: 'NotificationEnvironment',
   props: {
     ...notificationEnvOptions,
-    // private
+    // 私有
     internalKey: {
       type: String,
       required: true
@@ -77,7 +77,7 @@ export const NotificationEnvironment = defineComponent({
       const { onAfterEnter, onAfterShow } = props
       if (onAfterEnter)
         onAfterEnter()
-      // deprecated
+      // 已废弃
       if (onAfterShow)
         onAfterShow()
     }
@@ -101,7 +101,7 @@ export const NotificationEnvironment = defineComponent({
       if (onAfterLeave)
         onAfterLeave()
       onInternalAfterLeave(internalKey)
-      // deprecated
+      // 已废弃
       if (onAfterHide)
         onAfterHide()
     }
@@ -160,7 +160,7 @@ export const NotificationEnvironment = defineComponent({
       <Transition
         name="notification-transition"
         appear={true}
-        // convert to any since Element is not compatible with HTMLElement
+        // 转成 any，因为 Element 与 HTMLElement 不兼容
         onBeforeEnter={this.handleBeforeEnter as any}
         onAfterEnter={this.handleAfterEnter as any}
         onBeforeLeave={this.handleBeforeLeave as any}

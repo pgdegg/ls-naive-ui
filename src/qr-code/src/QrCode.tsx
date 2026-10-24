@@ -61,7 +61,7 @@ export const qrCodeProps = {
 
 export type QrCodeProps = ExtractPublicPropTypes<typeof qrCodeProps>
 
-// For retina display
+// 用于 Retina 高清屏显示
 const UPSCALE_RATIO = 2
 
 export default defineComponent({
@@ -211,8 +211,8 @@ export default defineComponent({
         let start: number | null = null
         row.forEach((cell, x) => {
           if (!cell && start !== null) {
-            // M0 0h7v1H0z injects the space with the move and drops the comma,
-            // saving a char per operation
+            // M0 0h7v1H0z 通过移动指令注入间隙并省略逗号，
+            // 每次操作节省一个字符
             ops.push(
               `M${start + margin} ${y + margin}h${x - start}v1H${start + margin}z`
             )
@@ -220,19 +220,19 @@ export default defineComponent({
             return
           }
 
-          // end of row, clean up or skip
+          // 到达行尾，收尾或跳过
           if (x === row.length - 1) {
             if (!cell) {
-              // We would have closed the op above already so this can only mean
-              // 2+ light modules in a row.
+              // 我们在上文已经闭合了该操作，因此这里只能表示
+              // 连续出现 2 个以上的浅色模块。
               return
             }
             if (start === null) {
-              // Just a single dark module.
+              // 仅有一个深色模块。
               ops.push(`M${x + margin},${y + margin} h1v1H${x + margin}z`)
             }
             else {
-              // Otherwise finish the current line.
+              // 否则完成当前线段。
               ops.push(
                 `M${start + margin},${y + margin} h${x + 1 - start}v1H${
                   start + margin

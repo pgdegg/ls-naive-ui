@@ -1,6 +1,6 @@
 <script lang="ts">
 import { useMemo } from 'vooks'
-// Frame component for components & docs page
+// 组件与文档页面的框架组件
 import { computed, defineComponent, ref, toRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useComponentOptions, useDocOptions } from '../store'
@@ -29,7 +29,7 @@ export default defineComponent({
     })
     watch(toRef(route, 'path'), (value, oldValue) => {
       const langAndThemeReg = /\/(zh-CN|en-US)\/(light|dark|os-theme)/g
-      // only theme & lang change do not restore the scroll status
+      // 仅主题和语言变化时不恢复滚动状态
       if (
         value.replace(langAndThemeReg, '')
         !== oldValue.replace(langAndThemeReg, '')

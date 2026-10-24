@@ -28,7 +28,7 @@ describe('n-calendar', () => {
   })
 
   it('should follow `default-value` to display month', () => {
-    // May 19 2022
+    // 2022 年 5 月 19 日
     const wrapper = mount(NCalendar, { props: { defaultValue: 1652956953562 } })
     expect(wrapper.find('.n-calendar-header__title').text()).toContain('May')
     wrapper.unmount()

@@ -4,7 +4,7 @@ import { defineComponent, h, inject } from 'vue'
 import { NRadio } from '../../../radio'
 import { dataTableInjectionKey } from '../interface'
 
-// Extract the radio to avoid useless rendering in table body
+// 抽出 radio 以避免表格主体中的无用渲染
 export default defineComponent({
   name: 'DataTableBodyRadio',
   props: {

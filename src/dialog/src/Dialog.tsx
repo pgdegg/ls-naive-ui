@@ -41,8 +41,8 @@ export interface DialogSlots {
 export const NDialog = defineComponent({
   name: 'Dialog',
   alias: [
-    'NimbusConfirmCard', // deprecated
-    'Confirm' // deprecated
+    'NimbusConfirmCard', // 已废弃
+    'Confirm' // 已废弃
   ],
   props: {
     ...(useTheme.props as ThemeProps<DialogTheme, DialogThemeOverrides>),

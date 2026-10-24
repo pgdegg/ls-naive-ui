@@ -19,10 +19,10 @@ import PanelHeader from './panelHeader'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
- * DateTime Panel
- * Update picker value on:
- * 1. confirm click
- * 2. clear click
+ * 日期时间面板
+ * 在以下时机更新选择器值：
+ * 1. 点击确认
+ * 2. 点击清除
  */
 export default defineComponent({
   name: 'DateTimePanel',

@@ -1,6 +1,6 @@
 import { cB } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --input-width
 export default cB('dynamic-tags', [
   cB('input', {

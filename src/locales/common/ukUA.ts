@@ -63,7 +63,7 @@ const ukUA: NLocale = {
     sourceTitle: 'Джерело',
     targetTitle: 'Ціль'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',

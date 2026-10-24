@@ -1,6 +1,6 @@
 import { c, cB, cE, insideModal, insidePopover } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-font-size
 // --n-border-radius
 // --n-color

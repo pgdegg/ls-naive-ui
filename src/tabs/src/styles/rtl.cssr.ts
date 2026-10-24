@@ -4,7 +4,7 @@ export default cB('tabs', [
   cM('rtl', `
     direction: rtl;
   `, [
-    // Keep physical left/right placement under direction: rtl
+    // 在 direction: rtl 下保持物理上的 left/right 位置
     cM('left', `
       flex-direction: row-reverse;
     `),

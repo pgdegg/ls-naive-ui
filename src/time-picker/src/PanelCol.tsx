@@ -17,7 +17,7 @@ export default defineComponent({
       type: [Number, String] as PropType<number | null | 'am' | 'pm'>,
       default: null
     },
-    // It should be required but vue's type seems to have bugs
+    // 它本应是 required，但 vue 的类型似乎有 bug
     onItemClick: Function as PropType<(value: number | 'am' | 'pm') => void>
   },
   render() {

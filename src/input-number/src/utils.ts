@@ -1,5 +1,5 @@
-// string => string (expected, not implemented)
-// string => number (legacy)
+// string => string（预期，未实现）
+// string => number（遗留）
 export function parse(value: string): number | null {
   if (
     value === undefined
@@ -11,11 +11,11 @@ export function parse(value: string): number | null {
   return Number(value)
 }
 
-// This function is created for `update-value-on-input` prop. When the prop is
-// true, the input value will update the value and <input />'s value at the same
-// time. So we need to make user's content won't be replaced by its parsed value
-// in some certain cases. For example '0.' should be parsed and replaced by '0',
-// '-0' should be parsed and replaced by '0', since user may input '-0.1' after.
+// 此函数为 `update-value-on-input` prop 而创建。当该 prop 为
+// true 时，输入值会同时更新 value 和 <input /> 的 value。所以我
+// 们需要确保在某些情况下，用户输入的内容不会被其解析值替换。例如
+// '0.' 会被解析并替换为 '0'，'-0' 会被解析并替换为 '0'，因为用户
+// 之后可能输入 '-0.1'。
 export function isWipValue(value: string): boolean {
   return (
     (value.includes('.')
@@ -25,8 +25,8 @@ export function isWipValue(value: string): boolean {
   )
 }
 
-// string => boolean (expected, not implemented)
-// number => boolean (legacy)
+// string => boolean（预期，未实现）
+// number => boolean（遗留）
 export function validator(value: number | null): boolean {
   if (value === undefined || value === null)
     return true
@@ -35,8 +35,8 @@ export function validator(value: number | null): boolean {
   return true
 }
 
-// string => string (expected, not implemented)
-// number => string (legacy)
+// string => string（预期，未实现）
+// number => string（遗留）
 export function format(
   value: number | undefined | null,
   precision: number | undefined

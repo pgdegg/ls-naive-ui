@@ -1,6 +1,6 @@
 import { c, cB } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-border-radius
 export default c([
   cB('qr-code', `

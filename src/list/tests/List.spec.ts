@@ -121,11 +121,11 @@ describe('n-list', () => {
         ]
       }
     })
-    // Default is true, so show-divider class should exist
+    // 默认值为 true，所以应该存在 show-divider 类
     expect(wrapper.find('.n-list').classes()).toContain('n-list--show-divider')
 
     await wrapper.setProps({ showDivider: false })
-    // When showDivider is false, the class should not exist
+    // 当 showDivider 为 false 时，类应该不存在
     expect(wrapper.find('.n-list').classes()).not.toContain(
       'n-list--show-divider'
     )
@@ -176,7 +176,7 @@ describe('n-list', () => {
           })
       }
     })
-    // List renders as a ul element
+    // List 渲染为 ul 元素
     expect(wrapper.find('ul.n-list').exists()).toBe(true)
     wrapper.unmount()
   })
@@ -191,7 +191,7 @@ describe('n-list', () => {
         ]
       }
     })
-    // List items should not show dividers when showDivider is false
+    // 当 showDivider 为 false 时，List 项不应显示分割线
     expect(wrapper.findAll('.n-list-item').length).toBe(2)
     wrapper.unmount()
   })

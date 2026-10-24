@@ -97,8 +97,8 @@ export default defineComponent({
     })
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
-      // do not add bottom bordered class if bordered is true
-      // since border is displayed on wrapper
+      // 如果 bordered 为 true，则不添加 bottom-bordered 类
+      // 因为边框显示在外层容器上
       if (mergedBorderedRef.value)
         return false
       if (bottomBordered !== undefined)
@@ -189,7 +189,7 @@ export default defineComponent({
     } = useExpand(props, treeMateRef)
     const maxHeightRef = toRef(props, 'maxHeight')
     const mergedTableLayoutRef = computed(() => {
-      // Layout
+      // 布局
       // virtual |descrete header | ellpisis => fixed
       //    = virtual | maxHeight | ellpisis => fixed
       if (
@@ -467,7 +467,7 @@ export default defineComponent({
       )
     })
     return {
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts：仅使用字符串 ref，类型在 render 中未使用
       mainTableInstRef: mainTableInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,

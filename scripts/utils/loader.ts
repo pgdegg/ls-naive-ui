@@ -157,7 +157,7 @@ async function transformMdToVueAndUpdateEntryFile(
         path.resolve(file.dir, `./${file.name}.vue`),
         `${vueDemoBlocks.join(LINE_SPACE)}\n`
       )
-      // should be able to be modified together
+      // 应该可以一起被修改
       await updateIndexEntryDemo(file)
     }
   }

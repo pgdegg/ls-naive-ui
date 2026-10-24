@@ -44,7 +44,7 @@ export const spaceProps = {
     type: Boolean,
     default: true
   },
-  // internal
+  // 内部使用
   internalUseGap: {
     type: Boolean,
     default: undefined

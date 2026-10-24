@@ -52,8 +52,8 @@ function findSiblingsAndIndex(
 }
 
 /**
- * The time complexity of the demo can be optimized,
- * but I'm too lazy to optimize it.
+ * 这个示例的时间复杂度其实可以优化，
+ * 但我懒得优化。
  */
 const expandedKeysRef = ref<string[]>([])
 const checkedKeysRef = ref<string[]>([])

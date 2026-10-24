@@ -86,7 +86,7 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('InputOtp', mergedRtlRef, mergedClsPrefixRef)
 
-    // form-item
+    // 表单项
     const formItem = useFormItem(props, {
       mergedSize: (NFormItem) => {
         const { size } = props
@@ -148,7 +148,7 @@ export default defineComponent({
     )
 
     const handleFocus = (e: FocusEvent, index: number) => {
-      // If it's focused from other input element inside the component, returns
+      // 如果是从组件内其他 input 元素聚焦过来的，直接返回
       if (
         inputRefList?.value.some(
           inputInst => inputInst.inputElRef === e.relatedTarget
@@ -165,7 +165,7 @@ export default defineComponent({
     }
 
     const handleBlur = (e: FocusEvent, index: number) => {
-      // If it's blured to other input element inside the component, returns
+      // 如果失焦到组件内其他 input 元素，直接返回
       if (
         inputRefList?.value.some(
           inputInst => inputInst.inputElRef === e.relatedTarget
@@ -308,7 +308,7 @@ export default defineComponent({
       const diff = value.replace(currentValueAtIndex, '')
       const text = diff || value
 
-      // Multi-character input (e.g. browser extension autofill)
+      // 多字符输入（例如浏览器扩展自动填充）
       if (text.length > 1) {
         let startIndex = index
         const allowInput = props.allowInput
@@ -337,7 +337,7 @@ export default defineComponent({
         return
       }
 
-      // Single character — original behavior
+      // 单字符 —— 原有行为
       const char = text[text.length - 1] || ''
       const allowInput = props.allowInput
       if (allowInput && !allowInput(char, index, currentValue)) {

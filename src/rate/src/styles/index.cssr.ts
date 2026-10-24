@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-item-color
 // --n-item-color-active

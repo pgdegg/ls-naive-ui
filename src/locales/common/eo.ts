@@ -47,7 +47,7 @@ const eo: NLocale = {
     endDatePlaceholder: 'Fina dato',
     startDatetimePlaceholder: 'Komencaj dato kaj tempo',
     endDatetimePlaceholder: 'Finaj dato kaj tempo',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
@@ -64,7 +64,7 @@ const eo: NLocale = {
     sourceTitle: 'Source',
     targetTitle: 'Target'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',

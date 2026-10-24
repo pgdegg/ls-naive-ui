@@ -16,7 +16,7 @@ describe('n-input-otp', () => {
         }
       })
       const inputs = wrapper.findAll('input')
-      // Simulate autofill setting full value on first input
+      // 模拟自动填充在第一个 input 上设置完整值
       await inputs[0].setValue('123456')
       expect(onUpdateValue).toHaveBeenCalled()
       const value = onUpdateValue.mock.calls[0][0]
@@ -52,7 +52,7 @@ describe('n-input-otp', () => {
       await inputs[0].setValue('12a456')
       expect(onUpdateValue).toHaveBeenCalled()
       const value = onUpdateValue.mock.calls[0][0]
-      // 'a' should be skipped
+      // 'a' 应该被跳过
       expect(value).toEqual(['1', '2', '4', '5', '6', ''])
     })
 

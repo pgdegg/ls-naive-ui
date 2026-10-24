@@ -45,7 +45,7 @@ export function createTmOptions(
           || 'key-required'
         )
       }
-      // Required for non-custom label & value field
+      // 非自定义 label 和 value 字段时必需
       return (option as SelectBaseOption | SelectIgnoredOption)[
         valueField
       ] as NonNullable<SelectOption['value']>

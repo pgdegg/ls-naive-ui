@@ -73,7 +73,7 @@ export function self(vars: ThemeCommonVars) {
     thButtonColorHover: tableColorHover,
     thIconColor: iconColor,
     thIconColorActive: primaryColor,
-    // modal
+    // 弹窗（modal）
     borderColorModal: composite(modalColor, dividerColor),
     tdColorHoverModal: composite(modalColor, tableColorHover),
     tdColorSortingModal: composite(modalColor, tableColorHover),
@@ -88,7 +88,7 @@ export function self(vars: ThemeCommonVars) {
       tableColorHover
     ),
     tdColorModal: modalColor,
-    // popover
+    // 气泡卡片（popover）
     borderColorPopover: composite(popoverColor, dividerColor),
     tdColorHoverPopover: composite(popoverColor, tableColorHover),
     tdColorSortingPopover: composite(popoverColor, tableColorHover),
@@ -105,7 +105,7 @@ export function self(vars: ThemeCommonVars) {
     tdColorPopover: popoverColor,
     boxShadowBefore: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)',
     boxShadowAfter: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)',
-    // loading
+    // 加载（loading）
     loadingColor: primaryColor,
     loadingSize: heightSmall,
     opacityLoading: opacityDisabled

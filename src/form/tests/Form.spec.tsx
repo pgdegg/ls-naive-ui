@@ -176,7 +176,7 @@ describe('n-form', () => {
           ))
       }
     })
-    // show-label default is true in component
+    // show-label 在组件中默认为 true
     expect(wrapper.findAll('.n-form-item-label').length).toBe(3)
     expect(wrapper.findAll('.n-form-item--no-label').length).toBe(0)
 
@@ -191,7 +191,7 @@ describe('n-form', () => {
       .filter(w => w.classes().includes('n-form-item--no-label'))
     expect(noLabelItem).toHaveLength(3)
 
-    // The NFormItem show-label has a higher weight than the NForm
+    // NFormItem 的 show-label 优先级高于 NForm
     wrapper = mount(NForm, {
       props: { showLabel: true },
       slots: {
@@ -462,7 +462,7 @@ describe('n-form', () => {
         ]
       ]
 
-      // show warning and error feedback, validate method rejected while empty form fields
+      // 显示 warning 和 error 反馈，表单字段为空时 validate 方法会 reject
       await expect(formRef.validate()).rejects.toMatchObject(validationError)
 
       expect(
@@ -475,7 +475,7 @@ describe('n-form', () => {
           .text()
       ).toBe('warning!')
 
-      // only warning is shown, validate method resolved while error filed got value.
+      // 只显示 warning，error 字段有值时 validate 方法会 resolve
       await wrapper
         .findComponent({ ref: 'errorInputRef' })
         .find('input')
@@ -498,7 +498,7 @@ describe('n-form', () => {
           .exists()
       ).toBe(false)
 
-      // either error nor warning was shown, validate method resolve while form filled.
+      // error 和 warning 都不显示，表单填写完整后 validate 方法会 resolve
       await wrapper
         .findComponent({ ref: 'warningInputRef' })
         .find('input')
@@ -620,7 +620,7 @@ describe('n-form', () => {
           }
         )
       }
-      // show warning and error feedback, validate method rejected while empty form fields
+      // 显示 warning 和 error 反馈，表单字段为空时 validate 方法会 reject
       expect(await validate()).toMatchObject([
         validationError,
         { warnings: validationWarning }
@@ -636,13 +636,13 @@ describe('n-form', () => {
           .text()
       ).toBe('warning!')
 
-      // only warning is shown, validate method resolved while error filed got value.
+      // 只显示 warning，error 字段有值时 validate 方法会 resolve
       await wrapper
         .findComponent({ ref: 'errorInputRef' })
         .find('input')
         .setValue('value')
 
-      // show warning and error feedback, validate method rejected while empty form fields
+      // 显示 warning 和 error 反馈，表单字段为空时 validate 方法会 reject
       expect(await validate()).toMatchObject([
         undefined,
         { warnings: validationWarning }
@@ -659,7 +659,7 @@ describe('n-form', () => {
           .exists()
       ).toBe(false)
 
-      // either error nor warning was shown, validate method resolve while form filled.
+      // error 和 warning 都不显示，表单填写完整后 validate 方法会 resolve
       await wrapper
         .findComponent({ ref: 'warningInputRef' })
         .find('input')

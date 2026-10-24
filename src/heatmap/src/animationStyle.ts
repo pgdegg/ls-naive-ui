@@ -52,7 +52,7 @@ export function useLoadingStyleClass(
         `
         )
       ])
-      // We don't unmount it since we didn't know its mount count
+      // 我们不卸载它，因为我们不知道它的挂载次数
       cnode.mount({
         id: loadingColorHash,
         ssr: adapter,

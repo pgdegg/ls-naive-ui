@@ -101,7 +101,7 @@ const scrollbarProps = {
   },
   useUnifiedContainer: Boolean,
   triggerDisplayManually: Boolean,
-  // If container is set, resize observer won't not attached
+  // 如果设置了 container，则不会附加 resize observer
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
   containerClass: String,
@@ -348,9 +348,9 @@ const Scrollbar = defineComponent({
     }
 
     const activateState = useReactivated(() => {
-      // Only restore for builtin container & content
+      // 仅为内置的 container 和 content 恢复滚动位置
       if (!props.container) {
-        // remount
+        // 重新挂载
         scrollTo({
           top: containerScrollTopRef.value,
           left: containerScrollLeftRef.value
@@ -358,7 +358,7 @@ const Scrollbar = defineComponent({
       }
     })
 
-    // methods
+    // 方法
     const handleContentResize = (): void => {
       if (activateState.isDeactivated)
         return
@@ -402,7 +402,7 @@ const Scrollbar = defineComponent({
         const { scrollTop, offsetHeight } = container
         if (top > scrollTop) {
           if (top + elSize <= scrollTop + offsetHeight) {
-            // do nothing
+            // 什么都不做
           }
           else {
             container.scrollTo({
@@ -467,7 +467,7 @@ const Scrollbar = defineComponent({
       syncScrollState()
     }
     function syncScrollState(): void {
-      // only collect scroll state, do not trigger any dom event
+      // 仅收集滚动状态，不触发任何 DOM 事件
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
@@ -476,8 +476,8 @@ const Scrollbar = defineComponent({
       }
     }
     function syncPositionState(): void {
-      // only collect position state, do not trigger any dom event
-      // Don't use getClientBoundingRect because element may be scale transformed
+      // 仅收集位置状态，不触发任何 DOM 事件
+      // 不要使用 getClientBoundingRect，因为元素可能经过了 scale 变换
       const { value: content } = mergedContentRef
       if (content) {
         contentHeightRef.value = content.offsetHeight
@@ -498,8 +498,8 @@ const Scrollbar = defineComponent({
       }
     }
     /**
-     * Sometimes there's only one element that we can scroll,
-     * For example for textarea, there won't be a content element.
+     * 有时只有一个元素可以滚动，
+     * 例如对于 textarea，就不会有 content 元素。
      */
     function syncUnifiedContainer(): void {
       const { value: container } = mergedContainerRef
@@ -665,14 +665,14 @@ const Scrollbar = defineComponent({
       }
     })
     onMounted(() => {
-      // if container exist, it always can't be resolved when scrollbar is mounted
-      // for example:
+      // 如果 container 存在，在 scrollbar 挂载时它总是还无法被解析
+      // 例如：
       // - component
       //   - scrollbar
       //     - inner
-      // if you pass inner to scrollbar, you may use a ref inside component
-      // however, when scrollbar is mounted, ref is not ready at component
-      // you need to init by yourself
+      // 如果你把 inner 传给 scrollbar，你可能会在 component 内部使用一个 ref
+      // 然而，当 scrollbar 挂载时，component 里的 ref 还没有就绪
+      // 你需要自行完成初始化
       if (props.container)
         return
       sync()

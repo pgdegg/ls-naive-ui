@@ -22,7 +22,7 @@ export const textProps = {
   underline: Boolean,
   depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>,
   tag: String,
-  // deprecated
+  // 已废弃
   as: {
     type: String,
     validator: () => {

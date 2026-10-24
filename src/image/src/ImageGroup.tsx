@@ -207,7 +207,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts：仅用字符串 ref，类型在 render 中未使用
       previewInstRef: previewInstRef as unknown,
       mergedShow: mergedShowRef,
       src: currentUrl,

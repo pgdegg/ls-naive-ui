@@ -259,7 +259,7 @@ export default defineComponent({
           .includes(pattern.toLowerCase())
       }
     })
-    // used to resolve selected options
+    // 用于解析已选中的选项
     const dataTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         props.options,
@@ -282,11 +282,10 @@ export default defineComponent({
     const mergedCascadeRef = computed(() => {
       return props.multiple && props.cascade && props.checkable
     })
-    // The same logic as tree, now it's not that complex so I don't extract a
-    // function to reuse it.
+    // 与 tree 相同的逻辑，目前还不算复杂，所以没有抽成函数复用
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
-        ? undefined // leave it, n-tree will handle it
+        ? undefined // 保留原样，n-tree 会处理它
         : props.defaultExpandedKeys || props.expandedKeys
     )
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
@@ -508,7 +507,7 @@ export default defineComponent({
             getPreciseEventTarget(e) as Node | null
           )
         ) {
-          // outside select, don't need to return focus
+          // 点击发生在 select 外部，无需归还焦点
           closeMenu()
         }
       }
@@ -521,7 +520,7 @@ export default defineComponent({
       }
       else {
         if (!props.filterable) {
-          // already focused, don't need to return focus
+          // 已经聚焦，无需归还焦点
           closeMenu()
         }
       }
@@ -559,8 +558,8 @@ export default defineComponent({
           doUpdateValue(null, null, { node, action })
         }
         closeMenu()
-        // Currently it is not necessary. However if there is an action slot,
-        // it will be useful. So just leave it here.
+        // 目前没有必要。不过如果之后存在 action slot，它就会有用。
+        // 所以先留在这里。
         focusSelection()
       }
     }
@@ -615,11 +614,11 @@ export default defineComponent({
       }
     }
     function handleDeleteOption(option: SelectBaseOption): void {
-      // only work for multiple mode
+      // 仅在 multiple 模式下生效
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
         const { value: treeMate } = dataTreeMateRef
-        // all visible checked keys
+        // 所有可见的选中 key
         const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
           mergedValue,
           {
@@ -716,8 +715,8 @@ export default defineComponent({
       focusSelection()
     }
     function handleMenuMousedown(e: MouseEvent): void {
-      // If there's an action slot later, we need to check if mousedown happens
-      // in action panel
+      // 如果之后添加 action slot，需要检查 mousedown 是否发生在
+      // action 面板中
       if (!happensIn(e, 'action') && !happensIn(e, 'header'))
         e.preventDefault()
     }
@@ -857,7 +856,7 @@ export default defineComponent({
       ...exposedMethods,
       menuElRef,
       mergedStatus: mergedStatusRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在 render 中未被使用
       triggerInstRef: triggerInstRef as unknown,
       followerInstRef: followerInstRef as unknown,
       treeInstRef: treeInstRef as unknown,

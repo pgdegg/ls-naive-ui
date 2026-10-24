@@ -39,31 +39,31 @@ const base = {
   alphaCode: '0.12',
   alphaTag: '0.2',
 
-  // primary
+  // 主色
   primaryHover: '#7fe7c4',
   primaryDefault: '#63e2b7',
   primaryActive: '#5acea7',
   primarySuppl: 'rgb(42, 148, 125)',
 
-  // info
+  // 信息色
   infoHover: '#8acbec',
   infoDefault: '#70c0e8',
   infoActive: '#66afd3',
   infoSuppl: 'rgb(56, 137, 197)',
 
-  // error
+  // 错误色
   errorHover: '#e98b8b',
   errorDefault: '#e88080',
   errorActive: '#e57272',
   errorSuppl: 'rgb(208, 58, 82)',
 
-  // warning
+  // 警告色
   warningHover: '#f5d599',
   warningDefault: '#f2c97d',
   warningActive: '#e6c260',
   warningSuppl: 'rgb(240, 138, 0)',
 
-  // success
+  // 成功色
   successHover: '#7fe7c4',
   successDefault: '#63e2b7',
   successActive: '#5acea7',
@@ -91,37 +91,37 @@ const derived: ThemeCommonVars = {
 
   baseColor: base.neutralBase,
 
-  // primary color
+  // 主色
   primaryColor: base.primaryDefault,
   primaryColorHover: base.primaryHover,
   primaryColorPressed: base.primaryActive,
   primaryColorSuppl: base.primarySuppl,
-  // info color
+  // 信息色
   infoColor: base.infoDefault,
   infoColorHover: base.infoHover,
   infoColorPressed: base.infoActive,
   infoColorSuppl: base.infoSuppl,
-  // success color
+  // 成功色
   successColor: base.successDefault,
   successColorHover: base.successHover,
   successColorPressed: base.successActive,
   successColorSuppl: base.successSuppl,
-  // warning color
+  // 警告色
   warningColor: base.warningDefault,
   warningColorHover: base.warningHover,
   warningColorPressed: base.warningActive,
   warningColorSuppl: base.warningSuppl,
-  // error color
+  // 错误色
   errorColor: base.errorDefault,
   errorColorHover: base.errorHover,
   errorColorPressed: base.errorActive,
   errorColorSuppl: base.errorSuppl,
-  // text color
+  // 文字颜色
   textColorBase: base.neutralTextBase,
   textColor1: overlay(base.alpha1),
   textColor2: overlay(base.alpha2),
   textColor3: overlay(base.alpha3),
-  // textColor4: overlay(base.alpha4), // disabled, placeholder, icon
+  // textColor4: overlay(base.alpha4), // 禁用、placeholder、图标
   // textColor5: overlay(base.alpha5),
 
   textColorDisabled: overlay(base.alpha4),
@@ -141,14 +141,14 @@ const derived: ThemeCommonVars = {
   dividerColor: overlay(base.alphaDivider),
   borderColor: overlay(base.alphaBorder),
 
-  // close
+  // 关闭图标
   closeIconColorHover: overlay(Number(base.alphaClose)),
   closeIconColor: overlay(Number(base.alphaClose)),
   closeIconColorPressed: overlay(Number(base.alphaClose)),
   closeColorHover: 'rgba(255, 255, 255, .12)',
   closeColorPressed: 'rgba(255, 255, 255, .08)',
 
-  // clear
+  // 清除
   clearColor: overlay(base.alpha4),
   clearColorHover: scaleColor(overlay(base.alpha4), { alpha: 1.25 }),
   clearColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.8 }),

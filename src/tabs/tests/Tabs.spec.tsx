@@ -670,7 +670,7 @@ describe('n-tabs', () => {
     await sleep(0)
     expect(barEl.style.left).toBe('80px')
 
-    // After RTL layout, active tab moves to the right
+    // RTL 布局后，激活的 tab 会移动到右侧
     Object.defineProperty(tabEl, 'offsetLeft', {
       value: 200,
       configurable: true

@@ -1,6 +1,6 @@
 import { isBrowser, isJsdom } from './_utils'
 
-// Polyfill browser APIs
+// Polyfill 浏览器 API
 class _ResizeObserver {
   observe(): void {}
   unobserve(): void {}

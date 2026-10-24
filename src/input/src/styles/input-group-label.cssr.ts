@@ -1,6 +1,6 @@
 import { cB, cE } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-group-label-color
 // --n-border-radius

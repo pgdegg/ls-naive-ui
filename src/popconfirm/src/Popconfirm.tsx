@@ -107,7 +107,7 @@ export default defineComponent({
         popoverInstRef.value?.syncPosition()
       },
       mergedTheme: themeRef,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts 体积：render 中只用到字符串 ref，类型用不上
       popoverInstRef: popoverInstRef as unknown,
       handlePositiveClick,
       handleNegativeClick

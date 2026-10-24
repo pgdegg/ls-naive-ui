@@ -1,5 +1,5 @@
-// Because of the nature of the loop slide work,
-// we need to add duplicates to the left and right of the carousel
+// 由于循环轮播的工作机制，
+// 我们需要在轮播的左右两侧添加重复的幻灯片
 // slot    [ 0 1 2 ]
 // display 2 0 1 2 0
 // real    0 1 2 3 4
@@ -23,7 +23,7 @@ function duplicateSlide(
   position: 'prepend' | 'append'
 ): VNode {
   return cloneVNode(child, {
-    // for patch
+    // 用于 patch
     key: `carousel-item-duplicate-${index}-${position}`
   })
 }

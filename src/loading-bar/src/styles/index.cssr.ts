@@ -1,7 +1,7 @@
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { cB, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-height
 // --n-color-loading
 // --n-color-error

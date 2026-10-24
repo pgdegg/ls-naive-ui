@@ -1,7 +1,7 @@
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-button-border-radius
 // --n-button-box-shadow

@@ -23,8 +23,8 @@ describe('n-input-number', () => {
   })
 
   it('should work with `show-button` prop', async () => {
-    // Here is a strange case, we must make input number's slots flag to 2
-    // (dynamic) to make it work.
+    // 这里有个奇怪的情况，必须把 input number 的 slots 标志设为 2
+    // （dynamic）才能让它正常工作。
     const wrapper = mount(NInputNumber)
     expect(wrapper.findComponent(NButton).exists()).toBe(true)
     await wrapper.setProps({ showButton: false })

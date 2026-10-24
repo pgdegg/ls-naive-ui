@@ -95,7 +95,7 @@ describe('n-radio', () => {
     const onUpdate2 = vi.fn()
     const wrapper = mount(NRadio, {
       props: { 'onUpdate:checked': onUpdate1, onUpdateChecked: onUpdate2 },
-      // special case for trigger click with radio input need `attachTo`
+      // 触发对 radio input 点击的特殊情况需要 `attachTo`
       // https://github.com/vuejs/test-utils/issues/1470
       attachTo: document.body
     })

@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-color
 // --n-color-hover
@@ -35,7 +35,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-count-text-color
 // --n-count-text-color-disabled
 // --n-loading-color
-// ...form item vars
+// …表单项变量
 export default cB('input', `
   max-width: 100%;
   cursor: text;
@@ -52,7 +52,7 @@ export default cB('input', `
   font-weight: var(--n-font-weight);
   --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
 `, [
-  // common
+  // 通用
   cE('input, textarea', `
     overflow: hidden;
     flex-grow: 1;
@@ -126,7 +126,7 @@ export default cB('input', `
       height: 100%;
     `)
   ]),
-  // input
+  // 输入框
   cB('input-wrapper', `
     overflow: hidden;
     display: inline-flex;
@@ -167,7 +167,7 @@ export default cB('input', `
     justify-content: center;
     transition: color .3s var(--n-bezier);
   `),
-  // textarea
+  // 文本域
   cM('textarea', 'width: 100%;', [
     cB('input-word-count', `
       position: absolute;
@@ -206,7 +206,7 @@ export default cB('input', `
       overflow-wrap: break-word;
     `)
   ]),
-  // pair
+  // 配对
   cM('pair', [
     cE('input-el, placeholder', 'text-align: center;'),
     cE('separator', `

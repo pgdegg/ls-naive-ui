@@ -35,7 +35,7 @@ export default defineComponent({
       required: true
     },
     value: {
-      // for hex to get percise value
+      // 供 hex 模式获取精确的值
       type: String as PropType<string | null>,
       default: null
     },
@@ -116,7 +116,7 @@ export default defineComponent({
             default: () => {
               const { mode, valueArr, showAlpha } = this
               if (mode === 'hex') {
-                // hex and rgba shares the same value arr
+                // hex 与 rgba 共享同一个值数组
                 let hexValue: string | null = null
                 try {
                   hexValue

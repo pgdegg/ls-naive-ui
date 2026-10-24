@@ -21,7 +21,7 @@ import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
 import { createShallowClonedObject } from './utils'
 
-// useTableData combines filter, sorter and pagination
+// useTableData 结合了 filter、sorter 和 pagination
 export function useTableData(
   props: DataTableSetupProps,
   {
@@ -139,7 +139,7 @@ export function useTableData(
     return data
       ? data.filter((tmNode) => {
           const { rawNode: row } = tmNode
-          // traverse all filters
+          // 遍历所有过滤器
           for (const [columnKey, column] of columnEntries) {
             let activeFilterOptionValues = mergedFilterState[columnKey]
             if (activeFilterOptionValues == null)
@@ -149,7 +149,7 @@ export function useTableData(
             }
             if (!activeFilterOptionValues.length)
               continue
-            // When async, filter won't be set, so data won't be filtered
+            // 异步模式下不会设置过滤器，因此数据不会被过滤
             const filter
               = column.filter === 'default'
                 ? createDefaultFilter(columnKey)
@@ -194,7 +194,7 @@ export function useTableData(
     filteredDataRef
   })
 
-  // initialize
+  // 初始化
   dataRelatedColsRef.value.forEach((column) => {
     if (column.filter) {
       const defaultFilterOptionValues = column.defaultFilterOptionValues
@@ -203,7 +203,7 @@ export function useTableData(
           = defaultFilterOptionValues || []
       }
       else if (defaultFilterOptionValues !== undefined) {
-        // this branch is for compatibility, someone may use `values` in single filter mode
+        // 这个分支是为了兼容：有人可能在单选过滤模式下使用 `values`
         uncontrolledFilterStateRef.value[column.key]
           = defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
       }
@@ -327,16 +327,16 @@ export function useTableData(
   const mergedPaginationRef = computed<PaginationProps>(() => {
     return {
       ...props.pagination,
-      // reset deprecated methods
+      // 重置已废弃的方法
       onChange: undefined,
       onUpdatePage: undefined,
       onUpdatePageSize: undefined,
       onPageSizeChange: undefined,
       'onUpdate:page': mergedOnUpdatePage,
       'onUpdate:pageSize': mergedOnUpdatePageSize,
-      // writing merged props after pagination to avoid
+      // 在 pagination 之后写入合并后的 props，以避免
       // pagination[key] === undefined
-      // key still exists but value is undefined
+      // key 仍然存在，但 value 为 undefined
       page: boundedMergedCurrentPageRef.value,
       pageSize: mergedPageSizeRef.value,
       pageCount:

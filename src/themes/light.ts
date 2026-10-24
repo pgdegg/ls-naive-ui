@@ -1,7 +1,7 @@
 import type { BuiltInGlobalTheme } from './interface'
 import { scrollbarLight } from '../_internal/scrollbar/styles'
-// The file is for internal usage, do not export it, since all the components
-// have default light theme.
+// 此文件仅供内部使用，请勿将其导出，因为所有组件
+// 都有默认的亮色主题。
 import { commonLight } from '../_styles/common'
 import { alertLight } from '../alert/styles'
 import { anchorLight } from '../anchor/styles'

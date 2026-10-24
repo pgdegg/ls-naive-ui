@@ -2,7 +2,7 @@ export { formProps, default as NForm } from './src/Form'
 export type { FormProps } from './src/Form'
 export { formItemProps, default as NFormItem } from './src/FormItem'
 export type { FormItemProps } from './src/FormItem'
-// deprecated
+// 已废弃
 export { default as NFormItemCol } from './src/FormItemCol'
 export type { FormItemColProps } from './src/FormItemCol'
 export {

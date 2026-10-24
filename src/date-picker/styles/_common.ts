@@ -12,12 +12,12 @@ export default {
   panelHeaderPadding: '8px 12px',
   calendarDaysHeight: '32px',
   calendarTitleGridTempateColumns: '28px 28px 1fr 28px 28px',
-  // type
+  // 类型
   calendarLeftPaddingDate: '6px 12px 4px 12px',
   calendarLeftPaddingDatetime: '4px 12px',
   calendarLeftPaddingDaterange: '6px 12px 4px 12px',
   calendarLeftPaddingDatetimerange: '4px 12px',
-  calendarLeftPaddingMonth: '0', // TODO: make it actually effective
+  calendarLeftPaddingMonth: '0', // TODO: 让它真正生效
   calendarLeftPaddingYear: '0',
   calendarLeftPaddingQuarter: '0',
   calendarLeftPaddingMonthrange: '0',

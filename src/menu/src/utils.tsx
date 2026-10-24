@@ -53,7 +53,7 @@ export function itemRenderer(
     | undefined,
     extra: rawNode.titleExtra || rawNode.extra,
     key,
-    internalKey: key, // since key can't be used as a prop
+    internalKey: key, // 因为 key 不能用作 prop
     level,
     root: level === 0,
     isGroup

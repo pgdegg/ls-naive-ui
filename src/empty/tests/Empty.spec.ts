@@ -98,7 +98,7 @@ describe('n-empty', () => {
   it('should have correct default description from locale', () => {
     const wrapper = mount(NEmpty)
 
-    // Should show default description when no description prop is provided
+    // 未提供 description prop 时应显示默认描述
     expect(wrapper.find('.n-empty__description').exists()).toBe(true)
     wrapper.unmount()
   })

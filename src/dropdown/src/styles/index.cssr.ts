@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-font-size
 // --n-padding
@@ -24,7 +24,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-option-icon-size
 // --n-option-opacity-disabled
 
-// shared with popover
+// 与 popover 共享
 // --n-box-shadow
 
 export default cB('dropdown-menu', `

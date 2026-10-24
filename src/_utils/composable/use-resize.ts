@@ -6,7 +6,7 @@ export function useOnResize(
   elRef: Ref<HTMLElement | null>,
   onResize: (() => void) | undefined
 ): void {
-  // it needn't be reactive since it's for internal usage
+  // 它不需要是响应式的，因为仅供内部使用
   if (onResize) {
     onMounted(() => {
       const { value: el } = elRef
@@ -15,7 +15,7 @@ export function useOnResize(
       }
     })
 
-    // avoid memory leak
+    // 避免内存泄漏
     watch(
       elRef,
       (_, oldEl) => {

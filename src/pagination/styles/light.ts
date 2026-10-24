@@ -20,11 +20,11 @@ export function self(vars: ThemeCommonVars) {
     textColorDisabled,
     borderColor,
     borderRadius,
-    // item font size
+    // 分页项字号
     fontSizeTiny,
     fontSizeSmall,
     fontSizeMedium,
-    // item size
+    // 分页项尺寸
     heightTiny,
     heightSmall,
     heightMedium

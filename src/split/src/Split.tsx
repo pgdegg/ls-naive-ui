@@ -95,7 +95,7 @@ export default defineComponent({
     if (props.watchProps?.includes('defaultSize')) {
       watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     }
-    // use to update controlled or uncontrolled values
+    // 用于更新受控或非受控的值
     const doUpdateSize = (size: number | string): void => {
       const _onUpdateSize = props['onUpdate:size']
       if (props.onUpdateSize)
@@ -213,12 +213,12 @@ export default defineComponent({
       let nextPxSize = newPxSize
       nextPxSize = Math.max(nextPxSize, pxMin)
       nextPxSize = Math.min(nextPxSize, pxMax, containerUsableSize)
-      // in pixel mode
+      // 像素模式
       if (typeof mergedSizeRef.value === 'string') {
         doUpdateSize(`${nextPxSize}px`)
       }
       else {
-        // in percentage mode
+        // 百分比模式
         doUpdateSize(nextPxSize / containerUsableSize)
       }
     }

@@ -17,10 +17,10 @@ import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
- * Month Panel
- * Update picker value on:
- * 1. item click
- * 2. clear click
+ * 月份面板
+ * 在以下时机更新选择器值：
+ * 1. 点击项
+ * 2. 点击清除
  */
 export default defineComponent({
   name: 'MonthPanel',
@@ -30,7 +30,7 @@ export default defineComponent({
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
     },
-    // panelHeader prop
+    // panelHeader 的 prop
     useAsQuickJump: Boolean
   },
   setup(props) {

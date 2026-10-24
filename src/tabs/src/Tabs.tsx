@@ -60,7 +60,7 @@ import style from './styles/index.cssr'
 import Tab from './Tab'
 import TabsButton from './TabsButton'
 
-// Fix vue-tsc error
+// 修复 vue-tsc 报错
 const throttle: <T>(f: T, t: number) => T = _throttle
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
@@ -115,7 +115,7 @@ export const tabsProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<OnClose>>,
-  // deprecated
+  // 已废弃
   labelSize: String as PropType<TabsSize>,
   activeName: [String, Number] as PropType<string | number>,
   onActiveNameChange: [Function, Array] as PropType<
@@ -349,7 +349,7 @@ export default defineComponent({
       isHorizontal: boolean,
       centerActiveTab: boolean
     ) {
-      // Geometry + scrollBy stays correct under RTL scrollLeft variants
+      // 几何计算 + scrollBy 在 RTL scrollLeft 变体下依然正确
       const containerRect = scrollContainer.getBoundingClientRect()
       const targetRect = targetElement.getBoundingClientRect()
       const start = isHorizontal ? 'left' : 'top'
@@ -545,8 +545,8 @@ export default defineComponent({
       const disableTransitionClassName = 'transition-disabled'
       barEl.classList.add(disableTransitionClassName)
       updateCurrentBarStyle()
-      // here we don't need to force layout after update bar style
-      // since deriveScrollShadow will force layout
+      // 这里在更新 bar 样式后不需要强制触发 layout
+      // 因为 deriveScrollShadow 会强制触发 layout
       barEl.classList.remove(disableTransitionClassName)
     }
 
@@ -564,7 +564,7 @@ export default defineComponent({
         tabsEl.classList.add('transition-disabled')
       const activeTabEl = getCurrentEl()
       if (activeTabEl && segmentCapsuleElRef.value) {
-        // move segment capsule to match the position of the active tab
+        // 移动 segment 胶囊，使其与激活 tab 的位置对齐
         segmentCapsuleElRef.value.style.width = `${activeTabEl.offsetWidth}px`
         segmentCapsuleElRef.value.style.height = `${activeTabEl.offsetHeight}px`
         segmentCapsuleElRef.value.style.transform = `translate(${activeTabEl.offsetLeft}px, ${activeTabEl.offsetTop}px)`
@@ -739,12 +739,12 @@ export default defineComponent({
       if (wrapperEl) {
         wrapperEl.classList.add('transition-disabled')
       }
-      // prevent scroll position from being 0
+      // 防止滚动位置为 0
       const SCROLL_POSITION_EPSILON = 1
       const placement = mergedPlacementRef.value
       if (placement === 'top' || placement === 'bottom') {
         const { scrollLeft, scrollWidth, offsetWidth } = el
-        // RTL may use negative scrollLeft
+        // RTL 下 scrollLeft 可能为负数
         const scrolled = Math.abs(scrollLeft)
         startReachedRef.value = scrolled <= SCROLL_POSITION_EPSILON
         endReachedRef.value
@@ -792,7 +792,7 @@ export default defineComponent({
       updateCurrentScrollPosition()
     })
 
-    // avoid useless rerender
+    // 避免无用的重新渲染
     watchEffect(() => {
       const { value: el } = scrollWrapperElRef
       if (!el)
@@ -930,9 +930,9 @@ export default defineComponent({
       tabsElRef,
       selfElRef,
       barElRef,
-      // 1. avoid unexpected type expansion when build es output
-      //    $watch will introduce an onCleanUp with local node_modules path
-      // 2. reduce dts: avoid expanding component instance types
+      // 1. 避免构建 es 输出时出现意外的类型展开
+      //    $watch 会引入带有本地 node_modules 路径的 onCleanUp
+      // 2. 缩减 dts：避免展开组件实例类型
       addTabInstRef: addTabInstRef as unknown,
       xScrollInstRef: xScrollInstRef as unknown,
       scrollWrapperElRef,
@@ -1109,10 +1109,9 @@ export default defineComponent({
       >
         <div
           class={[
-            // the class should be applied here since it's possible
-            // to make tabs nested in tabs, style may influence each
-            // other. adding a class will make it easy to write the
-            // style.
+            // 这个类应该应用在这里，因为可能出现 tabs 嵌套在
+            // tabs 中的情况，样式可能互相影响。添加一个类会让
+            // 样式的编写更容易。
             `${mergedClsPrefix}-tabs-nav--${type}-type`,
             `${mergedClsPrefix}-tabs-nav--${resolvedPlacement}`,
             `${mergedClsPrefix}-tabs-nav`

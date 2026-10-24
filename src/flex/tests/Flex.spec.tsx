@@ -98,7 +98,7 @@ describe('n-flex', () => {
     })
     expect(wrapper.html()).toMatchSnapshot()
     const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toEqual(3) // includes whitespace text nodes introduced by the compiler plus a comment node
+    expect(childNodes.length).toEqual(3) // 包含编译器引入的空白文本节点以及一个注释节点
   })
 
   it('should work with `wrap` prop', async () => {

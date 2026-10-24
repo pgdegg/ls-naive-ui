@@ -8,11 +8,11 @@ export { default as create } from './create'
 
 export * from './locales'
 export { default, install } from './preset'
-// component themes
+// 组件主题
 export * from './styles'
 
 export { NThemeEditor } from './theme-editor'
-// composed global theme, createTheme from component themes util
+// 由组件主题工具组合出的全局主题 createTheme
 export { createTheme, darkTheme, lightTheme } from './themes'
 
 export { default as version } from './version'

@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-link-color
 // --n-link-font-size
 // --n-link-text-color

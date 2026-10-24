@@ -40,9 +40,9 @@ export default defineConfig({
     dts: '.d.ts'
   }),
   deps: {
-    // Compiled JSX imports vue-jsx-vapor runtime helpers. It is a devDependency,
-    // so whitelist it for bundling into es/lib; anything else from node_modules
-    // being bundled should fail the build.
+    // 编译后的 JSX 会引入 vue-jsx-vapor 的运行时辅助函数。它是
+    // devDependency，因此将其加入白名单以打包进 es/lib；如果
+    // node_modules 中的其他内容被打包，应使构建失败。
     onlyBundle: ['vue-jsx-vapor']
   },
   plugins: [

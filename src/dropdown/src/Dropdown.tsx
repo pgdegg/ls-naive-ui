@@ -102,7 +102,7 @@ const dropdownBaseProps = {
     type: String,
     default: 'children'
   },
-  // for menu, not documented
+  // 供 menu 使用，未文档化
   value: [String, Number] as PropType<Key | null>
 } as const
 
@@ -374,7 +374,7 @@ export default defineComponent({
         '--n-divider-color': dividerColor,
         '--n-option-opacity-disabled': optionOpacityDisabled
       }
-      // writing like this is the fastest method
+      // 这样写是最快的方式
       if (inverted) {
         vars['--n-color'] = self.colorInverted
         vars['--n-option-color-hover'] = self.optionColorHoverInverted

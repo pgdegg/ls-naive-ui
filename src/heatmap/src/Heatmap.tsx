@@ -246,7 +246,7 @@ export default defineComponent({
       const { monthFormat } = localeRef.value
       const { locale } = dateLocaleRef.value
       const currentYear = new Date().getFullYear()
-      // for more consistent month label widths
+      // 让月份标签的宽度更一致
       const colSpans = [5, 4, 5, 4, 5, 4, 5, 4, 4, 5, 4, 4]
       return Array.from({ length: 12 }, (_, i) => {
         const monthDate = new Date(currentYear, i, 1)
@@ -296,7 +296,7 @@ export default defineComponent({
       )
 
       return Object.entries(monthStats)
-        .filter(([, stats]) => stats.weekCount >= 3) // ensure have enough space
+        .filter(([, stats]) => stats.weekCount >= 3) // 确保有足够空间
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([month, stats]) => {
           const monthDate = new Date(parseISO(`${month}-01`))

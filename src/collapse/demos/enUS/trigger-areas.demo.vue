@@ -21,7 +21,7 @@ const triggerAreasRef = computed(() => {
   return areas
 })
 
-// Export variables for template
+// 导出变量供 template 使用
 const main = mainRef
 const extra = extraRef
 const arrow = arrowRef

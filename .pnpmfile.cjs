@@ -1,4 +1,4 @@
-// We will lock vue version if there's regression
+// 如果出现回归问题，我们将锁定 vue 版本
 const lockVueVersion = false
 
 const vueVersion = '3.2.36'

@@ -66,7 +66,7 @@ export default defineComponent({
     return {
       show: showRef,
       triggerRef,
-      // reduce dts: avoid expanding component instance types
+      // 减少 dts：避免展开组件实例类型
       monthPanelRef: monthPanelRef as unknown,
       handleSelectYear,
       handleSelectMonth,
@@ -127,7 +127,7 @@ export default defineComponent({
                                   calendarHeaderMonthYearSeparator={
                                     this.monthYearSeparator
                                   }
-                                  // month and year click show month type
+                                  // 点击月份和年份时展示 month 类型
                                   type="month"
                                   key="month"
                                   useAsQuickJump

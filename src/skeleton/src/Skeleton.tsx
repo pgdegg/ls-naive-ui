@@ -96,8 +96,8 @@ export default defineComponent({
   render() {
     const { repeat: repeatProp, style, mergedClsPrefix, $attrs } = this
     // BUG:
-    // Chrome devtools can't read the element
-    // Maybe it's a bug of chrome
+    // Chrome devtools 无法读取该元素
+    // 可能是 Chrome 的 bug
     const child = h(
       'div',
       mergeProps(

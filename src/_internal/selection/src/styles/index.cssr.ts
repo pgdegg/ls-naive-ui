@@ -6,7 +6,7 @@ import {
   cNotM
 } from '../../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-border
 // --n-border-active
@@ -32,8 +32,8 @@ import {
 // --n-arrow-size
 // --n-loading-color
 // --n-font-weight
-// ...clear vars
-// ...form item vars
+// ...clear 相关变量
+// ...表单项相关变量
 export default c([
   cB('base-selection', `
     --n-padding-single: var(--n-padding-single-top) var(--n-padding-single-right) var(--n-padding-single-bottom) var(--n-padding-single-left);

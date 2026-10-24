@@ -3,7 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverSlots } from '../../popover'
 import type { TooltipTheme, TooltipThemeOverrides } from '../styles'
-// Tooltip: popover wearing waistcoat
+// Tooltip：穿着马甲的 popover
 import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { NPopover } from '../../popover'
@@ -47,7 +47,7 @@ export default defineComponent({
     }
     return {
       ...tooltipExposedMethod,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在 render 中未被使用
       popoverRef: popoverRef as unknown,
       mergedTheme: themeRef,
       popoverThemeOverrides: computed(() => {

@@ -90,7 +90,7 @@ export function useSorter(
 ) {
   const defaultSortState: SortState[] = []
 
-  // initialize
+  // 初始化
   dataRelatedColsRef.value.forEach((column) => {
     if (column.sorter !== undefined) {
       updateSortStatesByNewSortState(defaultSortState, {
@@ -105,8 +105,8 @@ export function useSorter(
     defaultSortState
   )
   const mergedSortStateRef = computed(() => {
-    // If one of the columns's sort order is false or 'ascend' or 'descend',
-    // the table's controll functionality should work in controlled manner.
+    // 如果某一列的 sortOrder 为 false、'ascend' 或 'descend'，
+    // 表格的排序功能将以受控方式工作。
     const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
       column =>
         column.type !== 'selection'
@@ -115,7 +115,7 @@ export function useSorter(
           || column.sortOrder === 'descend'
           || column.sortOrder === false)
     )
-    // if multiple columns are controlled sortable, then we need to find columns with active sortOrder
+    // 如果有多列处于受控排序状态，我们需要找出 sortOrder 处于激活状态的列
     const columnToSort: TableBaseColumn[] | undefined = (
       columnsWithControlledSortOrder as TableBaseColumn[]
     ).filter((col: TableBaseColumn) => col.sortOrder !== false)
@@ -123,15 +123,15 @@ export function useSorter(
       return columnToSort.map((column) => {
         return {
           columnKey: column.key,
-          // column to sort has controlled sorter
-          // sorter && sort order won't be undefined
+          // 待排序列使用受控排序器
+          // sorter 和 sort order 不会为 undefined
           order: column.sortOrder!,
           sorter: column.sorter!
         }
       })
     }
-    // If any column is in controlled mode, the sorting state of the table is
-    // in controlled mode
+    // 如果有任何一列处于受控模式，表格的排序状态就处于
+    // 受控模式
     if (columnsWithControlledSortOrder.length)
       return []
     const { value: uncontrolledSortState } = uncontrolledSortStateRef
@@ -179,9 +179,9 @@ export function useSorter(
     sortState: SortState | null
   ): SortState | SortState[] | null {
     let currentSortState = mergedSortStateRef.value.slice()
-    // Multiple sorter (if you clicked on a multiple sort column)
+    // 多列排序（当你点击了一个支持多列排序的列时）
     if (sortState && getMultiplePriority(sortState.sorter) !== false) {
-      // clear column is not multiple sort
+      // 清除非多列排序的列
       currentSortState = currentSortState.filter(
         sortState => getMultiplePriority(sortState.sorter) !== false
       )
@@ -189,10 +189,10 @@ export function useSorter(
       return currentSortState
     }
     else if (sortState) {
-      // single sorter
+      // 单列排序
       return sortState
     }
-    // no sorter
+    // 无排序
     return null
   }
 

@@ -16,7 +16,7 @@ export const NPerformantEllipsis = defineComponent({
     const mouseEnteredRef = ref(false)
     const mergedClsPrefixRef = useMergedClsPrefix()
     useStyle('-ellipsis', style, mergedClsPrefixRef)
-    // Modified from Ellipsis.tsx
+    // 修改自 Ellipsis.tsx
     const renderTrigger = (): JSX.Element => {
       const { lineClamp } = props
       const mergedClsPrefix = mergedClsPrefixRef.value

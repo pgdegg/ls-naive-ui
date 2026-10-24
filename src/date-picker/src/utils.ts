@@ -59,8 +59,8 @@ const matcherMap = {
 
 function makeWeekMatcher(firstDayOfWeek: FirstDayOfWeek) {
   return (sourceTime: number, patternTime: number | Date) => {
-    // date-fns: 0 - Sunday
-    // naive-ui: 0 - Monday
+    // date-fns：0 表示周日
+    // naive-ui：0 表示周一
     const weekStartsOn = transformNaiveFirstDayOfWeekToDateFns(firstDayOfWeek)
     return isSameWeek(sourceTime, patternTime, { weekStartsOn })
   }
@@ -162,8 +162,8 @@ function dateOrWeekItem(
   }
 }
 
-// date item's valueTs can be a tuple since two date may show in one panel, so
-// any matched value would make it shown as selected
+// date 项的 valueTs 可以是元组，因为两个日期可能展示在同一个面板中，
+// 所以任何匹配的值都会使其显示为选中状态
 function dateItem(
   time: number,
   monthTs: number,
@@ -345,8 +345,8 @@ function quarterItem(
 }
 
 /**
- * Given time to display calendar, given the selected time, given current time,
- * return the date array of display time's month.
+ * 给定要展示的日历时间、选中的时间以及当前时间，
+ * 返回展示时间所在月份的日期数组。
  */
 function dateArray(
   monthTs: number,
@@ -358,9 +358,9 @@ function dateArray(
 ): DateItem[] {
   const granularity = weekMode ? 'week' : 'date'
   const displayMonth = getMonth(monthTs)
-  // First day of current month
+  // 当前月的第一天
   let displayMonthIterator = getTime(startOfMonth(monthTs))
-  // Last day of last month
+  // 上个月的最后一天
   let lastMonthIterator = getTime(addDays(displayMonthIterator, -1))
   const calendarDays: DateItem[] = []
   let protectLastMonthDateIsShownFlag = !strip

@@ -13,8 +13,8 @@ const base = {
   alpha1: '0.82',
   alpha2: '0.72',
   alpha3: '0.38',
-  alpha4: '0.24', // disabled text, placeholder, icon
-  alpha5: '0.18', // disabled placeholder
+  alpha4: '0.24', // 禁用文字、placeholder、图标
+  alpha5: '0.18', // 禁用的 placeholder
 
   alphaClose: '0.6',
 
@@ -37,31 +37,31 @@ const base = {
   alphaCode: '0.05',
   alphaTag: '0.02',
 
-  // primary
+  // 主色
   primaryHover: '#36ad6a',
   primaryDefault: '#18a058',
   primaryActive: '#0c7a43',
   primarySuppl: '#36ad6a',
 
-  // info
+  // 信息色
   infoHover: '#4098fc',
   infoDefault: '#2080f0',
   infoActive: '#1060c9',
   infoSuppl: '#4098fc',
 
-  // error
+  // 错误色
   errorHover: '#de576d',
   errorDefault: '#d03050',
   errorActive: '#ab1f3f',
   errorSuppl: '#de576d',
 
-  // warning
+  // 警告色
   warningHover: '#fcb040',
   warningDefault: '#f0a020',
   warningActive: '#c97c10',
   warningSuppl: '#fcb040',
 
-  // success
+  // 成功色
   successHover: '#36ad6a',
   successDefault: '#18a058',
   successActive: '#0c7a43',
@@ -89,37 +89,37 @@ const derived = {
 
   baseColor: base.neutralBase,
 
-  // primary color
+  // 主色
   primaryColor: base.primaryDefault,
   primaryColorHover: base.primaryHover,
   primaryColorPressed: base.primaryActive,
   primaryColorSuppl: base.primarySuppl,
-  // info color
+  // 信息色
   infoColor: base.infoDefault,
   infoColorHover: base.infoHover,
   infoColorPressed: base.infoActive,
   infoColorSuppl: base.infoSuppl,
-  // success color
+  // 成功色
   successColor: base.successDefault,
   successColorHover: base.successHover,
   successColorPressed: base.successActive,
   successColorSuppl: base.successSuppl,
-  // warning color
+  // 警告色
   warningColor: base.warningDefault,
   warningColorHover: base.warningHover,
   warningColorPressed: base.warningActive,
   warningColorSuppl: base.warningSuppl,
-  // error color
+  // 错误色
   errorColor: base.errorDefault,
   errorColorHover: base.errorHover,
   errorColorPressed: base.errorActive,
   errorColorSuppl: base.errorSuppl,
-  // text color
+  // 文字颜色
   textColorBase: base.neutralTextBase,
   textColor1: 'rgb(31, 34, 37)',
   textColor2: 'rgb(51, 54, 57)',
   textColor3: 'rgb(118, 124, 130)',
-  // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
+  // textColor4: neutral(base.alpha4), // 禁用、placeholder、图标
   // textColor5: neutral(base.alpha5),
 
   textColorDisabled: neutral(base.alpha4),
@@ -139,14 +139,14 @@ const derived = {
   dividerColor: 'rgb(239, 239, 245)',
   borderColor: 'rgb(224, 224, 230)',
 
-  // close
+  // 关闭图标
   closeIconColor: neutral(Number(base.alphaClose)),
   closeIconColorHover: neutral(Number(base.alphaClose)),
   closeIconColorPressed: neutral(Number(base.alphaClose)),
   closeColorHover: 'rgba(0, 0, 0, .09)',
   closeColorPressed: 'rgba(0, 0, 0, .13)',
 
-  // clear
+  // 清除
   clearColor: neutral(base.alpha4),
   clearColorHover: scaleColor(neutral(base.alpha4), { lightness: 0.75 }),
   clearColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
@@ -176,7 +176,7 @@ const derived = {
   tableHeaderColor: 'rgb(250, 250, 252)',
 
   hoverColor: 'rgb(243, 243, 245)',
-  // use color with alpha since it can be nested with header filter & sorter effect
+  // 使用带 alpha 的颜色，因为它可能与表头筛选和排序效果叠加
   tableColorHover: 'rgba(0, 0, 100, 0.03)',
   tableColorStriped: 'rgba(0, 0, 100, 0.02)',
   pressedColor: 'rgb(237, 237, 239)',
@@ -184,8 +184,8 @@ const derived = {
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: 'rgb(250, 250, 252)',
 
-  // secondary button color
-  // can also be used in tertiary button & quaternary button
+  // 次要按钮颜色
+  // 也可用于三级按钮和四级按钮
   buttonColor2: 'rgba(46, 51, 56, .05)',
   buttonColor2Hover: 'rgba(46, 51, 56, .09)',
   buttonColor2Pressed: 'rgba(46, 51, 56, .13)',

@@ -61,7 +61,7 @@ function renderColorWandIcon() {
   )
 }
 
-// button colorOpacitySecondary var is not color
+// button 的 colorOpacitySecondary 变量不是颜色
 function showColorPicker(key: string): boolean {
   if (key.includes('pacity'))
     return false
@@ -102,8 +102,8 @@ export default defineComponent({
         }
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common)
           || lightTheme[key].self?.(common)) as any
-        // There (last line) we must use as any, nor ts 2590 will be raised since the union
-        // is too complex
+        // 那里（上一行）必须使用 as any，否则由于联合类型
+        // 过于复杂会抛出 ts 2590 错误
         if (mergedThemeOverrides && (overrides as any)[key]) {
           merge((overrides as any)[key], mergedThemeOverrides[key])
         }
@@ -251,8 +251,8 @@ export default defineComponent({
                       },
                       this.$attrs.style
                     ]}
-                    // @ts-expect-error We use ts-ignore for vue-tsc, since it
-                    // seems to patch native event for vue components
+                    // @ts-expect-error 我们对 vue-tsc 使用 ts-ignore，因为它似乎会
+                    // 为 vue 组件修补原生事件
                     onClick={() => {
                       this.showPanel = !this.showPanel
                     }}

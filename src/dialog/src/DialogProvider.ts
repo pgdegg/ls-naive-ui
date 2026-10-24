@@ -27,7 +27,7 @@ export interface DialogReactive extends DialogOptions {
 }
 
 // FIXME
-// If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
+// 如果 style 用作 CSSProperties，typescript 4.4.2 会抛出大量错误
 // Fxxx
 interface TypeSafeDialogReactive extends DialogReactive {
   class?: any

@@ -15,16 +15,16 @@ function createPressedColor (
 }
 
 // TODO
-// 2. input suffix & prefix text color
-// 3. input icon color?
-// 6. notification size customization
-// 7. upload style
-// 8. missing attrs
+// 2. 输入框后缀与前缀文字颜色
+// 3. 输入框图标颜色？
+// 6. notification 尺寸自定义
+// 7. upload 样式
+// 8. 缺失的属性（attrs）
 //
-// Some demands are really not easy to implement,
-// particularly related to component layout.
+// 有些需求确实难以实现，
+// 尤其是与组件布局相关的需求。
 //
-// It's nearly impossible to expose all layout params (with a balanced count)
+// 几乎不可能暴露所有布局参数（且数量保持合理）
 
 export const colors = {
   primaryColor: '#4FB233',
@@ -66,7 +66,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     inputColorDisabled: '#333333',
 
     textColor3: '#ADADAD',
-    placeholderColor: '#5B5B5B', // disabled, placeholder, icon
+    placeholderColor: '#5B5B5B', // 禁用态、占位符、图标
     placeholderColorDisabled: '#848484',
     tableHeaderColor: '#282828',
 

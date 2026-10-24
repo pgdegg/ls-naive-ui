@@ -8,7 +8,7 @@ function self(vars: ThemeCommonVars) {
     textColor: textColor2,
     fontSize,
     fontWeightStrong,
-    // extracted from hljs atom-one-light.scss
+    // 提取自 hljs atom-one-light.scss
     'mono-3': '#a0a1a7',
     'hue-1': '#0184bb',
     'hue-2': '#4078f2',
@@ -18,7 +18,7 @@ function self(vars: ThemeCommonVars) {
     'hue-5-2': '#c91243',
     'hue-6': '#986801',
     'hue-6-2': '#c18401',
-    // line-number styles
+    // 行号样式
     lineNumberTextColor: textColor3
   }
 }

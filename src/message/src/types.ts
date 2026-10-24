@@ -10,7 +10,7 @@ export type MessageType
     | 'loading'
     | 'default'
 
-// We should export keepAliveOnHover since it's not managed by users
+// 我们需要导出 keepAliveOnHover，因为它不由用户管理
 export type RenderMessageProps = Pick<
   MessageSetupProps,
   'closable' | 'content' | 'icon' | 'onClose' | 'type'

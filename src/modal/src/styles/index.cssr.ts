@@ -3,7 +3,7 @@ import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { c, cB, cM } from '../../../_utils/cssr'
 import { DRAGGABLE_CLASS } from '../composables'
 
-// vars:
+// 变量：
 // --n-bezier-ease-out
 // --n-box-shadow
 // --n-color

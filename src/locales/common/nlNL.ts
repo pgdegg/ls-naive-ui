@@ -63,7 +63,7 @@ const nlNL: NLocale = {
     sourceTitle: 'Bron',
     targetTitle: 'Doel'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',
@@ -122,7 +122,7 @@ const nlNL: NLocale = {
     tipZoomIn: 'Inzoomen',
     tipDownload: 'Download',
     tipClose: 'Sluiten (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom to original size'
   },
   Heatmap: {

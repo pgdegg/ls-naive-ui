@@ -181,9 +181,8 @@ export default defineComponent({
         css={!this.transitionDisabled}
       >
         {/*
-          BUG: need to use v-show nor it will glitch when triggers start, end,
-          start. This could be a bug of vue but currently I have no time to verify
-          it.
+          BUG：必须使用 v-show，否则在触发 start、end、start 时会出
+          现异常。这可能是 vue 的一个 bug，但目前我没有时间去验证。
         */}
         {{
           default: () => {

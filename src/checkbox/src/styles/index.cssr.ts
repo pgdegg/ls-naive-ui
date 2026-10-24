@@ -1,7 +1,7 @@
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-label-line-height
 // --n-bezier
 // --n-size
@@ -61,7 +61,7 @@ export default c([
         background-color: var(--n-color-checked);
       `, [
         cB('checkbox-icon', [
-          // if not set width to 100%, safari & old chrome won't display the icon
+          // 如果不把宽度设置为 100%，Safari 和旧版 Chrome 不会显示图标
           c('.check-icon', `
             opacity: 1;
             transform: scale(1);
@@ -209,13 +209,13 @@ export default c([
       })
     ])
   ]),
-  // modal table header checkbox
+  // 模态框中的表头复选框
   insideModal(
     cB('checkbox', `
       --n-merged-color-table: var(--n-color-table-modal);
     `)
   ),
-  // popover table header checkbox
+  // Popover 中的表头复选框
   insidePopover(
     cB('checkbox', `
       --n-merged-color-table: var(--n-color-table-popover);

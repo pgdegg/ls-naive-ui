@@ -1,6 +1,6 @@
 import { c, cB, cE, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-play
 // --n-direction
 // --n-duration

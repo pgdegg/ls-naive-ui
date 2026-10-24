@@ -79,7 +79,7 @@ function self(vars: ThemeCommonVars) {
     borderFocus: `1px solid ${primaryColorHover}`,
     boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
     loadingColor: primaryColor,
-    // warning
+    // 警告
     loadingColorWarning: warningColor,
     borderWarning: `1px solid ${warningColor}`,
     borderHoverWarning: `1px solid ${warningColorHover}`,
@@ -89,7 +89,7 @@ function self(vars: ThemeCommonVars) {
       alpha: 0.2
     })}`,
     caretColorWarning: warningColor,
-    // error
+    // 错误
     loadingColorError: errorColor,
     borderError: `1px solid ${errorColor}`,
     borderHoverError: `1px solid ${errorColorHover}`,

@@ -8,7 +8,7 @@ const contentBaseStyle = cB('card-content', `
   font-size: var(--n-font-size);
 `)
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-border-radius
 // --n-color

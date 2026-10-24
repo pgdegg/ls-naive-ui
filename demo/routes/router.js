@@ -37,7 +37,7 @@ export default function createDemoRouter(app, routes) {
           document.title = `${h1s[0].textContent} - Naive UI`
         }
         else {
-          // defined in index.html
+          // 在 index.html 中定义
           window.deriveTitleFromLocale(useLocaleName().value)
         }
       })

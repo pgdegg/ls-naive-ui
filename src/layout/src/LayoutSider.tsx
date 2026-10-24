@@ -69,7 +69,7 @@ export const layoutSiderProps = {
   >,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
-  // deprecated
+  // 已废弃
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
   onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>,
   onScroll: Function as PropType<(e: Event) => void>
@@ -148,7 +148,7 @@ export default defineComponent({
       const {
         'onUpdate:collapsed': _onUpdateCollapsed,
         onUpdateCollapsed,
-        // deprecated
+        // 已废弃
         onExpand,
         onCollapse
       } = props
@@ -259,7 +259,7 @@ export default defineComponent({
       : undefined
     return {
       scrollableElRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅使用字符串 ref，类型在 render 中未使用
       scrollbarInstRef: scrollbarInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
@@ -311,8 +311,8 @@ export default defineComponent({
             contentClass={this.contentClass}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-            // here is a hack, since in light theme the scrollbar color is dark,
-            // we need to invert it in light color...
+            // 这是一个 hack：浅色主题下滚动条颜色偏深，
+            // 我们需要在浅色中把它反色……
             builtinThemeOverrides={
               this.inverted
               && (this.cssVars as any).__invertScrollbar === 'true'

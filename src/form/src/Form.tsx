@@ -97,9 +97,9 @@ export default defineComponent({
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
-    // from path to form-item
+    // 从 path 到 form-item
     const formItems: Record<string, FormItemInst[]> = {}
-    // for label-width = 'auto'
+    // 用于 label-width = 'auto'
     const maxChildLabelWidthRef = ref<number | undefined>(undefined)
     const deriveMaxChildLabelWidth = (currentWidth: number): void => {
       const currentMaxChildLabelWidth = maxChildLabelWidthRef.value

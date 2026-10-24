@@ -36,9 +36,9 @@ export const collapseTransitionProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
-  // The collapsed is implemented with mistake, collapsed=true would make it show
-  // However there's no possibility to change so I just let it deprecated and use
-  // `show` prop instead.
+  // collapsed 的实现有错误，collapsed=true 反而会让它显示
+  // 但现在不可能修改了，所以我将它废弃，改为使用
+  // `show` prop。
   /** @deprecated */
   collapsed: {
     type: Boolean as PropType<boolean | undefined>,
@@ -82,7 +82,7 @@ export default defineComponent({
     )
     const mergedShowRef = computed(() => {
       if (props.collapsed !== undefined) {
-        // No mistake, it's implemented with error at first, just keep it here
+        // 没写错，它一开始就是以错误的方式实现的，先保留在这里
         return props.collapsed
       }
       return props.show
@@ -124,7 +124,7 @@ export default defineComponent({
               return
             this.onRender?.()
             const contentNode = h(
-              'div', // Don't use jsx since it would cause useless spread in each rendering
+              'div', // 不要使用 JSX，因为它会在每次渲染时产生无用的 spread
               mergeProps(
                 {
                   class: [

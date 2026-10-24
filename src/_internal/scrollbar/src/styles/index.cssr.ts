@@ -1,7 +1,7 @@
 import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 import { c, cB, cE, cM } from '../../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-scrollbar-bezier
 // --n-scrollbar-color
 // --n-scrollbar-color-hover
@@ -33,7 +33,7 @@ export default cB('scrollbar', `
         display: none;
       `),
       c('>', [
-        // We can't set overflow hidden since it affects positioning.
+        // 我们不能设置 overflow 为 hidden，因为这会影响定位。
         cB('scrollbar-content', `
           box-sizing: border-box;
           min-width: 100%;

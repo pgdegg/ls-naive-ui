@@ -14,7 +14,7 @@ export default defineComponent({
   name: 'GlobalStyle',
   setup() {
     if (typeof document === 'undefined')
-      return // TODO: inject style for SSR
+      return // TODO：为 SSR 注入样式
     const NConfigProvider = inject(configProviderInjectionKey, null)
     const { body } = document
     const { style } = body

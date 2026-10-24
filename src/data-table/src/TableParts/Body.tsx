@@ -287,8 +287,8 @@ export default defineComponent({
         return value.containerRef
       return null
     }
-    // For table row with children, tmNode is non-nullable
-    // For table row is expandable but is not tree data, tmNode is null
+    // 对于有子节点的表格行，tmNode 不可为空
+    // 对于可展开但不是树形数据的表格行，tmNode 为 null
     function handleUpdateExpanded(key: RowKey, tmNode: TmNode | null): void {
       if (loadingKeySetRef.value.has(key))
         return
@@ -359,7 +359,7 @@ export default defineComponent({
       }
     }
 
-    // manually control shadow style to avoid rerender
+    // 手动控制阴影样式以避免重新渲染
     const style = c([
       ({ props: cProps }: { props: StyleCProps }) => {
         const createActiveLeftFixedStyle = (
@@ -439,7 +439,7 @@ export default defineComponent({
       summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       scrollbarInstRef: scrollbarInstRef as unknown,
       virtualListRef: virtualListRef as unknown,
       emptyElRef,
@@ -599,12 +599,12 @@ export default defineComponent({
               && !this.showHeader
               && (this.explicitlyScrollable || this.xScrollable)
             ) {
-              // Placeholder for outer header to sync scroll state
+              // 供外部表头同步滚动状态的占位
               return createEmptyNode()
             }
-            // coordinate to pass if there are cells that cross row & col
+            // 用于跨行跨列单元格传递的坐标
             const cordToPass: Record<number, number[]> = {}
-            // coordinate to related hover keys
+            // 与 hover key 关联的坐标
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
             const {
               cols,
@@ -635,7 +635,7 @@ export default defineComponent({
 
             let mergedData: RowRenderInfo[]
 
-            // if there is children in data, we should expand mergedData first
+            // 如果数据中包含子节点，应先展开 mergedData
 
             const { data: paginatedData, hasChildren } = paginatedDataAndInfo
 
@@ -684,7 +684,7 @@ export default defineComponent({
               ? { width: pxfy(this.indent) }
               : undefined
 
-            // Tile the data of the expanded row
+            // 平铺展开行的数据
             const displayedData: RowRenderInfo[] = []
             mergedData.forEach((rowInfo) => {
               if (
@@ -694,7 +694,7 @@ export default defineComponent({
               ) {
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
-                  key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row
+                  key: `${rowInfo.key}-expand`, // 解决展开行的 key 重复问题
                   tmNode: rowInfo.tmNode as TmNode,
                   index: rowInfo.index
                 })
@@ -730,11 +730,11 @@ export default defineComponent({
             }
 
             const renderRow = ({
-              // Normal
+              // 普通
               rowInfo,
               displayedRowIndex,
               isVirtual,
-              // Virtual X
+              // 横向虚拟滚动
               isVirtualX,
               startColIndex,
               endColIndex,
@@ -743,7 +743,7 @@ export default defineComponent({
               rowInfo: RowRenderInfo
               displayedRowIndex: number
               isVirtual: boolean
-              // for horizontal virtual list
+              // 用于横向虚拟列表
               isVirtualX: boolean
               startColIndex: number
               endColIndex: number
@@ -820,17 +820,17 @@ export default defineComponent({
                     return null
                   }
                 }
-                // TODO: Simplify row calculation
+                // TODO: 简化行计算逻辑
                 const { column } = col
                 const colKey = getColKey(col)
                 const { rowSpan, colSpan } = column
                 const mergedColSpan = isSummary
-                  ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1 // optional for #1276
+                  ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1 // 可选，对应 #1276
                   : colSpan
                     ? colSpan(rowData, actualRowIndex)
                     : 1
                 const mergedRowSpan = isSummary
-                  ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1 // optional for #1276
+                  ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1 // 可选，对应 #1276
                   : rowSpan
                     ? rowSpan(rowData, actualRowIndex)
                     : 1

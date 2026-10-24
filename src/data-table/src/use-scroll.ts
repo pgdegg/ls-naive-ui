@@ -37,9 +37,9 @@ export function useScroll(
       || props.flexHeight
   )
   const xScrollableRef = computed(() => {
-    // For a basic table with auto layout whose content may overflow we will
-    // make it scrollable, which differs from browser's native behavior.
-    // For native behavior, see
+    // 对于内容可能溢出的 auto 布局基础表格，我们会
+    // 将其设为可滚动，这与浏览器的原生行为不同。
+    // 原生行为参见
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
     const isBasicAutoLayout
       = !explicitlyScrollableRef.value && mergedTableLayoutRef.value === 'auto'
@@ -109,7 +109,7 @@ export function useScroll(
     return columns
   })
   function deriveActiveLeftFixedColumn(): void {
-    // target is header element
+    // 目标是表头元素
     const { value: leftFixedColumns } = leftFixedColumnsRef
     let leftWidth = 0
     const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
@@ -144,7 +144,7 @@ export function useScroll(
     }
   }
   function deriveActiveRightFixedColumn(): void {
-    // target is header element
+    // 目标是表头元素
     const { value: rightFixedColumns } = rightFixedColumnsRef
     const scrollWidth = Number(props.scrollX)
     const { value: tableWidth } = bodyWidthRef
@@ -229,16 +229,16 @@ export function useScroll(
     }
   }
   function syncScrollState(source: ScrollSyncSource): void {
-    // We can't simply use props.scrollX to determine whether the table has
-    // need to be sync since user may set column width for each column.
-    // Just let it be, the scroll listener won't be triggered for a basic table.
+    // 我们不能简单地用 props.scrollX 来判断表格是否
+    // 需要同步，因为用户可能为每一列设置列宽。
+    // 顺其自然即可，基础表格不会触发滚动监听器。
     const { header, body } = getScrollElements()
     if (!body)
       return
     if (source === 'layout') {
-      // Body may remount (e.g. virtual list is disabled when empty) or shrink.
-      // Keep the stored x-scroll instead of treating the new body's 0 as user
-      // input, which would reset the discrete header.
+      // body 可能重新挂载（例如空数据时虚拟列表被禁用）或收缩。
+      // 保留已存储的横向滚动位置，而不是把新 body 的 0 当作用户
+      // 输入，否则会重置独立的表头。
       if (header) {
         header.scrollLeft = lastScrollLeft
       }
@@ -256,7 +256,7 @@ export function useScroll(
         scrollPartRef.value = 'body'
       }
       else {
-        // we need to deal with overscroll
+        // 我们需要处理过度滚动（overscroll）
         const directionHead = lastScrollLeft - header.scrollLeft
         scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
         if (scrollPartRef.value === 'head') {

@@ -71,7 +71,7 @@ export function getFlagOfOrder(order: SortOrder): SortOrderFlag {
   return 0
 }
 
-// priority: min-width > max-width > width
+// 优先级：min-width > max-width > width
 export function clampValueFollowCSSRules(
   value: number,
   min?: number | string,
@@ -122,9 +122,9 @@ export function createRowClassName(
   return rowClassName || ''
 }
 
-// for compatibility
-// If column.filterOptionValues or column.defaultFilterOptionValues is set, use
-// array value
+// 为兼容旧版本
+// 如果设置了 column.filterOptionValues 或 column.defaultFilterOptionValues，则使用
+// 数组形式的值
 export function shouldUseArrayInSingleMode(column: TableBaseColumn): boolean {
   return (
     column.filterOptionValues !== undefined

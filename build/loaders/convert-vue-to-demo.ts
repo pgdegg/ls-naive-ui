@@ -61,8 +61,8 @@ function mergeParts({ parts, isVue }: MergePartsOptions): MergedParts {
 
 const cssRuleRegex = /([^{}]*)(\{[^}]*\})/g
 
-// simulate scss style
-// to remove dep of sass
+// 模拟 scss 风格
+// 以去除 sass 依赖
 // xxx {
 //   mystyle
 // }
@@ -152,7 +152,7 @@ function getFileName(resourcePath: string): [string, string] {
 }
 
 function getPartsOfDemo(text: string): Parts {
-  // slot template
+  // slot 模板
   const firstIndex = text.indexOf('<template>')
   let template = text.slice(firstIndex + 10)
   const lastIndex = template.lastIndexOf('</template>')

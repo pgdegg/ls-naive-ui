@@ -1,4 +1,4 @@
-// Auto generated component declarations
+// 自动生成的组件声明
 declare module 'vue' {
   export interface GlobalComponents {
     NAffix: (typeof import('naive-ui'))['NAffix']

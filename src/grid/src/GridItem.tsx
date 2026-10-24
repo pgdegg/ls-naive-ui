@@ -24,7 +24,7 @@ export const gridItemProps = {
     default: 0
   },
   suffix: Boolean,
-  // private props
+  // 私有 props
   privateOffset: Number,
   privateSpan: Number,
   privateColStart: Number,
@@ -61,7 +61,7 @@ export default defineComponent({
       }),
       deriveStyle: () => {
         void isSsrRef.value
-        // Here is quite a hack, I hope there is a better way to solve it
+        // 这里是个 hack，希望能有更好的解决办法
         const {
           privateSpan = defaultSpan,
           privateShow = true,

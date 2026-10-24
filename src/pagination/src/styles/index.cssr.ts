@@ -14,7 +14,7 @@ const hoverStyleChildren = [
   `)
 ]
 
-// vars:
+// 变量：
 // --n-item-font-size
 // --n-select-width
 // --n-input-width

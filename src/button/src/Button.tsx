@@ -173,8 +173,8 @@ const Button = defineComponent({
         return
       }
       e.preventDefault()
-      // normally this won't be called if disabled (when tag is button)
-      // if not, we try to make it behave like a button
+      // 禁用时通常不会走到这里（当 tag 为 button 时）
+      // 否则会尽量让它表现得像 button 一样
       if (props.disabled) {
         return
       }
@@ -246,11 +246,11 @@ const Button = defineComponent({
         quaternary,
         strong
       } = props
-      // font
+      // 字体
       const fontProps = {
         '--n-font-weight': strong ? fontWeightStrong : fontWeight
       }
-      // color
+      // 颜色
       let colorProps = {
         '--n-color': 'initial',
         '--n-color-hover': 'initial',
@@ -430,7 +430,7 @@ const Button = defineComponent({
               : self[createKey('textColorDisabled', mergedType)])
         }
       }
-      // border
+      // 边框
       let borderProps = {
         '--n-border': 'initial',
         '--n-border-hover': 'initial',
@@ -456,7 +456,7 @@ const Button = defineComponent({
           '--n-border-disabled': self[createKey('borderDisabled', mergedType)]
         }
       }
-      // size
+      // 尺寸
       const {
         [createKey('height', size)]: height,
         [createKey('fontSize', size)]: fontSize,
@@ -551,7 +551,7 @@ const Button = defineComponent({
 
     return {
       selfElRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：只用字符串 ref，类型在 render 中未使用
       waveElRef: waveElRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedFocusable: mergedFocusableRef,
@@ -610,7 +610,7 @@ const Button = defineComponent({
           this.color && `${mergedClsPrefix}-button--color`,
           this.secondary && `${mergedClsPrefix}-button--secondary`,
           this.loading && `${mergedClsPrefix}-button--loading`,
-          this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
+          this.ghost && `${mergedClsPrefix}-button--ghost` // 按钮组边框合并所必需
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
         type={this.attrType}
@@ -692,14 +692,14 @@ type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 
 export default Button
 
-// XButton is for tsx type checking
-// It's not compatible with render function `h`
-// Currently we don't expose it as public
-// If there's any issue about this, we may expose it
-// Since most people use template, the type checking phase doesn't work as tsx
+// XButton 用于 tsx 类型检查
+// 它与 render 函数 `h` 不兼容
+// 目前我们不将其对外暴露
+// 如果有相关问题，我们可能会将其暴露
+// 由于大多数人使用 template，类型检查阶段不像 tsx 那样生效
 export const XButton: new () => { $props: MergedProps } = Button as any
 
-// Also, we may make XButton a generic type which support `tag` prop
-// but currently vue doesn't export IntrinsicElementAttributes from runtime-dom
-// so we can't easily make an attr map by hand
-// just leave it for later
+// 另外，我们可能会让 XButton 成为支持 `tag` prop 的泛型类型
+// 但目前 vue 没有从 runtime-dom 导出 IntrinsicElementAttributes
+// 所以我们没法轻易地手动制作 attr 映射
+// 先留到以后处理

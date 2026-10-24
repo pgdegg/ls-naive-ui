@@ -1,6 +1,6 @@
 const easeOut = (t: number): number => 1 - (1 - t) ** 5
 
-// Tween
+// 补间动画（Tween）
 export interface TweenProps {
   from: number
   to: number

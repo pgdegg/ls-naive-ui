@@ -292,11 +292,11 @@ export default defineComponent({
         }
       }
     }
-    // the composition end is later than its input so we can cached the event
-    // and return the input event
+    // composition end 晚于它的 input，所以我们可以缓存该事件
+    // 并在之后返回这个 input 事件
     let cachedInputEvent: InputEvent | null = null
     function handlePatternInputInput(e: InputEvent): void {
-      // we should sync mirror width here
+      // 我们应该在这里同步镜像宽度
       const { value: patternInputMirrorEl } = patternInputMirrorRef
       if (patternInputMirrorEl) {
         const inputText: string = (e.target as any).value
@@ -457,7 +457,7 @@ export default defineComponent({
           arrowColor,
           arrowColorDisabled,
           loadingColor,
-          // form warning
+          // 表单警告
           colorActiveWarning,
           boxShadowFocusWarning,
           boxShadowActiveWarning,
@@ -466,7 +466,7 @@ export default defineComponent({
           borderFocusWarning,
           borderHoverWarning,
           borderActiveWarning,
-          // form error
+          // 表单错误
           colorActiveError,
           boxShadowFocusError,
           boxShadowActiveError,
@@ -475,12 +475,12 @@ export default defineComponent({
           borderFocusError,
           borderHoverError,
           borderActiveError,
-          // clear
+          // 清除
           clearColor,
           clearColorHover,
           clearColorPressed,
           clearSize,
-          // arrow
+          // 箭头
           arrowSize,
           [createKey('height', size)]: height,
           [createKey('fontSize', size)]: fontSize
@@ -521,7 +521,7 @@ export default defineComponent({
         '--n-arrow-color': arrowColor,
         '--n-arrow-color-disabled': arrowColorDisabled,
         '--n-loading-color': loadingColor,
-        // form warning
+        // 表单警告
         '--n-color-active-warning': colorActiveWarning,
         '--n-box-shadow-focus-warning': boxShadowFocusWarning,
         '--n-box-shadow-active-warning': boxShadowActiveWarning,
@@ -530,7 +530,7 @@ export default defineComponent({
         '--n-border-focus-warning': borderFocusWarning,
         '--n-border-hover-warning': borderHoverWarning,
         '--n-border-active-warning': borderActiveWarning,
-        // form error
+        // 表单错误
         '--n-color-active-error': colorActiveError,
         '--n-box-shadow-focus-error': boxShadowFocusError,
         '--n-box-shadow-active-error': boxShadowActiveError,
@@ -539,14 +539,14 @@ export default defineComponent({
         '--n-border-focus-error': borderFocusError,
         '--n-border-hover-error': borderHoverError,
         '--n-border-active-error': borderActiveError,
-        // clear
+        // 清除
         '--n-clear-size': clearSize,
         '--n-clear-color': clearColor,
         '--n-clear-color-hover': clearColorHover,
         '--n-clear-color-pressed': clearColorPressed,
-        // arrow-size
+        // 箭头尺寸
         '--n-arrow-size': arrowSize,
-        // font-weight
+        // 字重
         '--n-font-weight': fontWeight
       }
     })
@@ -571,7 +571,7 @@ export default defineComponent({
       selected: selectedRef,
       showTagsPanel: showTagsPopoverRef,
       isComposing: isComposingRef,
-      // dom ref
+      // DOM ref
       counterRef,
       counterWrapperRef,
       patternInputMirrorRef,
@@ -580,7 +580,7 @@ export default defineComponent({
       multipleElRef,
       singleElRef,
       patternInputWrapperRef,
-      // reduce dts: string ref only, type unused in render
+      // 减小 dts：只用字符串 ref，类型在 render 中未使用
       overflowRef: overflowRef as unknown,
       inputTagElRef,
       handleMouseDown,
@@ -722,7 +722,7 @@ export default defineComponent({
           </span>
         </div>
       ) : null
-      // May Overflow
+      // 可能会溢出
       const renderCounter = maxTagCountResponsive
         ? () => (
             <div
@@ -993,9 +993,9 @@ export default defineComponent({
               this.selected || (this.active && this.pattern),
             [`${clsPrefix}-base-selection--disabled`]: this.disabled,
             [`${clsPrefix}-base-selection--multiple`]: this.multiple,
-            // focus is not controlled by selection itself since it always need
-            // to be managed together with menu. provide :focus style will cause
-            // many redundant codes.
+            // 焦点不是由 selection 自己控制的，因为它总是需要
+            // 和菜单一起管理。提供 :focus 样式会导致
+            // 很多冗余代码。
             [`${clsPrefix}-base-selection--focus`]: this.focused
           }
         ]}

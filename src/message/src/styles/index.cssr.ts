@@ -2,7 +2,7 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-margin
 // --n-bezier
 // --n-padding

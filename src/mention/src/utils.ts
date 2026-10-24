@@ -1,58 +1,58 @@
 /**
- * The original package is https://www.npmjs.com/package/textarea-caret-ts
- * The original file is https://github.com/TheRealSyler/textarea-caret-position/blob/master/index.ts
+ * 原始包是 https://www.npmjs.com/package/textarea-caret-ts
+ * 原始文件是 https://github.com/TheRealSyler/textarea-caret-position/blob/master/index.ts
  *
- * Here I modified it to make it works when input is scrolled.
+ * 这里我修改了它，使其在 input 滚动时也能正常工作。
  */
 
 import { isBrowser } from '../../_utils'
 
 export interface Position {
   /**
-   * position in pixel.
+   * 以像素为单位的位置。
    */
   top: number
   /**
-   * position in pixel.
+   * 以像素为单位的位置。
    */
   left: number
   /**
-   * if true the position is relative to the inner window size, if false the position is relative to itself.
+   * 为 true 时位置相对于窗口内尺寸，为 false 时位置相对于元素自身。
    */
   absolute: boolean
   /**
-   * height in pixel.
+   * 以像素为单位的高度。
    */
   height: number
 }
 export interface Point {
   /**
-   * left position.
+   * 左侧位置。
    */
   left: number
   /**
-   * top position.
+   * 顶部位置。
    */
   top: number
 }
 export interface Options {
   /**
-   * Enables debug Mode.
+   * 启用调试模式。
    */
   debug?: boolean
   /**
-   * usesSelection End Instead of selection Start.
+   * 使用 selectionEnd 而非 selectionStart。
    */
   useSelectionEnd?: boolean
   /**
-   * if true the left position gets caped if left >= element Width.
+   * 为 true 时，当 left >= 元素宽度时会截断 left 位置。
    */
   checkWidthOverflow?: boolean
 }
 
 /**
- * Returns the Absolute (relative to the inner window size) position of the caret in the given element.
- * @param element Input (has to be type='text') or Text Area.
+ * 返回给定元素中光标的绝对位置（相对于窗口内尺寸）。
+ * @param element 输入框（type 必须为 'text'）或文本域。
  */
 export function getAbsolutePosition(
   element: HTMLInputElement | HTMLTextAreaElement
@@ -68,8 +68,8 @@ export function getAbsolutePosition(
   }
 }
 /**
- * Returns the relative position of the caret in the given element.
- * @param element Input (has to be type='text') or Text Area.
+ * 返回给定元素中光标的相对位置。
+ * @param element 输入框（type 必须为 'text'）或文本域。
  */
 export function getRelativePosition(
   element: HTMLInputElement | HTMLTextAreaElement,
@@ -83,17 +83,17 @@ export function getRelativePosition(
     = element.selectionStart !== null ? element.selectionStart : 0
   const selectionEnd = element.selectionEnd !== null ? element.selectionEnd : 0
   const position = options.useSelectionEnd ? selectionEnd : selectionStart
-  // We'll copy the properties below into the mirror div.
-  // Note that some browsers, such as Firefox, do not concatenate properties
-  // into their shorthand (e.g. padding-top, padding-bottom etc. -> padding),
-  // so we have to list every single property explicitly.
+  // 我们将把下面的样式属性复制到镜像 div 中。
+  // 注意，某些浏览器（如 Firefox）不会把属性合并为简写形式
+  // （例如 padding-top、padding-bottom 等合并为 padding），
+  // 因此我们必须逐一显式列出每个属性。
   const properties: string[] = [
-    'direction', // RTL support
+    'direction', // 支持 RTL
     'boxSizing',
-    'width', // on Chrome and IE, exclude the scrollbar, so the mirror div wraps exactly as the textarea does
+    'width', // 在 Chrome 和 IE 中排除滚动条，使镜像 div 的换行行为与 textarea 完全一致
     'height',
     'overflowX',
-    'overflowY', // copy the scrollbar for IE
+    'overflowY', // 为 IE 复制滚动条
     'borderTopWidth',
     'borderRightWidth',
     'borderBottomWidth',
@@ -115,7 +115,7 @@ export function getRelativePosition(
     'textAlign',
     'textTransform',
     'textIndent',
-    'textDecoration', // might not make a difference, but better be safe
+    'textDecoration', // 可能没有区别，但稳妥起见保留
     'letterSpacing',
     'wordSpacing',
     'tabSize',
@@ -138,7 +138,7 @@ export function getRelativePosition(
       el.parentNode.removeChild(el)
   }
 
-  // The mirror div will replicate the textareas style
+  // 镜像 div 将复刻 textarea 的样式
   const div = document.createElement('div')
   div.id = 'input-textarea-caret-position-mirror-div'
   document.body.appendChild(div)
@@ -146,24 +146,24 @@ export function getRelativePosition(
   const style = div.style
   const computed = window.getComputedStyle
     ? window.getComputedStyle(element)
-    : (element as any).currentStyle // currentStyle for IE < 9
+    : (element as any).currentStyle // currentStyle，用于 IE < 9
 
   const isInput = element.nodeName === 'INPUT'
 
-  // Default textarea styles
+  // 默认的 textarea 样式
   style.whiteSpace = isInput ? 'nowrap' : 'pre-wrap'
   if (!isInput)
-    style.wordWrap = 'break-word' // only for textarea-s
+    style.wordWrap = 'break-word' // 仅用于 textarea
 
-  // Position off-screen
-  style.position = 'absolute' // required to return coordinates properly
+  // 定位到屏幕之外
+  style.position = 'absolute' // 正确返回坐标所必需
   if (!debug)
-    style.visibility = 'hidden' // not 'display: none' because we want rendering
+    style.visibility = 'hidden' // 不使用 'display: none'，因为我们仍需要渲染
 
-  // Transfer the element's properties to the div
+  // 将元素的属性转移到 div 上
   properties.forEach((prop) => {
     if (isInput && prop === 'lineHeight') {
-      // Special case for <input>s because text is rendered centered and line height may be != height
+      // <input> 的特殊情况：文本居中渲染，且行高可能不等于高度
       if (computed.boxSizing === 'border-box') {
         const height = Number.parseInt(computed.height as string)
         const outerHeight
@@ -193,29 +193,29 @@ export function getRelativePosition(
   })
 
   if (isFirefox) {
-    // Firefox lies about the overflow property for textareas: https://bugzilla.mozilla.org/show_bug.cgi?id=984275
+    // Firefox 在 textarea 的 overflow 属性上报值不准确：https://bugzilla.mozilla.org/show_bug.cgi?id=984275
     if (element.scrollHeight > Number.parseInt(computed.height as string)) {
       style.overflowY = 'scroll'
     }
   }
   else {
-    style.overflow = 'hidden' // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
+    style.overflow = 'hidden' // 避免 Chrome 渲染滚动条；IE 保持 overflowY = 'scroll'
   }
 
   div.textContent = element.value.substring(0, position)
-  // The second special handling for input type="text" vs textarea:
-  // spaces need to be replaced with non-breaking spaces - http://stackoverflow.com/a/13402035/1269037
+  // 第二个特殊处理，针对 input type="text" 与 textarea：
+  // 空格需要替换为不换行空格 - http://stackoverflow.com/a/13402035/1269037
   if (isInput && div.textContent) {
     div.textContent = div.textContent.replace(/\s/g, '\u00A0')
   }
 
   const span = document.createElement('span')
-  // Wrapping must be replicated *exactly*, including when a long word gets
-  // onto the next line, with whitespace at the end of the line before (#7).
-  // The  *only* reliable way to do that is to copy the *entire* rest of the
-  // textareas content into the <span> created at the caret position.
-  // For inputs, just '.' would be enough, but no need to bother.
-  span.textContent = element.value.substring(position) || '.' // || because a completely empty faux span doesn't render at all
+  // 换行必须被*精确*复刻，包括长单词被折到
+  // 下一行、且前一行末尾保留空白的情况（#7）。
+  // 唯一可靠的做法是把剩余的*全部*内容复制到
+  // 光标位置处创建的 <span> 中。
+  // 对于 input，只用 '.' 就足够了，这里无需这么麻烦。
+  span.textContent = element.value.substring(position) || '.' // 使用 || 是因为完全为空的伪 span 根本不会渲染
   span.style.position = 'relative'
   span.style.left = `${-element.scrollLeft}px`
   span.style.top = `${-element.scrollTop}px`
@@ -225,8 +225,8 @@ export function getRelativePosition(
     top: span.offsetTop + Number.parseInt(computed.borderTopWidth as string),
     left: span.offsetLeft + Number.parseInt(computed.borderLeftWidth as string),
     absolute: false,
-    // We don't use line-height since it may be too large for position. Eg. 34px
-    // for input
+    // 这里不使用 line-height，因为它对定位来说可能过大，例如 34px
+    // 适用于 input
     height: Number.parseInt(computed.fontSize as string) * 1.5
   }
 
@@ -246,10 +246,10 @@ export function getRelativePosition(
   return relativePosition
 }
 /**
- * sets the top and left css style of the element based on the absolute position of the caretElements caret,
- * @param offset offsets the position.
- * @param detectBoundary offsets the position if the position would be outside the window.
- * @param returnOnly if true the element position wont be set.
+ * 基于 caretElement 光标的绝对位置，设置元素的 top 和 left CSS 样式，
+ * @param offset 对位置进行偏移。
+ * @param detectBoundary 当位置超出窗口时对位置进行偏移。
+ * @param returnOnly 为 true 时不设置元素位置。
  */
 export function setElementPositionBasedOnCaret(
   element: HTMLElement,

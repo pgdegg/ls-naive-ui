@@ -18,7 +18,7 @@ function changePlacement(val: MessageProviderProps['placement']) {
   placementRef.value = val
 }
 
-// Buttons component
+// Buttons 组件
 const Buttons = defineComponent({
   emits: ['changePlacement'],
   setup(props, { emit }) {

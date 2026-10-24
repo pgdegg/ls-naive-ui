@@ -52,7 +52,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       heightMedium,
       heightLarge,
       borderRadius,
-      // default
+      // 默认
       textColor: textColor2,
       textColorDisabled,
       placeholderColor,
@@ -75,7 +75,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       arrowColor: iconColor,
       arrowColorDisabled: iconColorDisabled,
       loadingColor: primaryColor,
-      // warning
+      // 警告
       borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,
       borderActiveWarning: `1px solid ${warningColor}`,
@@ -89,7 +89,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       })}`,
       colorActiveWarning: changeColor(warningColor, { alpha: 0.1 }),
       caretColorWarning: warningColor,
-      // error
+      // 错误
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
       borderActiveError: `1px solid ${errorColor}`,

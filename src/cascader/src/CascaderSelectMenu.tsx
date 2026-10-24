@@ -123,7 +123,7 @@ export default defineComponent({
     function handleToggle(tmNode: TreeNode<SelectBaseOption>): void {
       doCheck(tmNode)
     }
-    // We don't care what type the tmNode is, we only care about its key
+    // 我们不关心 tmNode 的类型，只关心它的 key
     function doCheck(tmNode: TreeNode<SelectBaseOption>): void {
       if (props.multiple) {
         const { value: mergedValue } = mergedValueRef
@@ -142,8 +142,8 @@ export default defineComponent({
       }
       else {
         cascaderDoCheck(tmNode.key)
-        // currently the select menu is set to focusable
-        // however just leave it here
+        // 当前 select menu 被设置为可聚焦
+        // 但暂时先把它留在这里
         closeMenu(true)
       }
     }
@@ -175,7 +175,7 @@ export default defineComponent({
       isMounted: isMountedRef,
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       menuInstRef: menuInstRef as unknown,
       selectTreeMate: selectTreeMateRef,
       handleResize,

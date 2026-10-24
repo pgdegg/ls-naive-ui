@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-icon-color-override
 // --n-icon-color-disabled-override
 // --n-bezier

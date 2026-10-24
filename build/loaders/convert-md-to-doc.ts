@@ -219,7 +219,7 @@ export async function convertMd2ComponentDocumentation(
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
   const tokens = marked.lexer(text)
-  // resolve external components
+  // 解析外部组件
   const componentsIndex = tokens.findIndex(
     token =>
       token.type === 'code' && (token as Tokens.Code).lang === 'component'
@@ -243,7 +243,7 @@ export async function convertMd2ComponentDocumentation(
       .filter(({ ids, importStmt }) => ids && importStmt)
     tokens.splice(componentsIndex, 1)
   }
-  // add edit on github button on title
+  // 在标题上添加 edit on github 按钮
   const titleIndex = tokens.findIndex(
     token => token.type === 'heading' && token.depth === 1
   )
@@ -258,7 +258,7 @@ export async function convertMd2ComponentDocumentation(
       text: btnTemplate
     } as Tokens.HTML)
   }
-  // resolve demos, debug demos are removed from production build
+  // 解析 demos，debug demos 会从生产构建中移除
   const demosIndex = tokens.findIndex(
     token => token.type === 'code' && (token as Tokens.Code).lang === 'demo'
   )
@@ -279,7 +279,7 @@ export async function convertMd2ComponentDocumentation(
     gfm: true,
     renderer: mdRenderer
   })
-  // generate page
+  // 生成页面
   const docTemplate = `
 <template>
   <div

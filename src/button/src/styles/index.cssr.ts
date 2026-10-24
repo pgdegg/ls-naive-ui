@@ -3,7 +3,7 @@ import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.c
 import { isBrowser } from '../../../_utils'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-bezier-ease-out
 // --n-ripple-duration
@@ -34,8 +34,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-wave-opacity
 // --n-font-weight
 //
-// private-vars:
-// --n-border-color-xxx, used for custom color
+// 私有变量：
+// --n-border-color-xxx，用于自定义颜色
 export default c([
   cB('button', `
     margin: 0;
@@ -243,7 +243,7 @@ export default c([
       boxShadow: '0 0 0.5px 0 var(--n-ripple-color)'
     },
     to: {
-      // don't use exact 5px since chrome will display the animation with glitches
+      // 不要用精确的 5px，否则 chrome 显示该动画时会出现瑕疵
       boxShadow: '0 0 0.5px 4.5px var(--n-ripple-color)'
     }
   }),

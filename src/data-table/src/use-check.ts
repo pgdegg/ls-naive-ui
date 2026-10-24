@@ -162,7 +162,7 @@ export function useCheck(
         rowKeysToCheck.push(tmNode.key)
       }
     })
-    // alway cascade, to emit correct row keys
+    // 始终级联，以 emit 正确的行 key
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
         cascade: true,
@@ -185,7 +185,7 @@ export function useCheck(
         rowKeysToUncheck.push(tmNode.key)
       }
     })
-    // alway cascade, to emit correct row keys
+    // 始终级联，以 emit 正确的行 key
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(
         rowKeysToUncheck,

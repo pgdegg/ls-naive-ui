@@ -121,7 +121,7 @@ const enGB: NLocale = {
     tipZoomIn: 'Zoom in',
     tipDownload: 'Download',
     tipClose: 'Close (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom to original size'
   },
   Heatmap: {

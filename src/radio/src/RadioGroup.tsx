@@ -54,7 +54,7 @@ function mapSlot(
       const currentInstanceChecked = value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
       /**
-       * Priority of button splitor:
+       * 按钮分隔符的优先级：
        * !disabled  checked >
        *  disabled  checked >
        * !disabled !checked >

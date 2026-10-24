@@ -40,7 +40,7 @@ const idID: NLocale = {
     datePlaceholder: 'Pilih Tanggal',
     datetimePlaceholder: 'Pilih Tanggal dan Waktu',
     monthPlaceholder: 'Pilih Bulan',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     yearPlaceholder: 'Pilih tahun',
     quarterPlaceholder: 'Pilih perempat tahun',
     weekPlaceholder: 'Select Week',
@@ -48,7 +48,7 @@ const idID: NLocale = {
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
     endDatetimePlaceholder: 'Tanggal dan Waktu Selesai',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: 'Awal bulan',
     endMonthPlaceholder: 'Akhir bulan',
     monthBeforeYear: true,
@@ -65,7 +65,7 @@ const idID: NLocale = {
     sourceTitle: 'Sumber',
     targetTitle: 'Tujuan'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Pilih semua',
     unselectAll: 'Batalkan pilihan',
@@ -124,7 +124,7 @@ const idID: NLocale = {
     tipZoomIn: 'Zoom in',
     tipDownload: 'Download',
     tipClose: 'Tutup (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom ke ukuran asli'
   },
   Heatmap: {

@@ -25,7 +25,7 @@ import NLogLine from './LogLine'
 import NLogLoader from './LogLoader'
 import style from './styles/index.cssr'
 
-// Fix vue-tsc error
+// 修复 vue-tsc 报错
 const throttle: <T>(f: T, t: number) => T = _throttle
 
 export interface LogInjection {
@@ -196,7 +196,7 @@ export default defineComponent({
         scrollbarInst.scrollTo({ position })
       }
     }
-    // deprecated
+    // 已废弃
     function scrollToTop(silent = false): void {
       warn(
         'log',
@@ -255,7 +255,7 @@ export default defineComponent({
     return {
       ...exportedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留 string ref，类型在 render 中未使用
       scrollbarRef: scrollbarRef as unknown,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,

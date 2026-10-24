@@ -29,41 +29,41 @@ namespace qrcodegen {
   type byte = number
   type int = number
 
-  /* ---- QR Code symbol class ---- */
+  /* ---- QR Code 符号类 ---- */
 
   /*
-   * A QR Code symbol, which is a type of two-dimension barcode.
-   * Invented by Denso Wave and described in the ISO/IEC 18004 standard.
-   * Instances of this class represent an immutable square grid of dark and light cells.
-   * The class provides static factory functions to create a QR Code from text or binary data.
-   * The class covers the QR Code Model 2 specification, supporting all versions (sizes)
-   * from 1 to 40, all 4 error correction levels, and 4 character encoding modes.
+   * QR Code 符号是一种二维条形码。
+   * 由 Denso Wave 发明，并在 ISO/IEC 18004 标准中定义。
+   * 该类的实例表示一个由深色与浅色单元组成的不可变方形网格。
+   * 该类提供静态工厂函数，用于从文本或二进制数据创建 QR Code。
+   * 该类覆盖 QR Code Model 2 规范，支持所有版本（尺寸）
+   * 从 1 到 40、全部 4 种纠错等级以及 4 种字符编码模式。
    *
-   * Ways to create a QR Code object:
-   * - High level: Take the payload data and call QrCode.encodeText() or QrCode.encodeBinary().
-   * - Mid level: Custom-make the list of segments and call QrCode.encodeSegments().
-   * - Low level: Custom-make the array of data codeword bytes (including
-   *   segment headers and final padding, excluding error correction codewords),
-   *   supply the appropriate version number, and call the QrCode() constructor.
-   * (Note that all ways require supplying the desired error correction level.)
+   * 创建 QR Code 对象的方式：
+   * - 高层：取负载数据并调用 QrCode.encodeText() 或 QrCode.encodeBinary()。
+   * - 中层：自行构造段列表并调用 QrCode.encodeSegments()。
+   * - 低层：自行构造数据码字字节数组（包含
+   *   段头与最终填充，不含纠错码字），
+   *   提供合适的版本号，然后调用 QrCode() 构造函数。
+   * （注意：所有方式都需要提供期望的纠错等级。）
    */
   export class QrCode {
-    /* -- Static factory functions (high level) -- */
+    /* -- 静态工厂函数（高层） -- */
 
-    // Returns a QR Code representing the given Unicode text string at the given error correction level.
-    // As a conservative upper bound, this function is guaranteed to succeed for strings that have 738 or fewer
-    // Unicode code points (not UTF-16 code units) if the low error correction level is used. The smallest possible
-    // QR Code version is automatically chosen for the output. The ECC level of the result may be higher than the
-    // ecl argument if it can be done without increasing the version.
+    // 返回以给定纠错等级表示给定 Unicode 文本字符串的 QR Code。
+    // 作为保守上限，当字符串包含 738 个或更少
+    // Unicode 码点（而非 UTF-16 码元）且使用低纠错等级时，本函数保证成功。输出会自动选择最小可用
+    // QR Code 版本。若无需提高版本号，结果的 ECC 等级可能高于
+    // ecl 参数。
     public static encodeText(text: string, ecl: QrCode.Ecc): QrCode {
       const segs: QrSegment[] = qrcodegen.QrSegment.makeSegments(text)
       return QrCode.encodeSegments(segs, ecl)
     }
 
-    // Returns a QR Code representing the given binary data at the given error correction level.
-    // This function always encodes using the binary segment mode, not any text mode. The maximum number of
-    // bytes allowed is 2953. The smallest possible QR Code version is automatically chosen for the output.
-    // The ECC level of the result may be higher than the ecl argument if it can be done without increasing the version.
+    // 返回以给定纠错等级表示给定二进制数据的 QR Code。
+    // 本函数始终使用二进制段模式编码，不使用任何文本模式。允许的最大
+    // 字节数为 2953。输出会自动选择最小可用的 QR Code 版本。
+    // 结果的 ECC 等级可能高于 ecl 参数。
     public static encodeBinary(
       data: Readonly<byte[]>,
       ecl: QrCode.Ecc
@@ -72,17 +72,17 @@ namespace qrcodegen {
       return QrCode.encodeSegments([seg], ecl)
     }
 
-    /* -- Static factory functions (mid level) -- */
+    /* -- 静态工厂函数（中层） -- */
 
-    // Returns a QR Code representing the given segments with the given encoding parameters.
-    // The smallest possible QR Code version within the given range is automatically
-    // chosen for the output. Iff boostEcl is true, then the ECC level of the result
-    // may be higher than the ecl argument if it can be done without increasing the
-    // version. The mask number is either between 0 to 7 (inclusive) to force that
-    // mask, or -1 to automatically choose an appropriate mask (which may be slow).
-    // This function allows the user to create a custom sequence of segments that switches
-    // between modes (such as alphanumeric and byte) to encode text in less space.
-    // This is a mid-level API; the high-level API is encodeText() and encodeBinary().
+    // 返回以给定编码参数表示给定各段的 QR Code。
+    // 会自动在给定范围内选择最小可用的 QR Code 版本。
+    // 若 boostEcl 为 true，结果的 ECC 等级
+    // 可能高于 ecl 参数，前提是无需提高版本号。
+    // 掩模号可取 0 到 7（含）以强制使用该
+    // 掩模，或取 -1 由系统自动选择合适掩模（可能较慢）。
+    // 本函数允许用户创建自定义段序列，在各模式之间切换
+    // （例如字母数字模式与字节模式），从而用更少空间编码文本。
+    // 这是中层 API；高层 API 为 encodeText() 与 encodeBinary()。
     public static encodeSegments(
       segs: Readonly<QrSegment[]>,
       ecl: QrCode.Ecc,
@@ -103,30 +103,30 @@ namespace qrcodegen {
         throw new RangeError('Invalid value')
       }
 
-      // Find the minimal version number to use
+      // 查找可使用的最小版本号
       let version: int
       let dataUsedBits: int
       for (version = minVersion; ; version++) {
         const dataCapacityBits: int
-          = QrCode.getNumDataCodewords(version, ecl) * 8 // Number of data bits available
+          = QrCode.getNumDataCodewords(version, ecl) * 8 // 可用数据位数
         const usedBits: number = QrSegment.getTotalBits(segs, version)
         if (usedBits <= dataCapacityBits) {
           dataUsedBits = usedBits
-          break // This version number is found to be suitable
+          break // 该版本号被判定为合适
         }
         if (version >= maxVersion) {
-          // All versions in the range could not fit the given data
+          // 范围内所有版本都无法容纳给定数据
           throw new RangeError('Data too long')
         }
       }
 
-      // Increase the error correction level while the data still fits in the current version number
+      // 在数据仍能放入当前版本号的前提下提高纠错等级
       for (const newEcl of [
         QrCode.Ecc.MEDIUM,
         QrCode.Ecc.QUARTILE,
         QrCode.Ecc.HIGH
       ]) {
-        // From low to high
+        // 从低到高
         if (
           boostEcl
           && dataUsedBits <= QrCode.getNumDataCodewords(version, newEcl) * 8
@@ -135,7 +135,7 @@ namespace qrcodegen {
         }
       }
 
-      // Concatenate all segments to create the data bit string
+      // 拼接所有段以生成数据位串
       const bb: bit[] = []
       for (const seg of segs) {
         appendBits(seg.mode.modeBits, 4, bb)
@@ -145,12 +145,12 @@ namespace qrcodegen {
         }
       }
 
-      // Add terminator and pad up to a byte if applicable
+      // 添加终止符，并按需填充至字节边界
       const dataCapacityBits: int = QrCode.getNumDataCodewords(version, ecl) * 8
       appendBits(0, Math.min(4, dataCapacityBits - bb.length), bb)
       appendBits(0, (8 - (bb.length % 8)) % 8, bb)
 
-      // Pad with alternating bytes until data capacity is reached
+      // 用交替字节填充，直至达到数据容量
       for (
         let padByte = 0xEC;
         bb.length < dataCapacityBits;
@@ -159,7 +159,7 @@ namespace qrcodegen {
         appendBits(padByte, 8, bb)
       }
 
-      // Pack bits into bytes in big endian
+      // 按大端序将位打包为字节
       const dataCodewords: byte[] = []
       while (dataCodewords.length * 8 < bb.length) {
         dataCodewords.push(0)
@@ -168,47 +168,47 @@ namespace qrcodegen {
         (b: bit, i: int) => (dataCodewords[i >>> 3] |= b << (7 - (i & 7)))
       )
 
-      // Create the QR Code object
+      // 创建 QR Code 对象
       return new QrCode(version, ecl, dataCodewords, mask)
     }
 
-    /* -- Fields -- */
+    /* -- 字段 -- */
 
-    // The width and height of this QR Code, measured in modules, between
-    // 21 and 177 (inclusive). This is equal to version * 4 + 17.
+    // 本 QR Code 的宽度与高度，以模块数计，介于
+    // 21 到 177（含）之间。等于 version * 4 + 17。
     public readonly size: int
 
-    // The index of the mask pattern used in this QR Code, which is between 0 and 7 (inclusive).
-    // Even if a QR Code is created with automatic masking requested (mask = -1),
-    // the resulting object still has a mask value between 0 and 7.
+    // 本 QR Code 使用的掩模图案索引，介于 0 到 7（含）之间。
+    // 即使创建 QR Code 时请求自动掩模（mask = -1），
+    // 所得对象的 mask 值仍介于 0 到 7 之间。
     public readonly mask: int
 
-    // The modules of this QR Code (false = light, true = dark).
-    // Immutable after constructor finishes. Accessed through getModule().
+    // 本 QR Code 的模块（false = 浅色，true = 深色）。
+    // 构造函数结束后不可变。通过 getModule() 访问。
     private readonly modules: boolean[][] = []
 
-    // Indicates function modules that are not subjected to masking. Discarded when constructor finishes.
+    // 标记不参与掩模的功能模块。构造函数结束后弃用。
     private readonly isFunction: boolean[][] = []
 
-    /* -- Constructor (low level) and fields -- */
+    /* -- 构造函数（低层）与字段 -- */
 
-    // Creates a new QR Code with the given version number,
-    // error correction level, data codeword bytes, and mask number.
-    // This is a low-level API that most users should not use directly.
-    // A mid-level API is the encodeSegments() function.
+    // 以给定版本号、
+    // 纠错等级、数据码字字节与掩模号创建新的 QR Code。
+    // 这是低层 API，大多数用户不应直接使用。
+    // 中层 API 为 encodeSegments() 函数。
     public constructor(
-      // The version number of this QR Code, which is between 1 and 40 (inclusive).
-      // This determines the size of this barcode.
+      // 本 QR Code 的版本号，介于 1 到 40（含）之间。
+      // 决定该条形码的尺寸。
       public readonly version: int,
 
-      // The error correction level used in this QR Code.
+      // 本 QR Code 使用的纠错等级。
       public readonly errorCorrectionLevel: QrCode.Ecc,
 
       dataCodewords: Readonly<byte[]>,
 
       msk: int
     ) {
-      // Check scalar arguments
+      // 检查标量参数
       if (version < QrCode.MIN_VERSION || version > QrCode.MAX_VERSION) {
         throw new RangeError('Version value out of range')
       }
@@ -217,24 +217,24 @@ namespace qrcodegen {
       }
       this.size = version * 4 + 17
 
-      // Initialize both grids to be size*size arrays of Boolean false
+      // 将两个网格初始化为 size*size 的 false 布尔数组
       const row: boolean[] = []
       for (let i = 0; i < this.size; i++) {
         row.push(false)
       }
       for (let i = 0; i < this.size; i++) {
-        this.modules.push(row.slice()) // Initially all light
+        this.modules.push(row.slice()) // 初始全为浅色
         this.isFunction.push(row.slice())
       }
 
-      // Compute ECC, draw modules
+      // 计算 ECC，绘制模块
       this.drawFunctionPatterns()
       const allCodewords: byte[] = this.addEccAndInterleave(dataCodewords)
       this.drawCodewords(allCodewords)
 
-      // Do masking
+      // 执行掩模
       if (msk === -1) {
-        // Automatically choose best mask
+        // 自动选择最佳掩模
         let minPenalty: int = 1000000000
         for (let i = 0; i < 8; i++) {
           this.applyMask(i)
@@ -244,53 +244,53 @@ namespace qrcodegen {
             msk = i
             minPenalty = penalty
           }
-          this.applyMask(i) // Undoes the mask due to XOR
+          this.applyMask(i) // 通过 XOR 撤销掩模
         }
       }
       this.mask = msk
-      this.applyMask(msk) // Apply the final choice of mask
-      this.drawFormatBits(msk) // Overwrite old format bits
+      this.applyMask(msk) // 应用最终选定的掩模
+      this.drawFormatBits(msk) // 覆盖旧的格式位
 
       this.isFunction = []
     }
 
-    /* -- Accessor methods -- */
+    /* -- 访问器方法 -- */
 
-    // Returns the color of the module (pixel) at the given coordinates, which is false
-    // for light or true for dark. The top left corner has the coordinates (x=0, y=0).
-    // If the given coordinates are out of bounds, then false (light) is returned.
+    // 返回给定坐标处模块（像素）的颜色，
+    // 浅色为 false，深色为 true。左上角坐标为 (x=0, y=0)。
+    // 若给定坐标越界，则返回 false（浅色）。
     public getModule(x: int, y: int): boolean {
       return (
         x >= 0 && x < this.size && y >= 0 && y < this.size && this.modules[y][x]
       )
     }
 
-    // Modified to expose modules for easy access
+    // 经修改以暴露模块，便于访问
     public getModules(): boolean[][] {
       return this.modules
     }
 
-    /* -- Private helper methods for constructor: Drawing function modules -- */
+    /* -- 构造函数的私有辅助方法：绘制功能模块 -- */
 
-    // Reads this object's version field, and draws and marks all function modules.
+    // 读取本对象的 version 字段，绘制并标记所有功能模块。
     private drawFunctionPatterns(): void {
-      // Draw horizontal and vertical timing patterns
+      // 绘制水平与垂直定时图案
       for (let i = 0; i < this.size; i++) {
         this.setFunctionModule(6, i, i % 2 === 0)
         this.setFunctionModule(i, 6, i % 2 === 0)
       }
 
-      // Draw 3 finder patterns (all corners except bottom right; overwrites some timing modules)
+      // 绘制 3 个定位图案（除右下角外的三个角；会覆盖部分定时模块）
       this.drawFinderPattern(3, 3)
       this.drawFinderPattern(this.size - 4, 3)
       this.drawFinderPattern(3, this.size - 4)
 
-      // Draw numerous alignment patterns
+      // 绘制多个对齐图案
       const alignPatPos: int[] = this.getAlignmentPatternPositions()
       const numAlign: int = alignPatPos.length
       for (let i = 0; i < numAlign; i++) {
         for (let j = 0; j < numAlign; j++) {
-          // Don't draw on the three finder corners
+          // 不要绘制在三个定位角上
           if (
             !(
               (i === 0 && j === 0)
@@ -303,23 +303,23 @@ namespace qrcodegen {
         }
       }
 
-      // Draw configuration data
-      this.drawFormatBits(0) // Dummy mask value; overwritten later in the constructor
+      // 绘制配置数据
+      this.drawFormatBits(0) // 占位掩模值；稍后在构造函数中覆盖
       this.drawVersion()
     }
 
-    // Draws two copies of the format bits (with its own error correction code)
-    // based on the given mask and this object's error correction level field.
+    // 绘制两份格式位副本（附带其自身的纠错码）
+    // 基于给定掩模与本对象的纠错等级字段。
     private drawFormatBits(mask: int): void {
-      // Calculate error correction code and pack bits
-      const data: int = (this.errorCorrectionLevel.formatBits << 3) | mask // errCorrLvl is uint2, mask is uint3
+      // 计算纠错码并打包位
+      const data: int = (this.errorCorrectionLevel.formatBits << 3) | mask // errCorrLvl 为 uint2，mask 为 uint3
       let rem: int = data
       for (let i = 0; i < 10; i++) {
         rem = (rem << 1) ^ ((rem >>> 9) * 0x537)
       }
       const bits = ((data << 10) | rem) ^ 0x5412 // uint15
 
-      // Draw first copy
+      // 绘制第一份副本
       for (let i = 0; i <= 5; i++) {
         this.setFunctionModule(8, i, getBit(bits, i))
       }
@@ -330,31 +330,31 @@ namespace qrcodegen {
         this.setFunctionModule(14 - i, 8, getBit(bits, i))
       }
 
-      // Draw second copy
+      // 绘制第二份副本
       for (let i = 0; i < 8; i++) {
         this.setFunctionModule(this.size - 1 - i, 8, getBit(bits, i))
       }
       for (let i = 8; i < 15; i++) {
         this.setFunctionModule(8, this.size - 15 + i, getBit(bits, i))
       }
-      this.setFunctionModule(8, this.size - 8, true) // Always dark
+      this.setFunctionModule(8, this.size - 8, true) // 恒为深色
     }
 
-    // Draws two copies of the version bits (with its own error correction code),
-    // based on this object's version field, iff 7 <= version <= 40.
+    // 绘制两份版本位副本（附带其自身的纠错码），
+    // 基于本对象的 version 字段，当且仅当 7 <= version <= 40 时绘制。
     private drawVersion(): void {
       if (this.version < 7) {
         return
       }
 
-      // Calculate error correction code and pack bits
-      let rem: int = this.version // version is uint6, in the range [7, 40]
+      // 计算纠错码并打包位
+      let rem: int = this.version // version 为 uint6，范围 [7, 40]
       for (let i = 0; i < 12; i++) {
         rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25)
       }
       const bits: int = (this.version << 12) | rem // uint18
 
-      // Draw two copies
+      // 绘制两份副本
       for (let i = 0; i < 18; i++) {
         const color: boolean = getBit(bits, i)
         const a: int = this.size - 11 + (i % 3)
@@ -364,12 +364,12 @@ namespace qrcodegen {
       }
     }
 
-    // Draws a 9*9 finder pattern including the border separator,
-    // with the center module at (x, y). Modules can be out of bounds.
+    // 绘制 9*9 定位图案（含边界分隔符），
+    // 中心模块位于 (x, y)。模块可越界。
     private drawFinderPattern(x: int, y: int): void {
       for (let dy = -4; dy <= 4; dy++) {
         for (let dx = -4; dx <= 4; dx++) {
-          const dist: int = Math.max(Math.abs(dx), Math.abs(dy)) // Chebyshev/infinity norm
+          const dist: int = Math.max(Math.abs(dx), Math.abs(dy)) // 切比雪夫/无穷范数
           const xx: int = x + dx
           const yy: int = y + dy
           if (xx >= 0 && xx < this.size && yy >= 0 && yy < this.size) {
@@ -379,8 +379,8 @@ namespace qrcodegen {
       }
     }
 
-    // Draws a 5*5 alignment pattern, with the center module
-    // at (x, y). All modules must be in bounds.
+    // 绘制 5*5 对齐图案，中心模块
+    // 位于 (x, y)。所有模块必须在边界内。
     private drawAlignmentPattern(x: int, y: int): void {
       for (let dy = -2; dy <= 2; dy++) {
         for (let dx = -2; dx <= 2; dx++) {
@@ -393,17 +393,17 @@ namespace qrcodegen {
       }
     }
 
-    // Sets the color of a module and marks it as a function module.
-    // Only used by the constructor. Coordinates must be in bounds.
+    // 设置模块颜色并将其标记为功能模块。
+    // 仅供构造函数使用。坐标必须在边界内。
     private setFunctionModule(x: int, y: int, isDark: boolean): void {
       this.modules[y][x] = isDark
       this.isFunction[y][x] = true
     }
 
-    /* -- Private helper methods for constructor: Codewords and masking -- */
+    /* -- 构造函数的私有辅助方法：码字与掩模 -- */
 
-    // Returns a new byte string representing the given data with the appropriate error correction
-    // codewords appended to it, based on this object's version and error correction level.
+    // 返回新的字节串：在给定数据后追加相应纠错
+    // 码字，基于本对象的版本号与纠错等级。
     private addEccAndInterleave(data: Readonly<byte[]>): byte[] {
       const ver: int = this.version
       const ecl: QrCode.Ecc = this.errorCorrectionLevel
@@ -411,7 +411,7 @@ namespace qrcodegen {
         throw new RangeError('Invalid argument')
       }
 
-      // Calculate parameter numbers
+      // 计算参数值
       const numBlocks: int
         = QrCode.NUM_ERROR_CORRECTION_BLOCKS[ecl.ordinal][ver]
       const blockEccLen: int = QrCode.ECC_CODEWORDS_PER_BLOCK[ecl.ordinal][ver]
@@ -419,7 +419,7 @@ namespace qrcodegen {
       const numShortBlocks: int = numBlocks - (rawCodewords % numBlocks)
       const shortBlockLen: int = Math.floor(rawCodewords / numBlocks)
 
-      // Split data into blocks and append ECC to each block
+      // 将数据拆分为多个块，并为每个块追加 ECC
       const blocks: byte[][] = []
       const rsDiv: byte[] = QrCode.reedSolomonComputeDivisor(blockEccLen)
       for (let i = 0, k = 0; i < numBlocks; i++) {
@@ -435,11 +435,11 @@ namespace qrcodegen {
         blocks.push(dat.concat(ecc))
       }
 
-      // Interleave (not concatenate) the bytes from every block into a single sequence
+      // 将各块的字节交错（而非拼接）为单一序列
       const result: byte[] = []
       for (let i = 0; i < blocks[0].length; i++) {
         blocks.forEach((block, j) => {
-          // Skip the padding byte in short blocks
+          // 跳过短块中的填充字节
           if (i !== shortBlockLen - blockEccLen || j >= numShortBlocks) {
             result.push(block[i])
           }
@@ -448,8 +448,8 @@ namespace qrcodegen {
       return result
     }
 
-    // Draws the given sequence of 8-bit codewords (data and error correction) onto the entire
-    // data area of this QR Code. Function modules need to be marked off before this is called.
+    // 将给定的 8 位码字序列（数据与纠错）绘制到 QR Code 的整个
+    // 数据区。调用本方法前需先标记出功能模块。
     private drawCodewords(data: Readonly<byte[]>): void {
       if (
         data.length
@@ -457,35 +457,35 @@ namespace qrcodegen {
       ) {
         throw new RangeError('Invalid argument')
       }
-      let i: int = 0 // Bit index into the data
-      // Do the funny zigzag scan
+      let i: int = 0 // 数据中的位索引
+      // 执行特殊的锯齿形扫描
       for (let right = this.size - 1; right >= 1; right -= 2) {
-        // Index of right column in each column pair
+        // 每对列中右列的索引
         if (right === 6) {
           right = 5
         }
         for (let vert = 0; vert < this.size; vert++) {
-          // Vertical counter
+          // 垂直计数器
           for (let j = 0; j < 2; j++) {
-            const x: int = right - j // Actual x coordinate
+            const x: int = right - j // 实际 x 坐标
             const upward: boolean = ((right + 1) & 2) === 0
-            const y: int = upward ? this.size - 1 - vert : vert // Actual y coordinate
+            const y: int = upward ? this.size - 1 - vert : vert // 实际 y 坐标
             if (!this.isFunction[y][x] && i < data.length * 8) {
               this.modules[y][x] = getBit(data[i >>> 3], 7 - (i & 7))
               i++
             }
-            // If this QR Code has any remainder bits (0 to 7), they were assigned as
-            // 0/false/light by the constructor and are left unchanged by this method
+            // 若本 QR Code 存在剩余位（0 到 7 位），它们已被构造函数设为
+            // 0/false/浅色，本方法保持不变
           }
         }
       }
     }
 
-    // XORs the codeword modules in this QR Code with the given mask pattern.
-    // The function modules must be marked and the codeword bits must be drawn
-    // before masking. Due to the arithmetic of XOR, calling applyMask() with
-    // the same mask value a second time will undo the mask. A final well-formed
-    // QR Code needs exactly one (not zero, two, etc.) mask applied.
+    // 将本 QR Code 的码字模块与给定掩模图案做 XOR。
+    // 掩模前必须先标记功能模块并绘制码字位。
+    // 由于 XOR 的运算性质，以同一掩模值再次调用 applyMask()
+    // 将撤销掩模。最终规范的
+    // QR Code 恰好需要应用一次掩模（不能是 0 次、2 次等）。
     private applyMask(mask: int): void {
       if (mask < 0 || mask > 7) {
         throw new RangeError('Mask value out of range')
@@ -528,12 +528,12 @@ namespace qrcodegen {
       }
     }
 
-    // Calculates and returns the penalty score based on state of this QR Code's current modules.
-    // This is used by the automatic mask choice algorithm to find the mask pattern that yields the lowest score.
+    // 基于本 QR Code 当前模块状态计算并返回惩罚分。
+    // 自动选掩模算法使用它来找到得分最低的掩模图案。
     private getPenaltyScore(): int {
       let result: int = 0
 
-      // Adjacent modules in row having same color, and finder-like patterns
+      // 行内相邻同色模块，以及类定位图案
       for (let y = 0; y < this.size; y++) {
         let runColor = false
         let runX = 0
@@ -562,7 +562,7 @@ namespace qrcodegen {
           += this.finderPenaltyTerminateAndCount(runColor, runX, runHistory)
             * QrCode.PENALTY_N3
       }
-      // Adjacent modules in column having same color, and finder-like patterns
+      // 列内相邻同色模块，以及类定位图案
       for (let x = 0; x < this.size; x++) {
         let runColor = false
         let runY = 0
@@ -592,7 +592,7 @@ namespace qrcodegen {
             * QrCode.PENALTY_N3
       }
 
-      // 2*2 blocks of modules having same color
+      // 2*2 的同色模块块
       for (let y = 0; y < this.size - 1; y++) {
         for (let x = 0; x < this.size - 1; x++) {
           const color: boolean = this.modules[y][x]
@@ -606,23 +606,23 @@ namespace qrcodegen {
         }
       }
 
-      // Balance of dark and light modules
+      // 深色与浅色模块的平衡度
       let dark: int = 0
       for (const row of this.modules) {
         dark = row.reduce((sum, color) => sum + (color ? 1 : 0), dark)
       }
-      const total: int = this.size * this.size // Note that size is odd, so dark/total != 1/2
-      // Compute the smallest integer k >= 0 such that (45-5k)% <= dark/total <= (55+5k)%
+      const total: int = this.size * this.size // 注意 size 为奇数，故 dark/total != 1/2
+      // 计算最小的整数 k >= 0，使 (45-5k)% <= dark/total <= (55+5k)%
       const k: int = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1
       result += k * QrCode.PENALTY_N4
       return result
     }
 
-    /* -- Private helper functions -- */
+    /* -- 私有辅助函数 -- */
 
-    // Returns an ascending list of positions of alignment patterns for this version number.
-    // Each position is in the range [0,177), and are used on both the x and y axes.
-    // This could be implemented as lookup table of 40 variable-length lists of integers.
+    // 返回本版本号对齐图案位置的升序列表。
+    // 每个位置都在 [0,177) 范围内，同时用于 x 轴与 y 轴。
+    // 也可实现为含 40 个变长整数列表的查找表。
     private getAlignmentPatternPositions(): int[] {
       if (this.version === 1) {
         return []
@@ -641,9 +641,9 @@ namespace qrcodegen {
       }
     }
 
-    // Returns the number of data bits that can be stored in a QR Code of the given version number, after
-    // all function modules are excluded. This includes remainder bits, so it might not be a multiple of 8.
-    // The result is in the range [208, 29648]. This could be implemented as a 40-entry lookup table.
+    // 返回给定版本号的 QR Code 在
+    // 排除所有功能模块后可存储的数据位数（含剩余位，故不一定是 8 的倍数）。
+    // 结果范围为 [208, 29648]。也可实现为 40 项查找表。
     private static getNumRawDataModules(ver: int): int {
       if (ver < QrCode.MIN_VERSION || ver > QrCode.MAX_VERSION) {
         throw new RangeError('Version number out of range')
@@ -659,9 +659,9 @@ namespace qrcodegen {
       return result
     }
 
-    // Returns the number of 8-bit data (i.e. not error correction) codewords contained in any
-    // QR Code of the given version number and error correction level, with remainder bits discarded.
-    // This stateless pure function could be implemented as a (40*4)-cell lookup table.
+    // 返回任意给定版本号与纠错等级的 QR Code 所含 8 位数据（即非纠错）
+    // 码字数量（丢弃剩余位）。
+    // 这个无状态纯函数也可实现为 (40*4) 单元查找表。
     private static getNumDataCodewords(ver: int, ecl: QrCode.Ecc): int {
       return (
         Math.floor(QrCode.getNumRawDataModules(ver) / 8)
@@ -670,26 +670,26 @@ namespace qrcodegen {
       )
     }
 
-    // Returns a Reed-Solomon ECC generator polynomial for the given degree. This could be
-    // implemented as a lookup table over all possible parameter values, instead of as an algorithm.
+    // 返回给定次数的 Reed-Solomon ECC 生成多项式。也可
+    // 对所有可能参数值用查找表实现，而非算法。
     private static reedSolomonComputeDivisor(degree: int): byte[] {
       if (degree < 1 || degree > 255) {
         throw new RangeError('Degree out of range')
       }
-      // Polynomial coefficients are stored from highest to lowest power, excluding the leading term which is always 1.
-      // For example the polynomial x^3 + 255x^2 + 8x + 93 is stored as the uint8 array [255, 8, 93].
+      // 多项式系数按幂次从高到低存储，恒为 1 的首项除外。
+      // 例如多项式 x^3 + 255x^2 + 8x + 93 存储为 uint8 数组 [255, 8, 93]。
       const result: byte[] = []
       for (let i = 0; i < degree - 1; i++) {
         result.push(0)
       }
-      result.push(1) // Start off with the monomial x^0
+      result.push(1) // 从单项式 x^0 开始
 
-      // Compute the product polynomial (x - r^0) * (x - r^1) * (x - r^2) * ... * (x - r^{degree-1}),
-      // and drop the highest monomial term which is always 1x^degree.
-      // Note that r = 0x02, which is a generator element of this field GF(2^8/0x11D).
+      // 计算乘积多项式 (x - r^0) * (x - r^1) * (x - r^2) * ... * (x - r^{degree-1})，
+      // 并舍去恒为 1x^degree 的最高次单项式项。
+      // 注意 r = 0x02，它是域 GF(2^8/0x11D) 的生成元。
       let root = 1
       for (let i = 0; i < degree; i++) {
-        // Multiply the current product by (x - r^i)
+        // 将当前乘积乘以 (x - r^i)
         for (let j = 0; j < result.length; j++) {
           result[j] = QrCode.reedSolomonMultiply(result[j], root)
           if (j + 1 < result.length) {
@@ -701,14 +701,14 @@ namespace qrcodegen {
       return result
     }
 
-    // Returns the Reed-Solomon error correction codeword for the given data and divisor polynomials.
+    // 返回给定数据多项式与除式多项式对应的 Reed-Solomon 纠错码字。
     private static reedSolomonComputeRemainder(
       data: Readonly<byte[]>,
       divisor: Readonly<byte[]>
     ): byte[] {
       const result: byte[] = divisor.map(_ => 0)
       for (const b of data) {
-        // Polynomial division
+        // 多项式除法
         const factor: byte = b ^ (result.shift() as byte)
         result.push(0)
         divisor.forEach(
@@ -718,13 +718,13 @@ namespace qrcodegen {
       return result
     }
 
-    // Returns the product of the two given field elements modulo GF(2^8/0x11D). The arguments and result
-    // are unsigned 8-bit integers. This could be implemented as a lookup table of 256*256 entries of uint8.
+    // 返回两个给定域元素在模 GF(2^8/0x11D) 下的乘积。参数与结果
+    // 均为无符号 8 位整数。也可实现为 256*256 项 uint8 查找表。
     private static reedSolomonMultiply(x: byte, y: byte): byte {
       if (x >>> 8 !== 0 || y >>> 8 !== 0) {
         throw new RangeError('Byte out of range')
       }
-      // Russian peasant multiplication
+      // 俄罗斯农民乘法
       let z: int = 0
       for (let i = 7; i >= 0; i--) {
         z = (z << 1) ^ ((z >>> 7) * 0x11D)
@@ -733,8 +733,8 @@ namespace qrcodegen {
       return z
     }
 
-    // Can only be called immediately after a light run is added, and
-    // returns either 0, 1, or 2. A helper function for getPenaltyScore().
+    // 只能在刚添加一段浅色连续串后调用，返回
+    // 0、1 或 2。是 getPenaltyScore() 的辅助函数。
     private finderPenaltyCountPatterns(runHistory: Readonly<int[]>): int {
       const n: int = runHistory[1]
       const core: boolean
@@ -749,50 +749,50 @@ namespace qrcodegen {
       )
     }
 
-    // Must be called at the end of a line (row or column) of modules. A helper function for getPenaltyScore().
+    // 必须在模块一行（行或列）结束时调用。是 getPenaltyScore() 的辅助函数。
     private finderPenaltyTerminateAndCount(
       currentRunColor: boolean,
       currentRunLength: int,
       runHistory: int[]
     ): int {
       if (currentRunColor) {
-        // Terminate dark run
+        // 结束深色连续串
         this.finderPenaltyAddHistory(currentRunLength, runHistory)
         currentRunLength = 0
       }
-      currentRunLength += this.size // Add light border to final run
+      currentRunLength += this.size // 为最后一段连续串添加浅色边界
       this.finderPenaltyAddHistory(currentRunLength, runHistory)
       return this.finderPenaltyCountPatterns(runHistory)
     }
 
-    // Pushes the given value to the front and drops the last value. A helper function for getPenaltyScore().
+    // 将给定值压入前端并丢弃最后一个值。是 getPenaltyScore() 的辅助函数。
     private finderPenaltyAddHistory(
       currentRunLength: int,
       runHistory: int[]
     ): void {
       if (runHistory[0] === 0) {
         currentRunLength += this.size
-      } // Add light border to initial run
+      } // 为初始连续串添加浅色边界
       runHistory.pop()
       runHistory.unshift(currentRunLength)
     }
 
-    /* -- Constants and tables -- */
+    /* -- 常量与表 -- */
 
-    // The minimum version number supported in the QR Code Model 2 standard.
+    // QR Code Model 2 标准支持的最小版本号。
     public static readonly MIN_VERSION: int = 1
-    // The maximum version number supported in the QR Code Model 2 standard.
+    // QR Code Model 2 标准支持的最大版本号。
     public static readonly MAX_VERSION: int = 40
 
-    // For use in getPenaltyScore(), when evaluating which mask is best.
+    // 供 getPenaltyScore() 在评估最佳掩模时使用。
     private static readonly PENALTY_N1: int = 3
     private static readonly PENALTY_N2: int = 3
     private static readonly PENALTY_N3: int = 40
     private static readonly PENALTY_N4: int = 10
 
     private static readonly ECC_CODEWORDS_PER_BLOCK: int[][] = [
-      // Version: (note that index 0 is for padding, and is set to an illegal value)
-      // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40    Error correction level
+      // 版本：（注意索引 0 用于填充，被设为非法值）
+      // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40    纠错等级
       [
         -1,
         7,
@@ -835,7 +835,7 @@ namespace qrcodegen {
         30,
         30,
         30
-      ], // Low
+      ], // 低
       [
         -1,
         10,
@@ -878,7 +878,7 @@ namespace qrcodegen {
         28,
         28,
         28
-      ], // Medium
+      ], // 中
       [
         -1,
         13,
@@ -921,7 +921,7 @@ namespace qrcodegen {
         30,
         30,
         30
-      ], // Quartile
+      ], // 四分
       [
         -1,
         17,
@@ -964,12 +964,12 @@ namespace qrcodegen {
         30,
         30,
         30
-      ] // High
+      ] // 高
     ]
 
     private static readonly NUM_ERROR_CORRECTION_BLOCKS: int[][] = [
-      // Version: (note that index 0 is for padding, and is set to an illegal value)
-      // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40    Error correction level
+      // 版本：（注意索引 0 用于填充，被设为非法值）
+      // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40    纠错等级
       [
         -1,
         1,
@@ -1012,7 +1012,7 @@ namespace qrcodegen {
         22,
         24,
         25
-      ], // Low
+      ], // 低
       [
         -1,
         1,
@@ -1055,7 +1055,7 @@ namespace qrcodegen {
         45,
         47,
         49
-      ], // Medium
+      ], // 中
       [
         -1,
         1,
@@ -1098,7 +1098,7 @@ namespace qrcodegen {
         62,
         65,
         68
-      ], // Quartile
+      ], // 四分
       [
         -1,
         1,
@@ -1141,12 +1141,12 @@ namespace qrcodegen {
         74,
         77,
         81
-      ] // High
+      ] // 高
     ]
   }
 
-  // Appends the given number of low-order bits of the given value
-  // to the given buffer. Requires 0 <= len <= 31 and 0 <= val < 2^len.
+  // 将给定值的指定位数低位
+  // 追加到给定缓冲区。要求 0 <= len <= 31 且 0 <= val < 2^len。
   function appendBits(val: int, len: int, bb: bit[]): void {
     if (len < 0 || len > 31 || val >>> len !== 0) {
       throw new RangeError('Value out of range')
@@ -1154,36 +1154,36 @@ namespace qrcodegen {
     for (
       let i = len - 1;
       i >= 0;
-      i-- // Append bit by bit
+      i-- // 逐位追加
     ) {
       bb.push((val >>> i) & 1)
     }
   }
 
-  // Returns true iff the i'th bit of x is set to 1.
+  // 当且仅当 x 的第 i 位为 1 时返回 true。
   function getBit(x: int, i: int): boolean {
     return ((x >>> i) & 1) !== 0
   }
 
-  /* ---- Data segment class ---- */
+  /* ---- 数据段类 ---- */
 
   /*
-   * A segment of character/binary/control data in a QR Code symbol.
-   * Instances of this class are immutable.
-   * The mid-level way to create a segment is to take the payload data
-   * and call a static factory function such as QrSegment.makeNumeric().
-   * The low-level way to create a segment is to custom-make the bit buffer
-   * and call the QrSegment() constructor with appropriate values.
-   * This segment class imposes no length restrictions, but QR Codes have restrictions.
-   * Even in the most favorable conditions, a QR Code can only hold 7089 characters of data.
-   * Any segment longer than this is meaningless for the purpose of generating QR Codes.
+   * QR Code 符号中的字符/二进制/控制数据段。
+   * 该类的实例不可变。
+   * 创建段的中层方式是取负载数据
+   * 并调用 QrSegment.makeNumeric() 等静态工厂函数。
+   * 创建段的低层方式是自行构造位缓冲区
+   * 并以合适的值调用 QrSegment() 构造函数。
+   * 本段类本身不限制长度，但 QR Code 有长度限制。
+   * 即使在最有利的条件下，一个 QR Code 最多也只能容纳 7089 个字符的数据。
+   * 任何超过此长度的段对于生成 QR Code 都没有意义。
    */
   export class QrSegment {
-    /* -- Static factory functions (mid level) -- */
+    /* -- 静态工厂函数（中层） -- */
 
-    // Returns a segment representing the given binary data encoded in
-    // byte mode. All input byte arrays are acceptable. Any text string
-    // can be converted to UTF-8 bytes and encoded as a byte mode segment.
+    // 返回以字节模式编码给定二进制数据的
+    // 段。接受任意输入字节数组。任何文本字符串
+    // 都可转换为 UTF-8 字节并编码为字节模式段。
     public static makeBytes(data: Readonly<byte[]>): QrSegment {
       const bb: bit[] = []
       for (const b of data) {
@@ -1192,14 +1192,14 @@ namespace qrcodegen {
       return new QrSegment(QrSegment.Mode.BYTE, data.length, bb)
     }
 
-    // Returns a segment representing the given string of decimal digits encoded in numeric mode.
+    // 返回以数字模式编码给定十进制数字串的段。
     public static makeNumeric(digits: string): QrSegment {
       if (!QrSegment.isNumeric(digits)) {
         throw new RangeError('String contains non-numeric characters')
       }
       const bb: bit[] = []
       for (let i = 0; i < digits.length;) {
-        // Consume up to 3 digits per iteration
+        // 每次迭代最多取 3 位数字
         const n: int = Math.min(digits.length - i, 3)
         appendBits(Number.parseInt(digits.substr(i, n), 10), n * 3 + 1, bb)
         i += n
@@ -1207,9 +1207,9 @@ namespace qrcodegen {
       return new QrSegment(QrSegment.Mode.NUMERIC, digits.length, bb)
     }
 
-    // Returns a segment representing the given text string encoded in alphanumeric mode.
-    // The characters allowed are: 0 to 9, A to Z (uppercase only), space,
-    // dollar, percent, asterisk, plus, hyphen, period, slash, colon.
+    // 返回以字母数字模式编码给定文本串的段。
+    // 允许的字符为：0 到 9、A 到 Z（仅大写）、空格、
+    // 美元符号、百分号、星号、加号、连字符、句点、斜杠、冒号。
     public static makeAlphanumeric(text: string): QrSegment {
       if (!QrSegment.isAlphanumeric(text)) {
         throw new RangeError(
@@ -1219,14 +1219,14 @@ namespace qrcodegen {
       const bb: bit[] = []
       let i: int
       for (i = 0; i + 2 <= text.length; i += 2) {
-        // Process groups of 2
+        // 按每 2 个一组处理
         let temp: int
           = QrSegment.ALPHANUMERIC_CHARSET.indexOf(text.charAt(i)) * 45
         temp += QrSegment.ALPHANUMERIC_CHARSET.indexOf(text.charAt(i + 1))
         appendBits(temp, 11, bb)
       }
       if (i < text.length) {
-        // 1 character remaining
+        // 剩余 1 个字符
         appendBits(
           QrSegment.ALPHANUMERIC_CHARSET.indexOf(text.charAt(i)),
           6,
@@ -1236,10 +1236,10 @@ namespace qrcodegen {
       return new QrSegment(QrSegment.Mode.ALPHANUMERIC, text.length, bb)
     }
 
-    // Returns a new mutable list of zero or more segments to represent the given Unicode text string.
-    // The result may use various segment modes and switch modes to optimize the length of the bit stream.
+    // 返回一个新的可变列表，含零个或多个段，用于表示给定 Unicode 文本串。
+    // 结果可能使用多种段模式并切换模式，以优化位流长度。
     public static makeSegments(text: string): QrSegment[] {
-      // Select the most efficient segment encoding automatically
+      // 自动选择最高效的段编码方式
       if (text === '') {
         return []
       }
@@ -1254,8 +1254,8 @@ namespace qrcodegen {
       }
     }
 
-    // Returns a segment representing an Extended Channel Interpretation
-    // (ECI) designator with the given assignment value.
+    // 返回表示扩展通道解释
+    //（ECI）指定符的段，携带给定赋值。
     public static makeEci(assignVal: int): QrSegment {
       const bb: bit[] = []
       if (assignVal < 0) {
@@ -1278,51 +1278,51 @@ namespace qrcodegen {
       return new QrSegment(QrSegment.Mode.ECI, 0, bb)
     }
 
-    // Tests whether the given string can be encoded as a segment in numeric mode.
-    // A string is encodable iff each character is in the range 0 to 9.
+    // 测试给定字符串能否以数字模式编码为段。
+    // 当且仅当每个字符都在 0 到 9 范围内时，字符串可编码。
     public static isNumeric(text: string): boolean {
       return QrSegment.NUMERIC_REGEX.test(text)
     }
 
-    // Tests whether the given string can be encoded as a segment in alphanumeric mode.
-    // A string is encodable iff each character is in the following set: 0 to 9, A to Z
-    // (uppercase only), space, dollar, percent, asterisk, plus, hyphen, period, slash, colon.
+    // 测试给定字符串能否以字母数字模式编码为段。
+    // 当且仅当每个字符都属于以下集合时，字符串可编码：0 到 9、A 到 Z
+    //（仅大写）、空格、美元符号、百分号、星号、加号、连字符、句点、斜杠、冒号。
     public static isAlphanumeric(text: string): boolean {
       return QrSegment.ALPHANUMERIC_REGEX.test(text)
     }
 
-    /* -- Constructor (low level) and fields -- */
+    /* -- 构造函数（低层）与字段 -- */
 
-    // Creates a new QR Code segment with the given attributes and data.
-    // The character count (numChars) must agree with the mode and the bit buffer length,
-    // but the constraint isn't checked. The given bit buffer is cloned and stored.
+    // 以给定属性与数据创建新的 QR Code 段。
+    // 字符数（numChars）必须与模式及位缓冲区长度一致，
+    // 但不校验该约束。给定位缓冲区会被克隆后存储。
     public constructor(
-      // The mode indicator of this segment.
+      // 本段的模式指示符。
       public readonly mode: QrSegment.Mode,
 
-      // The length of this segment's unencoded data. Measured in characters for
-      // numeric/alphanumeric/kanji mode, bytes for byte mode, and 0 for ECI mode.
-      // Always zero or positive. Not the same as the data's bit length.
+      // 本段未编码数据的长度。数字/字母数字/汉字模式以字符计，
+      // 字节模式以字节计，ECI 模式为 0。
+      // 恒为零或正数，与数据的位长度不同。
       public readonly numChars: int,
 
-      // The data bits of this segment. Accessed through getData().
+      // 本段的数据位。通过 getData() 访问。
       private readonly bitData: bit[]
     ) {
       if (numChars < 0) {
         throw new RangeError('Invalid argument')
       }
-      this.bitData = bitData.slice() // Make defensive copy
+      this.bitData = bitData.slice() // 做防御性拷贝
     }
 
-    /* -- Methods -- */
+    /* -- 方法 -- */
 
-    // Returns a new copy of the data bits of this segment.
+    // 返回本段数据位的新拷贝。
     public getData(): bit[] {
-      return this.bitData.slice() // Make defensive copy
+      return this.bitData.slice() // 做防御性拷贝
     }
 
-    // (Package-private) Calculates and returns the number of bits needed to encode the given segments at
-    // the given version. The result is infinity if a segment has too many characters to fit its length field.
+    //（包私有）计算并返回在给定版本号下编码给定各段所需的位数。
+    // 若某段字符过多、无法装入其长度字段，则结果为无穷大。
     public static getTotalBits(
       segs: Readonly<QrSegment[]>,
       version: int
@@ -1332,13 +1332,13 @@ namespace qrcodegen {
         const ccbits: int = seg.mode.numCharCountBits(version)
         if (seg.numChars >= 1 << ccbits) {
           return Infinity
-        } // The segment's length doesn't fit the field's bit width
+        } // 该段长度无法装入字段的位宽
         result += 4 + ccbits + seg.bitData.length
       }
       return result
     }
 
-    // Returns a new array of bytes representing the given string encoded in UTF-8.
+    // 返回表示给定字符串 UTF-8 编码的新字节数组。
     private static toUtf8ByteArray(str: string): byte[] {
       str = encodeURI(str)
       const result: byte[] = []
@@ -1354,56 +1354,56 @@ namespace qrcodegen {
       return result
     }
 
-    /* -- Constants -- */
+    /* -- 常量 -- */
 
-    // Describes precisely all strings that are encodable in numeric mode.
+    // 精确描述所有可在数字模式下编码的字符串。
     private static readonly NUMERIC_REGEX: RegExp = /^[0-9]*$/
 
-    // Describes precisely all strings that are encodable in alphanumeric mode.
+    // 精确描述所有可在字母数字模式下编码的字符串。
     private static readonly ALPHANUMERIC_REGEX: RegExp = /^[A-Z0-9 $%*+./:-]*$/
 
-    // The set of all legal characters in alphanumeric mode,
-    // where each character value maps to the index in the string.
+    // 字母数字模式下所有合法字符的集合，
+    // 其中每个字符的值映射为该字符串中的索引。
     private static readonly ALPHANUMERIC_CHARSET: string
       = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:'
   }
 }
 
-/* ---- Public helper enumeration ---- */
+/* ---- 公共辅助枚举 ---- */
 namespace qrcodegen.QrCode {
   type int = number
 
   /*
-   * The error correction level in a QR Code symbol. Immutable.
+   * QR Code 符号中的纠错等级。不可变。
    */
   export class Ecc {
-    /* -- Constants -- */
+    /* -- 常量 -- */
 
-    public static readonly LOW = new Ecc(0, 1) // The QR Code can tolerate about  7% erroneous codewords
-    public static readonly MEDIUM = new Ecc(1, 0) // The QR Code can tolerate about 15% erroneous codewords
-    public static readonly QUARTILE = new Ecc(2, 3) // The QR Code can tolerate about 25% erroneous codewords
-    public static readonly HIGH = new Ecc(3, 2) // The QR Code can tolerate about 30% erroneous codewords
+    public static readonly LOW = new Ecc(0, 1) // QR Code 约可容忍 7% 的错误码字
+    public static readonly MEDIUM = new Ecc(1, 0) // QR Code 约可容忍 15% 的错误码字
+    public static readonly QUARTILE = new Ecc(2, 3) // QR Code 约可容忍 25% 的错误码字
+    public static readonly HIGH = new Ecc(3, 2) // QR Code 约可容忍 30% 的错误码字
 
-    /* -- Constructor and fields -- */
+    /* -- 构造函数与字段 -- */
 
     private constructor(
-      // In the range 0 to 3 (unsigned 2-bit integer).
+      // 范围为 0 到 3（无符号 2 位整数）。
       public readonly ordinal: int,
-      // (Package-private) In the range 0 to 3 (unsigned 2-bit integer).
+      //（包私有）范围为 0 到 3（无符号 2 位整数）。
       public readonly formatBits: int
     ) {}
   }
 }
 
-/* ---- Public helper enumeration ---- */
+/* ---- 公共辅助枚举 ---- */
 namespace qrcodegen.QrSegment {
   type int = number
 
   /*
-   * Describes how a segment's data bits are interpreted. Immutable.
+   * 描述如何解释一段的数据位。不可变。
    */
   export class Mode {
-    /* -- Constants -- */
+    /* -- 常量 -- */
 
     public static readonly NUMERIC = new Mode(0x1, [10, 12, 14])
     public static readonly ALPHANUMERIC = new Mode(0x2, [9, 11, 13])
@@ -1411,19 +1411,19 @@ namespace qrcodegen.QrSegment {
     public static readonly KANJI = new Mode(0x8, [8, 10, 12])
     public static readonly ECI = new Mode(0x7, [0, 0, 0])
 
-    /* -- Constructor and fields -- */
+    /* -- 构造函数与字段 -- */
 
     private constructor(
-      // The mode indicator bits, which is a uint4 value (range 0 to 15).
+      // 模式指示位，为 uint4 值（范围 0 到 15）。
       public readonly modeBits: int,
-      // Number of character count bits for three different version ranges.
+      // 三个不同版本范围对应的字符计数字段位数。
       private readonly numBitsCharCount: [int, int, int]
     ) {}
 
-    /* -- Method -- */
+    /* -- 方法 -- */
 
-    // (Package-private) Returns the bit width of the character count field for a segment in
-    // this mode in a QR Code at the given version number. The result is in the range [0, 16].
+    //（包私有）返回给定版本号下，该模式段的
+    // 字符计数字段位宽。结果范围为 [0, 16]。
     public numCharCountBits(ver: int): int {
       return this.numBitsCharCount[Math.floor((ver + 7) / 17)]
     }

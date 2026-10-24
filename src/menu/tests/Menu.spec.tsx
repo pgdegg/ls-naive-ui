@@ -79,13 +79,13 @@ describe('n-menu', () => {
       }
     ]
     function renderMenuIcon(option: any): any {
-      // return comment vnode, render placeholder for indent
+      // 返回注释 vnode，渲染用于缩进的占位符
       if (option.key === 'mojito')
         return h(Comment)
-      // return falsy, don't render icon placeholder
+      // 返回假值，不渲染图标占位符
       if (option.key === 'initialj')
         return null
-      // otherwise, render returns vnode
+      // 其余情况，render 返回 vnode
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
     const wrapper = mount(NMenu, {
@@ -195,7 +195,7 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.n-submenu').exists()).toBe(true)
     await wrapper.find('.n-submenu').trigger('mouseenter')
-    // Popover has delay, so we need to wait
+    // Popover 有延迟，因此需要等待
     await sleep(150)
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('a').length).toEqual(3)
@@ -243,7 +243,7 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.n-submenu').exists()).toBe(true)
     await wrapper.find('.n-submenu').trigger('mouseenter')
-    // Popover has delay, so we need to wait
+    // Popover 有延迟，因此需要等待
     await sleep(150)
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('.n-icon').length).toEqual(2)
@@ -468,7 +468,7 @@ describe('n-menu', () => {
       }
     })
     const contents = wrapper.findAll('.n-menu-item-content')
-    // [0] is the root item, [1] is the item nested inside the group
+    // [0] 是根项，[1] 是嵌套在分组内的项
     const rootPaddingLeft = (contents[0].element as HTMLElement).style.paddingLeft
     const groupItemPaddingLeft = (contents[1].element as HTMLElement).style.paddingLeft
     expect(groupItemPaddingLeft).toEqual(rootPaddingLeft)

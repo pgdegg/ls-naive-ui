@@ -60,7 +60,7 @@ export const panelProps = {
   },
   nodeProps: Function as PropType<NodeProps>,
   virtualScroll: Boolean,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 

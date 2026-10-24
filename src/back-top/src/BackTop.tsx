@@ -62,7 +62,7 @@ export const backTopProps = {
     type: Function,
     default: () => {}
   },
-  // deprecated
+  // 已废弃
   target: Function as PropType<() => HTMLElement>,
   onShow: Function as unknown as PropType<() => void>,
   onHide: Function as unknown as PropType<() => void>
@@ -72,7 +72,7 @@ export type BackTopProps = ExtractPublicPropTypes<typeof backTopProps>
 
 export default defineComponent({
   name: 'BackTop',
-  // make style applied to back-top button
+  // 使样式应用于 back-top 按钮
   inheritAttrs: false,
   props: backTopProps,
   setup(props) {
@@ -135,7 +135,7 @@ export default defineComponent({
     )
     let scrollElement: HTMLElement | Document
     let scrollListenerRegistered: boolean
-    // deprecated
+    // 已废弃
     watch(mergedShowRef, (value) => {
       if (DomInfoReadyRef.value) {
         if (value) {

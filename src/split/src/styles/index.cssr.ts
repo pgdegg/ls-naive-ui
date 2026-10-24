@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-resize-trigger-color
 // --n-resize-trigger-color-hover
 // --n-bezier

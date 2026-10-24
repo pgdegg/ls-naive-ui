@@ -317,11 +317,11 @@ export const treeProps = {
     MaybeArray<OnUpdateSelectedKeys>
   >,
   ...treeSharedProps,
-  // internal props for tree-select
+  // 供 tree-select 使用的内部 props
   internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
-  // use it to display
+  // 用于渲染展示
   internalRenderEmpty: Function as PropType<() => VNodeChild>,
   internalHighlightKeySet: Object as PropType<Set<Key> | null>,
   internalUnifySelectCheck: Boolean,
@@ -330,7 +330,7 @@ export const treeProps = {
     default: true
   },
   internalFocusable: {
-    // Make tree-select take over keyboard operations
+    // 让 tree-select 接管键盘操作
     type: Boolean,
     default: true
   },
@@ -440,7 +440,7 @@ export default defineComponent({
       )
     })
 
-    // We don't expect data source to change so we just determine it once
+    // 我们不期望数据源发生变化，因此只计算一次
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeOption>(
         props.showIrrelevantNodes
@@ -529,13 +529,13 @@ export default defineComponent({
           : keys
     }
     if (watchProps?.includes('defaultExpandedKeys')) {
-      // if watching defaultExpandedKeys, we use access props.defaultExpandedKeys inside initiator
+      // 若监听 defaultExpandedKeys，则在初始化逻辑内部访问 props.defaultExpandedKeys
       watchEffect(() => {
         initUncontrolledExpandedKeys(undefined)
       })
     }
     else {
-      // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
+      // 默认使用 watchEffect，因为当 defaultExpandAll 为 true 时，数据变化后仍应保持树展开
       watchEffect(() => {
         initUncontrolledExpandedKeys(props.defaultExpandedKeys)
       })
@@ -592,14 +592,14 @@ export default defineComponent({
       const { value: droppingNode } = droppingNodeRef
       if (!droppingNode)
         return null
-      // May avoid overlap between line mark of first child & rect mark of parent
+      // 可避免首个子节点的线条标记与父节点的矩形标记重叠
       // if (droppingNode.isFirstChild && droppingPositionRef.value === 'before') {
       //   return null
       // }
       return droppingNode.parent
     })
 
-    // shallow watch data
+    // 浅监听 data
     let isDataReset = false
     watch(
       toRef(props, 'data'),
@@ -714,15 +714,15 @@ export default defineComponent({
         }
       })
     })
-    // animation in progress
+    // 动画进行中
     const aipRef = ref(false)
-    // animation flattened nodes
+    // 动画期间的扁平化节点
     const afNodesRef = ref<Array<TmNode | MotionData>>([])
-    // Note: Since the virtual list depends on min height, if there's a node
-    // whose height starts from 0, the virtual list will have a wrong height
-    // during animation. This will seldom cause wired scrollbar status. It is
-    // fixable and need some changes in vueuc, I've no time so I just leave it
-    // here. Maybe the bug won't be fixed during the life time of the project.
+    // 注意：由于虚拟列表依赖最小高度，如果存在某个节点
+    // 其高度从 0 开始，动画期间虚拟列表的高度就会计算错误
+    // 这很少会导致滚动条状态异常。该问题
+    // 可以修复，但需要改动 vueuc，我没时间，就先把它
+    // 搁置在这里。也许这个 bug 在项目生命周期内都不会被修复。
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
@@ -738,7 +738,7 @@ export default defineComponent({
       for (const expandedKey of value) {
         if (!prevVSet.has(expandedKey)) {
           if (addedKey !== null)
-            return // multi expand, not triggered by click
+            return // 多处展开，并非由点击触发
           addedKey = expandedKey
         }
       }
@@ -746,13 +746,13 @@ export default defineComponent({
       for (const expandedKey of prevValue) {
         if (!currentVSet.has(expandedKey)) {
           if (removedKey !== null)
-            return // multi collapse, not triggered by click
+            return // 多处收起，并非由点击触发
           removedKey = expandedKey
         }
       }
       if (addedKey === null && removedKey === null) {
-        // 1. multi action, not triggered by click
-        // 2. no action, don't know what happened
+        // 1. 多处操作，并非由点击触发
+        // 2. 没有操作，不清楚发生了什么
         return
       }
       const { virtualScroll } = props
@@ -760,7 +760,7 @@ export default defineComponent({
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
       const viewportItemCount = Math.ceil(viewportHeight / nodeHeight) + 1
-      // play add animation
+      // 播放添加动画
       let baseExpandedKeys: Key[] | undefined
       if (addedKey !== null) {
         baseExpandedKeys = prevValue
@@ -785,7 +785,7 @@ export default defineComponent({
         if (~expandedNodeIndex) {
           const children = (afNodesRef.value[expandedNodeIndex] as TmNode)
             .children
-          // sometimes user will pass leaf keys in
+          // 有时用户会传入叶子节点的 key
           if (children) {
             const expandedChildren = flatten(children, value)
             afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
@@ -809,11 +809,11 @@ export default defineComponent({
           const collapsedNodeChildren = (
             afNodesRef.value[collapsedNodeIndex] as TmNode
           ).children
-          // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
-          // but maybe children removed
+          // 有时整棵树都发生了变化，移除一个 key 并不意味着它被收起，
+          // 而可能是其子节点被移除了
           if (!collapsedNodeChildren)
             return
-          // play remove animation
+          // 播放移除动画
           aipRef.value = true
           const collapsedChildren = flatten(collapsedNodeChildren, value)
           afNodesRef.value.splice(collapsedNodeIndex + 1, 0, {
@@ -849,9 +849,9 @@ export default defineComponent({
     function handleAfterEnter(): void {
       aipRef.value = false
       if (props.virtualScroll) {
-        // If virtual scroll, we won't listen to resize during animation, so
-        // resize callback of virtual list won't be called and as a result
-        // scrollbar won't sync. We need to sync scrollbar manually.
+        // 若开启虚拟滚动，动画期间我们不会监听 resize，因此
+        // 虚拟列表的 resize 回调不会被调用，结果
+        // 滚动条不同步，我们需要手动同步滚动条。
         void nextTick(syncScrollbar)
       }
     }
@@ -979,7 +979,7 @@ export default defineComponent({
         )
       }
     }
-    // Drag & Drop
+    // 拖拽（Drag & Drop）
     function doDragEnter(info: TreeDragInfo): void {
       const { onDragenter } = props
       if (onDragenter)
@@ -1032,7 +1032,7 @@ export default defineComponent({
       nodeKeyToBeExpanded = null
     }
     function handleCheck(node: TmNode, checked: boolean): void {
-      // We don't guard for leaf only since we have done it in view layer
+      // 我们不再单独对叶子节点做拦截，因为视图层已经处理过了
       if (props.disabled || isNodeDisabled(node, props.disabledField)) {
         return
       }
@@ -1171,7 +1171,7 @@ export default defineComponent({
         window.clearTimeout(expandTimerId)
         expandTimerId = null
       }
-      // Don't expand leaf node.
+      // 不要展开叶子节点。
       if (node.isLeaf)
         return
       nodeKeyToBeExpanded = node.key
@@ -1207,9 +1207,9 @@ export default defineComponent({
       }
     }
 
-    // Dnd
+    // 拖拽（DnD）
     function handleDragEnter({ event, node }: InternalDragInfo): void {
-      // node should be a tmNode
+      // node 应当是一个 tmNode
       if (
         !props.draggable
         || props.disabled
@@ -1235,7 +1235,7 @@ export default defineComponent({
         return
       resetDropState()
     }
-    // Dragend is ok, we don't need to add global listener to reset drag status
+    // dragend 即可，无需添加全局监听器来重置拖拽状态
     function handleDragEnd({ event, node }: InternalDragInfo): void {
       resetDndState()
       if (
@@ -1255,7 +1255,7 @@ export default defineComponent({
       ) {
         return
       }
-      // Most of time, the image will block user's view
+      // 多数情况下，拖拽镜像图片会遮挡用户视野
       if (emptyImage) {
         event.dataTransfer?.setDragImage(emptyImage, 0, 0)
       }
@@ -1280,7 +1280,7 @@ export default defineComponent({
       const { allowDrop, indent } = props
       if (emit)
         doDragOver({ event, node: node.rawNode })
-      // Update dropping node
+      // 更新放置目标节点
       const el = event.currentTarget as HTMLElement
       const { height: elOffsetHeight, top: elClientTop }
         = el.getBoundingClientRect()
@@ -1315,12 +1315,12 @@ export default defineComponent({
 
       const { value: getFindex } = getFIndexRef
 
-      /** determine the drop position and drop node */
-      /** the dropping node needn't to be the mouse hovering node! */
+      /** 确定放置位置与放置目标节点 */
+      /** 放置目标节点不必是鼠标悬停的节点！ */
       /**
-       * if there is something i've learned from implementing a complex
-       * drag & drop. that is never write unit test before you really figure
-       * out what behavior is exactly you want.
+       * 实现复杂拖拽功能让我明白一件事：在真正想清楚
+       * 需要什么行为之前，绝不要先写单元测试。
+       * 自己到底想要什么行为。
        */
       let finalDropNode: TmNode
       let finalDropPosition: DropPosition
@@ -1352,8 +1352,8 @@ export default defineComponent({
         }
       }
 
-      // If the node is non-leaf and it is expanded, we don't allow it to
-      // drop after it and change it to drop before its next view sibling
+      // 如果节点是非叶子节点且处于展开状态，我们不允许把它放到自身之后，
+      // 而是改为放到其下一个可视兄弟节点之前
       if (
         !finalDropNode.isLeaf
         && mergedExpandedKeysRef.value.includes(finalDropNode.key)
@@ -1362,8 +1362,8 @@ export default defineComponent({
         if (finalDropPosition === 'after') {
           finalDropNode = fNodesRef.value[hoverNodeFIndex + 1]
           if (!finalDropNode) {
-            // maybe there is no next view sibling when non-leaf node has no
-            // children and it is the last node in the tree
+            // 当非叶子节点没有子节点且是树中最后一个节点时，
+            // 可能不存在下一个可视兄弟节点
             finalDropNode = node
             finalDropPosition = 'inside'
           }
@@ -1377,11 +1377,11 @@ export default defineComponent({
 
       droppingMouseNodeRef.value = droppingMouseNode
 
-      // This is a speacial case, user is dragging a last child itself, so we
-      // only view it as they are trying to drop after it.
-      // There are some relevant codes in bailout 1's child branch.
-      // Also, the expand bailout should have a high priority. If it's non-leaf
-      // node and expanded, keep its origin drop position
+      // 这是一个特殊情况：用户拖拽的就是最后一个子节点本身，因此
+      // 只将其视为试图放到该节点之后。
+      // 相关代码见 Bailout 1 的子分支。
+      // 另外，展开拦截应具有更高优先级：若为非叶子
+      // 节点且已展开，则保持其原始放置位置。
       if (
         !mouseAtExpandedNonLeafNode
         && draggingNode.isLastChild
@@ -1391,10 +1391,10 @@ export default defineComponent({
       }
 
       if (finalDropPosition === 'after') {
-        let offset = dragStartX - event.clientX // drag left => > 0
+        let offset = dragStartX - event.clientX // 向左拖拽 => > 0
         let offsetLevel = 0
         while (
-          offset >= indent / 2 // divide by 2 to make it easier to trigger
+          offset >= indent / 2 // 除以 2 以降低触发门槛
           && finalDropNode.parent !== null
           && finalDropNode.isLastChild
           && offsetLevel < 1
@@ -1410,8 +1410,8 @@ export default defineComponent({
       }
 
       // Bailout 1
-      // Drag self into self
-      // Drag it into direct parent
+      // 把自身拖入自身
+      // 拖入其直接父节点
       if (
         draggingNode.contains(finalDropNode)
         || (finalDropPosition === 'inside'
@@ -1421,9 +1421,9 @@ export default defineComponent({
           draggingNode.key === droppingMouseNode.key
           && draggingNode.key === finalDropNode.key
         ) {
-          // This is special case that we want ui to show a mark to guide user
-          // to start dragging. Nor they will think nothing happens.
-          // However this is an invalid drop, we need to guard it inside
+          // 这是一个特殊情况：我们希望界面显示标记来引导用户开始拖拽，
+          // 否则用户会觉得毫无反应。但这是一次无效放置，
+          // 需要在 handleDrop 内部对其进行拦截。
           // handleDrop
         }
         else {
@@ -1445,7 +1445,7 @@ export default defineComponent({
       }
 
       if (draggingNode.key === finalDropNode.key) {
-        // don't expand when drag on itself
+        // 拖拽自身时不要展开
         resetDragExpandState()
       }
       else {
@@ -1454,7 +1454,7 @@ export default defineComponent({
             if (props.expandOnDragenter) {
               expandDragEnterNode(finalDropNode)
               // Bailout 4
-              // not try to loading
+              // 不尝试加载
               if (
                 !finalDropNode.shallowLoaded
                 && nodeKeyToBeExpanded !== finalDropNode.key
@@ -1465,7 +1465,7 @@ export default defineComponent({
             }
             else {
               // Bailout 5
-              // never expands on drag
+              // 拖拽时绝不展开
               if (!finalDropNode.shallowLoaded) {
                 resetDndState()
                 return
@@ -1510,14 +1510,14 @@ export default defineComponent({
         return
       }
       // Bailout 2
-      // This is a special case to guard since we want ui to show the status
-      // but not to emit a event
+      // 这是一个需要拦截的特殊情况：我们希望界面显示该状态，
+      // 但不触发事件
       if (draggingNode.key === droppingNode.key) {
         return
       }
       // Bailout 3
-      // insert before its next node
-      // insert after its prev node
+      // 插入到下一个节点之前
+      // 插入到上一个节点之后
       if (droppingPosition === 'before') {
         const nextNode = draggingNode.getNext({ includeDisabled: true })
         if (nextNode) {
@@ -1730,7 +1730,7 @@ export default defineComponent({
       fNodes: mergedFNodesRef,
       aip: aipRef,
       selfElRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       virtualListInstRef: virtualListInstRef as unknown,
       scrollbarInstRef: scrollbarInstRef as unknown,
       handleFocusout,

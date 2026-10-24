@@ -240,7 +240,7 @@ export default defineComponent({
       mergedThumbnailUrl: mergedThumbnailUrlRef,
       shouldUseThumbnailUrl: NUpload.shouldUseThumbnailUrlRef,
       renderIcon: NUpload.renderIconRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留 string ref，type 在 render 中未使用
       imageRef: imageRef as unknown,
       handleRemoveOrCancelClick,
       handleDownloadClick,
@@ -251,7 +251,7 @@ export default defineComponent({
   render() {
     const { clsPrefix, mergedTheme, listType, file, renderIcon } = this
 
-    // if there is text list type, show file icon
+    // 如果是 text 列表类型，则显示文件图标
     let icon: VNode
 
     const isImageType = listType === 'image'

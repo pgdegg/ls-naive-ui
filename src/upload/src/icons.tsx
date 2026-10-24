@@ -1,8 +1,8 @@
 import { h } from 'vue'
 
 /**
- * Since image is too large compared with normal icons, we keep it inside upload
- * now.
+ * 由于图片比普通图标体积大，
+ * 我们目前将其直接内置在 upload 组件中。
  */
 
 export function renderImageIcon() {

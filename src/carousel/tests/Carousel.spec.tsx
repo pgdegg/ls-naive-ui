@@ -27,13 +27,13 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await sleep(25)
-    // Because `autoplay` is `true`, `[data-index="${0}"]` `aria-hidden` must not be `false` at the moment
+    // 因为 `autoplay` 为 `true`，此时 `[data-index="${0}"]` 的 `aria-hidden` 不能为 `false`
     expect(wrapper.find(`[data-index="${0}"]`).attributes('aria-hidden')).toBe(
       'true'
     )
 
     await sleep(25)
-    // Because `autoplay` is `true` and `interval` is `50`, both `[data-index="${0}"]` and `[data-index="${0}"]` `aria-hidden` must not be `false` at the moment
+    // 因为 `autoplay` 为 `true` 且 `interval` 为 `50`，此时 `[data-index="${0}"]` 和 `[data-index="${0}"]` 的 `aria-hidden` 都不能为 `false`
     ;([0, 1] as const).forEach((i) => {
       expect(
         wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')

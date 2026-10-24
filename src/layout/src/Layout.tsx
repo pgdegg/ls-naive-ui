@@ -129,7 +129,7 @@ export function createLayoutComponent(isContent: boolean) {
       return {
         mergedClsPrefix: mergedClsPrefixRef,
         scrollableElRef,
-        // reduce dts: string ref only, type unused in render
+        // 精简 dts：仅使用字符串 ref，类型在 render 中未使用
         scrollbarInstRef: scrollbarInstRef as unknown,
         hasSiderStyle,
         mergedTheme: themeRef,

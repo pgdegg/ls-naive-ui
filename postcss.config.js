@@ -1,4 +1,4 @@
-// this file is used by vite, keep it here
+// 此文件由 vite 使用，请保留在这里
 module.exports = {
   plugins: [
     require('autoprefixer'),

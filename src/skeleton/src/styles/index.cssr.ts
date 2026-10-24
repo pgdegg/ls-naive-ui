@@ -1,6 +1,6 @@
 import { c, cB } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-color-start
 // --n-color-end
 // --n-bezier

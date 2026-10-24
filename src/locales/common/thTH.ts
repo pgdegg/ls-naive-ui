@@ -47,7 +47,7 @@ const thTH: NLocale = {
     endDatePlaceholder: 'วันที่สิ้นสุด',
     startDatetimePlaceholder: 'วันที่เริ่มต้นและสิ้นสุด',
     endDatetimePlaceholder: 'วันที่สิ้นสุดและเวลา',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
@@ -64,7 +64,7 @@ const thTH: NLocale = {
     sourceTitle: 'Source',
     targetTitle: 'Target'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',
@@ -114,7 +114,7 @@ const thTH: NLocale = {
     export: 'ส่งออก',
     restore: 'รีเซ็ต'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Image: {
     tipPrevious: 'ก่อนหน้า (←)',
     tipNext: 'ถัดไป (→)',
@@ -124,7 +124,7 @@ const thTH: NLocale = {
     tipZoomIn: 'ซูมเข้า',
     tipDownload: 'ดาวน์โหลด',
     tipClose: 'ปิด (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom to original size'
   },
   Heatmap: {

@@ -65,7 +65,7 @@ import {
 } from './utils'
 
 /**
- * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
+ * 文件状态 ['pending', 'uploading', 'finished', 'removed', 'error']
  */
 function createXhrHandlers(
   inst: UploadInternalInst,
@@ -335,7 +335,7 @@ export const uploadProps = {
   onRetry: Function as PropType<OnRetry>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
   isErrorState: Function as PropType<(xhr: XMLHttpRequest) => boolean>,
-  /** currently not used */
+  /** 当前未使用 */
   onDownload: Function as PropType<UploadOnDownload>,
   customDownload: Function as PropType<UploadOnDownload>,
   defaultUpload: {
@@ -461,7 +461,7 @@ export default defineComponent({
           : null,
         e
       )
-      // May have bug! set to null?
+      // 可能存在 bug！置为 null？
       target.value = ''
     }
     function doUpdateFileList(files: UploadSettledFileInfo[]): void {
@@ -800,7 +800,7 @@ export default defineComponent({
         accept={this.accept}
         multiple={this.mergedMultiple}
         onChange={this.handleFileInputChange}
-        // @ts-expect-error // seems vue-tsc will add the prop, so we can't use expect-error
+        // @ts-expect-error // vue-tsc 似乎会添加该 prop，因此我们无法使用 expect-error
         webkitdirectory={directory || undefined}
         directory={directory || undefined}
       />

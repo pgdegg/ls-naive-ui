@@ -20,7 +20,7 @@ describe('n-split', () => {
     const wrapper = mount(NSplit, {
       props: { defaultSize: 0.3 }
     })
-    // The style uses calc() format: flex: 0 0 calc(30% - 0.9px)
+    // 样式使用 calc() 格式：flex: 0 0 calc(30% - 0.9px)
     expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
       'flex: 0 0 calc(30%'
     )
@@ -31,7 +31,7 @@ describe('n-split', () => {
     const wrapper = mount(NSplit, {
       props: { size: 0.4 }
     })
-    // The style uses calc() format
+    // 样式使用 calc() 格式
     expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
       'flex: 0 0 calc(40%'
     )
@@ -64,11 +64,11 @@ describe('n-split', () => {
         2: () => 'Pane 2'
       }
     })
-    // When not disabled, resize trigger should exist
+    // 未禁用时，resize trigger 应该存在
     expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(true)
 
     await wrapper.setProps({ disabled: true })
-    // When disabled, resize trigger should not exist
+    // 禁用时，resize trigger 不应该存在
     expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(
       false
     )
@@ -164,7 +164,7 @@ describe('n-split', () => {
       }
     })
 
-    // Trigger resize by simulating drag
+    // 通过模拟拖拽触发 resize
     const trigger = wrapper.find('.n-split__resize-trigger-wrapper')
     expect(trigger.exists()).toBe(true)
 

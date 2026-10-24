@@ -31,14 +31,14 @@ describe('n-popover', () => {
   })
 
   ;(['hover', 'click'] as const).forEach((trigger) => {
-    // test trigger node
+    // 测试触发节点
     ;['text', 'div', 'Fragment', TriggerComponent1].forEach((type) => {
       const classNameHash: string = `${trigger}-${typeof type === 'string' ? type : type.name}`
       it(`trigger node ${classNameHash}`, async () => {
-        // hover trigger, click trigger
+        // hover 触发、click 触发
         const triggerEvent = trigger === 'hover' ? 'mouseenter' : 'click'
         const hideTriggerEvent = trigger === 'hover' ? 'mouseleave' : 'click'
-        // text node, element node
+        // 文本节点、元素节点
         const triggerNode
           = type === 'text' ? (
             'star kirby'

@@ -95,7 +95,7 @@ export default defineComponent({
           if (valid) {
             props.onUpdateValue(value)
           }
-          inputValueRef.value = getInputString() // to normalized new value
+          inputValueRef.value = getInputString() // 还原为规范化后的新值
           break
         case 'H':
           unit = normalizeHueUnit(value)
@@ -158,7 +158,7 @@ export default defineComponent({
         value={this.inputValue}
         onUpdateValue={this.handleInputUpdateValue}
         onChange={this.handleInputChange}
-        // add more space for xxx% input
+        // 为 xxx% 的输入框留出更多空间
         style={this.label === 'A' ? 'flex-grow: 1.25;' : ''}
       />
     )

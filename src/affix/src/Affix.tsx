@@ -27,7 +27,7 @@ export const affixProps = {
     type: String as PropType<'fixed' | 'absolute'>,
     default: 'fixed'
   },
-  // deprecated
+  // 已废弃
   offsetTop: {
     type: Number as PropType<number | undefined>,
     validator: () => {
@@ -100,7 +100,7 @@ export default defineComponent({
     const init = (): void => {
       const { target: getScrollTarget, listenTo } = props
       if (getScrollTarget) {
-        // deprecated
+        // 已废弃
         scrollTarget = getScrollTarget()
       }
       else if (listenTo) {

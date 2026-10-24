@@ -86,7 +86,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    // show is used to toggle pending state initialization
+    // show 用于切换 pending 状态的初始化
     show: {
       type: Boolean,
       default: true
@@ -121,7 +121,7 @@ export default defineComponent({
     },
     inlineThemeDisabled: Boolean,
     scrollbarProps: Object as PropType<ScrollbarProps>,
-    // deprecated
+    // 已废弃
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
   setup(props) {
@@ -251,7 +251,7 @@ export default defineComponent({
       if (onScroll)
         onScroll(e)
     }
-    // required, scroller sync need to be triggered manually
+    // 必须的，滚动条的同步需要手动触发
     function handleVirtualListScroll(e: Event): void {
       scrollbarRef.value?.sync()
       doScroll(e)
@@ -281,7 +281,7 @@ export default defineComponent({
         return
       doToggle(tmNode)
     }
-    // keyboard related methods
+    // 键盘相关方法
     function handleKeyUp(e: KeyboardEvent): void {
       if (happensIn(e, 'action'))
         return
@@ -438,7 +438,7 @@ export default defineComponent({
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       virtualListRef: virtualListRef as unknown,
       scrollbarRef: scrollbarRef as unknown,
       itemSize: itemSizeRef,

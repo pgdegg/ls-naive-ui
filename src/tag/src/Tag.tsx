@@ -50,7 +50,7 @@ export const tagProps = {
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
   onUpdateChecked: Function as PropType<(checked: boolean) => void>,
-  // private
+  // 私有
   internalCloseFocusable: {
     type: Boolean,
     default: true
@@ -59,7 +59,7 @@ export const tagProps = {
     type: Boolean,
     default: true
   },
-  // deprecated
+  // 已废弃
   onCheckedChange: Function as PropType<(checked: boolean) => void>
 }
 
@@ -127,7 +127,7 @@ export default defineComponent({
             onUpdateChecked(!checked)
           if (_onUpdateChecked)
             _onUpdateChecked(!checked)
-          // deprecated
+          // 已废弃
           if (onCheckedChange)
             onCheckedChange(!checked)
         }

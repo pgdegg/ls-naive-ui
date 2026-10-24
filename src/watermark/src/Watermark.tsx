@@ -236,9 +236,9 @@ export default defineComponent({
           base64UrlRef.value = canvas.toDataURL()
         }
         else if (!content) {
-          // For example, you are using the input box to customize the watermark
-          // content, but after clearing the input box, the content is empty,
-          // and the canvas content is empty. Clear canvas when content is empty
+          // 例如：使用输入框自定义水印内容，
+          // 但清空输入框后内容为空，
+          // 画布内容也为空，此时需要清空画布
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           base64UrlRef.value = canvas.toDataURL()
         }

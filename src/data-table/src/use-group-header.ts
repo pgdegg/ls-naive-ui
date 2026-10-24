@@ -25,7 +25,7 @@ export interface ColItem {
   column: TableSelectionColumn | TableExpandColumn | TableBaseColumn
   index: number
   /**
-   * The width property is only applied to horizontally virtual scroll table
+   * width 属性仅应用于水平虚拟滚动的表格
    */
   width: number
 }
@@ -71,7 +71,7 @@ function getRowsAndCols(
           ),
           column,
           index: currentLeafIndex++,
-          // The width property is only applied to horizontally virtual scroll table
+          // width 属性仅应用于水平虚拟滚动的表格
           width: column.width === undefined ? 128 : Number(column.width)
         })
         totalRowSpan += 1
@@ -88,8 +88,8 @@ function getRowsAndCols(
     let hideUntilIndex = 0
     columns.forEach((column) => {
       if ('children' in column) {
-        // do not allow colSpan > 1 for non-leaf th
-        // we will execute the calculation logic
+        // 不允许非叶子 th 的 colSpan > 1
+        // 我们将执行计算逻辑
         const cachedCurrentLeafIndex = currentLeafIndex
         const rowItem: RowItem = {
           column,

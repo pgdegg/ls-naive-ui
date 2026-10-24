@@ -38,7 +38,7 @@ const horizontalHoverStyleChildren = [
   ])
 ]
 
-// vars:
+// 变量：
 // --n-color
 // --n-group-text-color
 // --n-bezier

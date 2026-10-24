@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-menu-border-radius
 // --n-menu-box-shadow
 // --n-menu-height
@@ -37,8 +37,8 @@ export default c([
       flex: 1;
       justify-content: center;
     `),
-    // if width not set, cascader select menu's inner scroll area's width is
-    // not correct, which won't change after select menu width is set
+    // 如果不设置宽度，cascader select menu 内部滚动区域的宽度会不正确，
+    // 且在 select menu 宽度设置后也不会改变
     cB('scrollbar', `
       width: 100%;
     `),

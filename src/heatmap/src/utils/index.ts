@@ -18,7 +18,7 @@ import {
 } from 'date-fns'
 import { groupBy } from 'lodash-es'
 
-/** get color by value/maxValue */
+/** 根据 value/maxValue 获取颜色 */
 export function calcColorByValue(
   colors: string[],
   value: number | null | undefined,
@@ -36,13 +36,13 @@ export function calcColorByValue(
 }
 
 /**
- * fill gaps for the given data
+ * 为给定数据填补空缺
  *
- * fill gaps `[firstDate,lastDate]` with value `0`
+ * 用值 `0` 填补 `[firstDate,lastDate]` 之间的空缺
  *
- * fill `[firstCalendarDate,firstDate]` and `[lastDate,lastCalendarDate]` with value `null` by default
+ * 默认用值 `null` 填补 `[firstCalendarDate,firstDate]` 和 `[lastDate,lastCalendarDate]`
  *
- * fill `[firstCalendarDate,firstDate]` with value `0` when `fillCalendarLeading` is `true`
+ * 当 `fillCalendarLeading` 为 `true` 时，用值 `0` 填补 `[firstCalendarDate,firstDate]`
  */
 export function completeDataGaps(
   data: HeatmapData,
@@ -87,7 +87,7 @@ export function completeDataGaps(
 }
 
 /**
- * Create a DayRect object with position information
+ * 创建带位置信息的 DayRect 对象
  */
 export function createDayRect(
   item: HeatmapDataItem,
@@ -116,7 +116,7 @@ export function createDayRect(
 }
 
 /**
- * Create a sparse matrix from items with position information
+ * 根据带位置信息的条目创建稀疏矩阵
  */
 export function createSparseMatrix<T>(
   rows: number,
@@ -137,7 +137,7 @@ export function createSparseMatrix<T>(
 }
 
 /**
- * This creates a 7x53 matrix (typical year layout) filled with loading cells
+ * 创建一个 7x53 的矩阵（典型的年度布局），其中填充 loading 单元格
  */
 export function createLoadingMatrix(
   firstDayOfWeek: HeatmapFirstDayOfWeek
@@ -158,9 +158,9 @@ export function createLoadingMatrix(
 }
 
 /**
- * Generate heatmap data for mock purposes.
- * This function generates random data and the result is not stable.
- * @param range - 'recent' for last year, or a specific year number
+ * 生成用于 mock 的 heatmap 数据。
+ * 此函数生成随机数据，结果不稳定。
+ * @param range - 传入 'recent' 表示最近一年，或传入具体的年份数字
  */
 export function heatmapMockData(year?: 'recent' | number): HeatmapData {
   let start: Date

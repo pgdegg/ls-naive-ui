@@ -13,8 +13,8 @@ console.log(notification)
 const urlToAnalyse = ref()
 
 function analyzeWebsite() {
-  // fetch website content from url
-  // return content
+  // 从 url 获取网站内容
+  // 返回内容
   setTimeout(() => {
     // message.error('oooo')
     notification.error({

@@ -38,7 +38,7 @@ export function self(vars: ThemeCommonVars) {
     fontSizeMedium,
     fontSizeLarge,
     fontSizeHuge,
-    // non-inverted
+    // 非反色
     optionTextColor: textColor2,
     optionTextColorHover: textColor2,
     optionTextColorActive: primaryColor,
@@ -50,7 +50,7 @@ export function self(vars: ThemeCommonVars) {
     optionColorHover: hoverColor,
     optionColorActive: changeColor(primaryColor, { alpha: 0.1 }),
     groupHeaderTextColor: textColor3,
-    // inverted
+    // 反色
     optionTextColorInverted: '#BBB',
     optionTextColorHoverInverted: '#FFF',
     optionTextColorActiveInverted: '#FFF',

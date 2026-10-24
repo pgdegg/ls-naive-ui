@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --action-margin
 export default cB('dynamic-input', {
   width: '100%'

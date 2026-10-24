@@ -74,7 +74,7 @@ export default defineComponent({
     },
     maskHidden: Boolean,
     ...presetProps,
-    // events
+    // 事件
     onClickoutside: {
       type: Function as PropType<(e: MouseEvent) => void>,
       required: true
@@ -236,9 +236,9 @@ export default defineComponent({
       appear: NModal.appearRef,
       isMounted: NModal.isMountedRef,
       mergedClsPrefix: NModal.mergedClsPrefixRef,
-      // reduce dts: avoid expanding component instance types
+      // 精简 dts：避免展开组件实例类型
       bodyRef: bodyRef as unknown,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅为字符串 ref，类型在 render 中未使用
       scrollbarRef: scrollbarRef as unknown,
       draggableClass: draggableClassRef,
       displayed: displayedRef,

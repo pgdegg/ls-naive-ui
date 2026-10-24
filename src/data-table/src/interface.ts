@@ -48,7 +48,7 @@ export const dataTableProps = {
   },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
-  // Use any type as row data to make prop data acceptable
+  // 将行数据设为 any 类型，使传入的 prop 数据可以被接受
   columns: {
     type: Array as PropType<TableColumns<any>>,
     default: () => []
@@ -164,7 +164,7 @@ export const dataTableProps = {
     MaybeArray<OnUpdateExpandedRowKeys>
   >,
   onScroll: Function as PropType<(e: Event) => void>,
-  // deprecated
+  // 已废弃
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   onPageSizeChange: [Function, Array] as PropType<
     PaginationProps['onUpdate:pageSize']
@@ -229,7 +229,7 @@ export interface FilterOption {
 
 export type TmNode = TreeNode<InternalRowData>
 
-// for compat may add null
+// 为兼容可能添加 null
 export type SortOrder = 'ascend' | 'descend' | false
 
 export type Ellipsis = boolean | EllipsisProps
@@ -268,7 +268,7 @@ export type TableColumnGroup<T = InternalRowData> = {
   key: ColumnKey
   children: Array<TableBaseColumn<T>>
 
-  // to suppress type error in table header
+  // 用于抑制表头中的类型报错
   resizable?: boolean
   filterOptions?: never
 } & CommonColumnInfo<T>
@@ -276,7 +276,7 @@ export type TableColumnGroup<T = InternalRowData> = {
 export type TableBaseColumn<T = InternalRowData> = {
   title?: TableColumnTitle
   titleColSpan?: number
-  // for compat maybe default
+  // 为兼容可能使用默认值
   type?: never
   key: ColumnKey
 
@@ -284,7 +284,7 @@ export type TableBaseColumn<T = InternalRowData> = {
 
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
-  sortOrder?: SortOrder // controlled
+  sortOrder?: SortOrder // 受控
   customNextSortOrder?: (order: SortOrder) => SortOrder
 
   resizable?: boolean
@@ -293,8 +293,8 @@ export type TableBaseColumn<T = InternalRowData> = {
 
   filter?: 'default' | boolean | Filter<T>
   filterOptions?: FilterOption[]
-  filterOptionValues?: FilterOptionValue[] | null // controlled
-  filterOptionValue?: FilterOptionValue | null // controlled
+  filterOptionValues?: FilterOptionValue[] | null // 受控
+  filterOptionValue?: FilterOptionValue | null // 受控
   filterMode?: 'or' | 'and'
 
   defaultFilterOptionValues?: FilterOptionValue[] | null
@@ -317,7 +317,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   disabled?: (row: T) => boolean
   options?: DataTableSelectionOptions<T>
 
-  // to suppress type error in utils
+  // 用于抑制 utils 中的类型报错
   sorter?: never
   resizable?: boolean
   filter?: never
@@ -340,7 +340,7 @@ export type RenderExpandIcon = ({
   rowData: RowData
 }) => VNodeChild
 
-// TODO: we should deprecate `index` since it would change after row is expanded
+// TODO: 我们应当废弃 `index`，因为展开行后它会发生变化
 export type Expandable<T = InternalRowData> = (row: T) => boolean
 export interface TableExpandColumn<T = InternalRowData> extends Omit<
   TableSelectionColumn<T>,
@@ -493,7 +493,7 @@ export type OnUpdateCheckedRowKeys = (
   }
 ) => void
 
-// `null` only occurs when clearSorter is called
+// `null` 只会在调用 clearSorter 时出现
 export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
 export type OnUpdateSorterImpl = (
   sortState: SortState | SortState[] | null
@@ -506,10 +506,10 @@ export type OnUpdateFilters = (
 export interface SortState {
   columnKey: ColumnKey
   order: SortOrder
-  // Sorter    => sync data + functional sorter
-  // 'default' => sync data + default sorter
-  // true      => async data
-  // false     => show nothing
+  // Sorter    => 同步数据 + 函数式排序器
+  // 'default' => 同步数据 + 默认排序器
+  // true      => 异步数据
+  // false     => 不显示任何内容
   sorter: Sorter | boolean | 'default'
 }
 
@@ -556,7 +556,7 @@ export interface DataTableInst {
   downloadCsv: (options?: CsvOptionsType) => void
   getFilteredAndSortedData: () => InternalRowData[]
   getCurrentPageData: () => InternalRowData[]
-  /** @deprecated it but just leave it here, it does no harm */
+  /** @deprecated 但先保留在这里，它不会造成影响 */
   clearFilter: () => void
 }
 

@@ -96,15 +96,15 @@ export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
 export type FormItemProps = ExtractPublicPropTypes<typeof formItemProps>
 export const formItemPropKeys = keysOf(formItemProps)
 
-// Wrapped Validator is to be passed into async-validator
-// In their source code, validator can be a asyncValidator.
-// asyncValidator will non-promise return value will be ignored.
-// We need to deal with some type quirks.
+// 包装后的 Validator 会被传入 async-validator
+// 在 async-validator 的源码中，validator 可以是 asyncValidator。
+// asyncValidator 返回非 Promise 的值会被忽略。
+// 我们需要处理一些类型上的怪癖。
 type WrappedValidator = (
   ...args: FormItemRuleValidatorParams
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
-// wrap sync validator
+// 包装同步 validator
 function wrapValidator(
   validator: FormItemRuleValidator,
   async: boolean
@@ -143,8 +143,8 @@ function wrapValidator(
         + '`n-form` or `n-form-item` won\'t be called in this validation.'
       )
       console.error(err)
-      // If returns undefined, async-validator won't trigger callback
-      // so the result will be abandoned, which means not true and not false
+      // 如果返回 undefined，async-validator 不会触发回调
+      // 因此结果会被丢弃，即既不表示 true 也不表示 false
       return undefined
     }
   }
@@ -334,7 +334,7 @@ export default defineComponent({
         }
       }
 
-      // if there are already errors, warning check can be skipped
+      // 如果已经有 error，可以跳过 warning 检查
       if (activeWarningRules.length && !validationResult.errors) {
         const warnings = await new Promise<ValidateError[] | null>(
           (resolve) => {
@@ -373,8 +373,8 @@ export default defineComponent({
     function handleContentInput(): void {
       void internalValidate('input')
     }
-    // Resolve : ()
-    // Reject  : (errors: AsyncValidator.ValidateError[])
+    // resolve（成功回调）: ()
+    // reject  （失败回调）: (errors: AsyncValidator.ValidateError[])
     async function validate(options: FormItemValidateOptions): Promise<{
       warnings: ValidateError[] | undefined
     }>
@@ -390,7 +390,7 @@ export default defineComponent({
     ): Promise<{
       warnings: ValidateError[] | undefined
     }> {
-      /** the following code is for compatibility */
+      /** 以下代码是为了兼容性 */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
       let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
@@ -513,14 +513,14 @@ export default defineComponent({
         )
       : undefined
     const reverseColSpaceRef = computed(() => {
-      // label placement left
-      // require-mark-placement | label align | areas (1fr auto)
-      // left                   | left        | mark text (need reverse)
-      // left                   | right       | mark text (okay)
-      // right                  | left        | mark text (okay)
-      // right                  | right       | mark text (okay)
-      // right-hanging          | left        | text mark (okay)
-      // right-hanging          | right       | text mark (okay)
+      // 标签位置（label placement）为 left
+      // require-mark-placement | 标签对齐 | 区域 (1fr auto)
+      // left                   | left        | 标记文本（需要反转）
+      // left                   | right       | 标记文本（正常）
+      // right                  | left        | 标记文本（正常）
+      // right                  | right       | 标记文本（正常）
+      // right-hanging          | left        | 文本标记（正常）
+      // right-hanging          | right       | 文本标记（正常）
       return (
         labelPlacementRef.value === 'left'
         && mergedRequireMarkPlacementRef.value === 'left'

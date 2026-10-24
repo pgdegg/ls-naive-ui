@@ -90,7 +90,7 @@ export default defineComponent({
       maxHeight: maxHeightRef,
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       headerInstRef: headerInstRef as unknown,
       bodyInstRef: bodyInstRef as unknown,
       bodyStyle: bodyStyleRef,

@@ -49,7 +49,7 @@ export const configProviderProps = {
     type: Boolean,
     default: undefined
   },
-  // deprecated
+  // 已废弃
   as: {
     type: String as PropType<string | undefined>,
     validator: () => {
@@ -83,10 +83,10 @@ export default defineComponent({
     })
     const mergedThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
-      // stop inheriting themeOverrides
+      // 停止继承 themeOverrides
       if (themeOverrides === null)
         return undefined
-      // use inherited themeOverrides
+      // 使用继承的 themeOverrides
       if (themeOverrides === undefined) {
         return NConfigProvider?.mergedThemeOverridesRef.value
       }
@@ -94,11 +94,11 @@ export default defineComponent({
         const inheritedThemeOverrides
           = NConfigProvider?.mergedThemeOverridesRef.value
         if (inheritedThemeOverrides === undefined) {
-          // no inherited, use self overrides
+          // 没有继承的，使用自身的 overrides
           return themeOverrides
         }
         else {
-          // merge overrides
+          // 合并 overrides
           return merge({}, inheritedThemeOverrides, themeOverrides)
         }
       }

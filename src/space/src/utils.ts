@@ -6,19 +6,19 @@ export function ensureSupportFlexGap(): boolean {
   if (!isBrowser)
     return true
   if (supportFlexGap === undefined) {
-    // create flex container with row-gap set
+    // 创建设置了 row-gap 的 flex 容器
     const flex = document.createElement('div')
     flex.style.display = 'flex'
     flex.style.flexDirection = 'column'
     flex.style.rowGap = '1px'
 
-    // create two, elements inside it
+    // 在其中创建两个元素
     flex.appendChild(document.createElement('div'))
     flex.appendChild(document.createElement('div'))
 
-    // append to the DOM (needed to obtain scrollHeight)
+    // 追加到 DOM 中（需要获取 scrollHeight）
     document.body.appendChild(flex)
-    const isSupported = flex.scrollHeight === 1 // flex container should be 1px high from the row-gap
+    const isSupported = flex.scrollHeight === 1 // flex 容器通过 row-gap 保持为 1px 高
     document.body.removeChild(flex)
     return (supportFlexGap = isSupported)
   }

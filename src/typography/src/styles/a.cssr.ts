@@ -1,6 +1,6 @@
 import { cB } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-text-color
 // --n-bezier
 export default cB('a', `

@@ -47,7 +47,7 @@ const koKR: NLocale = {
     endDatePlaceholder: '종료 날짜',
     startDatetimePlaceholder: '시작 날짜 및 시간',
     endDatetimePlaceholder: '종료 날짜 및 시간',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: '시작 월',
     endMonthPlaceholder: '종료 월',
     monthBeforeYear: false,
@@ -64,7 +64,7 @@ const koKR: NLocale = {
     sourceTitle: '원본',
     targetTitle: '타깃'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: '전체 선택',
     unselectAll: '전체 해제',
@@ -123,7 +123,7 @@ const koKR: NLocale = {
     tipZoomIn: '확대',
     tipDownload: '다운로드',
     tipClose: '닫기 (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: '원본 크기로 확대'
   },
   Heatmap: {

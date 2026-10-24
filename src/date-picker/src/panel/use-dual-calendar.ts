@@ -144,7 +144,7 @@ function useDualCalendar(
       : ''
   )
 
-  // derived computed
+  // 派生的 computed
   const selectingPhaseRef = computed(() => {
     if (isSelectingRef.value)
       return 'end'
@@ -306,7 +306,7 @@ function useDualCalendar(
   }
   watch(startCalendarDateTimeRef, handleCalendarChange)
   watch(endCalendarDateTimeRef, handleCalendarChange)
-  // change calendar
+  // 切换日历
   function adjustCalendarTimes(byStartCalendarTime: boolean): void {
     const startTime = startOfMonth(startCalendarDateTimeRef.value)
     const endTime = startOfMonth(endCalendarDateTimeRef.value)
@@ -377,7 +377,7 @@ function useDualCalendar(
     adjustCalendarTimes(false)
   }
 
-  // The function is used on date panel, not the date-picker value validation
+  // 该函数用于日期面板，而非 date-picker 的值校验
   function mergedIsDateDisabled(ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled)
@@ -386,12 +386,12 @@ function useDualCalendar(
       return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
     }
     if (selectingPhaseRef.value === 'start') {
-      // before you really start to select
+      // 在你真正开始选择之前
       return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
     }
     else {
       const { value: memorizedStartDateTime } = memorizedStartDateTimeRef
-      // after you starting to select
+      // 在你开始选择之后
       if (ts < memorizedStartDateTimeRef.value) {
         return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', [
           memorizedStartDateTime,
@@ -420,7 +420,7 @@ function useDualCalendar(
       endCalendarDateTimeRef.value = getTime(startOfMonth(endMoment))
     }
   }
-  // for daterange & datetimerange
+  // 用于 daterange 和 datetimerange
   function handleDateClick(dateItem: DateItem): void {
     if (!isSelectingRef.value) {
       isSelectingRef.value = true
@@ -600,7 +600,7 @@ function useDualCalendar(
     }
   }
   function handleEndDateInput(value: string): void {
-    /** strict check when input */
+    /** 输入时严格校验 */
     const date = strictParse(
       value,
       mergedDateFormatRef.value,
@@ -690,8 +690,8 @@ function useDualCalendar(
     }
   }
   function refreshDisplayDateString(times?: [number, number]): void {
-    // If not selected, display nothing,
-    // else update datetime related string
+    // 如果未选择，则不显示任何内容，
+    // 否则更新与日期时间相关的字符串
     const { value } = props
     if (value === null || !Array.isArray(value)) {
       startDateInput.value = ''
@@ -786,7 +786,7 @@ function useDualCalendar(
       }
     }
   }
-  // only for monthrange
+  // 仅用于 monthrange
   function handleColItemClick(
     dateItem: MonthItem | QuarterItem | YearItem,
     clickType: 'start' | 'end'
@@ -914,14 +914,14 @@ function useDualCalendar(
     handleRangeShortcutClick,
     ...panelCommon,
     ...validation,
-    // reduce dts: string ref only, type unused in render
+    // 减少 dts：仅字符串 ref，render 中未使用类型
     startYearVlRef: startYearVlRef as unknown,
     endYearVlRef: endYearVlRef as unknown,
     startMonthScrollbarRef: startMonthScrollbarRef as unknown,
     endMonthScrollbarRef: endMonthScrollbarRef as unknown,
     startYearScrollbarRef: startYearScrollbarRef as unknown,
     endYearScrollbarRef: endYearScrollbarRef as unknown,
-    // datetimerangeonly
+    // 仅用于 datetimerange
     startDateDisplayString: startDateInput,
     endDateInput: endDateInputRef,
     timePickerSize: panelCommon.timePickerSize,

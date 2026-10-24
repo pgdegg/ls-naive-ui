@@ -63,9 +63,9 @@ const TreeNode = defineComponent({
       })
     })
 
-    // used for drag and drop
+    // 供拖拽使用
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
-    // must be non-reactive
+    // 必须为非响应式
     const contentElRef: { value: HTMLElement | null } = { value: null }
 
     onMounted(() => {
@@ -102,9 +102,9 @@ const TreeNode = defineComponent({
         }
       }
       if (renderSwitcherIconRef.value) {
-        // if renderSwitcherIcon is set, icon dom may be altered before event
-        // bubbles to parent dom, so that target check fails. Call it in next
-        // event loop so that event bubble phase is finishes.
+        // 若设置了 renderSwitcherIcon，事件冒泡到父级 DOM 之前，
+        // 图标 DOM 可能已被改动，导致 target 检查失败。因此放到下一个
+        // 事件循环中调用，等事件冒泡阶段结束后再执行。
         setTimeout(callback, 0)
       }
       else {
@@ -221,7 +221,7 @@ const TreeNode = defineComponent({
     function handleCheck(checked: boolean): void {
       NTree.handleCheck(props.tmNode, checked)
     }
-    // Dnd
+    // 拖拽（DnD）
     function handleDragStart(e: DragEvent): void {
       NTree.handleDragStart({
         event: e,
@@ -238,7 +238,7 @@ const TreeNode = defineComponent({
       })
     }
     function handleDragOver(e: DragEvent): void {
-      e.preventDefault() // if not prevent, drop event won't be fired...
+      e.preventDefault() // 若不阻止默认行为，drop 事件将不会触发……
       NTree.handleDragOver({
         event: e,
         node: props.tmNode
@@ -369,7 +369,7 @@ const TreeNode = defineComponent({
       indent: indentRef,
       checkboxPlacement: checkboxPlacementRef,
       showLine: showLineRef,
-      // reduce dts: avoid expanding component instance types
+      // 精简 dts：避免展开组件实例类型
       contentInstRef: contentInstRef as unknown,
       contentElRef,
       indentNodes,
@@ -405,8 +405,8 @@ const TreeNode = defineComponent({
       nodeProps,
       checkboxPlacement
     } = this
-    // drag start not inside
-    // it need to be append to node itself, not wrapper
+    // 拖拽起始点不在内部
+    // 需要追加到节点自身，而不是外层 wrapper
     const dragEventHandlers
       = draggable && !disabled
         ? {
@@ -417,8 +417,8 @@ const TreeNode = defineComponent({
             onDragover: this.handleDragOver
           }
         : undefined
-    // In non virtual mode, there's no evidence that which element should be
-    // scrolled to, so we need data-key to query the target element.
+    // 在非虚拟滚动模式下，无法判断应该滚动到哪个元素，
+    // 因此需要通过 data-key 来查询目标元素。
     const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
     const checkboxOnRight = checkboxPlacement === 'right'
     const checkboxNode = checkable ? (

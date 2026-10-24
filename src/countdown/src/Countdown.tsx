@@ -46,7 +46,7 @@ export default defineComponent({
     let elapsed = 0
     let finished = false
 
-    // in ms
+    // 单位为毫秒
     const distanceRef = ref(0)
     watchEffect(() => {
       distanceRef.value = props.duration
@@ -108,7 +108,7 @@ export default defineComponent({
       switch (precision) {
         case 3:
         case 2:
-          leftTime = distance % 34 // about 30 fps
+          leftTime = distance % 34 // 约 30 fps
           break
         case 1:
           leftTime = distance % 100

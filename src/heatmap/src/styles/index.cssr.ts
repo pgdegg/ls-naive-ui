@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-font-size
 // --n-font-weight
 // --n-text-color
@@ -8,7 +8,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-x-gap
 // --n-y-gap
 // --n-rect-size
-// --n-rect-color (for individual rect background color)
+// --n-rect-color（用于单个矩形的背景颜色）
 // --n-bezier
 
 export default c([

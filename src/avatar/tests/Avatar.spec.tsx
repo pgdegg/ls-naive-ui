@@ -4,10 +4,10 @@ import { h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { NAvatar } from '../index'
 
-// Please note that resize observer doesn't work in JSDOM, so text transfrom
-// can't be tested.
+// 请注意，resize observer 在 JSDOM 中不生效，
+// 因此无法测试文本变换。
 describe('n-avatar', () => {
-  // mock offsetHeight offsetWidth
+  // 模拟 offsetHeight 和 offsetWidth
   const originalOffsetHeight = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
     'offsetHeight'

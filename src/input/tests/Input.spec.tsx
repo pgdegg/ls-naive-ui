@@ -309,7 +309,7 @@ describe('n-input', () => {
               ref={inputInstRef}
               onBlur={onBlur}
               onFocus={onFocus}
-              // @ts-expect-error onSelect is not an exposed jsx prop
+              // @ts-expect-error onSelect 不是暴露的 jsx 属性
               onSelect={onSelect}
             />
           )
@@ -322,7 +322,7 @@ describe('n-input', () => {
     })
     expect(onBlur).toHaveBeenCalled()
     expect(onFocus).toHaveBeenCalled()
-    // won't call onSelect because it not a NInput prop
+    // 不会调用 onSelect，因为它不是 NInput 的属性
     expect(onSelect).not.toHaveBeenCalled()
     wrapper.unmount()
   })

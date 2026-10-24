@@ -50,7 +50,7 @@ function self(vars: ThemeCommonVars) {
     heightLarge,
     borderRadius,
     fontWeight,
-    // default
+    // 默认
     textColor: textColor2,
     textColorDisabled,
     placeholderColor,
@@ -73,7 +73,7 @@ function self(vars: ThemeCommonVars) {
     arrowColor: iconColor,
     arrowColorDisabled: iconColorDisabled,
     loadingColor: primaryColor,
-    // warning
+    // 警告
     borderWarning: `1px solid ${warningColor}`,
     borderHoverWarning: `1px solid ${warningColorHover}`,
     borderActiveWarning: `1px solid ${warningColor}`,
@@ -87,7 +87,7 @@ function self(vars: ThemeCommonVars) {
     })}`,
     colorActiveWarning: inputColor,
     caretColorWarning: warningColor,
-    // error
+    // 错误
     borderError: `1px solid ${errorColor}`,
     borderHoverError: `1px solid ${errorColorHover}`,
     borderActiveError: `1px solid ${errorColor}`,

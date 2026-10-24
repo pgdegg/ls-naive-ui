@@ -100,8 +100,7 @@ export default defineComponent({
         }
       }
       else {
-        // If you are using SSR, we assume that you are targeting browsers with
-        // recent versions
+        // 如果你在使用 SSR，我们假设你的目标浏览器版本较新
         supportCssMax = true
       }
     }

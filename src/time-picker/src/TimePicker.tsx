@@ -76,7 +76,7 @@ import Panel from './Panel'
 import style from './styles/index.cssr'
 import { findSimilarTime, isTimeInStep } from './utils'
 
-// validate hours, minutes, seconds prop
+// 校验 hours、minutes、seconds prop
 function validateUnits(value: MaybeArray<number>, max: number): boolean {
   if (value === undefined) {
     return true
@@ -168,12 +168,12 @@ export const timePickerProps = {
     validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   },
   use12Hours: Boolean,
-  // private
+  // 私有
   stateful: {
     type: Boolean,
     default: true
   },
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
@@ -504,7 +504,7 @@ export default defineComponent({
         returnFocus: true
       })
     }
-    // clear selected time
+    // 清除已选中的时间
     function clearSelectedValue(): void {
       doUpdateValue(null)
       deriveInputValue(null)
@@ -515,7 +515,7 @@ export default defineComponent({
     function handleInputKeydown(e: KeyboardEvent): void {
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
-        // closePanel will be called in onDeactivated
+        // closePanel 将在 onDeactivated 中被调用
       }
     }
     function handleMenuKeydown(e: KeyboardEvent): void {
@@ -879,7 +879,7 @@ export default defineComponent({
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       inputInstRef: inputInstRef as unknown,
       panelInstRef: panelInstRef as unknown,
       adjustedTo: useAdjustedTo(props),

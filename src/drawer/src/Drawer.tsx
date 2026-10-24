@@ -252,7 +252,7 @@ export default defineComponent({
         call(onUpdateShow, show)
       if (_onUpdateShow)
         call(_onUpdateShow, show)
-      // deprecated
+      // 已废弃
       if (onHide && !show)
         call(onHide, show)
     }

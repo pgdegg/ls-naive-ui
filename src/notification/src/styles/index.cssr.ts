@@ -1,7 +1,7 @@
 import type { CNode } from 'css-render'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-color
 // --n-text-color
 // --n-description-text-color

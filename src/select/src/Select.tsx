@@ -181,7 +181,7 @@ export const selectProps = {
   nodeProps: Function as PropType<NodeProps>,
   ignoreComposition: { type: Boolean, default: true },
   showOnFocus: Boolean,
-  // for jsx
+  // 供 jsx 使用
   onUpdateValue: [Function, Array] as PropType<
     MaybeArray<OnUpdateValue> | undefined
   >,
@@ -218,7 +218,7 @@ export const selectProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  /** deprecated */
+  /** 已废弃 */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
 } as const
@@ -491,7 +491,7 @@ export default defineComponent({
       if (onScroll)
         call(onScroll, e)
     }
-    // remote related methods
+    // remote 相关方法
     function updateMemorizedOptions(): void {
       const { remote, multiple } = props
       if (remote) {
@@ -516,7 +516,7 @@ export default defineComponent({
         }
       }
     }
-    // menu related methods
+    // menu 相关方法
     function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow)
@@ -563,7 +563,7 @@ export default defineComponent({
       }
       else {
         if (!props.filterable) {
-          // already focused, don't need to return focus
+          // 已经聚焦，无需归还焦点
           closeMenu()
         }
         else {
@@ -577,7 +577,7 @@ export default defineComponent({
       }
       focusedRef.value = false
       doBlur(e)
-      // outside select, don't need to return focus
+      // select 外部，无需归还焦点
       closeMenu()
     }
     function handleTriggerFocus(e: FocusEvent): void {
@@ -592,7 +592,7 @@ export default defineComponent({
         return
       focusedRef.value = false
       doBlur(e)
-      // outside select, don't need to return focus
+      // select 外部，无需归还焦点
       closeMenu()
     }
     function handleMenuTabOut(): void {
@@ -606,7 +606,7 @@ export default defineComponent({
             getPreciseEventTarget(e) as Node | null
           )
         ) {
-          // outside select, don't need to return focus
+          // select 外部，无需归还焦点
           closeMenu()
         }
       }
@@ -617,11 +617,11 @@ export default defineComponent({
       if (!Array.isArray(value))
         return []
       if (wrappedFallbackOptionRef.value) {
-        // if option has a fallback, I can't help user to clear some unknown value
+        // 如果 option 有 fallback，就无法帮用户清除未知的值
         return Array.from(value)
       }
       else {
-        // if there's no option fallback, unappeared options are treated as invalid
+        // 如果没有 option fallback，未出现的 option 会被视为无效
         const { remote } = props
         const { value: valOptMap } = valOptMapRef
         if (remote) {
@@ -786,12 +786,12 @@ export default defineComponent({
         e.preventDefault()
       }
     }
-    // scroll events on menu
+    // menu 上的滚动事件
     function handleMenuScroll(e: Event): void {
       doScroll(e)
     }
-    // keyboard events
-    // also for menu keydown
+    // 键盘事件
+    // 同样用于 menu 的 keydown
     function handleKeydown(e: KeyboardEvent): void {
       if (!props.keyboard) {
         e.preventDefault()
@@ -832,7 +832,7 @@ export default defineComponent({
                       Array.isArray(mergedValue)
                       && mergedValue.includes(optionValue as never)
                     ) {
-                      // do nothing
+                      // 什么也不做
                     }
                     else {
                       handleToggleByOption(beingCreatedOption)
@@ -922,7 +922,7 @@ export default defineComponent({
       namespace: namespaceRef,
       treeMate: treeMateRef,
       isMounted: useIsMounted(),
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       triggerRef: triggerRef as unknown,
       menuRef: menuRef as unknown,
       pattern: patternRef,
@@ -931,7 +931,7 @@ export default defineComponent({
       adjustedTo: useAdjustedTo(props),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
-      // reduce dts: string ref only, type unused in render
+      // 减少 dts：仅字符串 ref，类型在 render 中未使用
       followerRef: followerRef as unknown,
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,

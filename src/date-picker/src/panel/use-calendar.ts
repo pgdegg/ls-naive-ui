@@ -211,7 +211,7 @@ function useCalendar(
     if (type === 'quarter')
       return getTime(startOfQuarter(value))
     if (type === 'week') {
-      // refer to makeWeekMatcher
+      // 参考 makeWeekMatcher
       const weekStartsOn = (((firstDayOfWeekRef.value
         ?? localeRef.value.firstDayOfWeek)
       + 1)
@@ -440,8 +440,8 @@ function useCalendar(
     calendarValueRef.value = value
   }
   function deriveDateInputValue(time?: number): void {
-    // If not selected, display nothing,
-    // else update datetime related string
+    // 如果未选择，则不显示任何内容，
+    // 否则更新与日期时间相关的字符串
     if (props.value === null || Array.isArray(props.value)) {
       dateInputValueRef.value = ''
       return
@@ -483,17 +483,17 @@ function useCalendar(
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
     props.onPrevMonth?.()
   }
-  // For month type
+  // 用于 month 类型
   function virtualListContainer(): HTMLElement | null {
     const { value } = yearVlRef
     return value?.listElRef || null
   }
-  // For month type
+  // 用于 month 类型
   function virtualListContent(): HTMLElement | null {
     const { value } = yearVlRef
     return value?.itemsElRef || null
   }
-  // For month type
+  // 用于 month 类型
   function handleVirtualListScroll(): void {
     yearScrollbarRef.value?.sync()
   }
@@ -560,11 +560,11 @@ function useCalendar(
     handleSingleShortcutClick,
     ...validation,
     ...panelCommon,
-    // reduce dts: string ref only, type unused in render
+    // 减少 dts：仅字符串 ref，render 中未使用类型
     monthScrollbarRef: monthScrollbarRef as unknown,
     yearScrollbarRef: yearScrollbarRef as unknown,
     yearVlRef: yearVlRef as unknown,
-    // datetime only
+    // 仅用于 datetime
     handleDateClick,
     handleDateInputBlur,
     handleDateInput,

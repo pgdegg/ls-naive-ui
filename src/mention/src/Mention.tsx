@@ -121,7 +121,7 @@ export const mentionProps = {
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  // private
+  // 私有
   internalDebug: Boolean
 } as const
 
@@ -172,9 +172,9 @@ export default defineComponent({
     const wrapperElRef = ref<HTMLElement | null>(null)
     const partialPatternRef = ref<string>('')
     let cachedPrefix: string | null = null
-    // cached pattern end is for partial pattern
-    // for example @abc|def
-    // end is after `c`
+    // 缓存的 pattern 结束位置用于表示局部 pattern
+    // 例如 @abc|def
+    // 结束位置位于 `c` 之后
     let cachedPartialPatternStart: number | null = null
     let cachedPartialPatternEnd: number | null = null
     const filteredOptionsRef = computed(() => {
@@ -186,12 +186,12 @@ export default defineComponent({
         SelectBaseOption,
         SelectGroupOption,
         SelectIgnoredOption
-        // We need to cast filteredOptionsRef's type since the render function
-        // is not compatible
+        // 我们需要对 filteredOptionsRef 的类型做强制转换，因为 render 函数
+        // 类型并不兼容
         // MentionOption { value: string, render?: (value: string) => VNodeChild }
         // SelectOption { value: string | number, render?: (value: string | number) => VNodeChild }
-        // The 2 types are not compatible since `render`s are not compatible
-        // However we know it works...
+        // 这两种类型并不兼容，因为它们的 `render` 不兼容
+        // 不过我们知道它是可以正常工作的……
       >(filteredOptionsRef.value as any, {
         getKey: (v) => {
           return (v as any).value
@@ -307,11 +307,11 @@ export default defineComponent({
     }
     function handleInputUpdateValue(value: string): void {
       doUpdateValue(value)
-      // Vue update is mirco task.
-      // So DOM must have been done when sync start in marco task.
-      // I can't use nextTick(), Chrome doesn't update scrollLeft of INPUT
-      // element is immediatelly updated. The behavior is wired but that's what
-      // happens.
+      // Vue 的更新是微任务。
+      // 因此当在宏任务中开始同步时，DOM 必定已经渲染完成。
+      // 这里不能使用 nextTick()，Chrome 不会在 INPUT 元素刚更新时立即更新 scrollLeft
+      // 该行为虽然怪异，但事实
+      // 就是如此。
       syncAfterCursorMove()
     }
     function syncAfterCursorMove(): void {
@@ -415,7 +415,7 @@ export default defineComponent({
           + nextMiddlePart.length
           + (alreadySeparated ? 1 : 0)
       void nextTick().then(() => {
-        // input value is updated
+        // input 的值已更新
         inputEl.selectionStart = nextSelectionEnd
         inputEl.selectionEnd = nextSelectionEnd
         deriveShowMenu()
@@ -434,11 +434,11 @@ export default defineComponent({
       mergedStatus: formItem.mergedStatusRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅使用字符串 ref，类型在 render 中未使用
       selectMenuInstRef: selectMenuInstRef as unknown,
       inputInstRef: inputInstRef as unknown,
       cursorRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅使用字符串 ref，类型在 render 中未使用
       followerRef: followerRef as unknown,
       wrapperElRef,
       showMenu: showMenuRef,

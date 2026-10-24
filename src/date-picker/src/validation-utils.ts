@@ -80,7 +80,7 @@ export function uniCalendarValidation(
     // date & datetime
     isValueInvalidRef,
     isDateInvalidRef,
-    // datetime only
+    // 仅 datetime
     isTimeInvalidRef,
     isDateTimeInvalidRef,
     isHourDisabledRef,

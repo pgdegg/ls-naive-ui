@@ -210,7 +210,7 @@ export default defineComponent({
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
-      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      // 如果开启了 lazy 且设置了 intersectionObserverOptions，则使用 IntersectionObserver
       if (props.lazy && props.intersectionObserverOptions) {
         let unobserve: (() => void) | undefined
         const stopWatchHandle = watchEffect(() => {
@@ -317,7 +317,7 @@ export default defineComponent({
           return h('img', {
             ...imgProps,
             loading:
-              // If interseciton observer options is set, do not use native lazy
+              // 如果设置了 interseciton observer options，则不使用原生 lazy 加载
               isImageSupportNativeLazy
               && !this.intersectionObserverOptions
               && lazy

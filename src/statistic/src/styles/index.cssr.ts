@@ -1,6 +1,6 @@
 import { cB, cE } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 // --n-label-font-size
 // --n-label-font-weight

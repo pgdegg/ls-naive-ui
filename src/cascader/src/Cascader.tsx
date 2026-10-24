@@ -186,7 +186,7 @@ export const cascaderProps = {
     }) => VNodeChild
   >,
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  // deprecated
+  // 已废弃
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
@@ -546,11 +546,11 @@ export default defineComponent({
         return placeholder
       return localeRef.value.placeholder
     })
-    // select option related
+    // 选择选项相关
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
     })
-    // init hover key
+    // 初始化 hover key
     watch(
       mergedShowRef,
       (show) => {
@@ -587,7 +587,7 @@ export default defineComponent({
         immediate: true
       }
     )
-    // --- methods
+    // --- 方法
     function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
@@ -646,7 +646,7 @@ export default defineComponent({
       if (props.clearFilterAfterSelect)
         patternRef.value = ''
     }
-    // --- keyboard
+    // --- 键盘
     function move(direction: 'prev' | 'next' | 'child' | 'parent'): void {
       const { value: keyboardKey } = keyboardKeyRef
       const { value: treeMate } = treeMateRef
@@ -833,7 +833,7 @@ export default defineComponent({
     function handleMenuKeydown(e: KeyboardEvent): void {
       handleKeydown(e)
     }
-    // --- search
+    // --- 搜索
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
       if (props.multiple) {
@@ -909,7 +909,7 @@ export default defineComponent({
         doUpdateValue(null, null, null)
       }
     }
-    // sync position
+    // 同步位置
     function syncSelectMenuPosition(): void {
       selectMenuFollowerRef.value?.syncPosition()
     }
@@ -1057,7 +1057,7 @@ export default defineComponent({
       ...exposedMethods,
       handleTriggerResize,
       mergedStatus: mergedStatusRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅字符串 ref，类型在 render 中未使用
       selectMenuFollowerRef: selectMenuFollowerRef as unknown,
       cascaderMenuFollowerRef: cascaderMenuFollowerRef as unknown,
       triggerInstRef: triggerInstRef as unknown,

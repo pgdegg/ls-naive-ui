@@ -50,7 +50,7 @@ const uzUZ: NLocale = {
     startMonthPlaceholder: 'Boshlang`ich oy',
     endMonthPlaceholder: 'Oxirgi oy',
     monthBeforeYear: true,
-    firstDayOfWeek: 1 as 0 | 1 | 2 | 3 | 4 | 5 | 6, // in Uzbekistan monday
+    firstDayOfWeek: 1 as 0 | 1 | 2 | 3 | 4 | 5 | 6, // 在乌兹别克斯坦，星期一是一周的第一天
     today: 'Bugun'
   },
   DataTable: {

@@ -1,7 +1,7 @@
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-color
 // --n-close-color-hover
@@ -100,7 +100,7 @@ export default cB('alert', `
       paddingLeft: 'calc(var(--n-icon-margin-left) + var(--n-icon-size) + var(--n-icon-margin-right))'
     })
   ]),
-  // fix: https://github.com/tusen-ai/naive-ui/issues/4588
+  // 修复: https://github.com/tusen-ai/naive-ui/issues/4588
   cM('right-adjust', [
     cB('alert-body', {
       paddingRight: 'calc(var(--n-close-size) + var(--n-padding) + 2px)'

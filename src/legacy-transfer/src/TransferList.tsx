@@ -77,7 +77,7 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderEmpty: mergedRenderEmptyRef,
-      // reduce dts: string ref only, type unused in render
+      // 精简 dts：仅保留字符串 ref，类型在 render 中未使用
       scrollerInstRef: scrollerInstRef as unknown,
       vlInstRef: vlInstRef as unknown,
       syncVLScroller,

@@ -154,7 +154,7 @@ export default defineComponent({
     }
   },
   render() {
-    // it's ok to expand all prop here since no slots' deps
+    // 此处展开全部 prop 是安全的，因为不存在 slot 依赖
     const {
       type,
       cssVars,

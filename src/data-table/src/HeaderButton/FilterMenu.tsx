@@ -65,7 +65,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedThemeRef, localeRef } = inject(
       dataTableInjectionKey
     )!
-    // to be compared with changed value
+    // 用于与变更后的值进行比较
     // const initialValueRef = ref(props.value)
     const temporalValueRef = ref(props.value)
     const checkboxGroupValueRef = computed(() => {
@@ -91,7 +91,7 @@ export default defineComponent({
     function doChange(
       value: FilterOptionValue | FilterOptionValue[] | null
     ): void {
-      // May need to check if equal
+      // 可能需要检查是否相等
       ;(props.onChange as OnFilterMenuChangeImpl)(value)
     }
     function handleChange(
@@ -104,7 +104,7 @@ export default defineComponent({
         shouldUseArrayInSingleMode(props.column)
         && !Array.isArray(value)
       ) {
-        /** this branch is for compatibility */
+        /** 此分支是为了兼容性 */
         temporalValueRef.value = [value]
       }
       else {

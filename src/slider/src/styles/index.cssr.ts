@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
-// vars:
+// 变量:
 // --n-bezier
 // --n-dot-border
 // --n-dot-border-active

@@ -47,7 +47,7 @@ const plPL: NLocale = {
     endDatePlaceholder: 'Data zakończenia',
     startDatetimePlaceholder: 'Data i godzina rozpoczęcia',
     endDatetimePlaceholder: 'Data i godzina zakończenia',
-    // FIXME: translation needed
+    // FIXME: 需要翻译
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
@@ -64,7 +64,7 @@ const plPL: NLocale = {
     sourceTitle: 'Źródło',
     targetTitle: 'Cel'
   },
-  // TODO: translation
+  // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',
     unselectAll: 'Unselect all',
@@ -123,7 +123,7 @@ const plPL: NLocale = {
     tipZoomIn: 'Pomniejsz',
     tipDownload: 'Pobierz',
     tipClose: 'Zamknij (Esc)',
-    // TODO: translation
+    // TODO: 待翻译
     tipOriginalSize: 'Zoom to original size'
   },
   Heatmap: {

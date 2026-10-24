@@ -4,7 +4,7 @@ import { defineComponent, h, inject } from 'vue'
 import { NCheckbox } from '../../../checkbox'
 import { dataTableInjectionKey } from '../interface'
 
-// Extract the checkbox to avoid useless rendering in table body
+// 抽出 checkbox 以避免表格主体中的无用渲染
 export default defineComponent({
   name: 'DataTableBodyCheckbox',
   props: {

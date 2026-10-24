@@ -1,6 +1,6 @@
 import { c, cB, cM, cNotM } from '../../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-close-border-radius
 // --n-close-color-hover
 // --n-close-color-pressed

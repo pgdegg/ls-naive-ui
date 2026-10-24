@@ -1,7 +1,7 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-bezier
 
 // --n-icon-color-override
@@ -12,11 +12,11 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-panel-box-shadow
 // --n-panel-text-color
 
-// panel header
+// panel 头部
 // --n-panel-header-padding
 // --n-panel-header-divider-color
 
-// panel calendar
+// panel 日历
 // --n-calendar-left-padding
 // --n-calendar-right-padding
 // --n-calendar-title-color-hover
@@ -32,11 +32,11 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-calendar-days-text-color
 // --n-calendar-divider-color
 
-// panel action
+// panel 操作区
 // --n-panel-action-padding
 // --n-panel-action-divider-color
 
-// panel item
+// panel 项
 // --n-item-border-radius
 // --n-item-size
 // --n-item-cell-width
@@ -50,12 +50,12 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-item-text-color-disabled
 // --n-item-text-color-active
 
-// scroll item
+// 滚动项
 // --n-scroll-item-width
 // --n-scroll-item-height
 // --n-scroll-item-border-radius
 
-// panel arrow
+// panel 箭头
 // --n-arrow-size
 // --n-arrow-color
 export default c([

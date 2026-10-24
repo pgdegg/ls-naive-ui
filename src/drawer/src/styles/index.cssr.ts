@@ -5,7 +5,7 @@ import { slideInFromRightTransition } from '../../../_styles/transitions/slide-i
 import { slideInFromTopTransition } from '../../../_styles/transitions/slide-in-from-top'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
-// vars:
+// 变量：
 // --n-line-height
 // --n-color
 // --n-border-radius

@@ -19,14 +19,14 @@ import {
 
 let route = null
 let router = null
-// locale
+// 语言
 let localeNameRef = null
 // useMemo
 let dateLocaleRef = null
-// theme
+// 主题
 const osThemeRef = useOsTheme()
 let themeNameRef = null
-let rawThemeNameRef = null // could be `os-theme`
+let rawThemeNameRef = null // 可能是 `os-theme`
 
 export function initRouter(_router, _route) {
   route = _route
@@ -60,7 +60,7 @@ export function initRouter(_router, _route) {
   })
 }
 
-// display mode
+// 展示模式
 const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
 const displayModeRef = computed({
   get() {
@@ -81,7 +81,7 @@ const themeRef = computed(() => {
   return value === 'dark' ? darkTheme : null
 })
 
-// config provider
+// 配置提供者
 // eslint-disable-next-line node/prefer-global/process
 const configProviderNameRef = ref(process.env.TUSIMPLE ? 'tusimple' : 'default')
 
@@ -91,7 +91,7 @@ const configProviderRef = computed(() => {
     : NConfigProvider
 })
 
-// options
+// 选项
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
     theme: rawThemeNameRef.value,

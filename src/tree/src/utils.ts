@@ -137,11 +137,11 @@ export function filterTree(
       const children = n[childrenField] as TreeOption[] | undefined
       if (children) {
         if (isVisitedTail) {
-          // If it is visited path tail, use origin node
+          // 若为已访问路径的末端，则使用原始节点
           sibs.push(n)
         }
         else {
-          // It it is not visited path tail, use cloned node
+          // 若不是已访问路径的末端，则使用克隆节点
           expandedKeys.push(key)
           const clonedNode = { ...n, [childrenField]: [] }
           sibs.push(clonedNode)

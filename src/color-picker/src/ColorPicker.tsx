@@ -99,7 +99,7 @@ export const colorPickerProps = {
   defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
-    // no hsva by default since browser doesn't support it
+    // 默认不含 hsva，因为浏览器不支持它
     default: () => ['rgb', 'hex', 'hsl']
   },
   placement: {
@@ -247,7 +247,7 @@ export default defineComponent({
       }
     }
 
-    let _h: number, // avoid conflict with render function's h
+    let _h: number, // 避免与 render 函数中的 h 冲突
       s: number,
       l: number,
       v: number,
@@ -461,7 +461,7 @@ export default defineComponent({
 
     function handleComplete(pushStack: boolean = true): void {
       const { value } = mergedValueRef
-      // no value & only hue changes will complete with no value
+      // 没有值且仅色相变化时，会以无值完成
       if (value) {
         const { nTriggerFormChange, nTriggerFormInput } = formItem
         const { onComplete } = props
@@ -530,7 +530,7 @@ export default defineComponent({
 
     watchEffect(() => {
       if (upcomingValue && upcomingValue === mergedValueRef.value) {
-        // let it works in uncontrolled mode
+        // 使其在非受控模式下生效
       }
       else {
         const { value } = hsvaRef
@@ -798,7 +798,7 @@ export default defineComponent({
                       return triggerNode
                     }
                   )
-                }
+                 }
               }}
             </VTarget>,
             <VFollower
