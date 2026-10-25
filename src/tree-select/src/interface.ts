@@ -115,6 +115,7 @@ export type TreeSelectNodeProps = (info: {
 }) => HTMLAttributes & Record<string, unknown>
 
 export interface TreeSelectInst {
+  readonly inputElement: HTMLElement | null
   getCheckedData: () => {
     keys: Array<string | number>
     options: Array<TreeSelectOption | null>

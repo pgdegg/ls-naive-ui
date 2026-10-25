@@ -59,10 +59,6 @@ const mkMK: NLocale = {
     confirm: 'Потврди',
     clear: 'Исчисти'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Извор',
-    targetTitle: 'Одредиште'
-  },
   Transfer: {
     selectAll: 'Избери сè',
     unselectAll: 'Отштиклирај сè',

@@ -2,15 +2,15 @@
 
 # 国际化
 
-Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有组件均为英语。
+Naive-ui 通过使用 `n-config-provider` 调整语言，此定制分支默认使用简体中文（`zhCN`）和中文日期（`dateZhCN`），无需额外配置。
 
 了解更多关于 `n-config-provider` 的信息，参见 [全局化配置](../components/config-provider)。
 
 ## 配置
 
-将 `n-config-provider` 的 `locale` 设为从 naive-ui 导入的 `zhCN` 来设定全局中文。
+将 `n-config-provider` 的 `locale` 设为从 naive-ui 导入的 `zhCN` 来显式设定全局简体中文。
 
-将 `n-config-provider` 的 `date-locale` 设为从 naive-ui 导入的 `dateZhCN` 来设定全局日期中文。
+将 `n-config-provider` 的 `date-locale` 设为从 naive-ui 导入的 `dateZhCN` 来显式设定全局中文日期。
 
 ```html
 <template>
@@ -37,6 +37,8 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
   })
 </script>
 ```
+
+如需英文，请显式设置 `:locale="enUS"` 和 `:date-locale="dateEnUS"`。嵌套配置省略这两个属性时继承上级，设为 `null` 时恢复本分支默认的简体中文。
 
 ## 支持语言
 

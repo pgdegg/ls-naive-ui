@@ -186,3 +186,9 @@ rtl-debug.vue
 | header  | `()` | `header` 内容 |        |
 | icon    | `()` | `icon` 内容   |        |
 | close   | `()` | `close` 内容  | 2.36.0 |
+
+## HIS 定制
+
+`height: string | number` 设置正文高度。useDialog().create 支持 resetOnResize；confirm(options) 返回确认动作 Promise，setConfirmDefaults 设置 provider 内默认值。resolveOnCancel 默认 false；distinguishCancelAndClose 区分 close；异步按钮回调返回 false 阻止关闭。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

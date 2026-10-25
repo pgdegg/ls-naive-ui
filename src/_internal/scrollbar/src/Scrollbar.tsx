@@ -85,6 +85,8 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
 }
 
 const scrollbarProps = {
+  overflowWidth: Number,
+  overflowHeight: Number,
   ...(useTheme.props as ThemeProps<ScrollbarTheme, ScrollbarThemeOverrides>),
   duration: {
     type: Number,
@@ -745,8 +747,14 @@ const Scrollbar = defineComponent({
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
         '--n-scrollbar-border-radius': borderRadius,
-        '--n-scrollbar-width': width,
-        '--n-scrollbar-height': height,
+        '--n-scrollbar-width':
+          props.overflowWidth === undefined
+            ? width
+            : `${props.overflowWidth}px`,
+        '--n-scrollbar-height':
+          props.overflowHeight === undefined
+            ? height
+            : `${props.overflowHeight}px`,
         '--n-scrollbar-rail-top-horizontal-top': railTopHorizontalTop,
         '--n-scrollbar-rail-right-horizontal-top': railRightHorizontalTop,
         '--n-scrollbar-rail-bottom-horizontal-top': railBottomHorizontalTop,

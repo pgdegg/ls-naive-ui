@@ -2,15 +2,15 @@
 
 # Internationalization
 
-Naive-ui provides `n-config-provider` to customize the internationalization. By default, all components are in English.
+Naive-ui provides `n-config-provider` to customize the internationalization. This fork defaults to Simplified Chinese (`zhCN`) and Chinese dates (`dateZhCN`) without extra configuration.
 
 To learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
 
 ## Configure
 
-Set `n-config-provider`'s `locale` prop to `enUS` imported from naive-ui to set Chinese theme inside `n-config-provider`.
+Set `n-config-provider`'s `locale` prop to `enUS` imported from naive-ui to explicitly use English inside `n-config-provider`.
 
-Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-ui to set Chinese theme's date inside `n-config-provider`.
+Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-ui to explicitly use English dates inside `n-config-provider`.
 
 ```html
 <template>
@@ -37,6 +37,8 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
   })
 </script>
 ```
+
+Omitted locale props inherit the parent configuration. Setting `locale` or `date-locale` to `null` restores the Simplified Chinese default.
 
 ## Supported languages
 

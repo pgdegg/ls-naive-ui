@@ -59,10 +59,6 @@ const ruRu: NLocale = {
     confirm: 'Подтвердить',
     clear: 'Очистить'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Источник',
-    targetTitle: 'Назначение'
-  },
   Transfer: {
     selectAll: 'Выбрать все',
     unselectAll: 'Снять все',

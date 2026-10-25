@@ -59,10 +59,6 @@ const neNP: NLocale = {
     confirm: 'पुष्टि गर्नुहोस्',
     clear: 'खाली गर्नुहोस्'
   },
-  LegacyTransfer: {
-    sourceTitle: 'स्रोत',
-    targetTitle: 'लक्ष्य'
-  },
   Transfer: {
     selectAll: 'सबै चयन गर्नुहोस्',
     unselectAll: 'सबै चयन हटाउनुहोस्',

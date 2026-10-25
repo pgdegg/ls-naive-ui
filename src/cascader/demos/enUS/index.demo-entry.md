@@ -6,6 +6,7 @@ Cascader can be used to display and select tree structured data.
 
 ```demo
 single.vue
+primitive-options.vue
 multiple.vue
 size.vue
 single-lazy.vue
@@ -45,7 +46,7 @@ status.vue
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.27.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
-| options | `CascaderOption[]` | `[]` | Options of the cascader. |  |
+| options | `CascaderOption[] \| string[] \| number[]` | `[]` | Cascader options. String and number arrays become root-level leaf options with matching labels and values, deduplicated in first-occurrence order. Numeric values remain numbers. Use object options for nested structures. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Cascader placement. | 2.25.0 |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |  |
@@ -94,3 +95,9 @@ status.vue
 | focus | `() => void` | Focus. | 2.24.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |
+
+## HIS extensions
+
+`filter-value` / `update:filter-value`, `filter-keys`, `on-query-change` extend path search. `default-first-option` defaults to true and controls automatic first-result highlighting. Added readonly/placeholder overrides and inputElement. createCascaderModelAdapter converts object paths and intermediate-field models.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

@@ -1052,7 +1052,7 @@
 
 ### Breaking Changes
 
-- `n-transfer` 的 UI 完全重构，原本的 transfer 组件被重命名为 `n-legacy-transfer`，并将在下个主版本被移除。
+- `n-transfer` 的 UI 完全重构。
 
 ### Fixes
 
@@ -1076,7 +1076,6 @@
 - `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/tusen-ai/naive-ui/issues/3277)
 - `n-tree` 支持 RTL
 - `n-input` 新增 `scrollTo` 方法，关闭 [#3280](https://github.com/tusen-ai/naive-ui/issues/3280)
-- `n-legacy-grid` 支持 RTL
 - `n-statistic` 支持 RTL
 - `n-thing` 支持 RTL
 - `n-transfer` 新增 `render-source-label` 属性
@@ -1719,7 +1718,6 @@
 - 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/tusen-ai/naive-ui/issues/2505)
 - 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/tusen-ai/naive-ui/issues/2504)
 - 修复 `n-button` rtl 支持
-- 修复 `n-form-item-row` 不能调用 `n-form-item` 的方法
 
 ### Feats
 
@@ -1739,7 +1737,6 @@
 
 ### Fixes
 
-- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/tusen-ai/naive-ui/issues/2497)
 - 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#2500](https://github.com/tusen-ai/naive-ui/issues/2500)
 
 ## 2.25.3
@@ -4167,8 +4164,6 @@
 `2020-05-14`
 
 ### Fixes
-
-- 修正 `n-form-item-col` & `n-form-item-row` 的 label 插槽 不显示的问题
 
 ## 1.0.12
 

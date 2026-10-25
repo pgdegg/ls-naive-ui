@@ -14,14 +14,16 @@ export async function replaceDefine(
     for await (const p of walk(dir)) {
       if (p.endsWith('.vue'))
         continue
-      let code = await fs.readFile(p, 'utf-8')
+      const originalCode = await fs.readFile(p, 'utf-8')
+      let code = originalCode
       for (const key of defineKeys) {
         const pattern = patterns[key]
         if (pattern.test(code)) {
           code = code.replace(pattern, defines[key])
         }
       }
-      await fs.writeFile(p, code)
+      if (code !== originalCode)
+        await fs.writeFile(p, code)
     }
   }
 }

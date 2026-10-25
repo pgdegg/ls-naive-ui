@@ -59,10 +59,6 @@ const jaJP: NLocale = {
     confirm: 'OK',
     clear: 'リセット'
   },
-  LegacyTransfer: {
-    sourceTitle: '元',
-    targetTitle: '先'
-  },
   Transfer: {
     selectAll: '全選択',
     unselectAll: '全選択取消',

@@ -10,6 +10,7 @@
 
 ```demo
 basic.vue
+icon.vue
 segment.vue
 card.vue
 flex-label.vue
@@ -117,3 +118,17 @@ rtl-debug.vue
 | ------------------ | ------------ | ---------------- | ------ |
 | scrollToCurrentTab | `() => void` | 滚动到当前标签   | 2.45.0 |
 | syncBarPosition    | `() => void` | 更新指示条的位置 | 2.24.0 |
+
+## HIS 定制 API
+
+| 位置 | API | 类型 / 默认值 | 说明 |
+| --- | --- | --- | --- |
+| Tab / TabPane | icon | string \| VNode \| (() => VNodeChild) / undefined | 标签图标；字符串作为 NIcon symbol，未加载时显示内置占位 |
+| Tab / TabPane 插槽 | icon | () => VNode[] | 优先于 icon 属性，与文字/自定义标签共存 |
+| Tab / TabPane | fixed | 'left' \| 'right' / undefined | 固定标签独立于中间滚动区 |
+| Tabs | left-type / right-type | 'bar' \| 'line' \| 'card' \| 'segment' / undefined | 固定分组类型，默认继承 type |
+| Tabs 插槽 | header-left | () => VNode[] | 标签头左侧内容 |
+| Tabs 插槽 | fixed-top / fixed-left / fixed-right / fixed-bottom | () => VNode[] | 内容区周围的固定区域 |
+| 导出 | tabPaneActiveContextKey | `InjectionKey<TabPaneActiveContext>` | 提供 selfActive、含祖先状态的 active 与嵌套 path |
+
+图标在普通、固定、segment 和独立 Tab 中均生效；不提供图标时不生成图标容器。激活、禁用、关闭与键盘导航沿用原生行为。新增 TabSlots 类型与 TabPaneSlots.icon。完整迁移说明见 [HIS 定制](../docs/his-customization)。

@@ -59,10 +59,6 @@ const heIL: NLocale = {
     confirm: 'אישור',
     clear: 'נקה'
   },
-  LegacyTransfer: {
-    sourceTitle: 'מקור',
-    targetTitle: 'יעד'
-  },
   Transfer: {
     selectAll: 'בחר הכול',
     unselectAll: 'בטל בחירה',

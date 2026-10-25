@@ -59,10 +59,6 @@ const sqAL: NLocale = {
     confirm: 'Konfirmo',
     clear: 'Pastro'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Burimi',
-    targetTitle: 'Destinacioni'
-  },
   Transfer: {
     selectAll: 'Zgjidh të gjitha',
     unselectAll: 'Hiq të gjitha',

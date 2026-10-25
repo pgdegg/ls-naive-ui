@@ -59,10 +59,6 @@ const knIN: NLocale = {
     confirm: 'ದೃಢೀಕರಿಸಿ',
     clear: 'ತೆರವುಗೊಳಿಸಿ'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ಮೂಲ',
-    targetTitle: 'ಗುರಿ'
-  },
   Transfer: {
     selectAll: 'ಎಲ್ಲವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
     unselectAll: 'ಎಲ್ಲ ಆಯ್ಕೆಯನ್ನು ತೆಗೆಯಿರಿ',

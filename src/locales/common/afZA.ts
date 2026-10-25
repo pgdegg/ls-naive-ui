@@ -59,10 +59,6 @@ const afZA: NLocale = {
     confirm: 'Bevestig',
     clear: 'Maak skoon'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Bron',
-    targetTitle: 'Teiken'
-  },
   Transfer: {
     selectAll: 'Kies alles',
     unselectAll: 'Ontkies alles',

@@ -19,6 +19,8 @@ import {
   nextTick,
   normalizeClass,
   normalizeStyle,
+  onBeforeUnmount,
+  onMounted,
   provide,
   ref,
   toRef,
@@ -50,6 +52,7 @@ export default defineComponent({
   inheritAttrs: false,
   slots: Object as SlotsType<ModalSlots>,
   props: {
+    resetOnResize: Boolean,
     show: {
       type: Boolean,
       required: true
@@ -135,6 +138,21 @@ export default defineComponent({
       }
     })
 
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined
+    const handleWindowResize = (): void => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        if (props.resetOnResize && props.show) {
+          dragX.value = null
+          dragY.value = null
+        }
+      }, 200)
+    }
+    onMounted(() => window.addEventListener('resize', handleWindowResize))
+    onBeforeUnmount(() => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleWindowResize)
+    })
     const dialogTitleClassRef = computed(() => {
       return normalizeClass([props.titleClass, draggableClassRef.value])
     })

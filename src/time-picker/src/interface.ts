@@ -54,6 +54,7 @@ export type IsSecondDisabled = (
 ) => boolean
 
 export interface TimePickerInst {
+  readonly inputElement: HTMLElement | null
   focus: () => void
   blur: () => void
 }

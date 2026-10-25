@@ -59,10 +59,6 @@ const zhTW: NLocale = {
     confirm: '確定',
     clear: '重設'
   },
-  LegacyTransfer: {
-    sourceTitle: '來源',
-    targetTitle: '目標'
-  },
   Transfer: {
     selectAll: '全選',
     unselectAll: '取消全選',

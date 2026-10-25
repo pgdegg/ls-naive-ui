@@ -61,10 +61,6 @@ const idID: NLocale = {
     confirm: 'Setuju',
     clear: 'Bersihkan'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Sumber',
-    targetTitle: 'Tujuan'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Pilih semua',

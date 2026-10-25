@@ -59,10 +59,6 @@ const ptBR: NLocale = {
     confirm: 'Confirmar',
     clear: 'Limpar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Origem',
-    targetTitle: 'Destino'
-  },
   Transfer: {
     selectAll: 'Selecionar todos',
     unselectAll: 'Desmarcar todos',

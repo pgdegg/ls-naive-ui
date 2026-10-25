@@ -59,10 +59,6 @@ const nlNL: NLocale = {
     confirm: 'Bevestig',
     clear: 'Wis'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Bron',
-    targetTitle: 'Doel'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

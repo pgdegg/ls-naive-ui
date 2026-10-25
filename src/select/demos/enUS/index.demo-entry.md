@@ -6,6 +6,7 @@ Select something!
 
 ```demo
 basic.vue
+primitive-options.vue
 size.vue
 multiple.vue
 events.vue
@@ -58,7 +59,7 @@ custom-field.vue
 | menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of select menu. | 2.40.0 |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.32.2 |
-| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |
+| options | `Array<SelectOption \| SelectGroupOption> \| string[] \| number[]` | `[]` | Selectable options. String and number arrays become options with matching labels and values, deduplicated in first-occurrence order. Numeric values remain numbers. See SelectOption Properties for object options. |  |
 | placeholder | `string` | `'Please Select' (i18n)` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Option menu's placement. | 2.25.0 |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
@@ -125,3 +126,9 @@ custom-field.vue
 | focusInput | `() => void` | Input focus. | 2.35.0  |
 | blur       | `() => void` | Blur.        | 2.24.2  |
 | blurInput  | `() => void` | Input blur.  | 2.35.0  |
+
+## HIS extensions
+
+`multiple` + `separator` enables separated string models. `update:label` emits labels (a joined string for separated models); there is no label input prop. `filter-value` / `update:filter-value`, `filter-keys`, `on-query-change`, `remote-show-on-input` extend search. Native on-search/filter/virtual scrolling remain. Added readonly/placeholder overrides and inputElement; use createOptionModelAdapter for object models.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

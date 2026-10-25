@@ -59,10 +59,6 @@ const zhCN: NLocale = {
     confirm: '确认',
     clear: '重置'
   },
-  LegacyTransfer: {
-    sourceTitle: '源项',
-    targetTitle: '目标项'
-  },
   Transfer: {
     selectAll: '全选',
     clearAll: '清除',

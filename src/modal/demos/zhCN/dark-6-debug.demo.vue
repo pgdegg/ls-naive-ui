@@ -133,11 +133,11 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
       </n-radio-button>
     </n-radio-group>
     <n-form :model="model" :rules="rules" :size="size" label-placement="top">
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Input" path="inputValue">
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Input" path="inputValue">
           <n-input v-model:value="model.inputValue" placeholder="Input" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Textarea" path="textareaValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Textarea" path="textareaValue">
           <n-input
             v-model:value="model.textareaValue"
             placeholder="Textarea"
@@ -147,17 +147,17 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               maxRows: 5,
             }"
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Select" path="selectValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Select" path="selectValue">
           <n-select
             v-model:value="model.selectValue"
             placeholder="Select"
             :options="generalOptions"
           />
-        </n-form-item-col>
-        <n-form-item-col
+        </n-form-item-gi>
+        <n-form-item-gi
           :span="12"
           label="Multiple Select"
           path="multipleSelectValue"
@@ -168,18 +168,18 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
             :options="generalOptions"
             multiple
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Datetime" path="datetimeValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Datetime" path="datetimeValue">
           <n-date-picker v-model:value="model.datetimeValue" type="datetime" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Switch" path="switchValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Switch" path="switchValue">
           <n-switch v-model:value="model.switchValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi
           :span="12"
           label="Checkbox Group"
           path="checkboxGroupValue"
@@ -197,8 +197,8 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-checkbox>
             </n-space>
           </n-checkbox-group>
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Radio Group" path="radioGroupValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Radio Group" path="radioGroupValue">
           <n-radio-group
             v-model:value="model.radioGroupValue"
             name="radiogroup1"
@@ -215,10 +215,10 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-radio>
             </n-space>
           </n-radio-group>
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi
           :span="12"
           label="Radio Button Group"
           path="radioButtonGroupValue"
@@ -234,50 +234,38 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               Radio Button 3
             </n-radio-button>
           </n-radio-group>
-        </n-form-item-col>
-        <n-form-item-col
-          :span="12"
-          label="Input Number"
-          path="inputNumberValue"
-        >
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Input Number" path="inputNumberValue">
           <n-input-number v-model:value="model.inputNumberValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Time Picker" path="timePickerValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Time Picker" path="timePickerValue">
           <n-time-picker v-model:value="model.timePickerValue" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Slider" path="sliderValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Slider" path="sliderValue">
           <n-slider v-model:value="model.sliderValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="24" label="Transfer" path="transferValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="24" label="Transfer" path="transferValue">
           <n-transfer
             v-model:value="model.transferValue"
             :options="generalOptions"
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
-          :span="12"
-          label="Nested Path"
-          path="nestedValue.path1"
-        >
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Nested Path" path="nestedValue.path1">
           <n-input v-model:value="model.nestedValue.path1" />
-        </n-form-item-col>
-        <n-form-item-col
-          :span="12"
-          label="Nested Path"
-          path="nestedValue.path2"
-        >
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Nested Path" path="nestedValue.path2">
           <n-select
             v-model:value="model.nestedValue.path2"
             :options="generalOptions"
           />
-        </n-form-item-col>
-      </n-row>
+        </n-form-item-gi>
+      </n-grid>
     </n-form>
   </n-popover>
 </template>

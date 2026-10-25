@@ -142,6 +142,7 @@ export const cascaderInjectionKey
   = createInjectionKey<CascaderInjection>('n-cascader')
 
 export interface CascaderInst {
+  readonly inputElement: HTMLElement | null
   focus: () => void
   blur: () => void
   getCheckedData: () => { keys: Key[], options: Array<CascaderOption | null> }

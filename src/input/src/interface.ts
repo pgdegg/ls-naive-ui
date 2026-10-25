@@ -11,6 +11,7 @@ export type OnUpdateValueImpl = (
 ) => void
 
 export interface InputWrappedRef {
+  inputElement: Ref<HTMLInputElement | HTMLTextAreaElement | null>
   wrapperElRef: Ref<HTMLElement | null>
   textareaElRef: Ref<HTMLTextAreaElement | null>
   inputElRef: Ref<HTMLInputElement | null>

@@ -59,10 +59,6 @@ const loLA: NLocale = {
     confirm: 'ຢືນຢັນ',
     clear: 'ລ້າງ'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ແຫຼ່ງຂໍ້ມູນ',
-    targetTitle: 'ເປົ້າໝາຍ'
-  },
   Transfer: {
     selectAll: 'ເລືອກທັງໝົດ',
     unselectAll: 'ຍົກເລີກການເລືອກທັງໝົດ',

@@ -59,10 +59,6 @@ const swKE: NLocale = {
     confirm: 'Thibitisha',
     clear: 'Futa'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Chanzo',
-    targetTitle: 'Lengo'
-  },
   Transfer: {
     selectAll: 'Chagua yote',
     unselectAll: 'Ondoa uteuzi wote',

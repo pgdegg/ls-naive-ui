@@ -59,10 +59,6 @@ const siLK: NLocale = {
     confirm: 'තහවුරු කරන්න',
     clear: 'හිස් කරන්න'
   },
-  LegacyTransfer: {
-    sourceTitle: 'මූලාශ්‍රය',
-    targetTitle: 'ඉලක්කය'
-  },
   Transfer: {
     selectAll: 'සියල්ල තෝරන්න',
     unselectAll: 'සියල්ල තේරීම ඉවත් කරන්න',

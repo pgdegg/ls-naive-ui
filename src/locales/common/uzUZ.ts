@@ -59,10 +59,6 @@ const uzUZ: NLocale = {
     confirm: 'Tasdiqlash',
     clear: 'Tozalash'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Manba',
-    targetTitle: 'Mansub'
-  },
   Transfer: {
     selectAll: 'Barchasini tanlash',
     unselectAll: 'Barchasini bekor qilish',

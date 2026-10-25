@@ -23,6 +23,8 @@ export interface ScrollbarInst {
 }
 
 export const scrollbarProps = {
+  overflowWidth: Number,
+  overflowHeight: Number,
   ...(useTheme.props as ThemeProps<ScrollbarTheme, ScrollbarThemeOverrides>),
   trigger: String as PropType<'none' | 'hover'>,
   xScrollable: Boolean,

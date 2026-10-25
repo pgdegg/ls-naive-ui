@@ -59,10 +59,6 @@ const nnNO: NLocale = {
     confirm: 'Stadfest',
     clear: 'Tøm'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Kjelde',
-    targetTitle: 'Mål'
-  },
   Transfer: {
     selectAll: 'Vel alle',
     unselectAll: 'Fjern alle',

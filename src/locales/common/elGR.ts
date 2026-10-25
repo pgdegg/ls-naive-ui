@@ -59,10 +59,6 @@ const elGR: NLocale = {
     confirm: 'Επιβεβαίωση',
     clear: 'Καθαρισμός'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Πηγή',
-    targetTitle: 'Προορισμός'
-  },
   Transfer: {
     selectAll: 'Επιλογή όλων',
     unselectAll: 'Αποεπιλογή όλων',

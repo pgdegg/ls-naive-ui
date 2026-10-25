@@ -59,10 +59,6 @@ const kaGE: NLocale = {
     confirm: 'დადასტურება',
     clear: 'გასუფთავება'
   },
-  LegacyTransfer: {
-    sourceTitle: 'წყარო',
-    targetTitle: 'დანიშნულება'
-  },
   Transfer: {
     selectAll: 'ყველას არჩევა',
     unselectAll: 'არჩევის მოხსნა',

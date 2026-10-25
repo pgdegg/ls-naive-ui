@@ -118,6 +118,7 @@ const Button = defineComponent({
         }
       })
     }
+    const NButtonGroup = inject(buttonGroupInjectionKey, {})
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
@@ -126,19 +127,18 @@ const Button = defineComponent({
         !props.quaternary
         && !props.tertiary
         && !props.secondary
-        && !props.text
-        && (!props.color || props.ghost || props.dashed)
+        && !(NButtonGroup.text ?? props.text)
+        && (!props.color || (NButtonGroup.ghost ?? props.ghost) || props.dashed)
         && props.bordered
       )
     })
-    const NButtonGroup = inject(buttonGroupInjectionKey, {})
     const {
       inlineThemeDisabled,
       mergedClsPrefixRef,
       mergedRtlRef,
       mergedComponentPropsRef
     } = useConfig(props)
-    const { mergedSizeRef } = useFormItem(
+    const { mergedSizeRef, mergedDisabledRef: formDisabledRef } = useFormItem(
       {},
       {
         defaultSize: 'medium',
@@ -162,8 +162,11 @@ const Button = defineComponent({
         }
       }
     )
+    const mergedDisabledRef = computed(
+      () => props.disabled || formDisabledRef.value || !!NButtonGroup.disabled
+    )
     const mergedFocusableRef = computed(() => {
-      return props.focusable && !props.disabled
+      return props.focusable && !mergedDisabledRef.value
     })
     const handleMousedown = (e: MouseEvent): void => {
       if (!mergedFocusableRef.value) {
@@ -175,7 +178,7 @@ const Button = defineComponent({
       e.preventDefault()
       // 禁用时通常不会走到这里（当 tag 为 button 时）
       // 否则会尽量让它表现得像 button 一样
-      if (props.disabled) {
+      if (mergedDisabledRef.value) {
         return
       }
       if (mergedFocusableRef.value) {
@@ -183,11 +186,11 @@ const Button = defineComponent({
       }
     }
     const handleClick = (e: MouseEvent): void => {
-      if (!props.disabled && !props.loading) {
+      if (!mergedDisabledRef.value && !props.loading) {
         const { onClick } = props
         if (onClick)
           call(onClick, e)
-        if (!props.text) {
+        if (!(NButtonGroup.text ?? props.text)) {
           waveElRef.value?.play()
         }
       }
@@ -245,7 +248,11 @@ const Button = defineComponent({
         tertiary,
         quaternary,
         strong
-      } = props
+      } = {
+        ...props,
+        text: NButtonGroup.text ?? props.text,
+        ghost: NButtonGroup.ghost ?? props.ghost
+      }
       // 字体
       const fontProps = {
         '--n-font-weight': strong ? fontWeightStrong : fontWeight
@@ -551,6 +558,9 @@ const Button = defineComponent({
 
     return {
       selfElRef,
+      disabled: mergedDisabledRef,
+      text: computed(() => NButtonGroup.text ?? props.text),
+      ghost: computed(() => NButtonGroup.ghost ?? props.ghost),
       // 精简 dts：只用字符串 ref，类型在 render 中未使用
       waveElRef: waveElRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,

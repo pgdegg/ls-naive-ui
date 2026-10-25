@@ -191,3 +191,9 @@ export function handler() {
 ```
 
 </n-space>
+
+## HIS extensions
+
+`reset-on-resize` resets drag offsets after a debounced window resize (default false), with listener/timer cleanup.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

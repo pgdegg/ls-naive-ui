@@ -60,10 +60,6 @@ const thTH: NLocale = {
     confirm: 'ยืนยัน',
     clear: 'ล้างข้อมูล'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Source',
-    targetTitle: 'Target'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

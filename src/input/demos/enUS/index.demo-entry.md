@@ -97,3 +97,9 @@ graphemes.vue
 | focus | `() => void` | Focus the input element. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | Scroll To. | 2.32.0 |
 | select | `() => void` | Select the input element. |  |
+
+## HIS extensions
+
+`keeps: string | RegExp | (string | RegExp)[]` retains allowed characters; `ignorekeeps: string | string[]` adds literal characters. Composition is preserved. `focus-delay` delays autofocus with unmount cleanup. Added prepend/append slots, form readonly/placeholder overrides and instance inputElement.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

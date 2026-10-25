@@ -36,6 +36,7 @@ import {
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NBaseIcon } from '../../_internal'
 import { DateIcon, ToIcon } from '../../_internal/icons'
+import { renderInputAddons } from '../../_internal/input-addons'
 import {
   useConfig,
   useFormItem,
@@ -52,6 +53,8 @@ import {
   warn,
   warnOnce
 } from '../../_utils'
+import { parseQuickInput } from '../../composables/quick-input'
+import { useInputElement } from '../../composables/use-input-element'
 import { NInput } from '../../input'
 import { datePickerLight } from '../styles'
 import { datePickerInjectionKey } from './interface'
@@ -72,6 +75,8 @@ import {
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
+  prepend?: () => VNode[]
+  append?: () => VNode[]
   'date-icon'?: () => VNode[]
   footer?: () => VNode[]
   'next-month'?: () => VNode[]
@@ -129,6 +134,9 @@ export default defineComponent({
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)
+    const inputElement = useInputElement<
+      HTMLInputElement | HTMLTextAreaElement
+    >(() => inputInstRef.value?.inputElement)
     const uncontrolledShowRef = ref<boolean>(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
@@ -482,7 +490,58 @@ export default defineComponent({
       //   doUpdateValue(nextValue)
       // }
     }
+    const uniVaidation = uniCalendarValidation(props, pendingValueRef)
+    const dualValidation = dualCalendarValidation(props, pendingValueRef)
     function handleInputKeydown(e: KeyboardEvent): void {
+      if (
+        props.quickInput
+        && e.key === 'Enter'
+        && !e.isComposing
+        && !mergedDisabledRef.value
+        && !formItem.mergedReadonlyRef.value
+        && !props.inputReadonly
+      ) {
+        const target = e.target as HTMLInputElement
+        const inputs
+          = inputInstRef.value?.wrapperElRef?.querySelectorAll('input')
+        const isEnd = isRangeRef.value && target === inputs?.[1]
+        const parsed = parseQuickInput(target.value, {
+          type: props.type.includes('time') ? 'date-time' : 'date',
+          defaultToExtreme: props.defaultToExtreme ?? (isEnd ? 'max' : 'min')
+        })
+        if (!parsed)
+          return
+        const timestamp = parsed.getTime()
+        const previous = pendingValueRef.value
+        const start = Array.isArray(previous) ? previous[0] : timestamp
+        pendingValueRef.value = isRangeRef.value
+          ? isEnd
+            ? [start, timestamp]
+            : [timestamp, timestamp]
+          : timestamp
+        const invalid = isRangeRef.value
+          ? dualValidation.isStartValueInvalidRef.value
+          || (isEnd
+            && (timestamp < start || dualValidation.isEndValueInvalidRef.value))
+          : uniVaidation.isValueInvalidRef.value
+        if (invalid) {
+          pendingValueRef.value = previous
+          return
+        }
+        e.preventDefault()
+        if (isRangeRef.value && !isEnd) {
+          rangeStartInputValueRef.value = format(
+            timestamp,
+            mergedFormatRef.value,
+            dateFnsOptionsRef.value
+          )
+          inputs?.[1]?.focus()
+          return
+        }
+        doUpdateValue(pendingValueRef.value, { doConfirm: true })
+        deriveInputState()
+        closeCalendar({ returnFocus: false })
+      }
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
         // closeCalendar 将在 handleDeactivated 中被调用
@@ -739,8 +798,6 @@ export default defineComponent({
     })
 
     // 使用 pending 值进行校验
-    const uniVaidation = uniCalendarValidation(props, pendingValueRef)
-    const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -763,6 +820,9 @@ export default defineComponent({
     })
 
     const exposedMethods: DatePickerInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       focus: () => {
         inputInstRef.value?.focus()
       },
@@ -915,6 +975,7 @@ export default defineComponent({
 
     return {
       ...exposedMethods,
+      inputElement,
       mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
@@ -1074,7 +1135,7 @@ export default defineComponent({
       onFocus: this.handleInputFocus,
       onBlur: this.handleInputBlur
     }
-    return (
+    const control = (
       <div
         ref="triggerElRef"
         class={[
@@ -1094,6 +1155,11 @@ export default defineComponent({
                   default: () =>
                     this.isRange ? (
                       <NInput
+                        hidePlaceholder={this.hidePlaceholder}
+                        ignoreParentHidePlaceholder={
+                          this.ignoreParentHidePlaceholder
+                        }
+                        ignoreParentReadonly={this.ignoreParentReadonly}
                         ref="inputInstRef"
                         status={this.mergedStatus}
                         value={[this.displayStartTime, this.displayEndTime]}
@@ -1215,5 +1281,6 @@ export default defineComponent({
         </VBinder>
       </div>
     )
+    return renderInputAddons(control, this.$slots, this.mergedSize)
   }
 })

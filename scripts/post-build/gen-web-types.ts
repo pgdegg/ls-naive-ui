@@ -239,10 +239,6 @@ export function genWebTypes(): void {
   } {
     let componentPath = kebabCase(componentName)
     switch (componentPath) {
-      case 'row':
-      case 'col':
-        componentPath = 'legacy-grid'
-        break
       case 'step':
         componentPath = 'steps'
         break

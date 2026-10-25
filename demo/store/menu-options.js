@@ -156,6 +156,11 @@ export function createDocumentationMenuOptions({ lang, theme }) {
       type: 'group',
       children: [
         {
+          en: 'HIS Customizations',
+          zh: 'HIS 定制',
+          path: '/his-customization'
+        },
+        {
           en: 'JSX & TSX',
           zh: 'JSX & TSX',
           path: '/jsx'
@@ -307,6 +312,7 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/typography'
         },
+        { en: 'Text', zh: '文本', enSuffix: true, isNew: true, path: '/text' },
         {
           en: 'Watermark',
           zh: '水印',
@@ -350,6 +356,12 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '颜色选择器',
           enSuffix: true,
           path: '/color-picker'
+        },
+        {
+          en: 'Color Picker Panel',
+          zh: '颜色面板',
+          isNew: true,
+          path: '/color-picker-panel'
         },
         {
           en: 'Checkbox',
@@ -783,12 +795,6 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/layout'
         },
         {
-          en: 'Legacy Grid',
-          zh: '旧版栅格',
-          enSuffix: true,
-          path: '/legacy-grid'
-        },
-        {
           en: 'Grid',
           zh: '栅格',
           enSuffix: true,
@@ -863,19 +869,6 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '全局样式',
           enSuffix: true,
           path: '/global-style'
-        }
-      ]
-    }),
-    appendCounts({
-      zh: '废弃的组件',
-      en: 'Deprecated Components',
-      type: 'group',
-      children: [
-        {
-          en: 'Legacy Transfer',
-          zh: '旧版穿梭框',
-          enSuffix: true,
-          path: '/legacy-transfer'
         }
       ]
     })

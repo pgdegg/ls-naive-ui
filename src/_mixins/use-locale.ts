@@ -3,7 +3,7 @@ import type { NLocale } from '../locales/common/enUS'
 import type { NDateLocale } from '../locales/date/enUS'
 import { computed, inject } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
-import { dateEnUS, enUS } from '../locales'
+import { dateZhCN, zhCN } from '../locales'
 
 export default function useLocale<T extends keyof NLocale>(
   ns: T
@@ -14,10 +14,10 @@ export default function useLocale<T extends keyof NLocale>(
   const { mergedLocaleRef, mergedDateLocaleRef }
     = inject(configProviderInjectionKey, null) || {}
   const localeRef = computed(() => {
-    return mergedLocaleRef?.value?.[ns] ?? enUS[ns]
+    return mergedLocaleRef?.value?.[ns] ?? zhCN[ns]
   })
   const dateLocaleRef = computed(() => {
-    return mergedDateLocaleRef?.value ?? dateEnUS
+    return mergedDateLocaleRef?.value ?? dateZhCN
   })
   return {
     dateLocaleRef,

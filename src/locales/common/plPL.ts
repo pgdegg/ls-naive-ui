@@ -60,10 +60,6 @@ const plPL: NLocale = {
     confirm: 'Potwierdź',
     clear: 'Wyczyść'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Źródło',
-    targetTitle: 'Cel'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

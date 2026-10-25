@@ -59,10 +59,6 @@ const teIN: NLocale = {
     confirm: 'నిర్ధారించండి',
     clear: 'క్లియర్ చేయండి'
   },
-  LegacyTransfer: {
-    sourceTitle: 'మూలం',
-    targetTitle: 'లక్ష్యం'
-  },
   Transfer: {
     selectAll: 'అన్నీ ఎంచుకోండి',
     unselectAll: 'అన్ని ఎంపికలను తీసివేయండి',

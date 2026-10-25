@@ -2,15 +2,21 @@ import type { Component, CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { IconTheme, IconThemeOverrides } from '../styles'
-import { computed, defineComponent, h, mergeProps } from 'vue'
+import type { SpriteIconProps } from './use-sprite-icon'
+import { computed, defineComponent, h, mergeProps, ref } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import { iconLight } from '../styles'
 import style from './styles/index.cssr'
+import { useSpriteIcon } from './use-sprite-icon'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
 export const iconProps = {
+  symbol: String,
+  prefix: [String, Array] as PropType<string | string[]>,
+  symbolVersion: [String, Number] as PropType<string | number>,
+  symbolResolver: Function as PropType<SpriteIconProps['symbolResolver']>,
   ...(useTheme.props as ThemeProps<IconTheme, IconThemeOverrides>),
   depth: [String, Number] as PropType<Depth>,
   size: [Number, String] as PropType<number | string>,
@@ -26,6 +32,8 @@ export const NIcon = defineComponent({
   inheritAttrs: false,
   props: iconProps,
   setup(props) {
+    const elementRef = ref<HTMLElement | null>(null)
+    const sprite = useSpriteIcon(props, elementRef)
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
@@ -64,6 +72,8 @@ export const NIcon = defineComponent({
         )
       : undefined
     return {
+      elementRef,
+      ...sprite,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedStyle: computed(() => {
         const { size, color } = props
@@ -89,6 +99,8 @@ export const NIcon = defineComponent({
     return h(
       'i',
       mergeProps(this.$attrs, {
+        ref: 'elementRef',
+        title: this.symbolElement?.getAttribute('name') ?? this.$attrs.title,
         role: 'img',
         class: [
           `${mergedClsPrefix}-icon`,
@@ -100,7 +112,33 @@ export const NIcon = defineComponent({
         ],
         style: [this.cssVars, this.mergedStyle]
       }),
-      component ? h(component) : this.$slots.default?.()
+      this.symbol
+        ? this.showPlaceholder
+          ? component
+            ? h(component)
+            : (this.$slots.default?.()
+              ?? h(
+                'svg',
+                {
+                  viewBox: '0 0 24 24',
+                  fill: 'none',
+                  stroke: 'currentColor',
+                  'stroke-width': 1.5,
+                  'aria-hidden': 'true',
+                  class: `${mergedClsPrefix}-icon__placeholder`
+                },
+                [
+                  h('rect', { x: 3.5, y: 3.5, width: 17, height: 17, rx: 3 }),
+                  h('circle', { cx: 8.5, cy: 8.5, r: 1.5 }),
+                  h('path', { d: 'm4 17 4.5-4.5 3 3 3.5-5 5 6.5' })
+                ]
+              ))
+          : h('svg', { 'aria-hidden': 'true' }, [
+              h('use', { href: `#${this.symbolElement?.id}` })
+            ])
+        : component
+          ? h(component)
+          : this.$slots.default?.()
     )
   }
 })

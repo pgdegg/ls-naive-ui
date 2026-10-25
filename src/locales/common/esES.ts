@@ -59,10 +59,6 @@ const esES: NLocale = {
     confirm: 'Confirmar',
     clear: 'Borrar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Origen',
-    targetTitle: 'Destino'
-  },
   Transfer: {
     selectAll: 'Seleccionar todo',
     unselectAll: 'Deseleccionar todo',

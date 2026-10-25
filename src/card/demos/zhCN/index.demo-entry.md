@@ -63,3 +63,9 @@ embedded-debug.vue
 | default      | `()` | 卡片内容     |
 | footer       | `()` | 底部内容     |
 | action       | `()` | 操作区域内容 |
+
+## HIS 定制
+
+`disabled` 提供祖先优先的禁用上下文、inert 与遮罩；内部 enabled 卡片或局部 disabled=false 不解除祖先禁用。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

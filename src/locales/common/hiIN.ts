@@ -59,10 +59,6 @@ const hiIN: NLocale = {
     confirm: 'पुष्टि करें',
     clear: 'साफ़ करें'
   },
-  LegacyTransfer: {
-    sourceTitle: 'स्रोत',
-    targetTitle: 'लक्ष्य'
-  },
   Transfer: {
     selectAll: 'सभी चुनें',
     unselectAll: 'सभी चयन हटाएँ',

@@ -17,42 +17,42 @@ const action = ref(true)
 </script>
 
 <template>
-  <n-row>
-    <n-col :span="12">
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="avatar">
         Avatar
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="action">
         Action
       </n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
+    </n-grid-item>
+  </n-grid>
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="header">
         Header
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="headerExtra">
         Header Extra
       </n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
+    </n-grid-item>
+  </n-grid>
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="description">
         Description
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="footer">
         Footer
       </n-checkbox>
-    </n-col>
-  </n-row>
+    </n-grid-item>
+  </n-grid>
   <n-divider />
   <n-thing>
     <template v-if="avatar" #avatar>

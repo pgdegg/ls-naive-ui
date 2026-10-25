@@ -19,11 +19,14 @@ import {
   watchEffect
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
-import { AddIcon, RemoveIcon } from '../../_internal/icons'
+import { AddIcon, ChevronDownIcon, RemoveIcon } from '../../_internal/icons'
+import { renderInputAddons } from '../../_internal/input-addons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, resolveSlot, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { NxButton } from '../../button'
+import { useInputElement } from '../../composables/use-input-element'
 import { NInput } from '../../input'
 import { inputNumberLight } from '../styles'
 import style from './styles/input-number.cssr'
@@ -33,6 +36,7 @@ const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
 
 export const inputNumberProps = {
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<
     InputNumberTheme,
     InputNumberThemeOverrides
@@ -69,7 +73,7 @@ export const inputNumberProps = {
     default: true
   },
   buttonPlacement: {
-    type: String as PropType<'right' | 'both'>,
+    type: String as PropType<'right' | 'both' | 'right-vertical'>,
     default: 'right'
   },
   inputProps: Object as PropType<InputHTMLAttributes>,
@@ -93,6 +97,10 @@ export const inputNumberProps = {
   parse: Function as PropType<(input: string) => number | null>,
   format: Function as PropType<(value: number | null) => string>,
   precision: Number,
+  maxPrecision: Number,
+  onPrecisionExceed: Function as PropType<
+    (value: number, precision: number) => void
+  >,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -106,6 +114,8 @@ export const inputNumberProps = {
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
 
 export interface InputNumberSlots {
+  prepend?: () => VNode[]
+  append?: () => VNode[]
   'add-icon'?: () => VNode[]
   'minus-icon'?: () => VNode[]
   prefix?: () => VNode[]
@@ -143,6 +153,7 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props, {
+      readonlyAsDisabled: false,
       mergedSize: (NFormItem) => {
         const { size } = props
         if (size)
@@ -159,6 +170,9 @@ export default defineComponent({
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // DOM 引用
     const inputInstRef = ref<InputInst | null>(null)
+    const inputElement = useInputElement<
+      HTMLInputElement | HTMLTextAreaElement
+    >(() => inputInstRef.value?.inputElement)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
     const addButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
     // 值
@@ -237,6 +251,21 @@ export default defineComponent({
     }
     deriveDisplayedValueFromValue()
     const doUpdateValue = (value: number | null): void => {
+      if (formItem.mergedReadonlyRef.value || mergedDisabledRef.value)
+        return
+      const limit = props.maxPrecision
+      if (
+        value !== null
+        && limit !== undefined
+        && Number.isInteger(limit)
+        && limit >= 0
+        && limit <= 100
+      ) {
+        const rounded = Number(value.toFixed(limit))
+        if (rounded !== value)
+          props.onPrecisionExceed?.(value, limit)
+        value = rounded
+      }
       const { value: mergedValue } = mergedValueRef
       if (value === mergedValue) {
         deriveDisplayedValueFromValue()
@@ -258,6 +287,23 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
+    watch(
+      [mergedValueRef, () => props.maxPrecision],
+      ([value, limit]) => {
+        if (
+          typeof value === 'number'
+          && limit !== undefined
+          && Number.isInteger(limit)
+          && limit >= 0
+          && limit <= 100
+          && Number(value.toFixed(limit)) !== value
+        ) {
+          doUpdateValue(value)
+          deriveDisplayedValueFromValue()
+        }
+      },
+      { immediate: true }
+    )
     const deriveValueFromDisplayedValue = ({
       offset,
       doUpdateIfValid,
@@ -609,6 +655,9 @@ export default defineComponent({
       deriveDisplayedValueFromValue()
     })
     const exposedMethods: InputNumberInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       focus: () => inputInstRef.value?.focus(),
       blur: () => inputInstRef.value?.blur(),
       select: () => inputInstRef.value?.select()
@@ -620,6 +669,8 @@ export default defineComponent({
     )
     return {
       ...exposedMethods,
+      inputElement,
+      mergedReadonly: formItem.mergedReadonlyRef,
       rtlEnabled: rtlEnabledRef,
       // 减少 dts：仅字符串 ref，类型在 render 中未使用
       inputInstRef: inputInstRef as unknown,
@@ -660,6 +711,14 @@ export default defineComponent({
         } = themeRef.value
         const [r, g, b, a] = rgba(iconColorDisabled)
         return {
+          ...(props.buttonPlacement === 'right-vertical'
+            ? {
+                iconSizeTiny: '12px',
+                iconSizeSmall: '12px',
+                iconSizeMedium: '12px',
+                iconSizeLarge: '12px'
+              }
+            : {}),
           textColorTextDisabled: `rgb(${r}, ${g}, ${b})`,
           opacityDisabled: `${a}`
         }
@@ -672,7 +731,12 @@ export default defineComponent({
       return (
         <NxButton
           text
-          disabled={!this.minusable || this.mergedDisabled || this.readonly}
+          aria-label={
+            this.buttonPlacement === 'right-vertical' ? '-' : undefined
+          }
+          disabled={
+            !this.minusable || this.mergedDisabled || this.mergedReadonly
+          }
           focusable={false}
           theme={this.mergedTheme.peers.Button}
           themeOverrides={this.mergedTheme.peerOverrides.Button}
@@ -686,7 +750,12 @@ export default defineComponent({
               resolveSlot($slots['minus-icon'], () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
-                    default: () => <RemoveIcon />
+                    default: () =>
+                      this.buttonPlacement === 'right-vertical' ? (
+                        <ChevronDownIcon />
+                      ) : (
+                        <RemoveIcon />
+                      )
                   }}
                 </NBaseIcon>
               ])
@@ -698,7 +767,10 @@ export default defineComponent({
       return (
         <NxButton
           text
-          disabled={!this.addable || this.mergedDisabled || this.readonly}
+          aria-label={
+            this.buttonPlacement === 'right-vertical' ? '+' : undefined
+          }
+          disabled={!this.addable || this.mergedDisabled || this.mergedReadonly}
           focusable={false}
           theme={this.mergedTheme.peers.Button}
           themeOverrides={this.mergedTheme.peerOverrides.Button}
@@ -710,9 +782,21 @@ export default defineComponent({
           {{
             icon: () =>
               resolveSlot($slots['add-icon'], () => [
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                <NBaseIcon
+                  clsPrefix={mergedClsPrefix}
+                  style={
+                    this.buttonPlacement === 'right-vertical'
+                      ? { transform: 'rotate(180deg)' }
+                      : undefined
+                  }
+                >
                   {{
-                    default: () => <AddIcon />
+                    default: () =>
+                      this.buttonPlacement === 'right-vertical' ? (
+                        <ChevronDownIcon />
+                      ) : (
+                        <AddIcon />
+                      )
                   }}
                 </NBaseIcon>
               ])
@@ -720,7 +804,7 @@ export default defineComponent({
         </NxButton>
       )
     }
-    return (
+    const control = (
       <div
         class={[
           `${mergedClsPrefix}-input-number`,
@@ -728,6 +812,9 @@ export default defineComponent({
         ]}
       >
         <NInput
+          hidePlaceholder={this.hidePlaceholder}
+          ignoreParentHidePlaceholder={this.ignoreParentHidePlaceholder}
+          ignoreParentReadonly={this.ignoreParentReadonly}
           ref="inputInstRef"
           autofocus={this.autofocus}
           status={this.mergedStatus}
@@ -741,7 +828,7 @@ export default defineComponent({
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
           disabled={this.mergedDisabled}
-          readonly={this.readonly as any}
+          readonly={this.mergedReadonly as any}
           round={this.round}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
@@ -789,15 +876,23 @@ export default defineComponent({
                       }
                       return null
                     }),
-                    this.buttonPlacement === 'right'
-                      ? renderMinusButton()
-                      : null,
-                    renderAddButton()
+                    this.buttonPlacement === 'right-vertical' ? (
+                      <div class={`${mergedClsPrefix}-input-number-stepper`}>
+                        {renderAddButton()}
+                        {renderMinusButton()}
+                      </div>
+                    ) : this.buttonPlacement === 'right' ? (
+                      renderMinusButton()
+                    ) : null,
+                    this.buttonPlacement === 'right-vertical'
+                      ? null
+                      : renderAddButton()
                   ]
                 : $slots.suffix?.()
           }}
         </NInput>
       </div>
     )
+    return renderInputAddons(control, this.$slots, this.mergedSize)
   }
 })

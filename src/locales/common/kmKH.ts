@@ -59,10 +59,6 @@ const kmKH: NLocale = {
     confirm: 'បញ្ជាក់',
     clear: 'កំណត់ឡើងវិញ'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ធាតុប្រភព',
-    targetTitle: 'ធាតុគោលដៅ'
-  },
   Transfer: {
     selectAll: 'ជ្រើសរើសទាំងអស់។',
     clearAll: 'ច្បាស់',

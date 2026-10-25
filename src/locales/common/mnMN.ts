@@ -59,10 +59,6 @@ const mnMN: NLocale = {
     confirm: 'Батлах',
     clear: 'Цэвэрлэх'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Эх сурвалж',
-    targetTitle: 'Очих газар'
-  },
   Transfer: {
     selectAll: 'Бүгдийг сонгох',
     unselectAll: 'Сонголтыг цэвэрлэх',

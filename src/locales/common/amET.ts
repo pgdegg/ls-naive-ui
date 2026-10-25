@@ -59,10 +59,6 @@ const amET: NLocale = {
     confirm: 'አረጋግጥ',
     clear: 'አጽዳ'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ምንጭ',
-    targetTitle: 'መድረሻ'
-  },
   Transfer: {
     selectAll: 'ሁሉንም ምረጥ',
     unselectAll: 'ሁሉንም አንሳ',

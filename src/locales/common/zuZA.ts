@@ -59,10 +59,6 @@ const zuZA: NLocale = {
     confirm: 'Qinisekisa',
     clear: 'Sula'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Umthombo',
-    targetTitle: 'Inhloso'
-  },
   Transfer: {
     selectAll: 'Khetha konke',
     unselectAll: 'Susa ukukhetha konke',

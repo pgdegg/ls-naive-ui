@@ -59,10 +59,6 @@ const caES: NLocale = {
     confirm: 'Confirmar',
     clear: 'Esborrar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Origen',
-    targetTitle: 'Destinació'
-  },
   Transfer: {
     selectAll: 'Seleccionar-ho tot',
     unselectAll: 'Desseleccionar-ho tot',

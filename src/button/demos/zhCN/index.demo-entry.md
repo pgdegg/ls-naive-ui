@@ -78,3 +78,9 @@ debug.vue
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 按钮组的内容 |
+
+## HIS 定制
+
+ButtonGroup 新增 `disabled`、`ghost`、`text`（未设置时不覆盖子按钮）。禁用对所有子按钮生效，外观属性指定时优先于子按钮。不再提供 ignoreGroupDisabled 和 plain / link 别名。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

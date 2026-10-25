@@ -59,10 +59,6 @@ const skSK: NLocale = {
     confirm: 'Potvrdiť',
     clear: 'Vyčistiť'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Zdroj',
-    targetTitle: 'Cieľ'
-  },
   Transfer: {
     selectAll: 'Vybrať všetko',
     unselectAll: 'odznačiť všetko',

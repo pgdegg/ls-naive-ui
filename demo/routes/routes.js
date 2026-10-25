@@ -1,4 +1,9 @@
 export const enDocRoutes = [
+  {
+    path: 'his-customization',
+    component: () =>
+      import('../pages/docs/his-customization/enUS/index.demo-entry.md')
+  },
   // 基础文档
   {
     path: 'introduction',
@@ -92,6 +97,11 @@ export const enDocRoutes = [
 ]
 
 export const zhDocRoutes = [
+  {
+    path: 'his-customization',
+    component: () =>
+      import('../pages/docs/his-customization/zhCN/index.demo-entry.md')
+  },
   // 基础文档
   {
     path: 'introduction',
@@ -368,11 +378,6 @@ export const enComponentRoutes = [
     component: () => import('../../src/transfer/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'legacy-transfer',
-    component: () =>
-      import('../../src/legacy-transfer/demos/enUS/index.demo-entry.md')
-  },
-  {
     path: 'spin',
     component: () => import('../../src/spin/demos/enUS/index.demo-entry.md')
   },
@@ -405,11 +410,6 @@ export const enComponentRoutes = [
     path: 'statistic',
     component: () =>
       import('../../src/statistic/demos/enUS/index.demo-entry.md')
-  },
-  {
-    path: 'legacy-grid',
-    component: () =>
-      import('../../src/legacy-grid/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'grid',
@@ -472,6 +472,10 @@ export const enComponentRoutes = [
       import('../../src/typography/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'text',
+    component: () => import('../../src/text/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'upload',
     component: () => import('../../src/upload/demos/enUS/index.demo-entry.md')
   },
@@ -530,6 +534,11 @@ export const enComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'color-picker-panel',
+    component: () =>
+      import('../../src/color-picker-panel/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'tree-select',
@@ -795,11 +804,6 @@ export const zhComponentRoutes = [
     component: () => import('../../src/transfer/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'legacy-transfer',
-    component: () =>
-      import('../../src/legacy-transfer/demos/zhCN/index.demo-entry.md')
-  },
-  {
     path: 'spin',
     component: () => import('../../src/spin/demos/zhCN/index.demo-entry.md')
   },
@@ -832,11 +836,6 @@ export const zhComponentRoutes = [
     path: 'statistic',
     component: () =>
       import('../../src/statistic/demos/zhCN/index.demo-entry.md')
-  },
-  {
-    path: 'legacy-grid',
-    component: () =>
-      import('../../src/legacy-grid/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'grid',
@@ -899,6 +898,10 @@ export const zhComponentRoutes = [
       import('../../src/typography/demos/zhCN/index.demo-entry.md')
   },
   {
+    path: 'text',
+    component: () => import('../../src/text/demos/zhCN/index.demo-entry.md')
+  },
+  {
     path: 'upload',
     component: () => import('../../src/upload/demos/zhCN/index.demo-entry.md')
   },
@@ -957,6 +960,11 @@ export const zhComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'color-picker-panel',
+    component: () =>
+      import('../../src/color-picker-panel/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'tree-select',
@@ -1074,7 +1082,7 @@ export const routes = [
     redirect: {
       name: 'home',
       params: {
-        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US',
+        lang: 'zh-CN',
         theme: 'os-theme'
       }
     }

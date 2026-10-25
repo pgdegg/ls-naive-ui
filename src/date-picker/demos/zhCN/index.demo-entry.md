@@ -239,3 +239,9 @@ form-debug.vue
 | ----- | ------------ | ---- | ------ |
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | blur  | `() => void` | 失焦 | 2.24.2 |
+
+## HIS 定制
+
+`quick-input` 启用 Enter 快捷解析；`default-to-extreme: "min" | "max"` 控制缺失字段补值。范围首段 Enter 只聚焦末段，完整有效范围才提交，继续遵守禁用日期/时间规则。新增 prepend / append 插槽、只读/提示覆盖及 inputElement。值继续使用时间戳或 formatted-value。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

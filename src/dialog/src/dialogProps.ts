@@ -5,6 +5,7 @@ import type { IconPlacement } from './interface'
 import { keysOf } from '../../_utils'
 
 const dialogProps = {
+  height: [Number, String] as PropType<number | string>,
   icon: Function as PropType<() => VNodeChild>,
   type: {
     type: String as PropType<

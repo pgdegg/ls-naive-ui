@@ -14,13 +14,13 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
   <div ref="containerRef" class="container">
     <div class="padding" />
     <div class="content">
-      <n-row>
-        <n-col :span="12">
+      <n-grid>
+        <n-grid-item :span="12">
           <n-affix :top="120" :trigger-top="60" :listen-to="() => containerRef">
             <n-tag>Affix Trigger Top 60px</n-tag>
           </n-affix>
-        </n-col>
-        <n-col :span="12">
+        </n-grid-item>
+        <n-grid-item :span="12">
           <n-affix
             :bottom="120"
             :trigger-bottom="60"
@@ -28,8 +28,8 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
           >
             <n-tag>Affix Trigger Bottom 60px</n-tag>
           </n-affix>
-        </n-col>
-      </n-row>
+        </n-grid-item>
+      </n-grid>
     </div>
   </div>
 </template>

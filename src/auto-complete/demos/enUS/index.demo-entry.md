@@ -80,3 +80,9 @@ append.vue
 | ----- | ------------ | ------------------------ | ------- |
 | blur  | `() => void` | Blur the input element.  | 2.26.2  |
 | focus | `() => void` | Focus the input element. | 2.26.2  |
+
+## HIS extensions
+
+`fetch-suggestions(query, callback)` supports callbacks or Promise returns. `debounce` defaults to 300ms; `trigger-on-focus` defaults to true; `offset` adjusts the popup. Stale results are ignored; blur/unmount cancel pending tasks. The instance exposes merged loading and inputElement. Supports form readonly/placeholder overrides.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

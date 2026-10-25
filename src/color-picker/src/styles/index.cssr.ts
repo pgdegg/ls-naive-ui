@@ -25,6 +25,7 @@ export default c([
     border-radius: var(--n-border-radius);
     box-shadow: var(--n-box-shadow);
   `, [
+    cM('disabled', { opacity: 0.5, pointerEvents: 'none' }),
     fadeInScaleUpTransition(),
     cB('input', `
       text-align: center;

@@ -44,3 +44,9 @@ icon.vue
 | icon           | `()` | 开关按钮的图标         | 2.25.3 |
 | unchecked      | `()` | 开关关闭时的内容       |        |
 | unchecked-icon | `()` | 开关按钮未选中时的图标 | 2.25.3 |
+
+## HIS 定制
+
+沿用原生 `:round="false"` 显示方形开关，不提供 square 别名。支持 readonly / ignore-parent-readonly，没有占位符属性。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

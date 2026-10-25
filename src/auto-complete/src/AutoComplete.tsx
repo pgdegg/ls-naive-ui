@@ -43,6 +43,7 @@ import {
   computed,
   defineComponent,
   h,
+  onBeforeUnmount,
   ref,
   toRef,
   Transition,
@@ -52,12 +53,14 @@ import {
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   getFirstSlotVNodeWithTypedProps,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { useInputElement } from '../../composables/use-input-element'
 import { NInput } from '../../input'
 import { createTmOptions } from '../../select/src/utils'
 import { autoCompleteLight } from '../styles'
@@ -65,6 +68,16 @@ import style from './styles/index.cssr'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
+  fetchSuggestions: Function as PropType<
+    (
+      query: string,
+      callback: (options: AutoCompleteOptions) => void
+    ) => void | AutoCompleteOptions | Promise<void | AutoCompleteOptions>
+  >,
+  debounce: { type: Number, default: 300 },
+  triggerOnFocus: { type: Boolean, default: true },
+  offset: Number,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<
     AutoCompleteTheme,
     AutoCompleteThemeOverrides
@@ -168,6 +181,43 @@ export default defineComponent({
       }
     })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
+    const suggestions = ref<AutoCompleteOptions>([])
+    const suggestionLoading = ref(false)
+    let fetchSerial = 0
+    let disposed = false
+    let fetchTimer: ReturnType<typeof setTimeout> | undefined
+    const cancelSuggestions = (): void => {
+      ++fetchSerial
+      clearTimeout(fetchTimer)
+      suggestionLoading.value = false
+    }
+    function fetchSuggestions(query: string): void {
+      cancelSuggestions()
+      if (!props.fetchSuggestions || mergedDisabledRef.value)
+        return
+      const serial = fetchSerial
+      suggestionLoading.value = true
+      fetchTimer = setTimeout(async () => {
+        const receive = (options: AutoCompleteOptions): void => {
+          if (disposed || serial !== fetchSerial)
+            return
+          suggestions.value = options
+          suggestionLoading.value = false
+        }
+        try {
+          const options = await props.fetchSuggestions!(query, receive)
+          if (Array.isArray(options))
+            receive(options)
+        }
+        catch {
+          receive([])
+        }
+      }, props.debounce)
+    }
+    onBeforeUnmount(() => {
+      disposed = true
+      cancelSuggestions()
+    })
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
 
@@ -189,14 +239,18 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const selectOptionsRef = computed(() => {
-      return mapAutoCompleteOptionsToSelectOptions(props.options)
+      return mapAutoCompleteOptionsToSelectOptions(
+        props.fetchSuggestions ? suggestions.value : props.options
+      )
     })
     const mergedShowOptionsRef = computed(() => {
       const { getShow } = props
       if (getShow) {
         return getShow(mergedValueRef.value || '')
       }
-      return !!mergedValueRef.value
+      return props.fetchSuggestions && props.triggerOnFocus
+        ? true
+        : !!mergedValueRef.value
     })
     const activeRef = computed(() => {
       return (
@@ -274,6 +328,7 @@ export default defineComponent({
       }
     }
     function select(option: AutoCompleteOption): void {
+      cancelSuggestions()
       if (option?.value !== undefined) {
         doSelect(option.value)
         if (props.clearAfterSelect) {
@@ -293,17 +348,24 @@ export default defineComponent({
       }
     }
     function handleClear(): void {
+      cancelSuggestions()
+      suggestions.value = []
+      canBeActivatedRef.value = false
       doUpdateValue(null)
     }
     function handleFocus(e: FocusEvent): void {
+      if (props.triggerOnFocus)
+        fetchSuggestions(mergedValueRef.value ?? '')
       canBeActivatedRef.value = true
       doFocus(e)
     }
     function handleBlur(e: FocusEvent): void {
+      cancelSuggestions()
       canBeActivatedRef.value = false
       doBlur(e)
     }
     function handleInput(value: string): void {
+      fetchSuggestions(value)
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
@@ -314,6 +376,7 @@ export default defineComponent({
       if (
         !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
+        cancelSuggestions()
         canBeActivatedRef.value = false
       }
     }
@@ -336,7 +399,16 @@ export default defineComponent({
       ? useThemeClass('auto-complete', undefined, cssVarsRef, props)
       : undefined
     const inputInstRef = ref<InputInst | null>(null)
+    const inputElement = useInputElement<
+      HTMLInputElement | HTMLTextAreaElement
+    >(() => inputInstRef.value?.inputElement)
     const exposedMethods: AutoCompleteInst = {
+      get inputElement() {
+        return inputElement.value
+      },
+      get loading() {
+        return props.loading ?? suggestionLoading.value
+      },
       focus: () => {
         inputInstRef.value?.focus()
       },
@@ -345,6 +417,7 @@ export default defineComponent({
       }
     }
     return {
+      inputElement,
       focus: exposedMethods.focus,
       blur: exposedMethods.blur,
       // 精简 dts：仅字符串 ref，类型在 render 中未使用
@@ -365,6 +438,8 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       handleInput,
+      suggestionLoading,
+      loading: computed(() => props.loading ?? suggestionLoading.value),
       handleToggle,
       handleClickOutsideMenu,
       handleCompositionStart,
@@ -423,7 +498,12 @@ export default defineComponent({
                         size={this.mergedSize}
                         disabled={this.mergedDisabled}
                         clearable={this.clearable}
-                        loading={this.loading}
+                        loading={this.loading ?? this.suggestionLoading}
+                        hidePlaceholder={this.hidePlaceholder}
+                        ignoreParentReadonly={this.ignoreParentReadonly}
+                        ignoreParentHidePlaceholder={
+                          this.ignoreParentHidePlaceholder
+                        }
                         inputProps={this.inputProps}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
@@ -478,6 +558,9 @@ export default defineComponent({
                               ]}
                               style={[
                                 menuProps?.style,
+                                this.offset === undefined
+                                  ? undefined
+                                  : { margin: `${this.offset}px 0` },
                                 this.cssVars as CSSProperties
                               ]}
                               treeMate={this.treeMate}

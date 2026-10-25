@@ -6,6 +6,7 @@ export type { DialogProps } from './src/dialogProps'
 export { dialogProviderProps, NDialogProvider } from './src/DialogProvider'
 export type {
   DialogApiInjection as DialogApi,
+  DialogConfirmOptions,
   DialogOptions,
   DialogProviderInst,
   DialogProviderProps,

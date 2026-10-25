@@ -59,10 +59,6 @@ const urPK: NLocale = {
     confirm: 'تصدیق',
     clear: 'صاف کریں'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ماخذ',
-    targetTitle: 'ہدف'
-  },
   Transfer: {
     selectAll: 'سب منتخب کریں',
     unselectAll: 'سب غیر منتخب کریں',

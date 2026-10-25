@@ -145,3 +145,9 @@ interface UploadCustomRequestOptions {
 ### 其他
 
 1. `uploadDownload`，类型为 `(url: string, name: string | undefined): void`，你可以直接从 naive-ui import 此函数
+
+## HIS 定制
+
+`max-size` 按字节限制文件大小，`validate-accept` 启用选择文件的类型校验。`on-validation-error(reason, file)` 返回 size / type 和 File。校验覆盖文件添加与手动 submit，禁用时不发起请求。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

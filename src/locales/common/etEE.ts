@@ -59,10 +59,6 @@ const etEE: NLocale = {
     confirm: 'Kinnita',
     clear: 'Tühjenda'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Kust',
-    targetTitle: 'Kuhu'
-  },
   Transfer: {
     selectAll: 'Vali kõik',
     unselectAll: 'Tühista valik',

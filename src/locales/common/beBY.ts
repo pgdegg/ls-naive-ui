@@ -59,10 +59,6 @@ const beBY: NLocale = {
     confirm: 'Пацвердзіць',
     clear: 'Ачысціць'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Крыніца',
-    targetTitle: 'Прызначэнне'
-  },
   Transfer: {
     selectAll: 'Выбраць усё',
     unselectAll: 'Зняць выбар',

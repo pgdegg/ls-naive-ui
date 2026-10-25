@@ -61,10 +61,6 @@ const esAR: NLocale = {
     confirm: 'Confirmar',
     clear: 'Limpiar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Fuente',
-    targetTitle: 'Objetivo'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

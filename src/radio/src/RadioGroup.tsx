@@ -7,8 +7,10 @@ import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, provide, ref, toRef } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { readonlyControlProps } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, flatten, getSlot, warn } from '../../_utils'
+import { useInputElement } from '../../composables/use-input-element'
 import { radioLight } from '../styles'
 import NRadio from './Radio'
 import style from './styles/radio-group.cssr'
@@ -97,6 +99,7 @@ export interface RadioGroupOption {
 }
 
 export const radioGroupProps = {
+  ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
   name: String,
   options: Array as PropType<RadioGroupOption[]>,
@@ -132,6 +135,7 @@ export default defineComponent({
   name: 'RadioGroup',
   props: radioGroupProps,
   setup(props) {
+    const inputElement = useInputElement()
     const selfElRef = ref<HTMLDivElement | null>(null)
     const {
       mergedSizeRef,
@@ -242,6 +246,7 @@ export default defineComponent({
         )
       : undefined
     return {
+      inputElement,
       selfElRef,
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,

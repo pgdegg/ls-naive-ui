@@ -1,6 +1,11 @@
 export { defaultClsPrefix, default as useConfig } from './use-config'
 export { useThemeClass } from './use-css-vars-class'
 export { default as useFormItem } from './use-form-item'
+export {
+  componentDisabledInjectionKey,
+  formControlProps,
+  readonlyControlProps
+} from './use-form-item'
 export { default as useHljs } from './use-hljs'
 export type { Hljs } from './use-hljs'
 export { default as useLocale } from './use-locale'

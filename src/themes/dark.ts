@@ -44,8 +44,6 @@ import { imageDark } from '../image/styles'
 import { inputNumberDark } from '../input-number/styles'
 import { inputDark } from '../input/styles'
 import { layoutDark } from '../layout/styles'
-import { rowDark } from '../legacy-grid/styles'
-import { legacyTransferDark } from '../legacy-transfer/styles'
 import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
@@ -134,7 +132,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Input: inputDark,
   InputNumber: inputNumberDark,
   InputOtp: inputOtpDark,
-  LegacyTransfer: legacyTransferDark,
   Layout: layoutDark,
   List: listDark,
   LoadingBar: loadingBarDark,
@@ -154,7 +151,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
-  Row: rowDark,
   Scrollbar: scrollbarDark,
   Select: selectDark,
   Skeleton: skeletonDark,

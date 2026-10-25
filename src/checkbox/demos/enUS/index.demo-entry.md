@@ -67,3 +67,9 @@ focus.vue
 | ----- | ------------ | ----------- | ------- |
 | focus | `() => void` | Focus.      | 2.24.2  |
 | blur  | `() => void` | Blur.       | 2.24.2  |
+
+## HIS extensions
+
+`hide-circle` hides the indicator while retaining keyboard access; `cancel-disabled` preserves selected label color without enabling interaction. Group options support visible=false. The instance exposes allChecked, isIndeterminate, toggleAll(checked?) and inputElement; bulk updates preserve locked options and min/max. Supports readonly/ignore-parent-readonly without placeholder props.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

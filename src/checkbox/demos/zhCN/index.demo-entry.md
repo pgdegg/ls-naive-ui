@@ -68,3 +68,9 @@ rtl-debug.vue
 | ----- | ------------ | ---- | ------ |
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | blur  | `() => void` | 失焦 | 2.24.2 |
+
+## HIS 定制
+
+`hide-circle` 隐藏指示器但保留键盘操作；`cancel-disabled` 仅保留已选标签颜色，不解除禁用。CheckboxGroup 的 options 支持 visible=false，实例提供 allChecked、isIndeterminate、toggleAll(checked?) 与 inputElement；全选保留锁定项且遵守 min/max。支持 readonly / ignore-parent-readonly，不提供占位符属性。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

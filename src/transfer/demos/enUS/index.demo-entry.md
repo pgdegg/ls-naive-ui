@@ -2,8 +2,6 @@
 
 A more efficient transfer.
 
-If you want to use original transfer, please refer to [Legacy Transfer](legacy-transfer). Please note that the legacy transfer will be removed in the next major version. It's not recommended to to use it.
-
 ## Demos
 
 ```demo

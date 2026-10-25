@@ -1,7 +1,8 @@
+export { componentDisabledInjectionKey as componentDisabledContextKey } from './_mixins/use-form-item'
+
 export { c, cB, cE, cM, cNotM } from './_utils/cssr'
 
 export * from './components'
-
 export * from './composables'
 
 export { default as create } from './create'
@@ -13,7 +14,7 @@ export * from './styles'
 
 export { NThemeEditor } from './theme-editor'
 // 由组件主题工具组合出的全局主题 createTheme
-export { createTheme, darkTheme, lightTheme } from './themes'
+export { createTheme, darkTheme, hisThemeOverrides, lightTheme } from './themes'
 
 export { default as version } from './version'
 

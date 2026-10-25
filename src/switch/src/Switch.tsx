@@ -9,6 +9,7 @@ import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { readonlyControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   createKey,
@@ -20,6 +21,7 @@ import { switchLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const switchProps = {
+  ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<SwitchTheme, SwitchThemeOverrides>),
   size: String as PropType<SwitchSize>,
   value: {

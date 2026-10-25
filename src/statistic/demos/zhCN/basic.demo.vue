@@ -7,8 +7,8 @@ import { MdSave } from '@vicons/ionicons4'
 </script>
 
 <template>
-  <n-row>
-    <n-col :span="12">
+  <n-grid>
+    <n-grid-item :span="12">
       <n-statistic label="统计数据" :value="99">
         <template #prefix>
           <n-icon>
@@ -19,11 +19,11 @@ import { MdSave } from '@vicons/ionicons4'
           / 100
         </template>
       </n-statistic>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-statistic label="活跃用户">
         1,234,123
       </n-statistic>
-    </n-col>
-  </n-row>
+    </n-grid-item>
+  </n-grid>
 </template>

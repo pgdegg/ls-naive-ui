@@ -59,10 +59,6 @@ const svSE: NLocale = {
     confirm: 'Bekräfta',
     clear: 'Rensa'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Källa',
-    targetTitle: 'Mål'
-  },
   Transfer: {
     selectAll: 'Välj allt',
     unselectAll: 'Välj inget',

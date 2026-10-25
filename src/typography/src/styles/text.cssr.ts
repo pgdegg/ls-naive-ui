@@ -12,6 +12,7 @@ export default cB('text', `
   transition: color .3s var(--n-bezier);
   color: var(--n-text-color);
 `, [
+  cM('truncated', { display: 'inline-block', maxWidth: '100%', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', verticalAlign: 'bottom' }),
   cM('strong', `
     font-weight: var(--n-font-weight-strong);
   `),
@@ -36,5 +37,7 @@ export default cB('text', `
     color: var(--n-code-text-color);
     background-color: var(--n-code-color);
     border: var(--n-code-border);
-  `)
+  `),
+  cM('sized', { fontSize: 'var(--n-text-font-size)' }),
+  cM('clamped', { display: '-webkit-box', maxWidth: '100%', minWidth: 0, overflow: 'hidden', WebkitBoxOrient: 'vertical', whiteSpace: 'normal', overflowWrap: 'anywhere' })
 ])

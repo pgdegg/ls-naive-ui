@@ -42,3 +42,9 @@ size.vue
 | value | `string \| number \| boolean \| null` | `null` | Checked value. |  |
 | value-field | `string` | `'value'` | The field name of option values in `options`. | 2.45.0 |
 | on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |  |
+
+## HIS extensions
+
+`hide-circle` hides the visual indicator while retaining input/keyboard behavior. Radio/RadioGroup expose inputElement and readonly/ignore-parent-readonly. Object models can use createOptionModelAdapter. No placeholder props are added.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

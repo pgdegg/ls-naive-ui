@@ -6,11 +6,15 @@ import type {
   VNodeChild
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { defineComponent, h, inject, watchEffect } from 'vue'
+import { computed, defineComponent, h, inject, provide, watchEffect } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
+import { tabPaneActiveContextKey } from './active-context'
 import { tabsInjectionKey } from './interface'
 
 export const tabPaneProps = {
+  icon: [String, Object, Function] as PropType<
+    string | VNode | (() => VNodeChild)
+  >,
   tab: [String, Number, Object, Function] as PropType<
     string | number | VNode | (() => VNodeChild)
   >,
@@ -19,6 +23,7 @@ export const tabPaneProps = {
     required: true
   },
   disabled: Boolean,
+  fixed: String as PropType<'left' | 'right'>,
   displayDirective: {
     type: String as PropType<'if' | 'show' | 'show:lazy'>,
     default: 'if'
@@ -37,6 +42,7 @@ export const tabPaneProps = {
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export interface TabPaneSlots {
+  icon?: () => VNode[]
   default?: () => VNode[]
   tab?: () => VNode[]
   prefix?: () => VNode[]
@@ -64,6 +70,17 @@ export default defineComponent({
     if (!NTab) {
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
     }
+    const parentActiveContext = inject(tabPaneActiveContextKey, null)
+    const selfActive = computed(() => NTab.valueRef.value === props.name)
+    const active = computed(
+      () => selfActive.value && (parentActiveContext?.active.value ?? true)
+    )
+    const path = computed(() =>
+      parentActiveContext
+        ? `${parentActiveContext.path.value}/${props.name}`
+        : String(props.name)
+    )
+    provide(tabPaneActiveContextKey, { selfActive, active, path })
     return {
       style: NTab.paneStyleRef,
       class: NTab.paneClassRef,

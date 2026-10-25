@@ -72,9 +72,6 @@ export interface FormItemInst {
   internalValidate: FormItemInternalValidate
 }
 
-export type FormItemColRef = FormItemInst
-export type FormItemRowRef = FormItemInst
-
 export interface FormInjection {
   props: FormSetupProps
   maxChildLabelWidthRef: Ref<number | undefined>

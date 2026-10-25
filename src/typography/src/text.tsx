@@ -1,9 +1,9 @@
-import type { CSSProperties, PropType, Ref } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme, TypographyThemeOverrides } from '../styles'
 import { useCompitable } from 'vooks'
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, h, onUpdated, ref, watch } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warn } from '../../_utils'
 import { typographyLight } from '../styles'
@@ -12,6 +12,9 @@ import style from './styles/text.cssr'
 export const textProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   code: Boolean,
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  truncated: Boolean,
+  lineClamp: [String, Number] as PropType<string | number>,
   type: {
     type: String,
     default: 'default'
@@ -37,10 +40,73 @@ export const textProps = {
 
 export type TextProps = ExtractPublicPropTypes<typeof textProps>
 
+export interface TextInst {
+  readonly isTruncated: boolean
+}
+
+export interface TextSlots {
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Text',
   props: textProps,
-  setup(props) {
+  slots: Object as SlotsType<TextSlots>,
+  setup(props, { expose }) {
+    const textRef = ref<HTMLElement | null>(null)
+    const isTruncated = ref(false)
+    const mergedLineClamp = computed(() => {
+      const lines = Number(props.lineClamp)
+      return Number.isInteger(lines) && lines > 0 ? lines : undefined
+    })
+    function measure(): void {
+      const element = textRef.value
+      isTruncated.value = Boolean(
+        element
+        && (mergedLineClamp.value
+          ? element.scrollHeight > element.clientHeight
+          : props.truncated && element.scrollWidth > element.clientWidth)
+      )
+    }
+    watch(
+      [textRef, () => props.truncated, mergedLineClamp],
+      ([element, truncated, lines], _, onCleanup) => {
+        if (!element || (!truncated && !lines)) {
+          isTruncated.value = false
+          return
+        }
+        const resize
+          = typeof ResizeObserver === 'undefined'
+            ? undefined
+            : new ResizeObserver(measure)
+        const mutation
+          = typeof MutationObserver === 'undefined'
+            ? undefined
+            : new MutationObserver(measure)
+        resize?.observe(element)
+        mutation?.observe(element, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        })
+        window.addEventListener('resize', measure)
+        document.fonts?.addEventListener('loadingdone', measure)
+        measure()
+        onCleanup(() => {
+          resize?.disconnect()
+          mutation?.disconnect()
+          window.removeEventListener('resize', measure)
+          document.fonts?.removeEventListener('loadingdone', measure)
+        })
+      },
+      { immediate: true, flush: 'post' }
+    )
+    onUpdated(measure)
+    expose({
+      get isTruncated() {
+        return isTruncated.value
+      }
+    } satisfies TextInst)
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -68,7 +134,7 @@ export default defineComponent({
           [textColorKey as 'textColor']: textColor
         }
       } = themeRef.value
-      return {
+      const cssVars: Record<string, string> = {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-text-color': textColor,
         '--n-font-weight-strong': fontWeightStrong,
@@ -78,16 +144,26 @@ export default defineComponent({
         '--n-code-color': codeColor,
         '--n-code-border': codeBorder
       }
+      if (props.size) {
+        cssVars['--n-text-font-size']
+          = themeRef.value.self[createKey('textFontSize', props.size)]
+      }
+      return cssVars
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'text',
-          computed(() => `${props.type[0]}${props.depth || ''}`),
+          computed(
+            () => `${props.type[0]}${props.depth || ''}${props.size || ''}`
+          ),
           cssVarsRef,
           props
         )
       : undefined
     return {
+      textRef,
+      mergedLineClamp,
+      isTruncated: computed(() => isTruncated.value),
       mergedClsPrefix: mergedClsPrefixRef,
       compitableTag: useCompitable(props, ['as', 'tag']),
       cssVars: inlineThemeDisabled
@@ -108,22 +184,44 @@ export default defineComponent({
         [`${mergedClsPrefix}-text--delete`]: this.delete,
         [`${mergedClsPrefix}-text--strong`]: this.strong,
         [`${mergedClsPrefix}-text--italic`]: this.italic,
-        [`${mergedClsPrefix}-text--underline`]: this.underline
+        [`${mergedClsPrefix}-text--underline`]: this.underline,
+        [`${mergedClsPrefix}-text--sized`]: !!this.size,
+        [`${mergedClsPrefix}-text--truncated`]:
+          this.truncated && !this.mergedLineClamp,
+        [`${mergedClsPrefix}-text--clamped`]: !!this.mergedLineClamp
       }
     ]
     const children = this.$slots.default?.()
     return this.code ? (
-      <code class={textClass} style={this.cssVars as CSSProperties}>
+      <code
+        ref="textRef"
+        class={textClass}
+        style={[
+          this.cssVars as CSSProperties,
+          { '-webkit-line-clamp': this.mergedLineClamp }
+        ]}
+      >
         {this.delete ? <del>{children}</del> : children}
       </code>
     ) : this.delete ? (
-      <del class={textClass} style={this.cssVars as CSSProperties}>
+      <del
+        ref="textRef"
+        class={textClass}
+        style={[
+          this.cssVars as CSSProperties,
+          { '-webkit-line-clamp': this.mergedLineClamp }
+        ]}
+      >
         {children}
       </del>
     ) : (
       h(
         this.compitableTag || 'span',
-        { class: textClass, style: this.cssVars },
+        {
+          ref: 'textRef',
+          class: textClass,
+          style: [this.cssVars, { '-webkit-line-clamp': this.mergedLineClamp }]
+        },
         children
       )
     )

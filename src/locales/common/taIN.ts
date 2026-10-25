@@ -59,10 +59,6 @@ const taIN: NLocale = {
     confirm: 'உறுதிப்படுத்து',
     clear: 'அழி'
   },
-  LegacyTransfer: {
-    sourceTitle: 'மூலம்',
-    targetTitle: 'இலக்கு'
-  },
   Transfer: {
     selectAll: 'அனைத்தையும் தேர்ந்தெடு',
     unselectAll: 'அனைத்துத் தேர்வையும் நீக்கு',

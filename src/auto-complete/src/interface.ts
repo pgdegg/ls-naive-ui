@@ -4,8 +4,10 @@ import type {
 } from '../../select/src/interface'
 
 export type AutoCompleteOption = SelectBaseOption<string, string>
-export interface AutoCompleteGroupOption
-  extends Omit<SelectGroupOption, 'children'> {
+export interface AutoCompleteGroupOption extends Omit<
+  SelectGroupOption,
+  'children'
+> {
   children: AutoCompleteOptions
 }
 
@@ -19,6 +21,8 @@ export type OnSelect = (value: string & number) => void
 export type OnSelectImpl = (value: string | number) => void
 
 export interface AutoCompleteInst {
+  readonly loading: boolean
+  readonly inputElement: HTMLElement | null
   focus: () => void
   blur: () => void
 }

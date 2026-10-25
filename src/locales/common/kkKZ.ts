@@ -59,10 +59,6 @@ const kkKZ: NLocale = {
     confirm: 'Растау',
     clear: 'Тазалау'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Көз',
-    targetTitle: 'Мақсат'
-  },
   Transfer: {
     selectAll: 'Барлығын таңдау',
     unselectAll: 'Таңдауды алу',

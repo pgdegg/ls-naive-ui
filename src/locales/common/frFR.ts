@@ -59,10 +59,6 @@ const frFR: NLocale = {
     confirm: 'Confirmer',
     clear: 'Effacer'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Source',
-    targetTitle: 'Cible'
-  },
   Transfer: {
     selectAll: 'Sélectionner tout',
     unselectAll: 'Désélectionner tout',

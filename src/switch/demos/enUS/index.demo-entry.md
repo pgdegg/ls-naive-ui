@@ -44,3 +44,9 @@ icon.vue
 | icon | `()` | Icon of switch button. | 2.25.3 |
 | unchecked | `()` | Content when the switch is unchecked. |  |
 | unchecked-icon | `()` | Icon of switch button when unchecked. | 2.25.3 |
+
+## HIS extensions
+
+Use native `:round="false"` for square switches; no square alias is added. Supports readonly/ignore-parent-readonly without placeholder props.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

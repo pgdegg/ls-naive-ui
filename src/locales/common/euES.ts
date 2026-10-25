@@ -59,10 +59,6 @@ const euES: NLocale = {
     confirm: 'Berretsi',
     clear: 'Garbitu'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Iturburua',
-    targetTitle: 'Helburua'
-  },
   Transfer: {
     selectAll: 'Hautatu dena',
     unselectAll: 'Desautatu dena',

@@ -58,7 +58,6 @@ export {
 } from './input-otp/styles'
 export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
 export { layoutDark } from './layout/styles'
-export { rowRtl as unstableRowRtl } from './legacy-grid/styles'
 export { listDark, listRtl as unstableListRtl } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'
 export { logDark } from './log/styles'

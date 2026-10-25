@@ -51,10 +51,8 @@ declare module 'vue' {
     NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
     NForm: (typeof import('naive-ui'))['NForm']
     NFormItem: (typeof import('naive-ui'))['NFormItem']
-    NFormItemCol: (typeof import('naive-ui'))['NFormItemCol']
     NFormItemGi: (typeof import('naive-ui'))['NFormItemGi']
     NFormItemGridItem: (typeof import('naive-ui'))['NFormItemGridItem']
-    NFormItemRow: (typeof import('naive-ui'))['NFormItemRow']
     NGlobalStyle: (typeof import('naive-ui'))['NGlobalStyle']
     NGradientText: (typeof import('naive-ui'))['NGradientText']
     NGi: (typeof import('naive-ui'))['NGi']
@@ -80,9 +78,6 @@ declare module 'vue' {
     NLayoutFooter: (typeof import('naive-ui'))['NLayoutFooter']
     NLayoutHeader: (typeof import('naive-ui'))['NLayoutHeader']
     NLayoutSider: (typeof import('naive-ui'))['NLayoutSider']
-    NCol: (typeof import('naive-ui'))['NCol']
-    NRow: (typeof import('naive-ui'))['NRow']
-    NLegacyTransfer: (typeof import('naive-ui'))['NLegacyTransfer']
     NList: (typeof import('naive-ui'))['NList']
     NListItem: (typeof import('naive-ui'))['NListItem']
     NLoadingBarProvider: (typeof import('naive-ui'))['NLoadingBarProvider']
@@ -157,6 +152,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
+    NColorPickerPanel: (typeof import('naive-ui'))['NColorPickerPanel']
   }
 }
 export {}

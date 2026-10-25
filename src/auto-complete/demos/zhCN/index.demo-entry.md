@@ -82,3 +82,9 @@ append.vue
 | ----- | ------------ | ---------------- | ------ |
 | blur  | `() => void` | Blur input 元素  | 2.26.2 |
 | focus | `() => void` | Focus input 元素 | 2.26.2 |
+
+## HIS 定制
+
+`fetch-suggestions(query, callback)` 可回调或返回 Promise，`debounce` 默认 300ms，`trigger-on-focus` 默认 true，`offset` 调整弹层。旧请求结果忽略，失焦/卸载取消待执行任务。实例 loading 提供合并加载状态，inputElement 提供输入元素。支持表单只读与提示覆盖。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

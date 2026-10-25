@@ -59,10 +59,6 @@ const ltLT: NLocale = {
     confirm: 'Patvirtinti',
     clear: 'Išvalyti'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Šaltinis',
-    targetTitle: 'Tikslas'
-  },
   Transfer: {
     selectAll: 'Pasirinkti viską',
     unselectAll: 'Panaikinti visą žymėjimą',

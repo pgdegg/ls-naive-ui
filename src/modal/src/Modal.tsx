@@ -72,6 +72,7 @@ export const modalProps = {
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
   draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
+  resetOnResize: Boolean,
   // 事件
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -360,6 +361,7 @@ export default defineComponent({
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
                   draggable={this.draggable}
+                  resetOnResize={this.resetOnResize}
                   blockScroll={this.blockScroll}
                   maskHidden={!showMask}
                   {...this.presetProps}

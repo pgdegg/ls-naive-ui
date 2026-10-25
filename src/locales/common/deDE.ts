@@ -59,10 +59,6 @@ const deDE: NLocale = {
     confirm: 'Bestätigen',
     clear: 'Löschen'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Quelle',
-    targetTitle: 'Ziel'
-  },
   Transfer: {
     selectAll: 'Alle auswählen',
     unselectAll: 'Alle abwählen',

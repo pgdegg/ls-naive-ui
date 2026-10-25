@@ -59,10 +59,6 @@ const filPH: NLocale = {
     confirm: 'Kumpirmahin',
     clear: 'I-clear'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Pinagmulan',
-    targetTitle: 'Destinasyon'
-  },
   Transfer: {
     selectAll: 'Piliin lahat',
     unselectAll: 'Alisin ang lahat ng seleksyon',

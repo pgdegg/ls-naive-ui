@@ -63,11 +63,26 @@ import TabsButton from './TabsButton'
 // 修复 vue-tsc 报错
 const throttle: <T>(f: T, t: number) => T = _throttle
 
+function getTabSlots(node: VNode): Record<string, () => VNode[]> | undefined {
+  const slots = node.children as {
+    tab?: () => VNode[]
+    icon?: () => VNode[]
+  } | null
+  const result: Record<string, () => VNode[]> = {}
+  if (typeof slots?.tab === 'function')
+    result.default = slots.tab
+  if (typeof slots?.icon === 'function')
+    result.icon = slots.icon
+  return Object.keys(result).length ? result : undefined
+}
+
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
 }
 
 export const tabsProps = {
+  leftType: String as PropType<TabsType>,
+  rightType: String as PropType<TabsType>,
   ...(useTheme.props as ThemeProps<TabsTheme, TabsThemeOverrides>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
@@ -128,6 +143,11 @@ export const tabsProps = {
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
 
 export interface TabsSlots {
+  'header-left'?: () => VNode[]
+  'fixed-top'?: () => VNode[]
+  'fixed-left'?: () => VNode[]
+  'fixed-right'?: () => VNode[]
+  'fixed-bottom'?: () => VNode[]
   default?: () => VNode[]
   prefix?: () => VNode[]
   suffix?: () => VNode[]
@@ -1002,7 +1022,58 @@ export default defineComponent({
     const isCard = type === 'card'
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
-    renderNameListRef.value = []
+    const allTabs = showPane ? tabPaneChildren : tabChildren
+    renderNameListRef.value = [
+      ...allTabs.filter(node => node.props?.fixed === 'left'),
+      ...allTabs.filter(node => !node.props?.fixed),
+      ...allTabs.filter(node => node.props?.fixed === 'right')
+    ].map(node => node.props!.name as string | number)
+    const middleTabs = allTabs.filter(node => !node.props?.fixed)
+    const renderFixed = (side: 'left' | 'right'): VNode | null => {
+      const nodes = allTabs.filter(node => node.props?.fixed === side)
+      if (!nodes.length)
+        return null
+      const fixedType
+        = (side === 'left' ? this.leftType : this.rightType) ?? type
+      return (
+        <div
+          class={[
+            `${mergedClsPrefix}-tabs-fixed`,
+            `${mergedClsPrefix}-tabs-fixed--${side}`,
+            `${mergedClsPrefix}-tabs-nav--${fixedType}-type`,
+            `${mergedClsPrefix}-tabs-nav--${placement}`
+          ]}
+          style={{
+            display: 'flex',
+            flexShrink: 0,
+            flexDirection: ['left', 'right'].includes(placement)
+              ? 'column'
+              : 'row',
+            maxWidth: ['top', 'bottom'].includes(placement) ? '40%' : undefined,
+            maxHeight: ['left', 'right'].includes(placement)
+              ? '40%'
+              : undefined,
+            overflow: 'auto',
+            minWidth: 0
+          }}
+        >
+          {nodes.map(node =>
+            showPane
+              ? h(
+                  Tab,
+                  {
+                    ...node.props,
+                    name: node.props!.name,
+                    internalCreatedByPane: true,
+                    internalType: fixedType
+                  },
+                  getTabSlots(node)
+                )
+              : cloneVNode(node, { internalType: fixedType })
+          )}
+        </div>
+      )
+    }
     const scrollContent = (): JSX.Element => {
       const tabs = (
         <div
@@ -1020,34 +1091,25 @@ export default defineComponent({
             />
           )}
           {showPane
-            ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-                renderNameListRef.value.push(
-                  tabPaneVNode.props.name as string | number
-                )
+            ? middleTabs.map((tabPaneVNode: any, index: number) => {
                 return justifyTabDynamicProps(
-                  <Tab
-                    {...tabPaneVNode.props}
-                    internalCreatedByPane={true}
-                    internalLeftPadded={
-                      index !== 0
-                      && (!mergedJustifyContent
-                        || mergedJustifyContent === 'center'
-                        || mergedJustifyContent === 'start'
-                        || mergedJustifyContent === 'end')
-                    }
-                  >
-                    {tabPaneVNode.children
-                      ? {
-                          default: tabPaneVNode.children.tab
-                        }
-                      : undefined}
-                  </Tab>
+                  h(
+                    Tab,
+                    {
+                      ...tabPaneVNode.props,
+                      internalCreatedByPane: true,
+                      internalLeftPadded:
+                        index !== 0
+                        && (!mergedJustifyContent
+                          || mergedJustifyContent === 'center'
+                          || mergedJustifyContent === 'start'
+                          || mergedJustifyContent === 'end')
+                    },
+                    getTabSlots(tabPaneVNode)
+                  )
                 )
               })
-            : tabChildren.map((tabVNode: any, index: number) => {
-                renderNameListRef.value.push(
-                  tabVNode.props.name as string | number
-                )
+            : middleTabs.map((tabVNode: any, index: number) => {
                 if (index !== 0 && !mergedJustifyContent) {
                   return justifyTabDynamicProps(
                     createLeftPaddedTabVNode(tabVNode as VNode)
@@ -1070,7 +1132,18 @@ export default defineComponent({
             />
           )}
           {isCard ? null : (
-            <div ref="barElRef" class={`${mergedClsPrefix}-tabs-bar`} />
+            <div
+              ref="barElRef"
+              class={`${mergedClsPrefix}-tabs-bar`}
+              style={
+                allTabs.some(
+                  node =>
+                    node.props?.fixed && node.props.name === this.mergedValue
+                )
+                  ? { display: 'none' }
+                  : undefined
+              }
+            />
           )}
         </div>
       )
@@ -1093,6 +1166,62 @@ export default defineComponent({
       )
     }
     const resolvedPlacement = isSegment ? 'top' : placement
+    const paneContent
+      = showPane
+        && (this.animated
+          && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
+              <div
+                ref="tabsPaneWrapperRef"
+                style={paneWrapperStyle}
+                class={[`${mergedClsPrefix}-tabs-pane-wrapper`, paneWrapperClass]}
+              >
+                {filterMapTabPanes(
+                  tabPaneChildren,
+                  this.mergedValue,
+                  this.renderedNames,
+                  this.onAnimationBeforeLeave,
+                  this.onAnimationEnter,
+                  this.onAnimationAfterEnter,
+                  this.animationDirection
+                )}
+              </div>
+            ) : (
+              filterMapTabPanes(tabPaneChildren, this.mergedValue, this.renderedNames)
+            ))
+    const fixedPositions = ['top', 'left', 'right', 'bottom'] as const
+    const hasFixedContent = fixedPositions.some(
+      position => this.$slots[`fixed-${position}`]
+    )
+    const renderedPaneContent = hasFixedContent ? (
+      <div
+        class={`${mergedClsPrefix}-tabs-content-wrap`}
+        style={{
+          display: 'grid',
+          gridTemplateAreas:
+            '"top top top" "left main right" "bottom bottom bottom"',
+          gridTemplateColumns: 'auto minmax(0,1fr) auto',
+          gridTemplateRows: 'auto minmax(0,1fr) auto',
+          minWidth: 0,
+          flex: 1
+        }}
+      >
+        {fixedPositions.map(position =>
+          this.$slots[`fixed-${position}`] ? (
+            <div
+              class={`${mergedClsPrefix}-tabs-fixed-content--${position}`}
+              style={{ gridArea: position }}
+            >
+              {this.$slots[`fixed-${position}`]?.()}
+            </div>
+          ) : null
+        )}
+        <div style={{ gridArea: 'main', minWidth: 0, minHeight: 0 }}>
+          {paneContent}
+        </div>
+      </div>
+    ) : (
+      paneContent
+    )
     return (
       <div
         ref="selfElRef"
@@ -1117,6 +1246,15 @@ export default defineComponent({
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
+          {this.$slots['header-left'] ? (
+            <div
+              class={`${mergedClsPrefix}-tabs-header-left`}
+              style={{ flexShrink: 0 }}
+            >
+              {this.$slots['header-left']()}
+            </div>
+          ) : null}
+          {renderFixed('left')}
           {resolveWrappedSlot(
             prefixSlot,
             children =>
@@ -1141,30 +1279,18 @@ export default defineComponent({
                       </div>
                     </div>
                     {showPane
-                      ? tabPaneChildren.map(
-                          (tabPaneVNode: any, index: number) => {
-                            renderNameListRef.value.push(
-                              tabPaneVNode.props.name as string | number
-                            )
-                            return (
-                              <Tab
-                                {...tabPaneVNode.props}
-                                internalCreatedByPane={true}
-                                internalLeftPadded={index !== 0}
-                              >
-                                {tabPaneVNode.children
-                                  ? {
-                                      default: tabPaneVNode.children.tab
-                                    }
-                                  : undefined}
-                              </Tab>
-                            )
-                          }
-                        )
-                      : tabChildren.map((tabVNode: any, index: number) => {
-                          renderNameListRef.value.push(
-                            tabVNode.props.name as string | number
+                      ? middleTabs.map((tabPaneVNode: any, index: number) => {
+                          return h(
+                            Tab,
+                            {
+                              ...tabPaneVNode.props,
+                              internalCreatedByPane: true,
+                              internalLeftPadded: index !== 0
+                            },
+                            getTabSlots(tabPaneVNode)
                           )
+                        })
+                      : middleTabs.map((tabVNode: any, index: number) => {
                           if (index === 0) {
                             return tabVNode
                           }
@@ -1240,6 +1366,7 @@ export default defineComponent({
               )}
             </>
           )}
+          {renderFixed('right')}
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}
@@ -1253,31 +1380,7 @@ export default defineComponent({
               )
           )}
         </div>
-        {showPane
-          && (this.animated
-            && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
-                <div
-                  ref="tabsPaneWrapperRef"
-                  style={paneWrapperStyle}
-                  class={[`${mergedClsPrefix}-tabs-pane-wrapper`, paneWrapperClass]}
-                >
-                  {filterMapTabPanes(
-                    tabPaneChildren,
-                    this.mergedValue,
-                    this.renderedNames,
-                    this.onAnimationBeforeLeave,
-                    this.onAnimationEnter,
-                    this.onAnimationAfterEnter,
-                    this.animationDirection
-                  )}
-                </div>
-              ) : (
-                filterMapTabPanes(
-                  tabPaneChildren,
-                  this.mergedValue,
-                  this.renderedNames
-                )
-              ))}
+        {renderedPaneContent}
       </div>
     )
   }

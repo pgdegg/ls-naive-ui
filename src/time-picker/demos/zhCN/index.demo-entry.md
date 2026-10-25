@@ -70,3 +70,9 @@ timezone-debug.vue
 | ----- | ------------ | ---- | ------ |
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | blur  | `() => void` | 失焦 | 2.24.2 |
+
+## HIS 定制
+
+`quick-input` 解析连续时间数字，`default-to-extreme: "min" | "max"` 补缺失字段，继续校验原生禁用时间与步长。新增 prepend / append 插槽、只读/提示覆盖及 inputElement。parseQuickInput 可独立调用。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

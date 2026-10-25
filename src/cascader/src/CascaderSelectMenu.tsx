@@ -38,6 +38,7 @@ export default defineComponent({
       default: null
     },
     show: Boolean,
+    defaultFirstOption: { type: Boolean, default: true },
     pattern: {
       type: String,
       default: ''
@@ -199,7 +200,7 @@ export default defineComponent({
                     onResize={this.handleResize}
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-cascader-menu`}
-                    autoPending
+                    autoPending={this.defaultFirstOption}
                     themeOverrides={
                       mergedTheme.peerOverrides.InternalSelectMenu
                     }

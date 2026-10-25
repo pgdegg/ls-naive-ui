@@ -59,10 +59,6 @@ const mrIN: NLocale = {
     confirm: 'पुष्टी करा',
     clear: 'साफ करा'
   },
-  LegacyTransfer: {
-    sourceTitle: 'स्रोत',
-    targetTitle: 'लक्ष्य'
-  },
   Transfer: {
     selectAll: 'सर्व निवडा',
     unselectAll: 'सर्व निवड रद्द करा',

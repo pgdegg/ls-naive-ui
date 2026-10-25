@@ -59,10 +59,6 @@ const hyAM: NLocale = {
     confirm: 'Հաստատել',
     clear: 'Մաքրել'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Աղբյուր',
-    targetTitle: 'Նպատակ'
-  },
   Transfer: {
     selectAll: 'Ընտրել բոլորը',
     unselectAll: 'Ապաընտրել բոլորը',

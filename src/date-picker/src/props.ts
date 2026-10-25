@@ -20,9 +20,13 @@ import type {
 } from './interface'
 import type { DatePickerSize } from './public-types'
 import { useTheme } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import { useAdjustedTo } from '../../_utils'
 
 export const datePickerProps = {
+  quickInput: Boolean,
+  defaultToExtreme: String as PropType<'min' | 'max'>,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<DatePickerTheme, DatePickerThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {

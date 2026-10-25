@@ -54,12 +54,15 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   markEventEffectPerformed,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { normalizeOptions } from '../../_utils/naive/normalize-options'
+import { useInputElement } from '../../composables/use-input-element'
 import { cascaderLight } from '../styles'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
@@ -68,6 +71,13 @@ import style from './styles/index.cssr'
 import { getPathLabel, getRawNodePath } from './utils'
 
 export const cascaderProps = {
+  defaultFirstOption: { type: Boolean, default: true },
+  filterValue: String,
+  filterKeys: Array as PropType<string[]>,
+  onUpdateFilterValue: Function as PropType<(value: string) => void>,
+  'onUpdate:filterValue': Function as PropType<(value: string) => void>,
+  onQueryChange: Function as PropType<(value: string) => void>,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<CascaderTheme, CascaderThemeOverrides>),
   allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
@@ -76,7 +86,7 @@ export const cascaderProps = {
     default: undefined
   },
   options: {
-    type: Array as PropType<CascaderOption[]>,
+    type: Array as PropType<CascaderOption[] | string[] | number[]>,
     default: () => []
   },
   value: [String, Number, Array] as PropType<Value | null>,
@@ -204,6 +214,7 @@ export default defineComponent({
   props: cascaderProps,
   slots: Object as SlotsType<CascaderSlots>,
   setup(props, { slots }) {
+    const inputElement = useInputElement()
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -245,7 +256,19 @@ export default defineComponent({
     const mergedCheckStrategyRef = computed(() => {
       return props.leafOnly ? 'child' : props.checkStrategy
     })
-    const patternRef = ref('')
+    const patternRef = ref(props.filterValue ?? '')
+    watch(
+      () => props.filterValue,
+      (value) => {
+        if (value !== undefined)
+          patternRef.value = value
+      }
+    )
+    watch(patternRef, (value) => {
+      props.onUpdateFilterValue?.(value)
+      props['onUpdate:filterValue']?.(value)
+      props.onQueryChange?.(value)
+    })
     const formItem = useFormItem(props, {
       mergedSize: (NFormItem) => {
         const { size } = props
@@ -279,17 +302,24 @@ export default defineComponent({
     }
     const treeMateRef = computed(() => {
       const { valueField, childrenField, disabledField } = props
-      return createTreeMate(props.options, {
-        getDisabled(node) {
-          return (node as any)[disabledField]
-        },
-        getKey(node) {
-          return (node as any)[valueField]
-        },
-        getChildren(node) {
-          return (node as any)[childrenField]
+      return createTreeMate(
+        normalizeOptions<CascaderOption>(
+          props.options,
+          props.labelField,
+          valueField
+        ),
+        {
+          getDisabled(node) {
+            return (node as any)[disabledField]
+          },
+          getKey(node) {
+            return (node as any)[valueField]
+          },
+          getChildren(node) {
+            return (node as any)[childrenField]
+          }
         }
-      })
+      )
     })
     const mergedKeysRef = computed(() => {
       const { cascade, multiple } = props
@@ -976,6 +1006,9 @@ export default defineComponent({
       clearPattern
     })
     const exposedMethods: CascaderInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       focus: () => {
         triggerInstRef.value?.focus()
       },
@@ -1055,6 +1088,7 @@ export default defineComponent({
       : undefined
     return {
       ...exposedMethods,
+      inputElement,
       handleTriggerResize,
       mergedStatus: mergedStatusRef,
       // 精简 dts：仅字符串 ref，类型在 render 中未使用
@@ -1073,7 +1107,11 @@ export default defineComponent({
       treeMate: treeMateRef,
       mergedSize: mergedSizeRef,
       mergedDisabled: mergedDisabledRef,
-      localizedPlaceholder: localizedPlaceholderRef,
+      localizedPlaceholder: computed(() =>
+        formItem.mergedHidePlaceholderRef.value
+          ? ''
+          : localizedPlaceholderRef.value
+      ),
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
       adjustedTo: adjustedToRef,
@@ -1205,6 +1243,7 @@ export default defineComponent({
                     const { filterMenuProps } = this
                     return (
                       <CascaderSelectMenu
+                        defaultFirstOption={this.defaultFirstOption}
                         {...filterMenuProps}
                         ref="selectMenuInstRef"
                         class={[this.themeClass, filterMenuProps?.class]}
@@ -1213,7 +1252,20 @@ export default defineComponent({
                         pattern={this.pattern}
                         multiple={this.multiple}
                         tmNodes={this.treeMate.treeNodes}
-                        filter={this.filter}
+                        filter={
+                          this.filter
+                          ?? (this.filterKeys?.length
+                            ? (pattern, _, path) =>
+                                path.some(option =>
+                                  [this.labelField, ...this.filterKeys!].some(
+                                    key =>
+                                      String(option[key] ?? '')
+                                        .toLowerCase()
+                                        .includes(pattern.toLowerCase())
+                                  )
+                                )
+                            : undefined)
+                        }
                         labelField={this.labelField}
                         separator={this.separator}
                         style={[

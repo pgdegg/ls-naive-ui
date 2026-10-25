@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import type { NDateLocale, NLocale } from 'naive-ui'
-import { dateZhCN, zhCN } from 'naive-ui'
+import { dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
 import { ref } from 'vue'
 
 const locale = ref<NLocale | null>(null)
@@ -17,8 +17,8 @@ const dateLocale = ref<NDateLocale | null>(null)
       <n-button
         @click="
           () => {
-            locale = null
-            dateLocale = null
+            locale = enUS
+            dateLocale = dateEnUS
           }
         "
       >

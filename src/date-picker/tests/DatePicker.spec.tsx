@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { format } from 'date-fns'
 import { ref } from 'vue'
 import { NBaseFocusDetector } from '../../_internal'
-import { dateEnUS } from '../../locales'
+import { dateZhCN } from '../../locales'
 import { NDatePicker } from '../index'
 
 describe('n-date-picker', () => {
@@ -192,7 +192,7 @@ describe('n-date-picker', () => {
     await wrapper.find('.n-input__input').trigger('click')
     const clearButton = Array.from(
       document.querySelectorAll('.n-date-panel-actions__suffix .n-button')
-    ).find(button => button.textContent === 'Clear') as HTMLElement
+    ).find(button => button.textContent === '清除') as HTMLElement
     clearButton.click()
 
     expect(onUpdateValue).toHaveBeenCalledTimes(1)
@@ -225,7 +225,7 @@ describe('n-date-picker', () => {
 
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NDatePicker)
-    expect(wrapper.find('input').attributes('placeholder')).toBe('Select Date')
+    expect(wrapper.find('input').attributes('placeholder')).toBe('选择日期')
     await wrapper.setProps({
       placeholder: 'test-placeholder'
     })
@@ -245,7 +245,7 @@ describe('n-date-picker', () => {
     const inputEl = wrapper.find('.n-input__input').find('input')
     expect(inputEl.element.value).toEqual(
       format(1183135260000, 'yyyy-MM-dd', {
-        locale: dateEnUS.locale
+        locale: dateZhCN.locale
       })
     )
     wrapper.unmount()
@@ -262,7 +262,7 @@ describe('n-date-picker', () => {
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll('.n-date-panel-weekdays__day')[0].textContent
-    ).toBe('Tu')
+    ).toBe('二')
 
     wrapper.unmount()
   })
@@ -374,7 +374,7 @@ describe('n-date-picker', () => {
       document.querySelectorAll(
         '.n-date-panel-month-calendar__picker-col-item'
       )[0].textContent
-    ).toBe('January')
+    ).toBe('一月')
 
     await wrapper.setProps({ monthFormat: 'MMM' })
     await wrapper.find('.n-input__input').trigger('click')
@@ -382,7 +382,7 @@ describe('n-date-picker', () => {
       document.querySelectorAll(
         '.n-date-panel-month-calendar__picker-col-item'
       )[0].textContent
-    ).toBe('Jan')
+    ).toBe('1月')
 
     await wrapper.setProps({ monthFormat: 'MMMMM' })
     await wrapper.find('.n-input__input').trigger('click')
@@ -390,7 +390,7 @@ describe('n-date-picker', () => {
       document.querySelectorAll(
         '.n-date-panel-month-calendar__picker-col-item'
       )[0].textContent
-    ).toBe('J')
+    ).toBe('一')
 
     wrapper.unmount()
   })

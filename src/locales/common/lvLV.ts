@@ -59,10 +59,6 @@ const lvLV: NLocale = {
     confirm: 'Apstiprināt',
     clear: 'Notīrīt'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Avots',
-    targetTitle: 'Mērķis'
-  },
   Transfer: {
     selectAll: 'Atlasīt visu',
     unselectAll: 'Noņemt atlasi',

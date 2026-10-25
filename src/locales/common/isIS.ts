@@ -59,10 +59,6 @@ const isIS: NLocale = {
     confirm: 'Staðfesta',
     clear: 'Hreinsa'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Uppruni',
-    targetTitle: 'Áfangastaður'
-  },
   Transfer: {
     selectAll: 'Velja allt',
     unselectAll: 'Afvelja allt',

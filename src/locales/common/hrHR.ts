@@ -59,10 +59,6 @@ const hrHR: NLocale = {
     confirm: 'Potvrdi',
     clear: 'Očisti'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Izvor',
-    targetTitle: 'Odredište'
-  },
   Transfer: {
     selectAll: 'Odaberi sve',
     unselectAll: 'Poništi odabir',

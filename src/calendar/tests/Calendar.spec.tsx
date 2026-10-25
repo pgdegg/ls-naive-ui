@@ -3,6 +3,7 @@ import { addMonths, format, getYear, isYesterday } from 'date-fns'
 /* eslint-disable unused-imports/no-unused-vars */
 import { h } from 'vue'
 import { NButton } from '../../button'
+import { dateZhCN } from '../../locales'
 import { NCalendar } from '../index'
 
 describe('n-calendar', () => {
@@ -30,7 +31,7 @@ describe('n-calendar', () => {
   it('should follow `default-value` to display month', () => {
     // 2022 年 5 月 19 日
     const wrapper = mount(NCalendar, { props: { defaultValue: 1652956953562 } })
-    expect(wrapper.find('.n-calendar-header__title').text()).toContain('May')
+    expect(wrapper.find('.n-calendar-header__title').text()).toContain('五月')
     wrapper.unmount()
   })
 
@@ -75,7 +76,7 @@ describe('n-calendar', () => {
     await buttons[0].trigger('click')
     const prevDate = addMonths(now, -1)
     expect(wrapper.find('.n-calendar-header__title').text()).toBe(
-      `${format(prevDate, 'MMMM')} ${getYear(prevDate)}`
+      `${getYear(prevDate)} ${format(prevDate, 'MMMM', { locale: dateZhCN.locale })}`
     )
 
     await buttons[1].trigger('click')
@@ -90,7 +91,7 @@ describe('n-calendar', () => {
     await buttons[2].trigger('click')
     const nextDate = addMonths(now, 1)
     expect(wrapper.find('.n-calendar-header__title').text()).toBe(
-      `${format(nextDate, 'MMMM')} ${getYear(nextDate)}`
+      `${getYear(nextDate)} ${format(nextDate, 'MMMM', { locale: dateZhCN.locale })}`
     )
     wrapper.unmount()
   })

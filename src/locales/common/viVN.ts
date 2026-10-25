@@ -59,10 +59,6 @@ const viVN: NLocale = {
     confirm: 'Xác nhận',
     clear: 'Xóa'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Nguồn',
-    targetTitle: 'Đích'
-  },
   Transfer: {
     selectAll: 'Chọn tất cả',
     unselectAll: 'Bỏ chọn tất cả',

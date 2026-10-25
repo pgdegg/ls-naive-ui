@@ -59,10 +59,6 @@ const bnBD: NLocale = {
     confirm: 'নিশ্চিত করুন',
     clear: 'মুছুন'
   },
-  LegacyTransfer: {
-    sourceTitle: 'উৎস',
-    targetTitle: 'গন্তব্য'
-  },
   Transfer: {
     selectAll: 'সব নির্বাচন করুন',
     unselectAll: 'সব নির্বাচন তুলে দিন',

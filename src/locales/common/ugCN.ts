@@ -59,10 +59,6 @@ const ugCN: NLocale = {
     confirm: 'جەزملەش',
     clear: 'تازلاش'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ئەسلى تۈر',
-    targetTitle: 'نىشان تۈر'
-  },
   Transfer: {
     selectAll: 'ھەممىنى تاللاش',
     clearAll: 'تازلاش',

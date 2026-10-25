@@ -143,3 +143,9 @@ interface UploadCustomRequestOptions {
 ### Others
 
 1. `uploadDownload`, with type of `(url: string, name: string | undefined): void`, you can import the method directly from naive-ui.
+
+## HIS extensions
+
+`max-size` limits bytes; `validate-accept` enables selected-file type validation. `on-validation-error(reason, file)` receives size/type and File. Validation covers addition and manual submit; disabled controls do not request uploads.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

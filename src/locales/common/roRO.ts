@@ -59,10 +59,6 @@ const roRO: NLocale = {
     confirm: 'Confirmă',
     clear: 'Șterge'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Sursă',
-    targetTitle: 'Destinație'
-  },
   Transfer: {
     selectAll: 'Selectează tot',
     unselectAll: 'Deselectează tot',

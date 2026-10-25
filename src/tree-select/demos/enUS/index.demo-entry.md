@@ -106,3 +106,9 @@ debug.vue
 | focusInput | `() => void` | Input focus. | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |
+
+## HIS extensions
+
+`filter-value` / `update:filter-value`, `filter-keys`, `on-query-change` extend search. Added readonly/placeholder overrides and instance inputElement.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

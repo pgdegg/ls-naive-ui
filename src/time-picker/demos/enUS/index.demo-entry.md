@@ -69,3 +69,9 @@ timezone.vue
 | ----- | ------------ | ----------- | ------- |
 | focus | `() => void` | Focus.      | 2.24.2  |
 | blur  | `() => void` | Blur.       | 2.24.2  |
+
+## HIS extensions
+
+`quick-input` parses compact times; `default-to-extreme: "min" | "max"` fills missing fields. Native disabled-time and step constraints remain. Added prepend/append slots, readonly/placeholder overrides and inputElement. parseQuickInput is also exported.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

@@ -11,6 +11,7 @@ export default cB('form', [
       width: 'auto',
       marginRight: '18px'
     }, [
+      cB('form-item-blank', { width: 'var(--n-form-content-width, auto)' }),
       c('&:last-child', {
         marginRight: 0
       })

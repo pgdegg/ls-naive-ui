@@ -76,3 +76,9 @@ popover.vue
 | Name    | Parameters | Description                            |
 | ------- | ---------- | -------------------------------------- |
 | default | `()`       | The button group is filled by default. |
+
+## HIS extensions
+
+ButtonGroup adds `disabled`, `ghost`, `text` (undefined leaves child appearance intact). Every child inherits disabling, and specified group appearance takes precedence. ignoreGroupDisabled and plain/link aliases have been removed.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

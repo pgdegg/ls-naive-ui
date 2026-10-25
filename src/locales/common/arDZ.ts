@@ -59,10 +59,6 @@ const arDZ: NLocale = {
     confirm: 'تأكيد',
     clear: 'مسح'
   },
-  LegacyTransfer: {
-    sourceTitle: 'المصدر',
-    targetTitle: 'الهدف'
-  },
   Transfer: {
     selectAll: 'تحديد الكل',
     unselectAll: 'إلغاء تحديد الكل',

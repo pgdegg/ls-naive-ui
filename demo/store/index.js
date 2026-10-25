@@ -33,14 +33,14 @@ export function initRouter(_router, _route) {
   router = _router
   localeNameRef = useMemo({
     get() {
-      return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
+      return route.path.startsWith('/en-US') ? 'en-US' : 'zh-CN'
     },
     set(locale) {
       router.push(changeLangInPath(route.fullPath, locale))
     }
   })
   dateLocaleRef = useMemo(() => {
-    return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
+    return localeNameRef.value === 'en-US' ? dateEnUS : dateZhCN
   })
   rawThemeNameRef = useMemo(() => route.params.theme)
   themeNameRef = useMemo({

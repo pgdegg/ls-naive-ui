@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+primitive-options.vue
 size.vue
 multiple.vue
 events.vue
@@ -69,7 +70,7 @@ create-debug.vue
 | menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 菜单的尺寸 | 2.40.0 |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |
-| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
+| options | `Array<SelectOption \| SelectGroupOption> \| string[] \| number[]` | `[]` | 配置选项内容。字符串或数字列表自动转换为同名同值选项，按原始值去重并保留首次顺序，数字值保持数字类型。对象选项详情见 SelectOption Properties。 |  |
 | placeholder | `string` | `'请选择' (i18n)` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 菜单的弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |  |
@@ -136,3 +137,9 @@ create-debug.vue
 | focusInput | `() => void` | 输入聚焦 | 2.35.0 |
 | blur       | `() => void` | 失焦     | 2.24.2 |
 | blurInput  | `() => void` | 输入失焦 | 2.35.0 |
+
+## HIS 定制
+
+`multiple` + `separator` 支持分隔字符串模型；`update:label` 输出标签（分隔模型输出标签字符串），没有 label 输入属性。`filter-value` / `update:filter-value` 控制查询，`filter-keys` 搜索附加字段，`on-query-change` 通知查询，`remote-show-on-input` 限制空查询弹出。保留原生 on-search、filter 和虚拟滚动。支持只读、提示覆盖、inputElement；对象模型使用 createOptionModelAdapter。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

@@ -11,9 +11,10 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme, CardThemeOverrides } from '../styles'
 import type { CardSize } from './public-types'
 import { getPadding } from 'seemly'
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, h, inject, provide, unref } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { componentDisabledInjectionKey } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
@@ -27,6 +28,7 @@ export interface CardSegmented {
 }
 
 export const cardBaseProps = {
+  disabled: Boolean,
   title: [String, Function] as PropType<string | (() => VNodeChild)>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
@@ -86,6 +88,11 @@ export default defineComponent({
   props: cardProps,
   slots: Object as SlotsType<CardSlots>,
   setup(props) {
+    const parentDisabled = inject(componentDisabledInjectionKey, null)
+    provide(
+      componentDisabledInjectionKey,
+      computed(() => props.disabled || !!unref(parentDisabled))
+    )
     const handleCloseClick = (): void => {
       const { onClose } = props
       if (onClose) {
@@ -220,9 +227,12 @@ export default defineComponent({
     onRender?.()
     return (
       <Component
+        inert={this.disabled || undefined}
+        aria-disabled={this.disabled || undefined}
         class={[
           `${mergedClsPrefix}-card`,
           this.themeClass,
+          this.disabled && `${mergedClsPrefix}-card--disabled`,
           embedded && `${mergedClsPrefix}-card--embedded`,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,

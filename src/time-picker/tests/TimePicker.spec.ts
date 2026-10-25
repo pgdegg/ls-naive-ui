@@ -15,18 +15,18 @@ describe('n-time-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     expect(document.querySelectorAll('button').length).toBe(2)
-    expect(document.querySelectorAll('button')[0].textContent).toBe('Now')
-    expect(document.querySelectorAll('button')[1].textContent).toBe('OK')
+    expect(document.querySelectorAll('button')[0].textContent).toBe('此刻')
+    expect(document.querySelectorAll('button')[1].textContent).toBe('确认')
     await wrapper.setProps({
       actions: ['now']
     })
     expect(document.querySelectorAll('button').length).toBe(1)
-    expect(document.querySelectorAll('button')[0].textContent).toBe('Now')
+    expect(document.querySelectorAll('button')[0].textContent).toBe('此刻')
     await wrapper.setProps({
       actions: ['confirm']
     })
     expect(document.querySelectorAll('button').length).toBe(1)
-    expect(document.querySelectorAll('button')[0].textContent).toBe('OK')
+    expect(document.querySelectorAll('button')[0].textContent).toBe('确认')
     await wrapper.setProps({
       actions: []
     })
@@ -86,7 +86,7 @@ describe('n-time-picker', () => {
 
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NTimePicker)
-    expect(wrapper.find('input').attributes('placeholder')).toBe('Select Time')
+    expect(wrapper.find('input').attributes('placeholder')).toBe('请选择时间')
     await wrapper.setProps({
       placeholder: 'test-placeholder'
     })

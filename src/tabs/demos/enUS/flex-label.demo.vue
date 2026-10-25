@@ -22,12 +22,12 @@ Only works with `'line'` or `'bar'` typed tabs.
     <n-tabs default-value="signin" size="large" justify-content="space-evenly">
       <n-tab-pane name="signin" tab="Sign in">
         <n-form>
-          <n-form-item-row label="Username">
+          <n-form-item label="Username">
             <n-input />
-          </n-form-item-row>
-          <n-form-item-row label="Password">
+          </n-form-item>
+          <n-form-item label="Password">
             <n-input />
-          </n-form-item-row>
+          </n-form-item>
         </n-form>
         <n-button type="primary" block secondary strong>
           Sign In
@@ -35,15 +35,15 @@ Only works with `'line'` or `'bar'` typed tabs.
       </n-tab-pane>
       <n-tab-pane name="signup" tab="Sign up">
         <n-form>
-          <n-form-item-row label="Username">
+          <n-form-item label="Username">
             <n-input />
-          </n-form-item-row>
-          <n-form-item-row label="Password">
+          </n-form-item>
+          <n-form-item label="Password">
             <n-input />
-          </n-form-item-row>
-          <n-form-item-row label="Reenter Password">
+          </n-form-item>
+          <n-form-item label="Reenter Password">
             <n-input />
-          </n-form-item-row>
+          </n-form-item>
         </n-form>
         <n-button type="primary" block secondary strong>
           Sign up

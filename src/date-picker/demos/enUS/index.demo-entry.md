@@ -239,3 +239,9 @@ close-panel-on-select.vue
 | ----- | ------------ | ----------- | ------- |
 | focus | `() => void` | Focus.      | 2.24.2  |
 | blur  | `() => void` | Blur.       | 2.24.2  |
+
+## HIS extensions
+
+`quick-input` enables Enter parsing; `default-to-extreme: "min" | "max"` fills missing fields. Range-start Enter advances focus without committing half a model. Native date/time constraints remain. Added prepend/append slots, readonly/placeholder overrides and inputElement. Native timestamp/formatted-value models remain.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

@@ -59,10 +59,6 @@ const azAZ: NLocale = {
     confirm: 'Təsdiqlə',
     clear: 'Təmizlə'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Mənbə',
-    targetTitle: 'Hədəf'
-  },
   Transfer: {
     selectAll: 'Hamısını seç',
     unselectAll: 'Hamısını ləğv et',

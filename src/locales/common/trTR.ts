@@ -59,10 +59,6 @@ const trTR: NLocale = {
     confirm: 'Onayla',
     clear: 'Temizle'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Kaynak',
-    targetTitle: 'Hedef'
-  },
   Transfer: {
     selectAll: 'Tümünü Seç',
     unselectAll: 'Tüm Seçimi Kaldır',

@@ -55,6 +55,7 @@ import {
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NBaseIcon } from '../../_internal'
 import { TimeIcon } from '../../_internal/icons'
+import { renderInputAddons } from '../../_internal/input-addons'
 import {
   useConfig,
   useFormItem,
@@ -62,12 +63,15 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   markEventEffectPerformed,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { parseQuickInput } from '../../composables/quick-input'
+import { useInputElement } from '../../composables/use-input-element'
 import { strictParse } from '../../date-picker/src/utils'
 import { NInput } from '../../input'
 import { timePickerLight } from '../styles'
@@ -90,6 +94,9 @@ function validateUnits(value: MaybeArray<number>, max: number): boolean {
 }
 
 export const timePickerProps = {
+  quickInput: Boolean,
+  defaultToExtreme: String as PropType<'min' | 'max'>,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<TimePickerTheme, TimePickerThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -180,6 +187,8 @@ export const timePickerProps = {
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 
 export interface TimePickerSlots {
+  prepend?: () => VNode[]
+  append?: () => VNode[]
   default?: () => VNode[]
   icon?: () => VNode[]
 }
@@ -234,6 +243,9 @@ export default defineComponent({
     const keyboardState = useKeyboard()
 
     const inputInstRef = ref<InputInst | null>(null)
+    const inputElement = useInputElement<
+      HTMLInputElement | HTMLTextAreaElement
+    >(() => inputInstRef.value?.inputElement)
     const panelInstRef = ref<PanelRef | null>(null)
 
     const dateFnsOptionsRef = computed(() => {
@@ -513,6 +525,38 @@ export default defineComponent({
       })
     }
     function handleInputKeydown(e: KeyboardEvent): void {
+      if (
+        props.quickInput
+        && e.key === 'Enter'
+        && !e.isComposing
+        && !mergedDisabledRef.value
+        && !formItem.mergedReadonlyRef.value
+        && !props.inputReadonly
+      ) {
+        const parsed = parseQuickInput((e.target as HTMLInputElement).value, {
+          type: 'time',
+          defaultToExtreme: props.defaultToExtreme
+        })
+        if (!parsed)
+          return
+        const hour = parsed.getHours()
+        const minute = parsed.getMinutes()
+        const second = parsed.getSeconds()
+        if (
+          props.isHourDisabled?.(hour)
+          || props.isMinuteDisabled?.(minute, hour)
+          || props.isSecondDisabled?.(second, minute, hour)
+          || !isTimeInStep(hour, 'hours', props.hours)
+          || !isTimeInStep(minute, 'minutes', props.minutes)
+          || !isTimeInStep(second, 'seconds', props.seconds)
+        ) {
+          return
+        }
+        e.preventDefault()
+        doUpdateValue(parsed.getTime())
+        deriveInputValue(parsed.getTime())
+        closePanel({ returnFocus: false })
+      }
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
         // closePanel 将在 onDeactivated 中被调用
@@ -804,6 +848,9 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     const exposedMethods: TimePickerInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       focus: () => {
         inputInstRef.value?.focus()
       },
@@ -870,6 +917,7 @@ export default defineComponent({
       ? useThemeClass('time-picker', undefined, cssVarsRef, props)
       : undefined
     return {
+      inputElement,
       focus: exposedMethods.focus,
       blur: exposedMethods.blur,
       mergedStatus: mergedStatusRef,
@@ -941,7 +989,7 @@ export default defineComponent({
   render() {
     const { mergedClsPrefix, $slots, triggerOnRender } = this
     triggerOnRender?.()
-    return (
+    const control = (
       <div
         class={[`${mergedClsPrefix}-time-picker`, this.triggerThemeClass]}
         style={this.triggerCssVars as CSSProperties}
@@ -953,6 +1001,11 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInput
+                      hidePlaceholder={this.hidePlaceholder}
+                      ignoreParentHidePlaceholder={
+                        this.ignoreParentHidePlaceholder
+                      }
+                      ignoreParentReadonly={this.ignoreParentReadonly}
                       ref="inputInstRef"
                       status={this.mergedStatus}
                       value={this.displayTimeString}
@@ -1082,5 +1135,6 @@ export default defineComponent({
         </VBinder>
       </div>
     )
+    return renderInputAddons(control, this.$slots, this.mergedSize)
   }
 })

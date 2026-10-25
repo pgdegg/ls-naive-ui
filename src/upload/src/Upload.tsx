@@ -304,6 +304,11 @@ export const uploadProps = {
     default: 'file'
   },
   accept: String,
+  maxSize: Number,
+  validateAccept: Boolean,
+  onValidationError: Function as PropType<
+    (reason: 'size' | 'type', file: File) => void
+  >,
   action: String,
   customRequest: Function as PropType<CustomRequest>,
   directory: Boolean,
@@ -523,13 +528,23 @@ export default defineComponent({
     ): void {
       if (!fileAndEntries || fileAndEntries.length === 0)
         return
+      if (formItem.mergedDisabledRef.value)
+        return
       const { onBeforeUpload } = props
       fileAndEntries = mergedMultipleRef.value
         ? fileAndEntries
         : [fileAndEntries[0]]
       const { max, accept } = props
       fileAndEntries = fileAndEntries.filter(({ file, source }) => {
-        if (source === 'dnd' && accept?.trim()) {
+        if (props.maxSize !== undefined && file.size > props.maxSize) {
+          props.onValidationError?.('size', file)
+          return false
+        }
+        if ((source === 'dnd' || props.validateAccept) && accept?.trim()) {
+          if (!matchType(file.name, file.type, accept)) {
+            props.onValidationError?.('type', file)
+            return false
+          }
           return matchType(file.name, file.type, accept)
         }
         else {
@@ -596,6 +611,8 @@ export default defineComponent({
       fileId,
       retry = false
     }: { fileId?: string, retry?: boolean } = {}): void {
+      if (formItem.mergedDisabledRef.value)
+        return
       const {
         method,
         action,
@@ -612,6 +629,20 @@ export default defineComponent({
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
+          if (file.file) {
+            if (props.maxSize !== undefined && file.file.size > props.maxSize) {
+              props.onValidationError?.('size', file.file)
+              return
+            }
+            if (
+              props.validateAccept
+              && props.accept?.trim()
+              && !matchType(file.file.name, file.file.type, props.accept)
+            ) {
+              props.onValidationError?.('type', file.file)
+              return
+            }
+          }
           if (props.customRequest) {
             customSubmitImpl({
               inst: {

@@ -36,3 +36,9 @@ icon-wrapper.vue
 | Name    | Parameters | Description              |
 | ------- | ---------- | ------------------------ |
 | default | `()`       | The content of the icon. |
+
+## HIS extensions
+
+`symbol`, `prefix`, `symbol-version`, `symbol-resolver` support dynamic sprites, visible-only image[data-src] loading, registry changes and shared requests. Pending/failed resources use component/default-slot content or the built-in placeholder.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

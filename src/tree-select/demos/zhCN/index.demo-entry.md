@@ -110,3 +110,9 @@ rtl-debug.vue
 | focusInput | `() => void` | 输入聚焦 | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
+
+## HIS 定制
+
+`filter-value` / `update:filter-value` 控制搜索，`filter-keys` 搜索附加字段，`on-query-change` 通知查询。支持只读、提示覆盖及实例 inputElement。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

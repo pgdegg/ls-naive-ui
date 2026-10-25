@@ -59,10 +59,6 @@ const csCZ: NLocale = {
     confirm: 'Potvrdit',
     clear: 'Vyčistit'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Zdroj',
-    targetTitle: 'Cíl'
-  },
   Transfer: {
     selectAll: 'Vybrat vše',
     unselectAll: 'Odznačit vše',

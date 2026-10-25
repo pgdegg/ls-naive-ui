@@ -59,10 +59,6 @@ const kyKG: NLocale = {
     confirm: 'Ырастоо',
     clear: 'Тазалоо'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Булагы',
-    targetTitle: 'Максат'
-  },
   Transfer: {
     selectAll: 'Баарын тандоо',
     unselectAll: 'Тандоону алуу',

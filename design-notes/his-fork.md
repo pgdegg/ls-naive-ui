@@ -1,5 +1,9 @@
 # HIS fork workflow
 
+## Local build and installation
+
+Run `pnpm build` to build and validate the package, then create a content-hashed archive in `D:/his-dependence`. Install the generated archive in another project with `pnpm add "file:D:/his-dependence/naive-ui-<hash>.tgz"`. See [local packaging](./local-package.md) for custom destinations and optional consumer dependency updates.
+
 ## Remotes and branches
 
 - `upstream`: https://github.com/tusen-ai/naive-ui.git
@@ -7,8 +11,7 @@
 - `main`: upstream mirror, tracking `upstream/main`. Keep custom changes off this branch.
 - `production`: HIS customizations and validated upstream merges.
 
-Keep upstream Git history so future updates can be merged. Preserve the package
-name and public exports unless a customization explicitly requires changing them.
+Keep upstream Git history so future updates can be merged. Preserve the package name and public exports unless a customization explicitly requires changing them.
 
 ## Configure the personal fork
 
@@ -26,8 +29,7 @@ git push -u origin production
 
 ## Merge upstream updates
 
-Start with a clean working tree. Commit intentional local changes or explicitly
-stash them before switching branches.
+Start with a clean working tree. Commit intentional local changes or explicitly stash them before switching branches.
 
 ```sh
 git fetch upstream --prune
@@ -37,9 +39,7 @@ git switch production
 git merge --no-ff --no-commit main
 ```
 
-If Git reports conflicts, resolve them while preserving the intended HIS behavior,
-then stage only the resolved files. Review upstream release notes and changes to
-dependencies, public APIs, themes, and locales.
+If Git reports conflicts, resolve them while preserving the intended HIS behavior, then stage only the resolved files. Review upstream release notes and changes to dependencies, public APIs, themes, and locales.
 
 Validate the merge before committing:
 
@@ -59,12 +59,8 @@ git commit -m "chore: merge upstream main into production"
 git merge-base --is-ancestor upstream/main HEAD
 ```
 
-Push `production` to `origin` when publication is intended. If upstream is already
-merged, Git reports that it is up to date and no merge commit is needed. To cancel
-an in-progress merge, use `git merge --abort`.
+Push `production` to `origin` when publication is intended. If upstream is already merged, Git reports that it is up to date and no merge commit is needed. To cancel an in-progress merge, use `git merge --abort`.
 
 ## Customization checks
 
-Keep custom patches focused. Update relevant component tests, demos, types, theme
-variables, and locales together when behavior changes. Run the affected component
-tests first, followed by the broader checks required for the change.
+Keep custom patches focused. Update relevant component tests, demos, types, theme variables, and locales together when behavior changes. Run the affected component tests first, followed by the broader checks required for the change.

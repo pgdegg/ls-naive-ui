@@ -70,8 +70,6 @@ import type { InputOtpTheme } from '../../input-otp/styles'
 import type { InputSize } from '../../input/src/public-types'
 import type { InputTheme } from '../../input/styles'
 import type { LayoutTheme } from '../../layout/styles'
-import type { RowTheme } from '../../legacy-grid/styles'
-import type { LegacyTransferTheme } from '../../legacy-transfer/styles'
 import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
@@ -178,7 +176,6 @@ export interface GlobalThemeWithoutCommon {
   InputNumber?: InputNumberTheme
   InputOtp?: InputOtpTheme
   Layout?: LayoutTheme
-  LegacyTransfer?: LegacyTransferTheme
   List?: ListTheme
   LoadingBar?: LoadingBarTheme
   Log?: LogTheme
@@ -220,7 +217,6 @@ export interface GlobalThemeWithoutCommon {
   Upload?: UploadTheme
   Watermark?: WatermarkTheme
   Split?: SplitTheme
-  Row?: RowTheme
   Marquee?: MarqueeTheme
   Heatmap?: HeatmapTheme
   // 内部

@@ -13,6 +13,7 @@ import {
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import {
   createKey,
+  formatLength,
   render,
   resolveSlot,
   resolveWrappedSlot
@@ -309,7 +310,12 @@ export const NDialog = defineComponent({
             actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`,
             this.contentClass
           ]}
-          style={this.contentStyle}
+          style={[
+            this.contentStyle,
+            this.height === undefined
+              ? undefined
+              : { height: formatLength(this.height), overflowY: 'auto' }
+          ]}
         >
           {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>

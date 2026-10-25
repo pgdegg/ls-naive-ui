@@ -2,9 +2,7 @@ import type { TreeMate } from 'treemate'
 import type { CSSProperties, VNode, VNodeChild } from 'vue'
 
 export type SelectMixedOption
-  = | SelectBaseOption
-    | SelectGroupOption
-    | SelectIgnoredOption
+  = SelectBaseOption | SelectGroupOption | SelectIgnoredOption
 
 export interface SelectBaseOption<
   V = string | number,
@@ -82,6 +80,7 @@ export type SelectGroupOption
   })
 
 export interface SelectInst {
+  readonly inputElement: HTMLElement | null
   focus: () => void
   blur: () => void
   focusInput: () => void

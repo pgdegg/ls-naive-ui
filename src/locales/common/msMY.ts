@@ -59,10 +59,6 @@ const msMY: NLocale = {
     confirm: 'Sahkan',
     clear: 'Kosongkan'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Sumber',
-    targetTitle: 'Sasaran'
-  },
   Transfer: {
     selectAll: 'Pilih semua',
     unselectAll: 'Nyahpilih semua',

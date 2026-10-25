@@ -41,3 +41,9 @@ placement.vue
 | --- | --- | --- |
 | scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动特定距离 |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 |
+
+## HIS 定制
+
+`overflow-width` 设置垂直滚动条宽度，`overflow-height` 设置水平滚动条高度，单位为像素；未设置时沿用主题尺寸。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

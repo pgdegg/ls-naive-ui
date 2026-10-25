@@ -59,10 +59,6 @@ const bgBG: NLocale = {
     confirm: 'Потвърди',
     clear: 'Изчисти'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Източник',
-    targetTitle: 'Цел'
-  },
   Transfer: {
     selectAll: 'Избери всички',
     unselectAll: 'Отмени всички',

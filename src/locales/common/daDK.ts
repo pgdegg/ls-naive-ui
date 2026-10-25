@@ -59,10 +59,6 @@ const daDK: NLocale = {
     confirm: 'Bekræft',
     clear: 'Ryd'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Kilde',
-    targetTitle: 'Mål'
-  },
   Transfer: {
     selectAll: 'Vælg alle',
     unselectAll: 'Vælg ingen',

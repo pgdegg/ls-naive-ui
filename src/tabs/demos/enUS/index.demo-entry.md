@@ -10,6 +10,7 @@ Switch contents in same area.
 
 ```demo
 basic.vue
+icon.vue
 segment.vue
 card.vue
 flex-label.vue
@@ -106,3 +107,17 @@ center-active-tab.vue
 | ------------------ | ------------ | ------------------------ | ------- |
 | scrollToCurrentTab | `() => void` | Scroll to current tab.   | 2.45.0  |
 | syncBarPosition    | `() => void` | Sync tab bar's position. | 2.24.0  |
+
+## HIS extension API
+
+| Location | API | Type / default | Description |
+| --- | --- | --- | --- |
+| Tab / TabPane | icon | string \| VNode \| (() => VNodeChild) / undefined | Header icon; strings use NIcon symbols and its loading placeholder |
+| Tab / TabPane slot | icon | () => VNode[] | Takes precedence over icon, alongside text/custom labels |
+| Tab / TabPane | fixed | 'left' \| 'right' / undefined | Pins tabs outside the middle scrolling region |
+| Tabs | left-type / right-type | 'bar' \| 'line' \| 'card' \| 'segment' / undefined | Fixed group style, inheriting type by default |
+| Tabs slot | header-left | () => VNode[] | Content before the headers |
+| Tabs slots | fixed-top / fixed-left / fixed-right / fixed-bottom | () => VNode[] | Persistent regions around pane content |
+| Export | tabPaneActiveContextKey | `InjectionKey<TabPaneActiveContext>` | selfActive, ancestor-aware active and nested path |
+
+Icons work with regular/fixed/segment and standalone tabs. No wrapper is created without an icon. Native activation, disabled, close and keyboard behavior remains. TabSlots and TabPaneSlots.icon describe the new slots. See [HIS customizations](../docs/his-customization).

@@ -2,7 +2,7 @@
 
 Naive UI supports tree shaking for components, locales and themes.
 
-By default the component theme is light, locale is enUS, and no extra imports are needed.
+By default the component theme is light, locale is zhCN and date locale is dateZhCN, and no extra imports are needed.
 
 For more info about theming, see [Customizing Theme](customize-theme).
 

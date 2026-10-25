@@ -198,3 +198,9 @@ export function handler() {
 ```
 
 </n-space>
+
+## HIS 定制
+
+`reset-on-resize` 在窗口 resize 防抖后重置拖拽偏移，默认 false；销毁时清理监听和定时器。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

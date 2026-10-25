@@ -1052,7 +1052,7 @@
 
 ### Breaking Changes
 
-- `n-transfer`'s UI is totally refactored. The original transfer component is renamed as `n-legacy-transfer` and will be removed in next major version.
+- `n-transfer`'s UI is totally refactored.
 
 ### Fixes
 
@@ -1075,7 +1075,6 @@
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/tusen-ai/naive-ui/issues/3277).
 - `n-tree` supports RTL.
 - `n-input` adds `scrollTo` method, closes [#3280](https://github.com/tusen-ai/naive-ui/issues/3280).
-- `n-legacy-grid` supports RTL.
 - `n-statistic` supports RTL.
 - `n-thing` supports RTL.
 - `n-transfer` add `render-source-label` prop.
@@ -1717,7 +1716,6 @@
 - Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/tusen-ai/naive-ui/issues/2505).
 - Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/tusen-ai/naive-ui/issues/2504).
 - Fix `n-button` rtl support.
-- Fix `n-form-item-row` can't call `n-form-item`'s methods.
 
 ### Feats
 
@@ -1737,7 +1735,6 @@
 
 ### Fixes
 
-- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/tusen-ai/naive-ui/issues/2497).
 - Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/tusen-ai/naive-ui/issues/2500).
 
 ## 2.25.3
@@ -4167,8 +4164,6 @@ See vue3.md
 `2020-05-14`
 
 ### Fixes
-
-- Fix the problem that label slot of the `n-form-item-col` & `n-form-item-row` cannot display.
 
 ## 1.0.12
 

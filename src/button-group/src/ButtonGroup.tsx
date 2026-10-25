@@ -8,12 +8,18 @@ import { buttonGroupInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export interface ButtonGroupInjection {
+  disabled?: boolean
+  ghost?: boolean
+  text?: boolean
   size?: ButtonSize | undefined
 }
 
 export const buttonGroupProps = {
   size: String as PropType<ButtonSize | undefined>,
-  vertical: Boolean
+  vertical: Boolean,
+  disabled: { type: Boolean, default: undefined },
+  ghost: { type: Boolean, default: undefined },
+  text: { type: Boolean, default: undefined }
 } as const
 
 export type ButtonGroupProps = ExtractPublicPropTypes<typeof buttonGroupProps>

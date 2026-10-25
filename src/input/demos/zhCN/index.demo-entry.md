@@ -101,3 +101,9 @@ textarea-resize-debug.vue
 | focus | `() => void` | Focus 输入框 |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | 滚动到 | 2.32.0 |
 | select | `() => void` | 选中输入框内容 |  |
+
+## HIS 定制
+
+`keeps: string | RegExp | (string | RegExp)[]` 过滤允许字符，`ignorekeeps: string | string[]` 补充字面字符；输入法组合期间不裁剪。`focus-delay` 延迟 autofocus 并在卸载时取消。新增 prepend / append 插槽。支持表单只读和占位符覆盖，实例 inputElement 暴露真实输入元素。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

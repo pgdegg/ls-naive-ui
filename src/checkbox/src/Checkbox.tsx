@@ -22,8 +22,10 @@ import {
 } from 'vue'
 import { NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { readonlyControlProps } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
+import { useInputElement } from '../../composables/use-input-element'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import renderCheckMark from './CheckMark'
@@ -31,6 +33,9 @@ import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {
+  hideCircle: Boolean,
+  cancelDisabled: Boolean,
+  ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<CheckboxTheme, CheckboxThemeOverrides>),
   size: String as PropType<CheckboxSize>,
   checked: {
@@ -78,6 +83,7 @@ export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
   setup(props) {
+    const inputElement = useInputElement()
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange) {
@@ -303,6 +309,7 @@ export default defineComponent({
         )
       : undefined
     return Object.assign(formItem, exposedMethods, {
+      inputElement,
       rtlEnabled: rtlEnabledRef,
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -352,6 +359,8 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-checkbox`,
+          this.hideCircle && 'hide-circle',
+          this.cancelDisabled && 'cancel-disabled',
           this.themeClass,
           this.rtlEnabled && `${mergedClsPrefix}-checkbox--rtl`,
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,

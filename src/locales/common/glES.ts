@@ -59,10 +59,6 @@ const glES: NLocale = {
     confirm: 'Confirmar',
     clear: 'Borrar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Orixe',
-    targetTitle: 'Destino'
-  },
   Transfer: {
     selectAll: 'Seleccionar todo',
     unselectAll: 'Deseleccionar todo',

@@ -59,10 +59,6 @@ const ukUA: NLocale = {
     confirm: 'Підтвердити',
     clear: 'Стерти'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Джерело',
-    targetTitle: 'Ціль'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

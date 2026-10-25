@@ -4,14 +4,14 @@
 
 <template>
   <div style="height: 200px">
-    <n-row :gutter="12">
-      <n-col :span="6">
+    <n-grid :x-gap="12">
+      <n-grid-item :span="6">
         <div />
-      </n-col>
-      <n-col :span="6">
+      </n-grid-item>
+      <n-grid-item :span="6">
         <div />
-      </n-col>
-      <n-col :span="6">
+      </n-grid-item>
+      <n-grid-item :span="6">
         <div style="width: 160px; float: right">
           <n-anchor style="z-index: 1" ignore-gap>
             <n-anchor-link title="演示" href="#演示">
@@ -22,8 +22,8 @@
             <n-anchor-link title="API" href="#API" />
           </n-anchor>
         </div>
-      </n-col>
-      <n-col :span="6">
+      </n-grid-item>
+      <n-grid-item :span="6">
         <div style="width: 160px; float: right">
           <n-anchor style="z-index: 1">
             <n-anchor-link title="演示" href="#演示">
@@ -34,7 +34,7 @@
             <n-anchor-link title="API" href="#API" />
           </n-anchor>
         </div>
-      </n-col>
-    </n-row>
+      </n-grid-item>
+    </n-grid>
   </div>
 </template>

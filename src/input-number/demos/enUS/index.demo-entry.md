@@ -12,6 +12,7 @@ precision.vue
 event.vue
 icon.vue
 button-placement.vue
+right-vertical.vue
 loading.vue
 min-max.vue
 size.vue
@@ -32,7 +33,7 @@ custom-icon.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
-| button-placement | `'both' \| 'right'` | `'right'` | Placement of add & minus button. | 2.29.1 |
+| button-placement | `'both' \| 'right' \| 'right-vertical'` | `'right'` | Placement of add/minus buttons. right-vertical stacks them on the right (up increases, down decreases). | 2.29.1 |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
@@ -74,3 +75,9 @@ custom-icon.vue
 | ----- | ------------ | ----------------------- |
 | blur  | `() => void` | Blur the input number.  |
 | focus | `() => void` | Focus the input number. |
+
+## HIS extensions
+
+`max-precision` caps decimals without padding; `on-precision-exceed(value, precision)` receives the original excess value. Added prepend/append slots, readonly/placeholder overrides and instance inputElement.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

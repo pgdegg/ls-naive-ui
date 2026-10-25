@@ -54,7 +54,7 @@ describe('n-auto-complete', () => {
 
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NAutoComplete)
-    expect(wrapper.find('input').attributes('placeholder')).toBe('Please Input')
+    expect(wrapper.find('input').attributes('placeholder')).toBe('请输入')
     await wrapper.setProps({
       placeholder: 'test-placeholder'
     })

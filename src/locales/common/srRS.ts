@@ -59,10 +59,6 @@ const srRS: NLocale = {
     confirm: 'Потврди',
     clear: 'Очисти'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Извор',
-    targetTitle: 'Одредиште'
-  },
   Transfer: {
     selectAll: 'Изабери све',
     unselectAll: 'Поништи избор',

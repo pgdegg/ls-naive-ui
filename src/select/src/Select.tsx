@@ -66,12 +66,15 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   markEventEffectPerformed,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { normalizeOptions } from '../../_utils/naive/normalize-options'
+import { useInputElement } from '../../composables/use-input-element'
 import { selectLight } from '../styles'
 import style from './styles/index.cssr'
 import {
@@ -82,6 +85,12 @@ import {
 } from './utils'
 
 export const selectProps = {
+  filterValue: String,
+  filterKeys: Array as PropType<string[]>,
+  onUpdateFilterValue: Function as PropType<(value: string) => void>,
+  'onUpdate:filterValue': Function as PropType<(value: string) => void>,
+  onQueryChange: Function as PropType<(value: string) => void>,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<SelectTheme, SelectThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -89,6 +98,10 @@ export const selectProps = {
     default: undefined
   },
   clearable: Boolean,
+  separator: String,
+  remoteShowOnInput: Boolean,
+  onUpdateLabel: Function as PropType<(value: string | string[]) => void>,
+  'onUpdate:label': Function as PropType<(value: string | string[]) => void>,
   clearCreatedOptionsOnClear: {
     type: Boolean,
     default: true
@@ -98,7 +111,7 @@ export const selectProps = {
     default: true
   },
   options: {
-    type: Array as PropType<SelectMixedOption[]>,
+    type: Array as PropType<SelectMixedOption[] | string[] | number[]>,
     default: () => []
   },
   defaultValue: {
@@ -238,6 +251,7 @@ export default defineComponent({
   props: selectProps,
   slots: Object as SlotsType<SelectSlots>,
   setup(props) {
+    const inputElement = useInputElement()
     if (__DEV__) {
       watchEffect(() => {
         if (props.items !== undefined) {
@@ -270,15 +284,42 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = toRef(props, 'value')
+    const decodeValue = (
+      value: Value | null | undefined
+    ): Value | null | undefined =>
+      props.multiple && props.separator && typeof value === 'string'
+        ? value
+          ? value.split(props.separator)
+          : []
+        : value
+    const uncontrolledValueRef = ref(decodeValue(props.defaultValue) ?? null)
+    const controlledValueRef = computed(() => decodeValue(props.value))
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
     const focusedRef = ref(false)
-    const patternRef = ref('')
-    const compitableOptionsRef = useCompitable(props, ['items', 'options'])
+    const patternRef = ref(props.filterValue ?? '')
+    watch(
+      () => props.filterValue,
+      (value) => {
+        if (value !== undefined)
+          patternRef.value = value
+      }
+    )
+    watch(patternRef, (value) => {
+      props.onUpdateFilterValue?.(value)
+      props['onUpdate:filterValue']?.(value)
+      props.onQueryChange?.(value)
+    })
+    const rawOptionsRef = useCompitable(props, ['items', 'options'])
+    const compitableOptionsRef = computed(() =>
+      normalizeOptions<SelectMixedOption>(
+        rawOptionsRef.value,
+        props.labelField,
+        props.valueField
+      )
+    )
     const createdOptionsRef = ref<SelectOption[]>([])
     const beingCreatedOptionsRef = ref<SelectOption[]>([])
     const localOptionsRef = computed<SelectMixedOption[]>(() => {
@@ -296,6 +337,19 @@ export default defineComponent({
       return (pattern: string, option: SelectBaseOption): boolean => {
         if (!option)
           return false
+        if (props.filterKeys?.length) {
+          const record = option[valueField]
+          return [labelField, ...props.filterKeys].some(key =>
+            String(
+              option[key]
+              ?? (record && typeof record === 'object'
+                ? (record as Record<string, unknown>)[key]
+                : '')
+            )
+              .toLowerCase()
+              .includes(pattern.toLowerCase())
+          )
+        }
         const label = option[labelField]
         if (typeof label === 'string') {
           return patternMatched(pattern, label)
@@ -347,17 +401,19 @@ export default defineComponent({
       )
     )
     const uncontrolledShowRef = ref(false)
-    const mergedShowRef = useMergedState(
+    const requestedShowRef = useMergedState(
       toRef(props, 'show'),
       uncontrolledShowRef
+    )
+    const mergedShowRef = computed(
+      () =>
+        requestedShowRef.value
+        && (!props.remote || !props.remoteShowOnInput || !!patternRef.value.trim())
     )
     const triggerRef = ref<InternalSelectionInst | null>(null)
     const followerRef = ref<FollowerInst | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
     const { localeRef } = useLocale('Select')
-    const localizedPlaceholderRef = computed<string>(() => {
-      return props.placeholder ?? localeRef.value.placeholder
-    })
 
     const emptyArray: SelectOption[] = []
     const memoValOptMapRef = ref(new Map<string | number, SelectOption>())
@@ -437,11 +493,47 @@ export default defineComponent({
         return 'medium'
       }
     })
+    const localizedPlaceholderRef = computed<string>(() => {
+      return formItem.mergedHidePlaceholderRef.value
+        ? ''
+        : (props.placeholder ?? localeRef.value.placeholder)
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
+    watch(
+      [selectedOptionsRef, selectedOptionRef],
+      () => {
+        const options = props.multiple
+          ? (selectedOptionsRef.value ?? [])
+          : selectedOptionRef.value
+            ? [selectedOptionRef.value]
+            : []
+        const labels = options.map(option =>
+          String(
+            typeof option[props.labelField] === 'string'
+              ? option[props.labelField]
+              : (option[props.valueField] ?? '')
+          )
+        )
+        const label = props.multiple
+          ? props.separator
+            ? labels.join(props.separator)
+            : labels
+          : (labels[0] ?? '')
+        props.onUpdateLabel?.(label)
+        props['onUpdate:label']?.(label)
+      },
+      { immediate: true }
+    )
     function doUpdateValue(
       value: string | number | Array<string | number> | null,
       option: SelectOption | null | SelectOption[]
     ): void {
+      if (mergedDisabledRef.value)
+        return
+      const emittedValue
+        = props.multiple && props.separator && Array.isArray(value)
+          ? value.join(props.separator)
+          : value
       const {
         onChange,
         'onUpdate:value': _onUpdateValue,
@@ -449,11 +541,11 @@ export default defineComponent({
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       if (onChange)
-        call(onChange as OnUpdateValueImpl, value, option)
+        call(onChange as OnUpdateValueImpl, emittedValue, option)
       if (onUpdateValue)
-        call(onUpdateValue as OnUpdateValueImpl, value, option)
+        call(onUpdateValue as OnUpdateValueImpl, emittedValue, option)
       if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+        call(_onUpdateValue as OnUpdateValueImpl, emittedValue, option)
       }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
@@ -526,6 +618,8 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function openMenu(): void {
+      if (props.remote && props.remoteShowOnInput && !patternRef.value.trim())
+        return
       if (!mergedDisabledRef.value) {
         doUpdateShow(true)
         uncontrolledShowRef.value = true
@@ -722,11 +816,11 @@ export default defineComponent({
       )
     }
     function handlePatternInput(e: InputEvent): void {
+      const { value } = e.target as unknown as HTMLInputElement
+      patternRef.value = value
       if (!mergedShowRef.value) {
         openMenu()
       }
-      const { value } = e.target as unknown as HTMLInputElement
-      patternRef.value = value
       const { tag, remote } = props
       doSearch(value)
       if (tag && !remote) {
@@ -887,9 +981,12 @@ export default defineComponent({
       followerRef.value?.syncPosition()
     }
     updateMemorizedOptions()
-    watch(toRef(props, 'options'), updateMemorizedOptions)
+    watch(compitableOptionsRef, updateMemorizedOptions)
 
     const exposedMethods: SelectInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       focus: () => {
         triggerRef.value?.focus()
       },
@@ -916,6 +1013,7 @@ export default defineComponent({
       : undefined
     return {
       ...exposedMethods,
+      inputElement,
       mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,

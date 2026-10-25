@@ -6,6 +6,7 @@
 
 ```demo
 single.vue
+primitive-options.vue
 multiple.vue
 size.vue
 single-lazy.vue
@@ -47,7 +48,7 @@ default-value-debug.vue
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.27.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
-| options | `CascaderOption[]` | `[]` | 填充的 options 数据 |  |
+| options | `CascaderOption[] \| string[] \| number[]` | `[]` | 填充的 options 数据。字符串或数字列表自动转换为同名同值的一级叶子选项，按原始值去重并保留首次顺序，数字值保持数字类型。多级结构使用对象选项。 |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否远程获取数据 |  |
@@ -96,3 +97,9 @@ default-value-debug.vue
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
+
+## HIS 定制
+
+`filter-value` / `update:filter-value` 控制查询，`filter-keys` 在路径节点附加字段中搜索，`on-query-change` 通知查询。`default-first-option` 默认 true，控制搜索结果自动高亮首项。支持只读、提示覆盖、inputElement；createCascaderModelAdapter 提供对象路径与中间字段模型转换。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

@@ -60,10 +60,6 @@ const eo: NLocale = {
     confirm: 'Konfirmi',
     clear: 'Malplenigi'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Source',
-    targetTitle: 'Target'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: 'Select all',

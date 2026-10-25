@@ -17,42 +17,42 @@ const action = ref(true)
 </script>
 
 <template>
-  <n-row>
-    <n-col :span="12">
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="avatar">
         头像
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="action">
         操作
       </n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
+    </n-grid-item>
+  </n-grid>
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="header">
         标题
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="headerExtra">
         标题附加信息
       </n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
+    </n-grid-item>
+  </n-grid>
+  <n-grid>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="description">
         描述
       </n-checkbox>
-    </n-col>
-    <n-col :span="12">
+    </n-grid-item>
+    <n-grid-item :span="12">
       <n-checkbox v-model:checked="footer">
         底部
       </n-checkbox>
-    </n-col>
-  </n-row>
+    </n-grid-item>
+  </n-grid>
   <n-divider />
   <n-thing>
     <template v-if="avatar" #avatar>

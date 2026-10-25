@@ -59,10 +59,6 @@ const mlIN: NLocale = {
     confirm: 'സ്ഥിരീകരിക്കുക',
     clear: 'മായ്ക്കുക'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ഉറവിടം',
-    targetTitle: 'ലക്ഷ്യം'
-  },
   Transfer: {
     selectAll: 'എല്ലാം തിരഞ്ഞെടുക്കുക',
     unselectAll: 'എല്ലാ തിരഞ്ഞെടുപ്പും നീക്കം ചെയ്യുക',

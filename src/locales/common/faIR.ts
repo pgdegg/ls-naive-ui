@@ -59,10 +59,6 @@ const faIR: NLocale = {
     confirm: 'تأیید',
     clear: 'تنظیم مجدد'
   },
-  LegacyTransfer: {
-    sourceTitle: 'آیتم منبع',
-    targetTitle: 'آیتم مقصد'
-  },
   Transfer: {
     selectAll: 'انتخاب همه',
     clearAll: 'حذف همه',

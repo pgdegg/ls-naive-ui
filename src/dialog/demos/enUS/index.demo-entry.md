@@ -184,3 +184,9 @@ All the properties can be modified dynamically.
 | header  | `()`       | `Header` content. |         |
 | icon    | `()`       | `Icon` content.   |         |
 | close   | `()`       | `Close` content.  | 2.36.0  |
+
+## HIS extensions
+
+`height: string | number` sets body height. useDialog().create accepts resetOnResize. confirm(options) returns an action Promise; setConfirmDefaults configures provider defaults. resolveOnCancel defaults to false, distinguishCancelAndClose separates close, and async callbacks returning false veto closing.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

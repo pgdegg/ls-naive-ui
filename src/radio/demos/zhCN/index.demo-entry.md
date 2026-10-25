@@ -46,3 +46,9 @@ tooltip-debug.vue
 | value | `string \| number \| boolean \| null` | `null` | 选中的值 |  |
 | value-field | `string` | `'value'` | `options` 中选项值的字段名 | 2.45.0 |
 | on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |  |
+
+## HIS 定制
+
+`hide-circle` 隐藏视觉指示器，保留输入与键盘操作。Radio / RadioGroup 提供 inputElement，支持 readonly / ignore-parent-readonly；对象模型可使用 createOptionModelAdapter。没有占位符属性。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

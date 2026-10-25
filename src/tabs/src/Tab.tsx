@@ -1,13 +1,16 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { OnBeforeLeaveImpl } from './interface'
+import type { OnBeforeLeaveImpl, TabsType } from './interface'
 import { computed, defineComponent, Fragment, h, inject, mergeProps } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
 import { omit, render } from '../../_utils'
+import { NIcon } from '../../icon'
 import { tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
 export const tabProps = {
+  internalType: String as PropType<TabsType>,
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
   internalCreatedByPane: Boolean,
@@ -16,11 +19,17 @@ export const tabProps = {
 
 export type TabProps = ExtractPublicPropTypes<typeof tabProps>
 
+export interface TabSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   __TAB__: true,
   inheritAttrs: false,
   name: 'Tab',
   props: tabProps,
+  slots: Object as SlotsType<TabSlots>,
   setup(props) {
     const {
       mergedClsPrefixRef,
@@ -54,7 +63,7 @@ export default defineComponent({
       addTabClass: addTabClassRef,
       clsPrefix: mergedClsPrefixRef,
       value: valueRef,
-      type: typeRef,
+      type: computed(() => props.internalType ?? typeRef.value),
       handleClose(e: MouseEvent) {
         e.stopPropagation()
         if (props.disabled)
@@ -102,6 +111,16 @@ export default defineComponent({
       $slots: { default: defaultSlot }
     } = this
     const mergedTab = label ?? tab
+    const icon
+      = !internalAddable
+        && (this.$slots.icon?.()
+          ?? (typeof this.icon === 'string' ? (
+            <NIcon symbol={this.icon} />
+          ) : typeof this.icon === 'object' ? (
+            this.icon
+          ) : (
+            render(this.icon)
+          )))
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
         {this.internalLeftPadded ? (
@@ -130,6 +149,9 @@ export default defineComponent({
               : this.$attrs
           )}
         >
+          {icon ? (
+            <span class={`${clsPrefix}-tabs-tab__icon`}>{icon}</span>
+          ) : null}
           <span class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (
               <>

@@ -59,10 +59,6 @@ const guIN: NLocale = {
     confirm: 'પુષ્ટિ કરો',
     clear: 'સાફ કરો'
   },
-  LegacyTransfer: {
-    sourceTitle: 'સ્ત્રોત',
-    targetTitle: 'લક્ષ્ય'
-  },
   Transfer: {
     selectAll: 'બધું પસંદ કરો',
     unselectAll: 'બધી પસંદગી દૂર કરો',

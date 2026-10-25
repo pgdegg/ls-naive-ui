@@ -131,3 +131,9 @@ feedback-style.vue
 | default  | `()` | 内容           |
 | feedback | `()` | 表项的反馈信息 | 2.24.0 |
 | label    | `()` | 标签内容       |        |
+
+## HIS 定制
+
+`readonly` 向控件提供只读状态，选择类控件以禁用交互实现；`hide-placeholder` 隐藏提示；`content-width: string | number` 设置 inline 表单项内容宽度。文本和选择控件可用 ignore-parent-readonly、hide-placeholder=false 或 ignore-parent-hide-placeholder="form" 局部覆盖。readonlyRaw 已移除。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

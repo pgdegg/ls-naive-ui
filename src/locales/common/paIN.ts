@@ -59,10 +59,6 @@ const paIN: NLocale = {
     confirm: 'ਪੁਸ਼ਟੀ ਕਰੋ',
     clear: 'ਸਾਫ਼ ਕਰੋ'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ਸਰੋਤ',
-    targetTitle: 'ਟੀਚਾ'
-  },
   Transfer: {
     selectAll: 'ਸਭ ਚੁਣੋ',
     unselectAll: 'ਸਭ ਅਣਚੁਣੇ ਕਰੋ',

@@ -19,6 +19,7 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
+import type { InputKeeps } from './keeps'
 import type { InputSize } from './public-types'
 import { off, on } from 'evtd'
 import { getPadding } from 'seemly'
@@ -30,6 +31,7 @@ import {
   getCurrentInstance,
   h,
   nextTick,
+  onBeforeUnmount,
   onMounted,
   provide,
   ref,
@@ -40,6 +42,7 @@ import {
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear, NBaseIcon, NBaseSuffix, NScrollbar } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
+import { renderInputAddons } from '../../_internal/input-addons'
 import {
   useConfig,
   useFormItem,
@@ -48,16 +51,20 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
+import { useInputElement } from '../../composables/use-input-element'
 import { inputLight } from '../styles'
 import { inputInjectionKey } from './interface'
+import { buildKeepRegExp } from './keeps'
 import style, { safariStyle } from './styles/input.cssr'
 import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 
 export const inputProps = {
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<InputTheme, InputThemeOverrides>),
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -105,6 +112,9 @@ export const inputProps = {
     default: true
   },
   autofocus: Boolean,
+  focusDelay: Number,
+  keeps: [String, RegExp, Array] as PropType<InputKeeps>,
+  ignorekeeps: [String, Array] as PropType<string | string[]>,
   inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
   resizable: {
     type: Boolean,
@@ -163,6 +173,8 @@ export const inputProps = {
 export type InputProps = ExtractPublicPropTypes<typeof inputProps>
 
 export interface InputSlots {
+  prepend?: () => VNode[]
+  append?: () => VNode[]
   'clear-icon'?: () => VNode[]
   count?: (props: { value: string }) => VNode[]
   'password-invisible-icon'?: () => VNode[]
@@ -201,6 +213,9 @@ export default defineComponent({
     const textareaMirrorElRef = ref<HTMLElement | null>(null)
     const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLInputElement | null>(null)
+    const inputElement = useInputElement<
+      HTMLInputElement | HTMLTextAreaElement
+    >(() => textareaElRef.value ?? inputElRef.value)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
     const currentFocusedInputRef = ref<
       HTMLInputElement | HTMLTextAreaElement | null
@@ -218,6 +233,7 @@ export default defineComponent({
     )
     // 表单项
     const formItem = useFormItem(props, {
+      readonlyAsDisabled: false,
       mergedSize: (NFormItem) => {
         const { size } = props
         if (size)
@@ -241,6 +257,8 @@ export default defineComponent({
     // 占位符
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
       const { placeholder, pair } = props
+      if (formItem.mergedHidePlaceholderRef.value)
+        return pair ? ['', ''] : ['']
       if (pair) {
         if (Array.isArray(placeholder)) {
           return placeholder
@@ -287,7 +305,7 @@ export default defineComponent({
     const showClearButton = useMemo(() => {
       if (
         mergedDisabledRef.value
-        || props.readonly
+        || formItem.mergedReadonlyRef.value
         || !props.clearable
         || (!mergedFocusRef.value && !hoverRef.value)
       ) {
@@ -379,7 +397,19 @@ export default defineComponent({
       const { maxlength } = props
       return maxlength === undefined ? undefined : Number(maxlength)
     })
+    let autofocusTimer: ReturnType<typeof setTimeout> | undefined
+    onBeforeUnmount(() => clearTimeout(autofocusTimer))
     onMounted(() => {
+      if (props.autofocus && props.focusDelay) {
+        autofocusTimer = setTimeout(() => {
+          if (
+            !formItem.mergedDisabledRef.value
+            && !formItem.mergedReadonlyRef.value
+          ) {
+            focus()
+          }
+        }, props.focusDelay)
+      }
       // 若非配对输入则同步镜像
       const { value } = mergedValueRef
       if (!Array.isArray(value)) {
@@ -499,7 +529,7 @@ export default defineComponent({
       index: 0 | 1 = 0,
       event = 'input'
     ): void {
-      const targetValue = (e.target as HTMLInputElement).value
+      let targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
       if (e instanceof InputEvent && !e.isComposing) {
         isComposingRef.value = false
@@ -513,6 +543,13 @@ export default defineComponent({
       syncSource = targetValue
       if (isComposingRef.value)
         return
+      const keep = buildKeepRegExp(props.keeps, props.ignorekeeps)
+      if (keep) {
+        targetValue = targetValue.replace(keep, '')
+        ;(e.target as HTMLInputElement).value = targetValue
+        syncSource = targetValue
+        syncMirror(targetValue)
+      }
       focusedInputCursorControl.recordCursor()
       const isIncomingValueValid = allowInput(targetValue)
       if (isIncomingValueValid) {
@@ -736,6 +773,8 @@ export default defineComponent({
     function handleWrapperKeydown(e: KeyboardEvent): void {
       if (props.onKeydown)
         call(props.onKeydown, e)
+      if (e.defaultPrevented)
+        return
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
@@ -892,6 +931,7 @@ export default defineComponent({
     })
 
     const exposedProps: InputWrappedRef = {
+      inputElement,
       wrapperElRef,
       inputElRef,
       textareaElRef,
@@ -1032,6 +1072,7 @@ export default defineComponent({
       : undefined
 
     return {
+      mergedReadonly: formItem.mergedReadonlyRef,
       ...exposedProps,
       // DOM 引用
       wrapperElRef,
@@ -1114,7 +1155,7 @@ export default defineComponent({
       ['password-invisible-icon']?: () => VNode[]
     }
     onRender?.()
-    return (
+    const control = (
       <div
         ref="wrapperElRef"
         class={[
@@ -1125,6 +1166,7 @@ export default defineComponent({
           {
             [`${mergedClsPrefix}-input--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
+            [`${mergedClsPrefix}-input--readonly`]: this.mergedReadonly,
             [`${mergedClsPrefix}-input--textarea`]: type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
               this.resizable && !this.autosize,
@@ -1191,14 +1233,14 @@ export default defineComponent({
                           `${mergedClsPrefix}-input__textarea-el`,
                           this.inputProps?.class
                         ]}
-                        autofocus={this.autofocus}
+                        autofocus={this.autofocus && !this.focusDelay}
                         rows={Number(this.rows)}
-                        placeholder={this.placeholder as string | undefined}
+                        placeholder={this.mergedPlaceholder[0]}
                         value={this.mergedValue as string | undefined}
                         disabled={this.mergedDisabled}
                         maxlength={countGraphemes ? undefined : this.maxlength}
                         minlength={countGraphemes ? undefined : this.minlength}
-                        readonly={this.readonly as any}
+                        readonly={this.mergedReadonly as any}
                         tabindex={
                           this.passivelyActivated && !this.activated
                             ? -1
@@ -1283,8 +1325,8 @@ export default defineComponent({
                     ? this.mergedValue[0]
                     : (this.mergedValue as any)
                 }
-                readonly={this.readonly as any}
-                autofocus={this.autofocus}
+                readonly={this.mergedReadonly as any}
+                autofocus={this.autofocus && !this.focusDelay}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
                 onFocus={(e) => {
@@ -1417,7 +1459,7 @@ export default defineComponent({
                     ? this.mergedValue[1]
                     : undefined
                 }
-                readonly={this.readonly as any}
+                readonly={this.mergedReadonly as any}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={(e) => {
@@ -1484,5 +1526,6 @@ export default defineComponent({
         ) : null}
       </div>
     )
+    return renderInputAddons(control, this.$slots, this.mergedSize)
   }
 })

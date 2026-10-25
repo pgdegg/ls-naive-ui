@@ -59,10 +59,6 @@ const rmCH: NLocale = {
     confirm: 'Confermar',
     clear: 'Stizzar'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Funtauna',
-    targetTitle: 'Destinaziun'
-  },
   Transfer: {
     selectAll: 'Tscherni tut',
     unselectAll: 'Destscherni tut',

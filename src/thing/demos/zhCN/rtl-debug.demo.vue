@@ -4,11 +4,11 @@
 
 <script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { unstableRowRtl, unstableThingRtl } from 'naive-ui'
+import { unstableThingRtl } from 'naive-ui'
 import { ref } from 'vue'
 
 const rtlEnabled = ref(false)
-const rtlStyles = [unstableThingRtl, unstableRowRtl]
+const rtlStyles = [unstableThingRtl]
 const avatar = ref(true)
 const header = ref(true)
 const headerExtra = ref(true)
@@ -21,42 +21,42 @@ const action = ref(true)
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-row>
-        <n-col :span="12">
+      <n-grid>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="avatar">
             Avatar
           </n-checkbox>
-        </n-col>
-        <n-col :span="12">
+        </n-grid-item>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="action">
             Action
           </n-checkbox>
-        </n-col>
-      </n-row>
-      <n-row>
-        <n-col :span="12">
+        </n-grid-item>
+      </n-grid>
+      <n-grid>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="header">
             Header
           </n-checkbox>
-        </n-col>
-        <n-col :span="12">
+        </n-grid-item>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="headerExtra">
             Header Extra
           </n-checkbox>
-        </n-col>
-      </n-row>
-      <n-row>
-        <n-col :span="12">
+        </n-grid-item>
+      </n-grid>
+      <n-grid>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="description">
             Description
           </n-checkbox>
-        </n-col>
-        <n-col :span="12">
+        </n-grid-item>
+        <n-grid-item :span="12">
           <n-checkbox v-model:checked="footer">
             Footer
           </n-checkbox>
-        </n-col>
-      </n-row>
+        </n-grid-item>
+      </n-grid>
       <n-divider />
       <n-thing>
         <template v-if="avatar" #avatar>

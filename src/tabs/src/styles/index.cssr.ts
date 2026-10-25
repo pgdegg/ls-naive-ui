@@ -40,6 +40,11 @@ export default cB('tabs', `
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
 `, [
+  cB('tabs-fixed', [
+    cB('tabs-tab-wrapper', { flexShrink: 0 }),
+    cB('tabs-tab', [cM('active', { boxShadow: 'inset 0 -2px 0 var(--n-bar-color)' })])
+  ]),
+  cB('tabs-tab', [cE('icon', { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginInlineEnd: '6px', verticalAlign: 'middle', fontSize: '1em' })]),
   c('&.transition-disabled', [
     cB('tabs-tab', `
       transition: none !important;

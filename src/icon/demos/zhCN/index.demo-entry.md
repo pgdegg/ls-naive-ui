@@ -36,3 +36,9 @@ icon-wrapper.vue
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |
 | default | `()` | 图标的内容 |
+
+## HIS 定制
+
+`symbol`、`prefix`、`symbol-version`、`symbol-resolver` 支持动态 sprite。进入视口后加载 image[data-src]，支持延迟插入、资源共享和版本更新。加载完成前或失败时使用 component / 默认插槽，未指定则显示内置占位。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

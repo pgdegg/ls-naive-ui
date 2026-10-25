@@ -4,6 +4,7 @@ import type { exposedDialogEnvProps } from './DialogEnvironment'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
+import { useLocale } from '../../_mixins'
 import { omit } from '../../_utils'
 import {
   dialogApiInjectionKey,
@@ -35,12 +36,21 @@ interface TypeSafeDialogReactive extends DialogReactive {
 }
 
 export interface DialogApiInjection {
+  confirm: (
+    options?: DialogConfirmOptions
+  ) => Promise<'confirm' | 'cancel' | 'close'>
+  setConfirmDefaults: (options: DialogConfirmOptions) => void
   destroyAll: () => void
   create: (options: DialogOptions) => DialogReactive
   success: (options: DialogOptions) => DialogReactive
   warning: (options: DialogOptions) => DialogReactive
   error: (options: DialogOptions) => DialogReactive
   info: (options: DialogOptions) => DialogReactive
+}
+
+export interface DialogConfirmOptions extends DialogOptions {
+  resolveOnCancel?: boolean
+  distinguishCancelAndClose?: boolean
 }
 
 export interface DialogProviderInjection {
@@ -75,6 +85,8 @@ export const NDialogProvider = defineComponent({
   name: 'DialogProvider',
   props: dialogProviderProps,
   setup(): DialogProviderSetup {
+    const { localeRef } = useLocale('Popconfirm')
+    const confirmDefaults: DialogConfirmOptions = {}
     const dialogListRef = ref<TypeSafeDialogReactive[]>([])
     const dialogInstRefs: Record<string, DialogInst | undefined> = {}
     function create(options: DialogOptions = {}): DialogReactive {
@@ -112,6 +124,52 @@ export const NDialogProvider = defineComponent({
     }
 
     const api: DialogApiInjection = {
+      setConfirmDefaults: options => Object.assign(confirmDefaults, options),
+      confirm(options = {}) {
+        const merged = { ...confirmDefaults, ...options }
+        const { resolveOnCancel, distinguishCancelAndClose, ...dialogOptions }
+          = merged
+        return new Promise((resolve, reject) => {
+          let settled = false
+          const finish = (action: 'confirm' | 'cancel' | 'close'): void => {
+            if (settled)
+              return
+            settled = true
+            const result
+              = action === 'close' && !distinguishCancelAndClose
+                ? 'cancel'
+                : action
+            if (action === 'confirm' || resolveOnCancel)
+              resolve(result)
+            else reject(result)
+          }
+          create({
+            type: 'warning',
+            positiveText: localeRef.value.positiveText,
+            negativeText: localeRef.value.negativeText,
+            ...dialogOptions,
+            async onPositiveClick(event) {
+              if ((await merged.onPositiveClick?.(event)) === false)
+                return false
+              finish('confirm')
+            },
+            async onNegativeClick(event) {
+              if ((await merged.onNegativeClick?.(event)) === false)
+                return false
+              finish('cancel')
+            },
+            async onClose() {
+              if ((await merged.onClose?.()) === false)
+                return false
+              finish('close')
+            },
+            onAfterLeave() {
+              merged.onAfterLeave?.()
+              finish('close')
+            }
+          })
+        })
+      },
       create,
       destroyAll,
       info: typedApi[0],

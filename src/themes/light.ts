@@ -48,8 +48,6 @@ import { inputNumberLight } from '../input-number/styles'
 import { inputOtpLight } from '../input-otp/styles'
 import { inputLight } from '../input/styles'
 import { layoutLight } from '../layout/styles'
-import { rowLight } from '../legacy-grid/styles'
-import { legacyTransferLight } from '../legacy-transfer/styles'
 import { listLight } from '../list/styles'
 import { loadingBarLight } from '../loading-bar/styles'
 import { logLight } from '../log/styles'
@@ -138,7 +136,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   InputNumber: inputNumberLight,
   InputOtp: inputOtpLight,
   Layout: layoutLight,
-  LegacyTransfer: legacyTransferLight,
   List: listLight,
   LoadingBar: loadingBarLight,
   Log: logLight,
@@ -156,7 +153,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   QrCode: qrcodeLight,
   Radio: radioLight,
   Rate: rateLight,
-  Row: rowLight,
   Result: resultLight,
   Scrollbar: scrollbarLight,
   Skeleton: skeletonLight,

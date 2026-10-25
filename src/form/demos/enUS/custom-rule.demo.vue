@@ -132,8 +132,8 @@ function handleValidateButtonClick(e: MouseEvent) {
         @keydown.enter.prevent
       />
     </n-form-item>
-    <n-row :gutter="[0, 24]">
-      <n-col :span="24">
+    <n-grid :x-gap="0" :y-gap="24">
+      <n-grid-item :span="24">
         <div style="display: flex; justify-content: flex-end">
           <n-button
             :disabled="modelRef.age === null"
@@ -144,8 +144,8 @@ function handleValidateButtonClick(e: MouseEvent) {
             Validate
           </n-button>
         </div>
-      </n-col>
-    </n-row>
+      </n-grid-item>
+    </n-grid>
   </n-form>
 
   <pre>{{ JSON.stringify(modelRef, null, 2) }}

@@ -138,3 +138,9 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 | default  | `()`       | Content.       |
 | feedback | `()`       | Feedback.      | 2.24.0  |
 | label    | `()`       | Label content. |         |
+
+## HIS extensions
+
+`readonly` propagates readonly state; selectors become noninteractive. `hide-placeholder` hides hints. `content-width: string | number` sets inline item content width. Text/select controls support ignore-parent-readonly, hide-placeholder=false and ignore-parent-hide-placeholder="form" overrides. The readonlyRaw alias has been removed.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

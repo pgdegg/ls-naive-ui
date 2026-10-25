@@ -40,3 +40,9 @@ placement.vue
 | --- | --- | --- |
 | scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content by specific distance. |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. |
+
+## HIS extensions
+
+`overflow-width` sets vertical bar width; `overflow-height` sets horizontal bar height in pixels. Undefined uses theme dimensions.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

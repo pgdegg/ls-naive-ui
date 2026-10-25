@@ -59,10 +59,6 @@ const itIT: NLocale = {
     confirm: 'Conferma',
     clear: 'Cancella'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Fonte',
-    targetTitle: 'Destinazione'
-  },
   Transfer: {
     selectAll: 'Seleziona tutto',
     unselectAll: 'Deseleziona tutto',

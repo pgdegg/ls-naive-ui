@@ -59,10 +59,6 @@ const huHU: NLocale = {
     confirm: 'Megerősítés',
     clear: 'Törlés'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Forrás',
-    targetTitle: 'Cél'
-  },
   Transfer: {
     selectAll: 'Összes kijelölése',
     unselectAll: 'Kijelölés törlése',

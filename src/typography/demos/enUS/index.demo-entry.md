@@ -28,6 +28,17 @@ router-link.vue
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
 | tag | `string` | `undefined` | Tag to use. `code` or `delete` properties will override this. |
 
+### Text extensions
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | 'small' \| 'medium' \| 'large' | undefined | Theme font size; omitted inherits the parent |
+| truncated | boolean | false | Single-line ellipsis |
+| line-clamp | string \| number | undefined | Positive integer lines; takes precedence over truncated |
+| Instance isTruncated | readonly boolean | false | Actual overflow state |
+
+See the dedicated [Text documentation](text) for complete APIs and demos. This is the same existing NText component.
+
 ### P Props
 
 | Name | Type | Default | Description |

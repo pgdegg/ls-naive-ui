@@ -37,6 +37,16 @@ const contentBaseStyle = cB('card-content', `
 // --n-color-embedded-modal
 // --n-color-embedded-popover
 export default c([
+  cB('card', [cM('disabled', { position: 'relative' }, [c('&::after', {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background: 'var(--n-color)',
+    opacity: 0.5,
+    cursor: 'not-allowed',
+    zIndex: 1,
+    borderRadius: 'inherit'
+  })])]),
   cB('card', `
     font-size: var(--n-font-size);
     line-height: var(--n-line-height);

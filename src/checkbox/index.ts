@@ -5,6 +5,7 @@ export {
   default as NCheckboxGroup
 } from './src/CheckboxGroup'
 export type {
+  CheckboxGroupInst,
   CheckboxGroupOption,
   CheckboxGroupProps
 } from './src/CheckboxGroup'

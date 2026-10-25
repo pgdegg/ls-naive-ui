@@ -9,6 +9,7 @@ import { NDialog } from './Dialog'
 import { dialogPropKeys, dialogProps } from './dialogProps'
 
 export const exposedDialogEnvProps = {
+  resetOnResize: Boolean,
   ...dialogProps,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
@@ -163,6 +164,7 @@ export const NDialogEnvironment = defineComponent({
         autoFocus={this.autoFocus}
         transformOrigin={this.transformOrigin}
         draggable={this.draggable}
+        resetOnResize={this.resetOnResize}
         internalAppear
         internalDialog
       >

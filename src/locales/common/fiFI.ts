@@ -59,10 +59,6 @@ const fiFI: NLocale = {
     confirm: 'Vahvista',
     clear: 'Tyhjennä'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Lähde',
-    targetTitle: 'Kohde'
-  },
   Transfer: {
     selectAll: 'Valitse kaikki',
     unselectAll: 'Poista kaikki valinnat',

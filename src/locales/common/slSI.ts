@@ -59,10 +59,6 @@ const slSI: NLocale = {
     confirm: 'Potrdi',
     clear: 'Počisti'
   },
-  LegacyTransfer: {
-    sourceTitle: 'Vir',
-    targetTitle: 'Cilj'
-  },
   Transfer: {
     selectAll: 'Izberi vse',
     unselectAll: 'Počisti izbor',

@@ -61,3 +61,9 @@ embedded.vue
 | default      | `()`       | Card content.           |
 | footer       | `()`       | Footer content.         |
 | action       | `()`       | Operating area content. |
+
+## HIS extensions
+
+`disabled` provides ancestor-aware disabling, inert content and an overlay. Locally enabled cards/controls cannot override a disabled ancestor.
+
+See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

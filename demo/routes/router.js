@@ -20,6 +20,9 @@ export default function createDemoRouter(app, routes) {
   })
 
   router.afterEach((to, from) => {
+    document.documentElement.lang = to.path.startsWith('/en-US')
+      ? 'en-US'
+      : 'zh-CN'
     if (!from || to.path !== from.path) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.finish()

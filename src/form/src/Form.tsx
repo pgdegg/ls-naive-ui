@@ -26,6 +26,9 @@ import style from './styles/form.cssr'
 export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme, FormThemeOverrides>),
   inline: Boolean,
+  readonly: Boolean,
+  hidePlaceholder: Boolean,
+  contentWidth: [String, Number] as PropType<string | number>,
   labelWidth: [Number, String] as PropType<number | string>,
   labelAlign: String as PropType<LabelAlign>,
   labelPlacement: {
@@ -196,6 +199,16 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     return (
       <form
+        style={
+          this.contentWidth === undefined
+            ? undefined
+            : {
+                '--n-form-content-width':
+                  typeof this.contentWidth === 'number'
+                    ? `${this.contentWidth}px`
+                    : this.contentWidth
+              }
+        }
         class={[
           `${mergedClsPrefix}-form`,
           this.inline && `${mergedClsPrefix}-form--inline`

@@ -12,6 +12,7 @@ precision.vue
 event.vue
 icon.vue
 button-placement.vue
+right-vertical.vue
 loading.vue
 min-max.vue
 size.vue
@@ -36,7 +37,7 @@ precision-debug.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 | 2.26.1 |
 | bordered | `boolean` | `true` | 是否有边框 |  |
-| button-placement | `'both' \| 'right'` | `'right'` | 加减按钮的位置 | 2.29.1 |
+| button-placement | `'both' \| 'right' \| 'right-vertical'` | `'right'` | 加减按钮的位置；right-vertical 在右侧上下排列（上加、下减） | 2.29.1 |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -78,3 +79,9 @@ precision-debug.vue
 | ----- | ------------ | -------- |
 | blur  | `() => void` | 失焦输入 |
 | focus | `() => void` | 聚焦输入 |
+
+## HIS 定制
+
+`max-precision` 限制最大小数位且不补零；`on-precision-exceed(value, precision)` 接收超限原值。新增 prepend / append 插槽。支持只读、提示覆盖及实例 inputElement。
+
+完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

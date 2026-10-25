@@ -50,6 +50,7 @@ import {
   ref,
   toRef,
   Transition,
+  watch,
   watchEffect,
   withDirectives
 } from 'vue'
@@ -62,6 +63,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { formControlProps } from '../../_mixins/use-form-item'
 import {
   call,
   markEventEffectPerformed,
@@ -71,6 +73,7 @@ import {
   useOnResize,
   warnOnce
 } from '../../_utils'
+import { useInputElement } from '../../composables/use-input-element'
 import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -86,6 +89,12 @@ import {
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
 export const treeSelectProps = {
+  filterValue: String,
+  filterKeys: Array as PropType<string[]>,
+  onUpdateFilterValue: Function as PropType<(value: string) => void>,
+  'onUpdate:filterValue': Function as PropType<(value: string) => void>,
+  onQueryChange: Function as PropType<(value: string) => void>,
+  ...formControlProps,
   ...(useTheme.props as ThemeProps<TreeSelectTheme, TreeSelectThemeOverrides>),
   bordered: {
     type: Boolean,
@@ -193,6 +202,7 @@ export default defineComponent({
   props: treeSelectProps,
   slots: Object as SlotsType<TreeSelectSlots>,
   setup(props) {
+    const inputElement = useInputElement()
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -245,7 +255,19 @@ export default defineComponent({
     const uncontrolledShowRef = ref(props.defaultShow)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
-    const patternRef = ref('')
+    const patternRef = ref(props.filterValue ?? '')
+    watch(
+      () => props.filterValue,
+      (value) => {
+        if (value !== undefined)
+          patternRef.value = value
+      }
+    )
+    watch(patternRef, (value) => {
+      props.onUpdateFilterValue?.(value)
+      props['onUpdate:filterValue']?.(value)
+      props.onQueryChange?.(value)
+    })
     const mergedFilterRef = computed(() => {
       const { filter } = props
       if (filter)
@@ -254,6 +276,13 @@ export default defineComponent({
       return (pattern: string, node: TreeSelectOption): boolean => {
         if (!pattern.length)
           return true
+        if (props.filterKeys?.length) {
+          return [labelField, ...props.filterKeys].some(key =>
+            String(node[key] ?? '')
+              .toLowerCase()
+              .includes(pattern.toLowerCase())
+          )
+        }
         return (node[labelField] as string)
           .toLowerCase()
           .includes(pattern.toLowerCase())
@@ -783,6 +812,9 @@ export default defineComponent({
     })
 
     const exposedMethods: TreeSelectInst = {
+      get inputElement() {
+        return inputElement.value
+      },
       getCheckedData: () => {
         const { checkedKeys } = exposedCheckedStatusRef.value
         return { keys: checkedKeys, options: getOptionsByKeys(checkedKeys) }
@@ -854,6 +886,7 @@ export default defineComponent({
     })
     return {
       ...exposedMethods,
+      inputElement,
       menuElRef,
       mergedStatus: mergedStatusRef,
       // 精简 dts：仅保留字符串 ref，类型在 render 中未被使用

@@ -59,10 +59,6 @@ const myMM: NLocale = {
     confirm: 'အတညီပြု',
     clear: 'ရှိင်းလိင်း'
   },
-  LegacyTransfer: {
-    sourceTitle: 'ရိင်းမြိစ်',
-    targetTitle: 'ပိစ်မှတ်'
-  },
   Transfer: {
     selectAll: 'အားလုံးရွေးပာ',
     unselectAll: 'အားလုံးဖြုတ်ပာ',

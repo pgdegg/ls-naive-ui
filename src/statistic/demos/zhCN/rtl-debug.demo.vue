@@ -4,19 +4,19 @@
 
 <script lang="ts" setup>
 import { MdSave } from '@vicons/ionicons4'
-import { unstableRowRtl, unstableStatisticRtl } from 'naive-ui'
+import { unstableStatisticRtl } from 'naive-ui'
 import { ref } from 'vue'
 
 const rtlEnabled = ref(false)
-const rtlStyles = [unstableStatisticRtl, unstableRowRtl]
+const rtlStyles = [unstableStatisticRtl]
 </script>
 
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-row>
-        <n-col :span="12">
+      <n-grid>
+        <n-grid-item :span="12">
           <n-statistic label="Statistic" :value="99">
             <template #prefix>
               <n-icon>
@@ -27,13 +27,13 @@ const rtlStyles = [unstableStatisticRtl, unstableRowRtl]
               / 100
             </template>
           </n-statistic>
-        </n-col>
-        <n-col :span="12">
+        </n-grid-item>
+        <n-grid-item :span="12">
           <n-statistic label="Active Users">
             1,234,123
           </n-statistic>
-        </n-col>
-      </n-row>
+        </n-grid-item>
+      </n-grid>
     </n-config-provider>
   </n-space>
 </template>

@@ -4,13 +4,17 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { RadioTheme, RadioThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { readonlyControlProps } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, resolveWrappedSlot } from '../../_utils'
+import { useInputElement } from '../../composables/use-input-element'
 import { radioLight } from '../styles'
 import style from './styles/radio.cssr'
 import { radioBaseProps, setup } from './use-radio'
 
 export const radioProps = {
+  hideCircle: Boolean,
+  ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
   ...radioBaseProps
 } as const
@@ -21,6 +25,7 @@ export default defineComponent({
   name: 'Radio',
   props: radioProps,
   setup(props) {
+    const inputElement = useInputElement()
     const radio = setup(props)
     const themeRef = useTheme(
       'Radio',
@@ -89,6 +94,7 @@ export default defineComponent({
         )
       : undefined
     return Object.assign(radio, {
+      inputElement,
       rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled
         ? undefined
@@ -104,6 +110,7 @@ export default defineComponent({
       <label
         class={[
           `${mergedClsPrefix}-radio`,
+          this.hideCircle && 'hide-circle',
           this.themeClass,
           this.rtlEnabled && `${mergedClsPrefix}-radio--rtl`,
           this.mergedDisabled && `${mergedClsPrefix}-radio--disabled`,

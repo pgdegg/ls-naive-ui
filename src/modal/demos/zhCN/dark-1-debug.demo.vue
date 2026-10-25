@@ -140,11 +140,11 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
       </n-radio-button>
     </n-radio-group>
     <n-form :model="model" :rules="rules" :size="size" label-placement="top">
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Input" path="inputValue">
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Input" path="inputValue">
           <n-input v-model:value="model.inputValue" placeholder="Input" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Textarea" path="textareaValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Textarea" path="textareaValue">
           <n-input
             v-model:value="model.textareaValue"
             placeholder="Textarea"
@@ -154,17 +154,17 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               maxRows: 5,
             }"
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Select" path="selectValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Select" path="selectValue">
           <n-select
             v-model:value="model.selectValue"
             placeholder="Select"
             :options="generalOptions"
           />
-        </n-form-item-col>
-        <n-form-item-col
+        </n-form-item-gi>
+        <n-form-item-gi
           :span="12"
           label="Multiple Select"
           path="multipleSelectValue"
@@ -175,18 +175,18 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
             :options="generalOptions"
             multiple
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Datetime" path="datetimeValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Datetime" path="datetimeValue">
           <n-date-picker v-model:value="model.datetimeValue" type="datetime" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Switch" path="switchValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Switch" path="switchValue">
           <n-switch v-model:value="model.switchValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi
           :span="12"
           label="Checkbox Group"
           path="checkboxGroupValue"
@@ -204,8 +204,8 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-checkbox>
             </n-space>
           </n-checkbox-group>
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Radio Group" path="radioGroupValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Radio Group" path="radioGroupValue">
           <n-radio-group
             v-model:value="model.radioGroupValue"
             name="radiogroup1"
@@ -222,10 +222,10 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-radio>
             </n-space>
           </n-radio-group>
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi
           :span="12"
           label="Radio Button Group"
           path="radioButtonGroupValue"
@@ -241,59 +241,47 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               Radio Button 3
             </n-radio-button>
           </n-radio-group>
-        </n-form-item-col>
-        <n-form-item-col
-          :span="12"
-          label="Input Number"
-          path="inputNumberValue"
-        >
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Input Number" path="inputNumberValue">
           <n-input-number v-model:value="model.inputNumberValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="12" label="Time Picker" path="timePickerValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Time Picker" path="timePickerValue">
           <n-time-picker v-model:value="model.timePickerValue" />
-        </n-form-item-col>
-        <n-form-item-col :span="12" label="Slider" path="sliderValue">
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Slider" path="sliderValue">
           <n-slider v-model:value="model.sliderValue" />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col :span="24" label="Transfer" path="transferValue">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="24" label="Transfer" path="transferValue">
           <n-transfer
             v-model:value="model.transferValue"
             :options="generalOptions"
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row :gutter="24">
-        <n-form-item-col
-          :span="12"
-          label="Nested Path"
-          path="nestedValue.path1"
-        >
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid :x-gap="24">
+        <n-form-item-gi :span="12" label="Nested Path" path="nestedValue.path1">
           <n-input v-model:value="model.nestedValue.path1" />
-        </n-form-item-col>
-        <n-form-item-col
-          :span="12"
-          label="Nested Path"
-          path="nestedValue.path2"
-        >
+        </n-form-item-gi>
+        <n-form-item-gi :span="12" label="Nested Path" path="nestedValue.path2">
           <n-select
             v-model:value="model.nestedValue.path2"
             :options="generalOptions"
           />
-        </n-form-item-col>
-      </n-row>
-      <n-row>
-        <n-col :span="24">
+        </n-form-item-gi>
+      </n-grid>
+      <n-grid>
+        <n-grid-item :span="24">
           <div style="display: flex; justify-content: flex-end">
             <n-button round type="primary" @click="drawerActive = true">
               抽屉
             </n-button>
           </div>
-        </n-col>
-      </n-row>
+        </n-grid-item>
+      </n-grid>
     </n-form>
   </n-modal>
   <n-drawer v-model:show="drawerActive" :width="502">
@@ -306,10 +294,10 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
         label-align="left"
         :label-width="100"
       >
-        <n-form-item-row label="Input" path="inputValue">
+        <n-form-item label="Input" path="inputValue">
           <n-input v-model:value="model.inputValue" placeholder="Input" />
-        </n-form-item-row>
-        <n-form-item-row label="Textarea" path="textareaValue">
+        </n-form-item>
+        <n-form-item label="Textarea" path="textareaValue">
           <n-input
             v-model:value="model.textareaValue"
             placeholder="Textarea"
@@ -319,33 +307,33 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               maxRows: 5,
             }"
           />
-        </n-form-item-row>
-        <n-form-item-row label="Select" path="selectValue">
+        </n-form-item>
+        <n-form-item label="Select" path="selectValue">
           <n-select
             v-model:value="model.selectValue"
             placeholder="Select"
             :options="generalOptions"
           />
-        </n-form-item-row>
-        <n-form-item-row label="Multiple Select" path="multipleSelectValue">
+        </n-form-item>
+        <n-form-item label="Multiple Select" path="multipleSelectValue">
           <n-select
             v-model:value="model.multipleSelectValue"
             placeholder="Select"
             :options="generalOptions"
             multiple
           />
-        </n-form-item-row>
-        <n-form-item-row label="Datetime" path="datetimeValue">
+        </n-form-item>
+        <n-form-item label="Datetime" path="datetimeValue">
           <n-date-picker
             v-model:value="model.datetimeValue"
             type="datetime"
             clearable
           />
-        </n-form-item-row>
-        <n-form-item-row label="Switch" path="switchValue">
+        </n-form-item>
+        <n-form-item label="Switch" path="switchValue">
           <n-switch v-model:value="model.switchValue" />
-        </n-form-item-row>
-        <n-form-item-row label="Checkbox Group" path="checkboxGroupValue">
+        </n-form-item>
+        <n-form-item label="Checkbox Group" path="checkboxGroupValue">
           <n-checkbox-group v-model:value="model.checkboxGroupValue">
             <n-space>
               <n-checkbox value="option1">
@@ -359,8 +347,8 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-checkbox>
             </n-space>
           </n-checkbox-group>
-        </n-form-item-row>
-        <n-form-item-row label="Radio Group" path="radioGroupValue">
+        </n-form-item>
+        <n-form-item label="Radio Group" path="radioGroupValue">
           <n-radio-group
             v-model:value="model.radioGroupValue"
             name="radiogroup2"
@@ -377,11 +365,8 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               </n-radio>
             </n-space>
           </n-radio-group>
-        </n-form-item-row>
-        <n-form-item-row
-          label="Radio Button Group"
-          path="radioButtonGroupValue"
-        >
+        </n-form-item>
+        <n-form-item label="Radio Button Group" path="radioButtonGroupValue">
           <n-radio-group v-model:value="model.radioButtonGroupValue">
             <n-radio-button value="radio-button1">
               Radio Button 1
@@ -393,31 +378,31 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
               Radio Button 3
             </n-radio-button>
           </n-radio-group>
-        </n-form-item-row>
-        <n-form-item-row label="Input Number" path="inputNumberValue">
+        </n-form-item>
+        <n-form-item label="Input Number" path="inputNumberValue">
           <n-input-number v-model:value="model.inputNumberValue" />
-        </n-form-item-row>
-        <n-form-item-row label="Time Picker" path="timePickerValue">
+        </n-form-item>
+        <n-form-item label="Time Picker" path="timePickerValue">
           <n-time-picker v-model:value="model.timePickerValue" />
-        </n-form-item-row>
-        <n-form-item-row label="Slider" path="sliderValue">
+        </n-form-item>
+        <n-form-item label="Slider" path="sliderValue">
           <n-slider v-model:value="model.sliderValue" />
-        </n-form-item-row>
-        <n-form-item-row label="Transfer" path="transferValue">
+        </n-form-item>
+        <n-form-item label="Transfer" path="transferValue">
           <n-transfer
             v-model:value="model.transferValue"
             :options="generalOptions"
           />
-        </n-form-item-row>
-        <n-form-item-row label="Nested Path" path="nestedValue.path1">
+        </n-form-item>
+        <n-form-item label="Nested Path" path="nestedValue.path1">
           <n-input v-model:value="model.nestedValue.path1" />
-        </n-form-item-row>
-        <n-form-item-row label="Nested Path" path="nestedValue.path2">
+        </n-form-item>
+        <n-form-item label="Nested Path" path="nestedValue.path2">
           <n-select
             v-model:value="model.nestedValue.path2"
             :options="generalOptions"
           />
-        </n-form-item-row>
+        </n-form-item>
       </n-form>
     </n-drawer-content>
   </n-drawer>

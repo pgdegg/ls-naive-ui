@@ -60,10 +60,6 @@ const koKR: NLocale = {
     confirm: '확인',
     clear: '지우기'
   },
-  LegacyTransfer: {
-    sourceTitle: '원본',
-    targetTitle: '타깃'
-  },
   // TODO: 待翻译
   Transfer: {
     selectAll: '전체 선택',

@@ -4,6 +4,7 @@ import type { datePickerProps } from './props'
 export type DatePickerSize = 'small' | 'medium' | 'large'
 
 export interface DatePickerInst {
+  readonly inputElement: HTMLElement | null
   focus: () => void
   blur: () => void
 }
