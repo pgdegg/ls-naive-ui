@@ -59,6 +59,7 @@ import { tabsInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
 import TabsButton from './TabsButton'
+import { isCardType } from './utils'
 
 // 修复 vue-tsc 报错
 const throttle: <T>(f: T, t: number) => T = _throttle
@@ -95,6 +96,10 @@ export const tabsProps = {
     default: 'bar'
   },
   closable: Boolean,
+  closeButtonDisplay: {
+    type: String as PropType<'hover' | 'always'>,
+    default: 'hover'
+  },
   justifyContent: String as PropType<
     | 'space-between'
     | 'space-around'
@@ -249,7 +254,7 @@ export default defineComponent({
     const tabChangeIdRef = { id: 0 }
 
     const tabWrapperStyleRef = computed(() => {
-      if (!props.justifyContent || props.type === 'card')
+      if (!props.justifyContent || isCardType(props.type))
         return undefined
       return {
         display: 'flex',
@@ -273,7 +278,7 @@ export default defineComponent({
       return tabEl as HTMLElement | null
     }
     function updateBarStyle(tabEl: HTMLElement): void {
-      if (props.type === 'card')
+      if (isCardType(props.type))
         return
       const { value: barEl } = barElRef
       if (!barEl)
@@ -336,7 +341,7 @@ export default defineComponent({
       }
     }
     function hideBarStyle(): void {
-      if (props.type === 'card')
+      if (isCardType(props.type))
         return
       const { value: barEl } = barElRef
       if (!barEl)
@@ -352,7 +357,7 @@ export default defineComponent({
       }
     }
     function updateCurrentBarStyle(): void {
-      if (props.type === 'card')
+      if (isCardType(props.type))
         return
       const tabEl = getCurrentEl()
       if (tabEl) {
@@ -800,6 +805,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
+      closeButtonDisplayRef: toRef(props, 'closeButtonDisplay'),
       valueRef: mergedValueRef,
       tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
@@ -851,7 +857,7 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
-      const { type } = props
+      const type = isCardType(props.type) ? 'card' : props.type
       const typeSuffix = (
         {
           card: 'Card',
@@ -868,6 +874,8 @@ export default defineComponent({
           closeIconColorHover,
           closeIconColorPressed,
           tabColor,
+          colorBorderCard,
+          colorBorderCardHeader,
           tabBorderColor,
           paneTextColor,
           tabFontWeight,
@@ -896,6 +904,8 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-card-color': colorBorderCard,
+        '--n-border-card-header-color': colorBorderCardHeader,
         '--n-color-segment': colorSegment,
         '--n-bar-color': barColor,
         '--n-tab-font-size': tabFontSize,
@@ -919,12 +929,30 @@ export default defineComponent({
         '--n-tab-font-weight-active': tabFontWeightActive,
         '--n-tab-padding': tabPadding,
         '--n-tab-padding-vertical': tabPaddingVertical,
-        '--n-tab-gap': tabGap,
-        '--n-tab-gap-vertical': tabGapVertical,
-        '--n-pane-padding-left': getPadding(panePadding, 'left'),
-        '--n-pane-padding-right': getPadding(panePadding, 'right'),
-        '--n-pane-padding-top': getPadding(panePadding, 'top'),
-        '--n-pane-padding-bottom': getPadding(panePadding, 'bottom'),
+        '--n-tab-gap':
+          props.type === 'border-card' || props.type === 'card-group'
+            ? '0px'
+            : tabGap,
+        '--n-tab-gap-vertical':
+          props.type === 'border-card' || props.type === 'card-group'
+            ? '0px'
+            : tabGapVertical,
+        '--n-pane-padding-left':
+          props.type === 'border-card'
+            ? '15px'
+            : getPadding(panePadding, 'left'),
+        '--n-pane-padding-right':
+          props.type === 'border-card'
+            ? '15px'
+            : getPadding(panePadding, 'right'),
+        '--n-pane-padding-top':
+          props.type === 'border-card'
+            ? '15px'
+            : getPadding(panePadding, 'top'),
+        '--n-pane-padding-bottom':
+          props.type === 'border-card'
+            ? '15px'
+            : getPadding(panePadding, 'bottom'),
         '--n-font-weight-strong': fontWeightStrong,
         '--n-tab-color-segment': tabColorSegment
       }
@@ -934,7 +962,7 @@ export default defineComponent({
       ? useThemeClass(
           'tabs',
           computed(() => {
-            return `${mergedSizeRef.value[0]}${props.type[0]}`
+            return `${mergedSizeRef.value[0]}${props.type}`
           }),
           cssVarsRef,
           props
@@ -1019,7 +1047,7 @@ export default defineComponent({
         })
       : []
     const showPane = !tabChildren.length
-    const isCard = type === 'card'
+    const isCard = isCardType(type)
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
     const allTabs = showPane ? tabPaneChildren : tabChildren
@@ -1041,6 +1069,9 @@ export default defineComponent({
             `${mergedClsPrefix}-tabs-fixed`,
             `${mergedClsPrefix}-tabs-fixed--${side}`,
             `${mergedClsPrefix}-tabs-nav--${fixedType}-type`,
+            fixedType !== 'card'
+            && isCardType(fixedType)
+            && `${mergedClsPrefix}-tabs-nav--card-type`,
             `${mergedClsPrefix}-tabs-nav--${placement}`
           ]}
           style={{
@@ -1242,6 +1273,9 @@ export default defineComponent({
             // tabs 中的情况，样式可能互相影响。添加一个类会让
             // 样式的编写更容易。
             `${mergedClsPrefix}-tabs-nav--${type}-type`,
+            type !== 'card'
+            && isCardType(type)
+            && `${mergedClsPrefix}-tabs-nav--card-type`,
             `${mergedClsPrefix}-tabs-nav--${resolvedPlacement}`,
             `${mergedClsPrefix}-tabs-nav`
           ]}

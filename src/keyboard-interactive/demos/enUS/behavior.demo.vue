@@ -1,0 +1,87 @@
+<markdown>
+# Navigation behavior and validation callbacks
+
+Toggle disabled, loop-focus, skip-when-has-value and stop-when-invalid to compare Enter navigation. The first item uses validate; enter-provider asynchronously guards navigation and on-enter / on-last-blur report events. default-focus-first=false avoids stealing focus on load.
+</markdown>
+
+<script setup lang="ts">
+import type { KeyboardInteractiveEnterContext } from 'naive-ui'
+import { ref } from 'vue'
+
+const disabled = ref(false)
+const loop = ref(false)
+const skip = ref(true)
+const stop = ref(true)
+const allow = ref(true)
+const first = ref('')
+const second = ref('Beta')
+const notice = ref('')
+async function validate() {
+  return first.value.length >= 2
+}
+async function beforeEnter() {
+  await new Promise(resolve => setTimeout(resolve, 100))
+  return allow.value
+}
+function entered(context: KeyboardInteractiveEnterContext) {
+  notice.value = `enter: ${context.current.tagName}`
+}
+function lastBlur() {
+  notice.value = 'last-blur'
+}
+</script>
+
+<template>
+  <n-space vertical>
+    <n-space>
+      <n-checkbox v-model:checked="disabled">
+        disabled
+      </n-checkbox><n-checkbox v-model:checked="loop">
+        loop-focus
+      </n-checkbox><n-checkbox v-model:checked="skip">
+        skip-when-has-value
+      </n-checkbox><n-checkbox v-model:checked="stop">
+        stop-when-invalid
+      </n-checkbox><n-checkbox v-model:checked="allow">
+        enter-provider: allow
+      </n-checkbox>
+    </n-space>
+    <n-keyboard-interactive
+      :disabled="disabled"
+      :default-focus-first="false"
+      :loop-focus="loop"
+      :skip-when-has-value="skip"
+      :stop-when-invalid="stop"
+      :enter-provider="beforeEnter"
+      @enter="entered"
+      @last-blur="lastBlur"
+    >
+      <n-space vertical>
+        <n-keyboard-interactive-item
+          :order="1"
+          path="first"
+          row-id="row-1"
+          :value="first"
+          :validate="validate"
+        >
+          <n-input
+            v-model:value="first"
+            placeholder="Enter at least two characters, then press Enter"
+          />
+        </n-keyboard-interactive-item>
+        <n-keyboard-interactive-item
+          :order="2"
+          path="second"
+          row-id="row-1"
+          :value="second"
+        >
+          <n-input v-model:value="second" />
+        </n-keyboard-interactive-item>
+        <n-keyboard-interactive-item ignore>
+          <n-input placeholder="Ignored by Enter navigation" />
+        </n-keyboard-interactive-item>
+      </n-space>
+    </n-keyboard-interactive>
+    <n-text>{{ notice }}</n-text>
+  </n-space>
+</template>

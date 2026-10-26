@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+quick-input.vue
 date.vue
 datetime.vue
 datetimeformat.vue
@@ -77,6 +78,12 @@ form-debug.vue
 | on-next-year | `() => void` | `undefined` | 点击下一年时的回调 | 2.37.0 |
 | on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | 2.37.0 |
 | on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#quick-input.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#quick-input.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#quick-input.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#quick-input.vue) |  |
+| quick-input | `boolean` | `false` | 启用 Enter 快捷录入，可解析连续数字和分隔输入，遵守禁用日期/时间；范围输入的第一段 Enter 聚焦末段，完整后才提交。 [使用案例](#quick-input.vue) |  |
+| default-to-extreme | `'min' \| 'max'` | `undefined` | quick-input 缺失字段补齐策略；min 补最小值，max 补最大值，省略时使用解析器默认 min。 [使用案例](#quick-input.vue) |  |
 
 ### Date 类型的 Props
 
@@ -201,15 +208,17 @@ form-debug.vue
 
 ### DatePicker Slots
 
-| 名称       | 参数 | 说明                         | 版本   |
-| ---------- | ---- | ---------------------------- | ------ |
-| date-icon  | `()` | 日期输入框的图标             | 2.29.0 |
-| footer     | `()` | 添加额外的页脚               |        |
-| next-month | `()` | 日期面板的 `下一个` 图标     | 2.33.4 |
-| next-year  | `()` | 日期面板的 `快速下一个` 图标 | 2.33.4 |
-| prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
-| prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
-| separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+| 名称       | 参数 | 说明                                         | 版本   |
+| ---------- | ---- | -------------------------------------------- | ------ |
+| date-icon  | `()` | 日期输入框的图标                             | 2.29.0 |
+| footer     | `()` | 添加额外的页脚                               |        |
+| next-month | `()` | 日期面板的 `下一个` 图标                     | 2.33.4 |
+| next-year  | `()` | 日期面板的 `快速下一个` 图标                 | 2.33.4 |
+| prev-month | `()` | 日期面板的 `上一个` 图标                     | 2.33.4 |
+| prev-year  | `()` | 日期面板的 `快速上一个` 图标                 | 2.33.4 |
+| separator  | `()` | 日期范围分隔符号                             | 2.29.0 |
+| prepend    | `()` | 输入框外部前置附加内容，与内部 prefix 分开。 |        |
+| append     | `()` | 输入框外部后置附加内容，与内部 suffix 分开。 |        |
 
 ### Date, Year, QuarterRange, Week Slots
 
@@ -235,13 +244,8 @@ form-debug.vue
 
 ### DatePicker Methods
 
-| 名称  | 类型         | 说明 | 版本   |
-| ----- | ------------ | ---- | ------ |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
 | focus | `() => void` | 聚焦 | 2.24.2 |
-| blur  | `() => void` | 失焦 | 2.24.2 |
-
-## HIS 定制
-
-`quick-input` 启用 Enter 快捷解析；`default-to-extreme: "min" | "max"` 控制缺失字段补值。范围首段 Enter 只聚焦末段，完整有效范围才提交，继续遵守禁用日期/时间规则。新增 prepend / append 插槽、只读/提示覆盖及 inputElement。值继续使用时间戳或 formatted-value。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| blur | `() => void` | 失焦 | 2.24.2 |
+| inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |

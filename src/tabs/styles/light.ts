@@ -17,6 +17,7 @@ export function self(vars: ThemeCommonVars) {
     closeColorHover,
     closeColorPressed,
     tabColor,
+    cardColor,
     baseColor,
     dividerColor,
     fontWeight,
@@ -27,6 +28,8 @@ export function self(vars: ThemeCommonVars) {
   } = vars
   return {
     ...sizeVariables,
+    colorBorderCard: cardColor,
+    colorBorderCardHeader: tabColor,
     colorSegment: tabColor,
     tabFontSizeCard: fontSize,
     tabTextColorLine: textColor1,

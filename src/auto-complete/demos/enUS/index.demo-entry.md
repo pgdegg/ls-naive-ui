@@ -5,6 +5,7 @@ Offer a search hint or maybe guess some likely options?
 ## Demos
 
 ```demo
+suggestions.vue
 basic.vue
 size.vue
 group.vue
@@ -47,6 +48,14 @@ append.vue
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | On update callback function. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#suggestions.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#suggestions.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#suggestions.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#suggestions.vue) |  |
+| fetch-suggestions | `(query: string, callback: (options: AutoCompleteOptions) => void) => void \| AutoCompleteOptions \| Promise<void \| AutoCompleteOptions>` | `undefined` | Fetch suggestions through the callback or an array/Promise return value. Stale responses are ignored. Uses options when omitted. [Example](#suggestions.vue) |  |
+| debounce | `number` | `300` | Debounce interval in milliseconds for fetch-suggestions. [Example](#suggestions.vue) |  |
+| trigger-on-focus | `boolean` | `true` | Request suggestions with the current text on focus when fetch-suggestions is configured. [Example](#suggestions.vue) |  |
+| offset | `number` | `undefined` | Vertical gap between the input and suggestions in pixels. Keeps the existing positioning gap when omitted. [Example](#suggestions.vue) |  |
 
 #### AutoCompleteOption Properties
 
@@ -76,13 +85,9 @@ append.vue
 
 ### AutoComplete Methods
 
-| Name  | Type         | Description              | Version |
-| ----- | ------------ | ------------------------ | ------- |
-| blur  | `() => void` | Blur the input element.  | 2.26.2  |
-| focus | `() => void` | Focus the input element. | 2.26.2  |
-
-## HIS extensions
-
-`fetch-suggestions(query, callback)` supports callbacks or Promise returns. `debounce` defaults to 300ms; `trigger-on-focus` defaults to true; `offset` adjusts the popup. Stale results are ignored; blur/unmount cancel pending tasks. The instance exposes merged loading and inputElement. Supports form readonly/placeholder overrides.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur the input element. | 2.26.2 |
+| focus | `() => void` | Focus the input element. | 2.26.2 |
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |  |
+| loading | `boolean` | Readonly loading state of asynchronous suggestion requests. |  |

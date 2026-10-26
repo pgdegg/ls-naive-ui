@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+controlled-search.vue
 single.vue
 primitive-options.vue
 multiple.vue
@@ -70,6 +71,16 @@ default-value-debug.vue
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | 菜单打开关闭的回调 |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | 值改变时执行的回调 |  |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#controlled-search.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#controlled-search.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#controlled-search.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#controlled-search.vue) |  |
+| filter-value | `string` | `undefined` | 受控搜索文本；未指定时由组件维护。支持 v-model:filter-value。 [使用案例](#controlled-search.vue) |  |
+| filter-keys | `string[]` | `undefined` | 与 label-field 一起在节点路径上搜索的附加字段；不传时使用原有过滤规则。 [使用案例](#controlled-search.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | 搜索文本变化时触发，参数为新文本。 [使用案例](#controlled-search.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | on-update:filter-value 的驼峰事件属性别名；两个回调均配置时分别触发。 [使用案例](#controlled-search.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | 搜索文本变化的额外通知；不替代原有搜索事件。 [使用案例](#controlled-search.vue) |  |
+| default-first-option | `boolean` | `true` | 搜索菜单是否默认高亮第一个匹配选项，便于键盘选择。 [使用案例](#controlled-search.vue) |  |
 
 #### CascaderOption Properties
 
@@ -97,9 +108,8 @@ default-value-debug.vue
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
+| inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
 
-## HIS 定制
+### 级联模型适配
 
-`filter-value` / `update:filter-value` 控制查询，`filter-keys` 在路径节点附加字段中搜索，`on-query-change` 通知查询。`default-first-option` 默认 true，控制搜索结果自动高亮首项。支持只读、提示覆盖、inputElement；createCascaderModelAdapter 提供对象路径与中间字段模型转换。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+`createCascaderModelAdapter` 是导出的业务模型适配工具，不是 Cascader props。通过 `decode` / `encode` 支持对象 valueKey、路径 bindPath 和 middleFields；调用方提供含 data、value、label、text、pathNodes 的节点信息，不依赖其它组件库的内部 Node。组件本身继续使用原生 value/update:value 模型。

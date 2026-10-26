@@ -7,6 +7,7 @@
 ## 演示
 
 ```demo
+behavior.vue
 basic.vue
 form.vue
 order.vue

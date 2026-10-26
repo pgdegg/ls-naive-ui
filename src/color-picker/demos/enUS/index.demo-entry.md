@@ -69,13 +69,3 @@ export function getRgb(colorName) {
   return rgbColor
 }
 ```
-
-## HIS extensions
-
-The instance adds inputElement and automatic container registration through inputElementRegistrationKey; native panel/value contracts remain.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
-
-## Inline panel
-
-Use [ColorPickerPanel](color-picker-panel) for an embedded editor. It shares this component's color logic and theme without a trigger or popup.

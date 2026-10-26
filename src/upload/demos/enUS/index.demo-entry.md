@@ -5,6 +5,7 @@ If latency didn't matter, I'd just fill trucks with hard disks.
 ## Demos
 
 ```demo
+validation.vue
 basic.vue
 drag.vue
 submit-manually.vue
@@ -73,6 +74,9 @@ download.vue
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. | `index` 2.38.2 |
 | on-retry | `(options: { file: UploadFileInfo }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | Click retry callback function. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the retry. | 2.40.0 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
+| max-size | `number` | `undefined` | Maximum bytes per file. Validated on file selection and manual submit; invalid files are not uploaded. [Example](#undefined.vue) |  |
+| validate-accept | `boolean` | `false` | Validate MIME types or extensions against accept. Reject invalid files and call on-validation-error. [Example](#undefined.vue) |  |
+| on-validation-error | `(reason: 'size' \| 'type', file: File) => void` | `undefined` | Called on file validation failure: size exceeds max-size, type does not match accept. file is the original File. [Example](#undefined.vue) |  |
 
 #### UploadFileInfo Type
 
@@ -143,9 +147,3 @@ interface UploadCustomRequestOptions {
 ### Others
 
 1. `uploadDownload`, with type of `(url: string, name: string | undefined): void`, you can import the method directly from naive-ui.
-
-## HIS extensions
-
-`max-size` limits bytes; `validate-accept` enables selected-file type validation. `on-validation-error(reason, file)` receives size/type and File. Validation covers addition and manual submit; disabled controls do not request uploads.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

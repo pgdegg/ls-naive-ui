@@ -18,9 +18,9 @@ tags.vue
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Semantic color; use error for Element Plus danger |
-| size | `'small' \| 'medium' \| 'large'` | `undefined` | Theme font size; omitted inherits the context as before |
-| truncated | `boolean` | `false` | Single-line ellipsis; constrain the element or parent width |
-| line-clamp | `string \| number` | `undefined` | Positive integer maximum lines; takes precedence over truncated |
+| size | `'small' \| 'medium' \| 'large'` | `undefined` | Text size (theme defaults 12/14/16px). Inherits the parent font size when omitted. |
+| truncated | `boolean` | `false` | Enable single-line ellipsis within a constrained width. Read the actual clipping state through isTruncated. |
+| line-clamp | `string \| number` | `undefined` | Positive integer line limit for multiline clipping. Overrides truncated when valid; other values are ignored. |
 | tag | `string` | `'span'` | Root tag; code/delete retain their existing precedence |
 | strong | `boolean` | `false` | Bold |
 | italic | `boolean` | `false` | Italic |

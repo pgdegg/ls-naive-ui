@@ -48,6 +48,7 @@ export default defineComponent({
 ## Demos
 
 ```demo
+reset-on-resize.vue
 basic.vue
 content-scrollable.vue
 reactive.vue
@@ -105,6 +106,7 @@ Provided since `2.38.0`.
 | on-esc | `() => void` | `undefined` | Callback fired when the escape key is pressed and focus is within modal. | 2.24.2 |
 | on-mask-click | `() => void` | `undefined` | Callback on mask is clicked. |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |  |
+| reset-on-resize | `boolean` | `false` | Debounce resetting the drag offset after window resize. Cleans listeners and pending tasks on unmount. [Example](#reset-on-resize.vue) |  |
 
 ### ModalProvider Props
 
@@ -191,9 +193,3 @@ export function handler() {
 ```
 
 </n-space>
-
-## HIS extensions
-
-`reset-on-resize` resets drag offsets after a debounced window resize (default false), with listener/timer cleanup.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

@@ -5,6 +5,7 @@ Yo, yo, check it out.
 ## Demos
 
 ```demo
+group-state.vue
 basic.vue
 size.vue
 group.vue
@@ -34,6 +35,10 @@ focus.vue
 | unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#group-state.vue) |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#group-state.vue) |
+| hide-circle | `boolean` | `false` | Hide the check indicator while preserving checked state, label and keyboard interaction. [Example](#group-state.vue) |
+| cancel-disabled | `boolean` | `false` | Adjust the label color for disabled checked options. Does not enable interaction or change checked state. [Example](#group-state.vue) |
 
 ### CheckboxGroup Props
 
@@ -48,6 +53,8 @@ focus.vue
 | value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |  |
 | value-field | `string` | `'value'` | The field name of option values in `options`. | 2.45.0 |
 | on-update:value | `(value: (string \| number)[], meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` 2.32.0 |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#group-state.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#group-state.vue) |  |
 
 ### Checkbox Slots
 
@@ -68,8 +75,11 @@ focus.vue
 | focus | `() => void` | Focus.      | 2.24.2  |
 | blur  | `() => void` | Blur.       | 2.24.2  |
 
-## HIS extensions
+### CheckboxGroup Methods
 
-`hide-circle` hides the indicator while retaining keyboard access; `cancel-disabled` preserves selected label color without enabling interaction. Group options support visible=false. The instance exposes allChecked, isIndeterminate, toggleAll(checked?) and inputElement; bulk updates preserve locked options and min/max. Supports readonly/ignore-parent-readonly without placeholder props.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| Name | Type | Description |
+| --- | --- | --- |
+| inputElement | `HTMLElement \| null` | Current checkbox-group entry element. |
+| allChecked | `boolean` | Readonly: whether all visible, enabled options are checked. |
+| isIndeterminate | `boolean` | Readonly: whether some but not all visible, enabled options are checked. |
+| toggleAll | `(checked?: boolean) => void` | Check or clear eligible options, toggling when omitted. Preserves hidden/disabled values and honors min/max. |

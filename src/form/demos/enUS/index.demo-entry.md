@@ -11,6 +11,7 @@ The element to collect and validate data.
 ## Demos
 
 ```demo
+readonly.vue
 inline.vue
 custom-rule.vue
 abnormal-warning.vue
@@ -47,6 +48,9 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | 2.27.0 |
+| readonly | `boolean` | `false` | Provide readonly state to descendant controls. Selection controls block editing; ignore-parent-readonly skips inheritance. [Example](#readonly.vue) |  |
+| hide-placeholder | `boolean` | `false` | Hide placeholders of descendant input/selection controls. Children can override with hide-placeholder=false or ignore-parent-hide-placeholder. [Example](#readonly.vue) |  |
+| content-width | `number \| string` | `undefined` | Content width of inline form items. Numbers use px; strings accept CSS lengths. [Example](#readonly.vue) |  |
 
 #### FormItemRule Type
 
@@ -138,9 +142,3 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 | default  | `()`       | Content.       |
 | feedback | `()`       | Feedback.      | 2.24.0  |
 | label    | `()`       | Label content. |         |
-
-## HIS extensions
-
-`readonly` propagates readonly state; selectors become noninteractive. `hide-placeholder` hides hints. `content-width: string | number` sets inline item content width. Text/select controls support ignore-parent-readonly, hide-placeholder=false and ignore-parent-hide-placeholder="form" overrides. The readonlyRaw alias has been removed.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

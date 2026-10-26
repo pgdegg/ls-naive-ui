@@ -156,11 +156,6 @@ export function createDocumentationMenuOptions({ lang, theme }) {
       type: 'group',
       children: [
         {
-          en: 'HIS Customizations',
-          zh: 'HIS 定制',
-          path: '/his-customization'
-        },
-        {
           en: 'JSX & TSX',
           zh: 'JSX & TSX',
           path: '/jsx'

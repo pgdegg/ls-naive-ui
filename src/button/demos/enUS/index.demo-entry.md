@@ -5,6 +5,7 @@ Button is used to trigger some actions.
 ## Demos
 
 ```demo
+group-state.vue
 basic.vue
 secondary.vue
 tertiary.vue
@@ -37,9 +38,9 @@ popover.vue
 | circle | `boolean` | `false` | Whether the button is round. |  |
 | color | `string` | `undefined` | Button color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
 | dashed | `boolean` | `false` | Whether the button's border is a dashed line. |  |
-| disabled | `boolean` | `false` | Whether the button is disabled. |  |
+| disabled | `boolean` | `false` | Whether the button is disabled. [Example](#group-state.vue) |  |
 | focusable | `boolean` | `true` | Whether the button is focusable. |  |
-| ghost | `boolean` | `false` | Whether the button is ghost. |  |
+| ghost | `boolean` | `false` | Whether the button is ghost. [Example](#group-state.vue) |  |
 | native-focus-behavior | `boolean` | Browser is not Safari | Whether to follow button's native focus behavior. Since safari's button can't be focused by click, naive-ui uses some tricks to make it focusable on safari. If you don't need the behavior or need the button to be draggable, you can enable the prop. | 2.28.3 |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |  |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |  |
@@ -52,7 +53,7 @@ popover.vue
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |  |
 | strong | `boolean` | `false` | Whether to use strong text in the button. |  |
 | tertiary | `boolean` | `false` | Whether the button is tertiary button. |  |
-| text | `boolean` | `false` | Whether to display as a text button. |  |
+| text | `boolean` | `false` | Whether to display as a text button. [Example](#group-state.vue) |  |
 | text-color | `string` | `undefined` | Button text color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
 | type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |  |
 | tag | `string` | `'button'` | What tag need the button be rendered as. |  |
@@ -63,6 +64,9 @@ popover.vue
 | --- | --- | --- | --- |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `undefined` | The buttons' size in button group. If set, the button's size prop inner group won't work. |
 | vertical | `boolean` | `false` | Directions of buttons in the group. |
+| disabled | `boolean` | `undefined` | Disable buttons in the group. A child disabled=false cannot override group disabled. [Example](#group-state.vue) |
+| ghost | `boolean` | `undefined` | Ghost appearance inherited by buttons in the group. [Example](#group-state.vue) |
+| text | `boolean` | `undefined` | Text appearance inherited by buttons in the group. [Example](#group-state.vue) |
 
 ### Button Slots
 
@@ -76,9 +80,3 @@ popover.vue
 | Name    | Parameters | Description                            |
 | ------- | ---------- | -------------------------------------- |
 | default | `()`       | The button group is filled by default. |
-
-## HIS extensions
-
-ButtonGroup adds `disabled`, `ghost`, `text` (undefined leaves child appearance intact). Every child inherits disabling, and specified group appearance takes precedence. ignoreGroupDisabled and plain/link aliases have been removed.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

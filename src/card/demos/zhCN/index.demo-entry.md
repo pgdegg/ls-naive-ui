@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+disabled.vue
 basic.vue
 size.vue
 cover.vue
@@ -52,6 +53,7 @@ embedded-debug.vue
 | tag | `string` | `'div'` | 卡片组件要渲染为什么标签 | 2.34.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 卡片的标题，可以是 render 函数 | 2.38.2 支持 render 函数 |
 | on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |  |
+| disabled | `boolean` | `false` | 禁用卡片内容交互并向子控件提供禁用上下文；内层卡片不能解除祖先禁用。 [使用案例](#disabled.vue) |  |
 
 ### Card Slots
 
@@ -63,9 +65,3 @@ embedded-debug.vue
 | default      | `()` | 卡片内容     |
 | footer       | `()` | 底部内容     |
 | action       | `()` | 操作区域内容 |
-
-## HIS 定制
-
-`disabled` 提供祖先优先的禁用上下文、inert 与遮罩；内部 enabled 卡片或局部 disabled=false 不解除祖先禁用。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

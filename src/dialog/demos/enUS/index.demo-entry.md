@@ -35,6 +35,8 @@ export default defineComponent({
 ## Demos
 
 ```demo
+height.vue
+confirm.vue
 basic.vue
 async.vue
 use-component.vue
@@ -55,6 +57,8 @@ use-dialog-reactive-list.vue
 | info | `(options: DialogOptions) => DialogReactive` | Use `info` type dialog. |
 | success | `(options: DialogOptions) => DialogReactive` | Use `success` type dialog. |
 | warning | `(options: DialogOptions) => DialogReactive` | Use `warning` type dialog. |
+| confirm | `(options?: DialogConfirmOptions) => Promise<'confirm' \| 'cancel' \| 'close'>` | Create a confirmation dialog. Confirmation resolves 'confirm'; cancellation rejects 'cancel' by default. A false result from an async button callback keeps the dialog and Promise pending. |
+| setConfirmDefaults | `(options: DialogConfirmOptions) => void` | Merge defaults for subsequent confirm calls in this DialogProvider. Per-call options take precedence. |
 
 ### useDialogReactiveList API
 
@@ -100,6 +104,8 @@ use-dialog-reactive-list.vue
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |  |
+| reset-on-resize | `boolean` | `false` | Debounce resetting the drag offset to its initial position after window resize. [Example](#height.vue) |  |
+| height | `number \| string` | `undefined` | Content height with scrolling overflow. Numbers use px, matching the Dialog height prop. [Example](#height.vue) |  |
 
 ### DialogReactive API
 
@@ -174,6 +180,7 @@ All the properties can be modified dynamically.
 | on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |
 | on-positive-click | `(e: MouseEvent) => void` | `undefined` | Callback on negative button clicked. |  |
+| height | `number \| string` | `undefined` | Dialog content height. Numbers use px; strings accept CSS lengths. [Example](#height.vue) |  |
 
 ### Dialog Slots
 
@@ -185,8 +192,11 @@ All the properties can be modified dynamically.
 | icon    | `()`       | `Icon` content.   |         |
 | close   | `()`       | `Close` content.  | 2.36.0  |
 
-## HIS extensions
+### DialogConfirmOptions Properties
 
-`height: string | number` sets body height. useDialog().create accepts resetOnResize. confirm(options) returns an action Promise; setConfirmDefaults configures provider defaults. resolveOnCancel defaults to false, distinguishCancelAndClose separates close, and async callbacks returning false veto closing.
+Extends DialogOptions above. The following options belong to `useDialog().confirm()` and `setConfirmDefaults()`, not NDialog component props.
 
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| resolveOnCancel | `boolean` | `false` | Resolve rather than reject the Promise on cancellation or close. |
+| distinguishCancelAndClose | `boolean` | `false` | Report close as 'close'; otherwise close is treated as 'cancel'. |

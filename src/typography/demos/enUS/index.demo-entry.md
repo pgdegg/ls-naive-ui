@@ -7,6 +7,8 @@ Typography is an art.
 ## Demos
 
 ```demo
+text-ellipsis.vue
+text-size.vue
 header.vue
 tags.vue
 text.vue
@@ -27,17 +29,9 @@ router-link.vue
 | code | `boolean` | `false` | Use the `code` tag and style. |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
 | tag | `string` | `undefined` | Tag to use. `code` or `delete` properties will override this. |
-
-### Text extensions
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| size | 'small' \| 'medium' \| 'large' | undefined | Theme font size; omitted inherits the parent |
-| truncated | boolean | false | Single-line ellipsis |
-| line-clamp | string \| number | undefined | Positive integer lines; takes precedence over truncated |
-| Instance isTruncated | readonly boolean | false | Actual overflow state |
-
-See the dedicated [Text documentation](text) for complete APIs and demos. This is the same existing NText component.
+| size | `'small' \| 'medium' \| 'large'` | `undefined` | Text size (theme defaults 12/14/16px). Inherits the parent font size when omitted. [Example](#text-size.vue) |
+| truncated | `boolean` | `false` | Enable single-line ellipsis within a constrained width. Read the actual clipping state through isTruncated. [Example](#text-ellipsis.vue) |
+| line-clamp | `string \| number` | `undefined` | Positive integer line limit for multiline clipping. Overrides truncated when valid; other values are ignored. [Example](#text-ellipsis.vue) |
 
 ### P Props
 
@@ -70,3 +64,9 @@ See the dedicated [Text documentation](text) for complete APIs and demos. This i
 | Name    | Parameters | Description                |
 | ------- | ---------- | -------------------------- |
 | default | `()`       | The content of typography. |
+
+### Text Inst
+
+| Name | Type | Description |
+| --- | --- | --- |
+| isTruncated | `boolean` | Readonly actual clipping state, updated for content and size changes. Requires truncated or a valid line-clamp. |

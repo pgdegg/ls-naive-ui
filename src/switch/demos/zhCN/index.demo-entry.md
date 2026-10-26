@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+readonly.vue
 basic.vue
 size.vue
 content.vue
@@ -34,6 +35,8 @@ icon.vue
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |  |
 | value | `string \| number \| boolean \| undefined` | `undefined` | 受控模式下的值 |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |  |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#readonly.vue) |  |
 
 ### Switch Slots
 
@@ -44,9 +47,3 @@ icon.vue
 | icon           | `()` | 开关按钮的图标         | 2.25.3 |
 | unchecked      | `()` | 开关关闭时的内容       |        |
 | unchecked-icon | `()` | 开关按钮未选中时的图标 | 2.25.3 |
-
-## HIS 定制
-
-沿用原生 `:round="false"` 显示方形开关，不提供 square 别名。支持 readonly / ignore-parent-readonly，没有占位符属性。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

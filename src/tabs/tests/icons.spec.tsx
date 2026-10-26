@@ -5,7 +5,7 @@ import { NTab, NTabPane, NTabs } from '..'
 enableAutoUnmount(afterEach)
 
 describe('tab icons', () => {
-  it.each(['bar', 'card', 'segment'] as const)(
+  it.each(['bar', 'card', 'segment', 'border-card', 'card-group'] as const)(
     'renders icon props and slots with %s tabs',
     async (type) => {
       const wrapper = mount(() => (

@@ -70,13 +70,3 @@ export function getRgb(colorName) {
   return rgbColor
 }
 ```
-
-## HIS 定制
-
-实例新增 inputElement，可通过 inputElementRegistrationKey 自动向容器注册交互入口；沿用原生颜色面板与值模型。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
-
-## 独立面板
-
-需要直接嵌入页面的调色器时，使用 [ColorPickerPanel](color-picker-panel)。它复用本组件的颜色编辑逻辑与主题，不渲染触发器或弹层。

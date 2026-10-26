@@ -5,6 +5,7 @@ Just put something in it.
 ## Demos
 
 ```demo
+disabled.vue
 basic.vue
 size.vue
 cover.vue
@@ -50,6 +51,7 @@ embedded.vue
 | tag | `string` | `'div'` | What tag need the card be rendered as. | 2.34.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Card title. | Render function since 2.38.2 |
 | on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |  |
+| disabled | `boolean` | `false` | Block content interactions and provide disabled context to child controls. Inner cards cannot override an ancestor disabled state. [Example](#disabled.vue) |  |
 
 ### Card Slots
 
@@ -61,9 +63,3 @@ embedded.vue
 | default      | `()`       | Card content.           |
 | footer       | `()`       | Footer content.         |
 | action       | `()`       | Operating area content. |
-
-## HIS extensions
-
-`disabled` provides ancestor-aware disabling, inert content and an overlay. Locally enabled cards/controls cannot override a disabled ancestor.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

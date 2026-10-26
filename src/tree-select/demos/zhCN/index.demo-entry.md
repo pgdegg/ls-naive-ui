@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+controlled-search.vue
 basic.vue
 custom-field.vue
 multiple.vue
@@ -80,6 +81,15 @@ rtl-debug.vue
 | on-update:expanded-keys | `(value: Array<string \| number>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | 展开节点更新的回调 | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' \| 'clear' }) => void` | `undefined` | 更新值的回调 | `meta` 2.34.0 |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#controlled-search.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#controlled-search.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#controlled-search.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#controlled-search.vue) |  |
+| filter-value | `string` | `undefined` | 受控搜索文本；未指定时由组件维护。支持 v-model:filter-value。 [使用案例](#controlled-search.vue) |  |
+| filter-keys | `string[]` | `undefined` | 与 label-field 一起搜索的附加字段；不传时使用原有过滤规则。 [使用案例](#controlled-search.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | 搜索文本变化时触发，参数为新文本。 [使用案例](#controlled-search.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | on-update:filter-value 的驼峰事件属性别名；两个回调均配置时分别触发。 [使用案例](#controlled-search.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | 搜索文本变化的额外通知；不替代原有搜索事件。 [使用案例](#controlled-search.vue) |  |
 
 ### TreeSelectOption Properties
 
@@ -110,9 +120,4 @@ rtl-debug.vue
 | focusInput | `() => void` | 输入聚焦 | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
-
-## HIS 定制
-
-`filter-value` / `update:filter-value` 控制搜索，`filter-keys` 搜索附加字段，`on-query-change` 通知查询。支持只读、提示覆盖及实例 inputElement。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |

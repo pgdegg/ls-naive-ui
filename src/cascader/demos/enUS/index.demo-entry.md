@@ -5,6 +5,7 @@ Cascader can be used to display and select tree structured data.
 ## Demos
 
 ```demo
+controlled-search.vue
 single.vue
 primitive-options.vue
 multiple.vue
@@ -68,6 +69,16 @@ status.vue
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback executed when menu is opened & closed. |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#controlled-search.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#controlled-search.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#controlled-search.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#controlled-search.vue) |  |
+| filter-value | `string` | `undefined` | Controlled search text. Managed internally when omitted. Supports v-model:filter-value. [Example](#controlled-search.vue) |  |
+| filter-keys | `string[]` | `undefined` | Additional fields searched along each node path together with label-field. Uses the existing filter when omitted. [Example](#controlled-search.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | Called with the new search text when it changes. [Example](#controlled-search.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | Camel-case prop alias of on-update:filter-value. Both callbacks run if both are supplied. [Example](#controlled-search.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | Additional search-text change notification. Does not replace existing search events. [Example](#controlled-search.vue) |  |
+| default-first-option | `boolean` | `true` | Highlight the first matching search option by default for keyboard selection. [Example](#controlled-search.vue) |  |
 
 #### CascaderOption Properties
 
@@ -95,9 +106,8 @@ status.vue
 | focus | `() => void` | Focus. | 2.24.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |  |
 
-## HIS extensions
+### Cascader model adapter
 
-`filter-value` / `update:filter-value`, `filter-keys`, `on-query-change` extend path search. `default-first-option` defaults to true and controls automatic first-result highlighting. Added readonly/placeholder overrides and inputElement. createCascaderModelAdapter converts object paths and intermediate-field models.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+`createCascaderModelAdapter` is an exported business-model helper, not Cascader props. Its `decode` / `encode` support object valueKey, bindPath and middleFields. Supply nodes with data, value, label, text and pathNodes rather than another library's internal Node. The component keeps its native value/update:value model.

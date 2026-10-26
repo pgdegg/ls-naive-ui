@@ -5,6 +5,7 @@ It's said that 99% of the people can't distinguish the `TreeSelect` component fr
 ## Demos
 
 ```demo
+controlled-search.vue
 basic.vue
 custom-field.vue
 multiple.vue
@@ -76,6 +77,15 @@ debug.vue
 | on-update:expanded-keys | `(value: Array<string \| number>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | Callback on expanded keys updated. | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function on indeterminate options changing. |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' \| 'clear' }) => void) => void` | `undefined` | Callback on value updated. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#controlled-search.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#controlled-search.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#controlled-search.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#controlled-search.vue) |  |
+| filter-value | `string` | `undefined` | Controlled search text. Managed internally when omitted. Supports v-model:filter-value. [Example](#controlled-search.vue) |  |
+| filter-keys | `string[]` | `undefined` | Additional fields searched together with label-field. Uses the existing filter when omitted. [Example](#controlled-search.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | Called with the new search text when it changes. [Example](#controlled-search.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | Camel-case prop alias of on-update:filter-value. Both callbacks run if both are supplied. [Example](#controlled-search.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | Additional search-text change notification. Does not replace existing search events. [Example](#controlled-search.vue) |  |
 
 ### TreeSelectOption Properties
 
@@ -106,9 +116,4 @@ debug.vue
 | focusInput | `() => void` | Input focus. | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |
-
-## HIS extensions
-
-`filter-value` / `update:filter-value`, `filter-keys`, `on-query-change` extend search. Added readonly/placeholder overrides and instance inputElement.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |  |

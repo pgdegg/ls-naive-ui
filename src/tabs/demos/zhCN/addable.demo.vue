@@ -1,7 +1,7 @@
 <markdown>
 # 可增加
 
-增加一些标签页。只对 `'card'` 类型生效。
+增加一些标签页，适用于 `card`、`card-group` 和 `border-card`。关闭按钮移出时释放宽度；标签默认按内容宽度排列，不设置额外的最小宽度。
 </markdown>
 
 <script lang="ts" setup>
@@ -47,7 +47,6 @@ function handleClose(name: number) {
     type="card"
     :addable="addable"
     :closable="closable"
-    tab-style="min-width: 80px;"
     @close="handleClose"
     @add="handleAdd"
   >

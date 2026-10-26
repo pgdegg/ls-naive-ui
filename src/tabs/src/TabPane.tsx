@@ -6,6 +6,7 @@ import type {
   VNodeChild
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TabsCloseButtonDisplay } from './interface'
 import { computed, defineComponent, h, inject, provide, watchEffect } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
 import { tabPaneActiveContextKey } from './active-context'
@@ -24,6 +25,7 @@ export const tabPaneProps = {
   },
   disabled: Boolean,
   fixed: String as PropType<'left' | 'right'>,
+  closeButtonDisplay: String as PropType<TabsCloseButtonDisplay>,
   displayDirective: {
     type: String as PropType<'if' | 'show' | 'show:lazy'>,
     default: 'if'

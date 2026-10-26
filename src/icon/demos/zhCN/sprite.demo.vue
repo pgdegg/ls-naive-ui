@@ -9,6 +9,18 @@ import { onBeforeUnmount, ref } from 'vue'
 
 const id = `his-demo-${Math.random().toString(36).slice(2)}`
 const state = ref('等待插入')
+const version = ref(0)
+function resolveSymbol(
+  symbol: string,
+  prefix: string | string[]
+): Element | null {
+  for (const item of Array.isArray(prefix) ? prefix : [prefix]) {
+    const found = document.getElementById(`${item}-${symbol}`)
+    if (found)
+      return found
+  }
+  return null
+}
 let sprite: SVGSVGElement | undefined
 let timer: ReturnType<typeof setTimeout> | undefined
 function load() {
@@ -32,6 +44,7 @@ function load() {
     symbol.append(image)
     sprite.append(symbol)
     document.body.append(sprite)
+    version.value++
     state.value = 'symbol 已插入'
   }, 1000)
 }
@@ -43,10 +56,19 @@ onBeforeUnmount(() => {
 
 <template>
   <n-space align="center">
-    <n-icon :symbol="id" :prefix="['his', 'icon']" :size="40" />
+    <n-icon
+      :symbol="id"
+      :symbol-version="version"
+      :symbol-resolver="resolveSymbol"
+      :prefix="['his', 'icon']"
+      :size="40"
+    />
     <n-button @click="load">
       动态加载图标
     </n-button>
-    <n-text>{{ state }}</n-text>
+    <n-button @click="version++">
+      手动刷新 symbol-version
+    </n-button>
+    <n-text>{{ state }} / {{ version }}</n-text>
   </n-space>
 </template>

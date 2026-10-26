@@ -7,6 +7,7 @@ When I was young, I loved listening to the radio, such as FM 106.8 or FM 92.1.
 ## Demos
 
 ```demo
+readonly.vue
 basic.vue
 group.vue
 options.vue
@@ -18,6 +19,8 @@ size.vue
 
 ### Radio Props, RadioButton Props
 
+`readonly`, `ignore-parent-readonly` and `hide-circle` apply only to Radio. Configure group-level readonly for RadioButton through RadioGroup's `readonly` prop.
+
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | checked | `boolean` | `undefined` | Checked state. |  |
@@ -28,6 +31,9 @@ size.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | value | `string \| number \| boolean` | `'on'` | Checked value. | `boolean` 2.33.0 |
 | on-update:checked | `(check: boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#readonly.vue) |  |
+| hide-circle | `boolean` | `false` | Hide the radio indicator while preserving the label and keyboard interaction. [Example](#readonly.vue) |  |
 
 ### RadioGroup Props
 
@@ -42,9 +48,5 @@ size.vue
 | value | `string \| number \| boolean \| null` | `null` | Checked value. |  |
 | value-field | `string` | `'value'` | The field name of option values in `options`. | 2.45.0 |
 | on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |  |
-
-## HIS extensions
-
-`hide-circle` hides the visual indicator while retaining input/keyboard behavior. Radio/RadioGroup expose inputElement and readonly/ignore-parent-readonly. Object models can use createOptionModelAdapter. No placeholder props are added.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#readonly.vue) |  |

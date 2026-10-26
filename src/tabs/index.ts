@@ -1,6 +1,10 @@
 export { tabPaneActiveContextKey } from './src/active-context'
 export type { TabPaneActiveContext } from './src/active-context'
-export type { TabsInst } from './src/interface'
+export type {
+  TabsCloseButtonDisplay,
+  TabsInst,
+  TabsType
+} from './src/interface'
 export type * from './src/public-types'
 export { default as NTab, tabProps } from './src/Tab'
 export type { TabProps, TabSlots } from './src/Tab'

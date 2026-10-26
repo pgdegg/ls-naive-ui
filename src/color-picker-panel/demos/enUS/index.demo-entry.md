@@ -5,6 +5,7 @@ An inline color editor similar to Element Plus ColorPickerPanel. It shares the p
 ## Demos
 
 ```demo
+readonly.vue
 basic.vue
 modes.vue
 actions.vue
@@ -25,8 +26,8 @@ actions.vue
 | actions | `Array<'confirm' \| 'clear'>` | `null` | Built-in actions; the panel stays mounted afterwards |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Internal input size, inherited from forms |
 | disabled | `boolean` | `undefined` | Disable editing; inherits form/container state |
-| readonly | `boolean` | `undefined` | Show the color without allowing editing; inherits form readonly |
-| ignore-parent-readonly | `boolean` | `false` | Ignore form readonly without bypassing disabling |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#readonly.vue) |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#readonly.vue) |
 | on-update:value / on-update-value | `(value: string \| null) => void` | `undefined` | Live value updates; supports v-model:value |
 | on-complete | `(value: string) => void` | `undefined` | End of an edit; matches ColorPicker. Presets only update the value |
 | on-confirm | `(value: string \| null) => void` | `undefined` | Confirm without hiding the panel |

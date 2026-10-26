@@ -33,7 +33,7 @@ custom-icon.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
-| button-placement | `'both' \| 'right' \| 'right-vertical'` | `'right'` | Placement of add/minus buttons. right-vertical stacks them on the right (up increases, down decreases). | 2.29.1 |
+| button-placement | `'right' \| 'both' \| 'right-vertical'` | `'right'` | Button position: horizontal on the right, on both sides, or vertically stacked on the right (up increments, down decrements). Supports hold, keyboard, limits and icon slots. [Example](#precision.vue) |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
@@ -47,7 +47,7 @@ custom-icon.vue
 | placeholder | `string` | `'Please Input'` | Placeholder. |  |
 | precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | round | `boolean` | `undefined` | Use a rounded input style. | 2.39.0 |
-| readonly | `boolean` | `false` | Whether it's readonly. |  |
+| readonly | `boolean` | `false` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#precision.vue) |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
@@ -59,25 +59,27 @@ custom-icon.vue
 | on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is focussed on. |  |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback triggered when the input value changes. |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#precision.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#precision.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#precision.vue) |  |
+| max-precision | `number` | `undefined` | Maximum decimal places. Rounds excess digits without padding zeros; does not replace precision semantics. [Example](#precision.vue) |  |
+| on-precision-exceed | `(value: number, precision: number) => void` | `undefined` | Called when exceeding max-precision causes rounding, with the original number and decimal limit. [Example](#precision.vue) |  |
 
 ### InputNumber Slots
 
-| Name       | Parameters | Description               | Version |
-| ---------- | ---------- | ------------------------- | ------- |
-| add-icon   | `()`       | icon of the add button.   | 2.28.1  |
-| minus-icon | `()`       | icon of the minus button. | 2.28.1  |
-| prefix     | `()`       | Prefix content slot.      |         |
-| suffix     | `()`       | Suffix content slot.      |         |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| add-icon | `()` | icon of the add button. | 2.28.1 |
+| minus-icon | `()` | icon of the minus button. | 2.28.1 |
+| prefix | `()` | Prefix content slot. |  |
+| suffix | `()` | Suffix content slot. |  |
+| prepend | `()` | Content before the input, outside the input border and separate from prefix. |  |
+| append | `()` | Content after the input, outside the input border and separate from suffix. |  |
 
 ### InputNumber Methods
 
-| Name  | Type         | Description             |
-| ----- | ------------ | ----------------------- |
-| blur  | `() => void` | Blur the input number.  |
+| Name | Type | Description |
+| --- | --- | --- |
+| blur | `() => void` | Blur the input number. |
 | focus | `() => void` | Focus the input number. |
-
-## HIS extensions
-
-`max-precision` caps decimals without padding; `on-precision-exceed(value, precision)` receives the original excess value. Added prepend/append slots, readonly/placeholder overrides and instance inputElement.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |

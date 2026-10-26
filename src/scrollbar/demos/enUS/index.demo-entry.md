@@ -5,6 +5,7 @@ It looks better but I'm sure it's not as reliable as native scrollbar.
 ## Demos
 
 ```demo
+thickness.vue
 basic.vue
 x.vue
 trigger.vue
@@ -27,6 +28,8 @@ placement.vue
 | x-placement | `'top' \| 'bottom'` | `bottom` | Scrollbar placement when scrolling horizontally. | 2.40.0 |
 | y-placement | `'left' \| 'right'` | `right` | Scrollbar placement when scrolling vertically. | 2.40.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback on scroll. |  |
+| overflow-width | `number` | `undefined` | Vertical scrollbar width in pixels. Uses the theme width when omitted. [Example](#thickness.vue) |  |
+| overflow-height | `number` | `undefined` | Horizontal scrollbar height in pixels. Uses the theme height when omitted. [Example](#thickness.vue) |  |
 
 ### Scrollbar Slots
 
@@ -40,9 +43,3 @@ placement.vue
 | --- | --- | --- |
 | scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content by specific distance. |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. |
-
-## HIS extensions
-
-`overflow-width` sets vertical bar width; `overflow-height` sets horizontal bar height in pixels. Undefined uses theme dimensions.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

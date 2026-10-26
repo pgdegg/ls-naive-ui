@@ -1,7 +1,7 @@
 <markdown>
 # Card type
 
-Set `type='card'`.
+Set `type='card'`. Close buttons expand on hover and release their width and spacing on mouse leave. This example does not set a minimum tab width. An explicitly configured tab-style min-width remains respected.
 </markdown>
 
 <script lang="ts" setup>
@@ -31,13 +31,7 @@ const panels = panelsRef
 </script>
 
 <template>
-  <n-tabs
-    v-model:value="name"
-    type="card"
-    closable
-    tab-style="min-width: 80px;"
-    @close="handleClose"
-  >
+  <n-tabs v-model:value="name" type="card" closable @close="handleClose">
     <n-tab-pane
       v-for="panel in panels"
       :key="panel"

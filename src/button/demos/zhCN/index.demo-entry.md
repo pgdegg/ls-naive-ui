@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+group-state.vue
 basic.vue
 secondary.vue
 tertiary.vue
@@ -39,9 +40,9 @@ debug.vue
 | circle | `boolean` | `false` | 按钮是否为圆形 |  |
 | color | `string` | `undefined` | 按钮颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |
 | dashed | `boolean` | `false` | 按钮边框是否为虚线 |  |
-| disabled | `boolean` | `false` | 按钮是否禁用 |  |
+| disabled | `boolean` | `false` | 按钮是否禁用 [使用案例](#group-state.vue) |  |
 | focusable | `boolean` | `true` | 按钮是否可以被聚焦 |  |
-| ghost | `boolean` | `false` | 按钮是否透明 |  |
+| ghost | `boolean` | `false` | 按钮是否透明 [使用案例](#group-state.vue) |  |
 | native-focus-behavior | `boolean` | 浏览器不是 Safari | 按钮是否遵循原生的 focus 行为。Safari 原生的 button 无法通过点击被聚焦，所以默认情况下 naive-ui 做了一些处理使它可以被聚焦，如果你不需要这种行为，或者发现你需要让按钮可被拖动，可以开启这个属性 | 2.28.3 |
 | icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |  |
@@ -54,7 +55,7 @@ debug.vue
 | secondary | `boolean` | `false` | 是否是次要按钮 |  |
 | strong | `boolean` | `false` | 按钮文字是否加粗 |  |
 | tertiary | `boolean` | `false` | 是否是三级按钮 |  |
-| text | `boolean` | `false` | 是否显示为文本按钮 |  |
+| text | `boolean` | `false` | 是否显示为文本按钮 [使用案例](#group-state.vue) |  |
 | text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |
 | type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |  |
 | tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |  |
@@ -65,6 +66,9 @@ debug.vue
 | --- | --- | --- | --- |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `undefined` | 在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效 |
 | vertical | `boolean` | `false` | 组内按钮的排列方式 |
+| disabled | `boolean` | `undefined` | 统一禁用组内按钮；子按钮不能通过 disabled=false 解除组禁用。 [使用案例](#group-state.vue) |
+| ghost | `boolean` | `undefined` | 组内按钮继承的 ghost 外观。 [使用案例](#group-state.vue) |
+| text | `boolean` | `undefined` | 组内按钮继承的 text 外观。 [使用案例](#group-state.vue) |
 
 ### Button Slots
 
@@ -78,9 +82,3 @@ debug.vue
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 按钮组的内容 |
-
-## HIS 定制
-
-ButtonGroup 新增 `disabled`、`ghost`、`text`（未设置时不覆盖子按钮）。禁用对所有子按钮生效，外观属性指定时优先于子按钮。不再提供 ignoreGroupDisabled 和 plain / link 别名。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

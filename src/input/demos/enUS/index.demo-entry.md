@@ -5,6 +5,7 @@ Many years ago, inputs were just punched cards.
 ## Demos
 
 ```demo
+input-rules.vue
 basic.vue
 size.vue
 round.vue
@@ -46,7 +47,7 @@ graphemes.vue
 | pair | `boolean` | `false` | Whether to use the pairwise type input. |  |
 | passively-activated | `boolean` | `false` | Whether to passively activate the input. |  |
 | placeholder | `string \| [string, string]` | `undefined` | Placeholder of input. When `pair` is `true`, this is an array. |  |
-| readonly | `boolean` | `false` | Set the readonly state. |  |
+| readonly | `boolean` | `false` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#input-rules.vue) |  |
 | render-count | `(props: { value: string }) => void` | `undefined` | Render function of word count. | 2.32.2 |
 | round | `boolean` | `false` | Use a rounded input style. |  |
 | rows | `number` | `3` | Rows property for when the input is of type `textarea`. |  |
@@ -63,6 +64,12 @@ graphemes.vue
 | on-focus | `() => void` | `undefined` | Callback triggered when the input is focussed on. |  |
 | on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input gets user input. |  |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#input-rules.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#input-rules.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#input-rules.vue) |  |
+| focus-delay | `number` | `undefined` | Autofocus delay in milliseconds. Only affects autofocus; pending focus is cancelled on unmount. [Example](#input-rules.vue) |  |
+| keeps | `string \| RegExp \| Array<string \| RegExp>` | `undefined` | Allowed input rules: common a-z/A-Z/0-9 ranges or literal strings, RegExp matches, or a combination. Does not filter during IME composition. [Example](#input-rules.vue) |  |
+| ignorekeeps | `string \| string[]` | `undefined` | Additional literal characters allowed by keeps. Not interpreted as regular expressions. [Example](#input-rules.vue) |  |
 
 ### Input Slots
 
@@ -75,6 +82,8 @@ graphemes.vue
 | prefix | `()` | Prefix content slot. |  |
 | separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |  |
 | suffix | `()` | Suffix content slot. |  |
+| prepend | `()` | Content before the input, outside the input border and separate from prefix. |  |
+| append | `()` | Content after the input, outside the input border and separate from suffix. |  |
 
 ### InputGroup Slots
 
@@ -97,9 +106,4 @@ graphemes.vue
 | focus | `() => void` | Focus the input element. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | Scroll To. | 2.32.0 |
 | select | `() => void` | Select the input element. |  |
-
-## HIS extensions
-
-`keeps: string | RegExp | (string | RegExp)[]` retains allowed characters; `ignorekeeps: string | string[]` adds literal characters. Composition is preserved. `focus-delay` delays autofocus with unmount cleanup. Added prepend/append slots, form readonly/placeholder overrides and instance inputElement.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| inputElement | `HTMLInputElement \| HTMLTextAreaElement \| null` | Current native input element. Supports automatic inputElementRegistrationKey registration and cleanup on unmount/KeepAlive deactivation. |  |

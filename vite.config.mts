@@ -26,6 +26,19 @@ const testExclude = isBuildTimeTest
 export default defineConfig({
   root: __dirname,
   plugins: [
+    {
+      name: 'css-render-reload',
+      apply: 'serve',
+      handleHotUpdate({ file, modules, server }) {
+        if (!/\.cssr\.[jt]s$/.test(file))
+          return
+        // CSS-render caches mounted styles by id; component HMR keeps stale CSS.
+        for (const module of modules)
+          server.moduleGraph.invalidateModule(module)
+        server.ws.send({ type: 'full-reload', path: '*' })
+        return []
+      }
+    },
     vueJsxVapor({
       interop: true
     }),

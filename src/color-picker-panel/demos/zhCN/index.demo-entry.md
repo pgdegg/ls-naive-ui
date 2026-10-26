@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+readonly.vue
 basic.vue
 modes.vue
 actions.vue
@@ -25,8 +26,8 @@ actions.vue
 | actions | `Array<'confirm' \| 'clear'>` | `null` | 内置操作按钮；操作后面板保持显示 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 继承表单大小，控制内部输入尺寸 |
 | disabled | `boolean` | `undefined` | 禁用面板；继承表单或容器禁用 |
-| readonly | `boolean` | `undefined` | 保留颜色展示并阻止编辑，继承表单 readonly |
-| ignore-parent-readonly | `boolean` | `false` | 跳过表单只读，不跳过禁用 |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#readonly.vue) |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#readonly.vue) |
 | on-update:value / on-update-value | `(value: string \| null) => void` | `undefined` | 实时更新颜色，支持 v-model:value |
 | on-complete | `(value: string) => void` | `undefined` | 一次编辑结束时触发；与 ColorPicker 一致，预设色板仅触发值更新 |
 | on-confirm | `(value: string \| null) => void` | `undefined` | 点击确认时触发，不关闭或隐藏面板 |

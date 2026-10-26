@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+validation.vue
 basic.vue
 drag.vue
 submit-manually.vue
@@ -75,6 +76,9 @@ rtl-debug.vue
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` 2.38.2 |
 | on-retry | `(options: { file: UploadFileInfo }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 点击重试的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次重试 | 2.40.0 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
+| max-size | `number` | `undefined` | 单个文件最大字节数；选择文件和手动 submit 均校验，失败时不发起上传。 [使用案例](#undefined.vue) |  |
+| validate-accept | `boolean` | `false` | 根据 accept 校验文件 MIME 类型或扩展名；不通过时阻止上传并通知 on-validation-error。 [使用案例](#undefined.vue) |  |
+| on-validation-error | `(reason: 'size' \| 'type', file: File) => void` | `undefined` | 文件校验失败时触发；size 表示超出 max-size，type 表示不符合 accept，file 为原始文件。 [使用案例](#undefined.vue) |  |
 
 #### UploadFileInfo Type
 
@@ -145,9 +149,3 @@ interface UploadCustomRequestOptions {
 ### 其他
 
 1. `uploadDownload`，类型为 `(url: string, name: string | undefined): void`，你可以直接从 naive-ui import 此函数
-
-## HIS 定制
-
-`max-size` 按字节限制文件大小，`validate-accept` 启用选择文件的类型校验。`on-validation-error(reason, file)` 返回 size / type 和 File。校验覆盖文件添加与手动 submit，禁用时不发起请求。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

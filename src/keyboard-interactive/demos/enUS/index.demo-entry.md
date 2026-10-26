@@ -7,6 +7,7 @@ This component is a HIS fork extension. Import `NKeyboardInteractive` and `NKeyb
 ## Demos
 
 ```demo
+behavior.vue
 basic.vue
 form.vue
 order.vue

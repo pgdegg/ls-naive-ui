@@ -1,9 +1,4 @@
 export const enDocRoutes = [
-  {
-    path: 'his-customization',
-    component: () =>
-      import('../pages/docs/his-customization/enUS/index.demo-entry.md')
-  },
   // 基础文档
   {
     path: 'introduction',
@@ -97,11 +92,6 @@ export const enDocRoutes = [
 ]
 
 export const zhDocRoutes = [
-  {
-    path: 'his-customization',
-    component: () =>
-      import('../pages/docs/his-customization/zhCN/index.demo-entry.md')
-  },
   // 基础文档
   {
     path: 'introduction',

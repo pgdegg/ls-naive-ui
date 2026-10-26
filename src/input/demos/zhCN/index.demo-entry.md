@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+input-rules.vue
 basic.vue
 size.vue
 round.vue
@@ -50,7 +51,7 @@ textarea-resize-debug.vue
 | pair | `boolean` | `false` | 是否输入成对的值 |  |
 | passively-activated | `boolean` | `false` | 是否被动激活输入框 |  |
 | placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果 `pair` 是 `true`，`placeholder`是一个数组 |  |
-| readonly | `boolean` | `false` | 是否只读 |  |
+| readonly | `boolean` | `false` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#input-rules.vue) |  |
 | render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | 2.32.2 |
 | round | `boolean` | `false` | 输入框是否圆角 |  |
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |  |
@@ -67,6 +68,12 @@ textarea-resize-debug.vue
 | on-focus | `() => void` | `undefined` | 输入框获得焦点时触发 |  |
 | on-input | `(value: string \| [string, string]) => void` | `undefined` | 输入框在用户输入时触发 |  |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值 change 时触发 |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#input-rules.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#input-rules.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#input-rules.vue) |  |
+| focus-delay | `number` | `undefined` | autofocus 的延迟时间，单位毫秒；仅影响自动聚焦，卸载时取消待执行任务。 [使用案例](#input-rules.vue) |  |
+| keeps | `string \| RegExp \| Array<string \| RegExp>` | `undefined` | 输入允许规则；字符串支持常用 a-z/A-Z/0-9 范围或字面字符，正则保留匹配内容，数组合并规则；中文输入法组合期间不裁剪。 [使用案例](#input-rules.vue) |  |
+| ignorekeeps | `string \| string[]` | `undefined` | keeps 规则之外额外允许的字面字符，不作为正则表达式解释。 [使用案例](#input-rules.vue) |  |
 
 ### Input Slots
 
@@ -79,6 +86,8 @@ textarea-resize-debug.vue
 | prefix | `()` | 输入框头部内容 |  |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |  |
 | suffix | `()` | 输入框尾部内容 |  |
+| prepend | `()` | 输入框外部前置附加内容，与内部 prefix 分开。 |  |
+| append | `()` | 输入框外部后置附加内容，与内部 suffix 分开。 |  |
 
 ### InputGroup Slots
 
@@ -101,9 +110,4 @@ textarea-resize-debug.vue
 | focus | `() => void` | Focus 输入框 |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | 滚动到 | 2.32.0 |
 | select | `() => void` | 选中输入框内容 |  |
-
-## HIS 定制
-
-`keeps: string | RegExp | (string | RegExp)[]` 过滤允许字符，`ignorekeeps: string | string[]` 补充字面字符；输入法组合期间不裁剪。`focus-delay` 延迟 autofocus 并在卸载时取消。新增 prepend / append 插槽。支持表单只读和占位符覆盖，实例 inputElement 暴露真实输入元素。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| inputElement | `HTMLInputElement \| HTMLTextAreaElement \| null` | 当前原生输入元素；可通过 inputElementRegistrationKey 自动注册，卸载或 KeepAlive 停用时清理。 |  |

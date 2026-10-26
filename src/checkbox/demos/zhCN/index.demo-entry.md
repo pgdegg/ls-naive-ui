@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+group-state.vue
 basic.vue
 size.vue
 group.vue
@@ -35,6 +36,10 @@ rtl-debug.vue
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |
 | value | `string \| number` | `undefined` | Checkbox 在 checkbox group 中使用的值 |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | 当 checked 改变时触发的回调函数 |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#group-state.vue) |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#group-state.vue) |
+| hide-circle | `boolean` | `false` | 隐藏勾选指示器，保留选中状态、标签和键盘交互。 [使用案例](#group-state.vue) |
+| cancel-disabled | `boolean` | `false` | 调整禁用且已选标签的颜色；不解除禁用，也不允许修改选中状态。 [使用案例](#group-state.vue) |
 
 ### CheckboxGroup Props
 
@@ -49,6 +54,8 @@ rtl-debug.vue
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |  |
 | value-field | `string` | `'value'` | `options` 中选项值的字段名 | 2.45.0 |
 | on-update:value | `(value: (string \| number)[], meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | 选项组的值改变时的回调 | `meta` 2.32.0 |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#group-state.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#group-state.vue) |  |
 
 ### Checkbox Slots
 
@@ -69,8 +76,11 @@ rtl-debug.vue
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | blur  | `() => void` | 失焦 | 2.24.2 |
 
-## HIS 定制
+### CheckboxGroup Methods
 
-`hide-circle` 隐藏指示器但保留键盘操作；`cancel-disabled` 仅保留已选标签颜色，不解除禁用。CheckboxGroup 的 options 支持 visible=false，实例提供 allChecked、isIndeterminate、toggleAll(checked?) 与 inputElement；全选保留锁定项且遵守 min/max。支持 readonly / ignore-parent-readonly，不提供占位符属性。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| inputElement | `HTMLElement \| null` | 当前复选框组入口元素。 |
+| allChecked | `boolean` | 只读；所有可见、未禁用选项是否全部选中。 |
+| isIndeterminate | `boolean` | 只读；可见、未禁用选项是否部分选中。 |
+| toggleAll | `(checked?: boolean) => void` | 全选或清空可选项，省略参数时切换；保留隐藏/禁用选项的值并遵守 min/max。 |

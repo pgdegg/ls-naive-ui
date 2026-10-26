@@ -48,6 +48,7 @@ export default defineComponent({
 ## 演示
 
 ```demo
+reset-on-resize.vue
 basic.vue
 content-scrollable.vue
 reactive.vue
@@ -120,6 +121,7 @@ mask-click-debug.vue
 | on-esc | `() => void` | `undefined` | 焦点在 Modal 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `() => void` | `undefined` | 点击遮罩时的回调 |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |  |
+| reset-on-resize | `boolean` | `false` | 可拖拽弹窗在窗口 resize 后防抖重置拖拽位移；卸载时清理监听与任务。 [使用案例](#reset-on-resize.vue) |  |
 
 ### Modal（Card 预设）Props
 
@@ -198,9 +200,3 @@ export function handler() {
 ```
 
 </n-space>
-
-## HIS 定制
-
-`reset-on-resize` 在窗口 resize 防抖后重置拖拽偏移，默认 false；销毁时清理监听和定时器。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

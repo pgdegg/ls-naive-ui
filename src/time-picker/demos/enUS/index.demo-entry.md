@@ -5,6 +5,7 @@ Like a digital clock.
 ## Demos
 
 ```demo
+quick-input.vue
 basic.vue
 confirm.vue
 size.vue
@@ -56,22 +57,25 @@ timezone.vue
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | Callback when formatted value changes. | 2.24.0 |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the value changes. | `formattedValue` 2.24.0 |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#quick-input.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#quick-input.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#quick-input.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#quick-input.vue) |  |
+| quick-input | `boolean` | `false` | Enable Enter-based parsing of compact or separated input, honoring disabled dates/times. Range input advances from the first field and only commits a complete range. [Example](#quick-input.vue) |  |
+| default-to-extreme | `'min' \| 'max'` | `undefined` | Fill missing quick-input fields with minimum or maximum values. Uses the parser default min when omitted. [Example](#quick-input.vue) |  |
 
 ### TimePicker Slots
 
 | Name | Parameters | Description |
-| ---- | ---------- | ----------- |
-| icon | `()`       | Custom icon |
+| --- | --- | --- |
+| icon | `()` | Custom icon |
+| prepend | `()` | Content before the input, outside the input border and separate from prefix. |
+| append | `()` | Content after the input, outside the input border and separate from suffix. |
 
 ### TimePicker Methods
 
-| Name  | Type         | Description | Version |
-| ----- | ------------ | ----------- | ------- |
-| focus | `() => void` | Focus.      | 2.24.2  |
-| blur  | `() => void` | Blur.       | 2.24.2  |
-
-## HIS extensions
-
-`quick-input` parses compact times; `default-to-extreme: "min" | "max"` fills missing fields. Native disabled-time and step constraints remain. Added prepend/append slots, readonly/placeholder overrides and inputElement. parseQuickInput is also exported.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| focus | `() => void` | Focus. | 2.24.2 |
+| blur | `() => void` | Blur. | 2.24.2 |
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |  |

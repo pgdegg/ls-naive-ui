@@ -5,6 +5,7 @@ Select something!
 ## Demo
 
 ```demo
+search-model.vue
 basic.vue
 primitive-options.vue
 size.vue
@@ -87,6 +88,19 @@ custom-field.vue
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#search-model.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#search-model.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | Hide placeholder text. Inherits the form setting when omitted; explicit false overrides the inherited setting. [Example](#search-model.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | Pass `'form'` or an array containing `'form'` to ignore the form hide-placeholder setting. [Example](#search-model.vue) |  |
+| filter-value | `string` | `undefined` | Controlled search text. Managed internally when omitted. Supports v-model:filter-value. [Example](#search-model.vue) |  |
+| filter-keys | `string[]` | `undefined` | Additional fields searched together with label-field. Uses the existing filter when omitted. [Example](#search-model.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | Called with the new search text when it changes. [Example](#search-model.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | Camel-case prop alias of on-update:filter-value. Both callbacks run if both are supplied. [Example](#search-model.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | Additional search-text change notification. Does not replace existing search events. [Example](#search-model.vue) |  |
+| separator | `string` | `undefined` | Allow a delimited string model in multiple mode. Keeps array models when omitted; label notifications use the same delimiter for string models. [Example](#search-model.vue) |  |
+| remote-show-on-input | `boolean` | `false` | In remote mode, show the menu only after entering search text; hide it for an empty query. [Example](#search-model.vue) |  |
+| on-update:label | `(value: string \| string[]) => void` | `undefined` | Emit selected labels when selection changes: a string for single selection, an array for multiple selection, or a delimited string for a separator string model. [Example](#search-model.vue) |  |
+| on-update-label | `(value: string \| string[]) => void` | `undefined` | Camel-case prop alias of on-update:label. [Example](#search-model.vue) |  |
 
 #### SelectOption Properties
 
@@ -120,15 +134,14 @@ custom-field.vue
 
 ### Select Methods
 
-| Name       | Type         | Description  | Version |
-| ---------- | ------------ | ------------ | ------- |
-| focus      | `() => void` | Focus.       | 2.24.2  |
-| focusInput | `() => void` | Input focus. | 2.35.0  |
-| blur       | `() => void` | Blur.        | 2.24.2  |
-| blurInput  | `() => void` | Input blur.  | 2.35.0  |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| focus | `() => void` | Focus. | 2.24.2 |
+| focusInput | `() => void` | Input focus. | 2.35.0 |
+| blur | `() => void` | Blur. | 2.24.2 |
+| blurInput | `() => void` | Input blur. | 2.35.0 |
+| inputElement | `HTMLElement \| null` | Current input element. A registrar provided through inputElementRegistrationKey registers it automatically and cleans up on unmount/deactivation. |  |
 
-## HIS extensions
+### Object model adapter
 
-`multiple` + `separator` enables separated string models. `update:label` emits labels (a joined string for separated models); there is no label input prop. `filter-value` / `update:filter-value`, `filter-keys`, `on-query-change`, `remote-show-on-input` extend search. Native on-search/filter/virtual scrolling remain. Added readonly/placeholder overrides and inputElement; use createOptionModelAdapter for object models.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).
+`createOptionModelAdapter(() => ({ options, valueKey, valueField, labelField, multiple }))` converts business objects to native values: pass `decode(model)` as value and write `encode(value)` back to the business model. `labels(value)` returns labels; `defaults(field)` selects visible, enabled defaults by marker. This is an exported helper, not Select props.

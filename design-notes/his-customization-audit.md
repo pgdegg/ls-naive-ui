@@ -2,7 +2,7 @@
 
 Source: `D:/HIS/element-plus`, behavioral changes between `dev` and `e6345c3fdf` (before the comment-only translation commit `a0f756c2e7`). Compare runtime logic rather than translated comments when refreshing this inventory.
 
-The public migration table and runnable examples live in `demo/pages/docs/his-customization/{zhCN,enUS}`. They specify Naive model contracts instead of silently emulating Element Plus event signatures.
+Public APIs and runnable examples live in each component's `demos/{zhCN,enUS}` documentation. New properties are listed in the corresponding Props tables, with slots and instance methods in their own sections. The documentation uses native Naive model contracts instead of emulating Element Plus event signatures.
 
 | Source directories | Destination |
 | --- | --- |

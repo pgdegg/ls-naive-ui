@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+suggestions.vue
 basic.vue
 size.vue
 group.vue
@@ -49,6 +50,14 @@ append.vue
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |  |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#suggestions.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#suggestions.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#suggestions.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#suggestions.vue) |  |
+| fetch-suggestions | `(query: string, callback: (options: AutoCompleteOptions) => void) => void \| AutoCompleteOptions \| Promise<void \| AutoCompleteOptions>` | `undefined` | 获取建议：调用 callback，或返回选项数组/Promise。过期响应忽略；不传时使用 options。 [使用案例](#suggestions.vue) |  |
+| debounce | `number` | `300` | 异步建议请求防抖间隔，单位毫秒；仅用于 fetch-suggestions。 [使用案例](#suggestions.vue) |  |
+| trigger-on-focus | `boolean` | `true` | 配置 fetch-suggestions 时，聚焦后是否用当前文本请求建议。 [使用案例](#suggestions.vue) |  |
+| offset | `number` | `undefined` | 建议菜单与输入框的垂直间距，单位像素；省略时保留原有定位间距。 [使用案例](#suggestions.vue) |  |
 
 #### AutoCompleteOption Properties
 
@@ -78,13 +87,9 @@ append.vue
 
 ### AutoComplete Methods
 
-| 名称  | 类型         | 说明             | 版本   |
-| ----- | ------------ | ---------------- | ------ |
-| blur  | `() => void` | Blur input 元素  | 2.26.2 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur input 元素 | 2.26.2 |
 | focus | `() => void` | Focus input 元素 | 2.26.2 |
-
-## HIS 定制
-
-`fetch-suggestions(query, callback)` 可回调或返回 Promise，`debounce` 默认 300ms，`trigger-on-focus` 默认 true，`offset` 调整弹层。旧请求结果忽略，失焦/卸载取消待执行任务。实例 loading 提供合并加载状态，inputElement 提供输入元素。支持表单只读与提示覆盖。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
+| loading | `boolean` | 只读的异步建议请求加载状态。 |  |

@@ -1,4 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
+import borderCard from './border-card.cssr'
+import cardGroup from './card-group.cssr'
 
 // 变量：
 // --n-bezier
@@ -315,11 +317,21 @@ export default cB('tabs', `
       cursor: 'not-allowed'
     }),
     cE('close', `
-      margin-inline-start: 6px;
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      margin-inline-start: 0;
+      overflow: hidden;
       transition:
+        opacity .2s var(--n-bezier),
+        width .2s var(--n-bezier),
+        margin .2s var(--n-bezier),
         background-color .3s var(--n-bezier),
         color .3s var(--n-bezier);
     `),
+    c('&:hover, &:focus-within', [cE('close', 'opacity: 1; pointer-events: auto; width: var(--n-close-size); margin-inline-start: 6px;')]),
+    cM('close-always', [cE('close', 'opacity: 1; pointer-events: auto; width: var(--n-close-size); margin-inline-start: 6px;')]),
+    c('@media (hover: none)', [cE('close', 'opacity: 1; pointer-events: auto; width: var(--n-close-size); margin-inline-start: 6px;')]),
     cE('label', `
       display: flex;
       align-items: center;
@@ -509,7 +521,8 @@ export default cB('tabs', `
             `)
           ])
         ]),
-        cM('closable', 'padding-inline-end: 8px;'),
+        // Only the close element expands; keep the label padding symmetric.
+        cM('closable', 'justify-content: center;'),
         cM('active', `
           background-color: #0000;
           font-weight: var(--n-tab-font-weight-active);
@@ -640,5 +653,7 @@ export default cB('tabs', `
     cM('down', `
       padding-top: 10px;
     `)
-  ])
+  ]),
+  borderCard,
+  cardGroup
 ])

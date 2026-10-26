@@ -18,9 +18,9 @@ tags.vue
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 文字颜色；Element Plus 的 danger 在这里使用 error |
-| size | `'small' \| 'medium' \| 'large'` | `undefined` | 主题字号；不设置时继承上下文，与现有 NText 一致 |
-| truncated | `boolean` | `false` | 单行超宽显示省略号，需要限制自身或容器宽度 |
-| line-clamp | `string \| number` | `undefined` | 最大行数，仅正整数生效；设置后优先于 truncated |
+| size | `'small' \| 'medium' \| 'large'` | `undefined` | 文字字号（主题默认 12/14/16px）；省略时继承父级字号。 |
+| truncated | `boolean` | `false` | 开启单行省略；需提供有限可用宽度，实际截断状态可通过实例 isTruncated 读取。 |
+| line-clamp | `string \| number` | `undefined` | 正整数最大行数，开启多行省略；有效时优先于 truncated，非正整数不生效。 |
 | tag | `string` | `'span'` | 根标签；code / delete 属性保留原有标签优先级 |
 | strong | `boolean` | `false` | 粗体 |
 | italic | `boolean` | `false` | 斜体 |

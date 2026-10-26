@@ -7,6 +7,7 @@
 ## 演示
 
 ```demo
+readonly.vue
 basic.vue
 group.vue
 options.vue
@@ -22,6 +23,8 @@ tooltip-debug.vue
 
 ### Radio Props, RadioButton Props
 
+`readonly`、`ignore-parent-readonly`、`hide-circle` 仅适用于 Radio；RadioButton 的组级只读请通过 RadioGroup 的 `readonly` 设置。
+
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | checked | `boolean` | `undefined` | 选中状态 |  |
@@ -32,6 +35,9 @@ tooltip-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |  |
 | value | `string \| number \| boolean` | `'on'` | 选中的值 | `boolean` 2.33.0 |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | 发生变化时触发的回调方法 |  |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#readonly.vue) |  |
+| hide-circle | `boolean` | `false` | 隐藏单选指示器，保留标签和键盘交互。 [使用案例](#readonly.vue) |  |
 
 ### RadioGroup Props
 
@@ -46,9 +52,5 @@ tooltip-debug.vue
 | value | `string \| number \| boolean \| null` | `null` | 选中的值 |  |
 | value-field | `string` | `'value'` | `options` 中选项值的字段名 | 2.45.0 |
 | on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |  |
-
-## HIS 定制
-
-`hide-circle` 隐藏视觉指示器，保留输入与键盘操作。Radio / RadioGroup 提供 inputElement，支持 readonly / ignore-parent-readonly；对象模型可使用 createOptionModelAdapter。没有占位符属性。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#readonly.vue) |  |

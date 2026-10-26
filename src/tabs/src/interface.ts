@@ -1,7 +1,9 @@
 import type { CSSProperties, Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
-export type TabsType = 'line' | 'card' | 'bar' | 'segment'
+export type TabsType
+  = 'line' | 'card' | 'bar' | 'segment' | 'border-card' | 'card-group'
+export type TabsCloseButtonDisplay = 'hover' | 'always'
 
 export type OnUpdateValue = (value: string & number) => void
 export type OnUpdateValueImpl = (value: string | number) => void
@@ -23,6 +25,7 @@ export interface TabsInjection {
   valueRef: Ref<string | number | null>
   typeRef: Ref<TabsType>
   closableRef: Ref<boolean>
+  closeButtonDisplayRef: Ref<TabsCloseButtonDisplay>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   tabClassRef: Ref<string | undefined>
   addTabClassRef: Ref<string | undefined>

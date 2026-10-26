@@ -5,6 +5,7 @@ I have a Nintendo Switch, but don't have time to play it. This reminds me of my 
 ## Demos
 
 ```demo
+readonly.vue
 basic.vue
 size.vue
 content.vue
@@ -34,6 +35,8 @@ icon.vue
 | unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |  |
 | value | `string \| number \| boolean \| undefined` | `undefined` | Value when being set manually. |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
+| readonly | `boolean` | `undefined` | Readonly state, combined with the parent form readonly state. Disabled always takes precedence. [Example](#readonly.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | Ignore the parent form readonly state without overriding local readonly or disabled states. [Example](#readonly.vue) |  |
 
 ### Switch Slots
 
@@ -44,9 +47,3 @@ icon.vue
 | icon | `()` | Icon of switch button. | 2.25.3 |
 | unchecked | `()` | Content when the switch is unchecked. |  |
 | unchecked-icon | `()` | Icon of switch button when unchecked. | 2.25.3 |
-
-## HIS extensions
-
-Use native `:round="false"` for square switches; no square alias is added. Supports readonly/ignore-parent-readonly without placeholder props.
-
-See the full API migration, shared composables and demos in [HIS customizations](../docs/his-customization).

@@ -11,6 +11,7 @@
 ## 演示
 
 ```demo
+readonly.vue
 inline.vue
 custom-rule.vue
 abnormal-warning.vue
@@ -47,6 +48,9 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | 2.27.0 |
+| readonly | `boolean` | `false` | 将只读状态传给后代输入控件；选择类控件禁用编辑，子控件可通过 ignore-parent-readonly 跳过继承。 [使用案例](#readonly.vue) |  |
+| hide-placeholder | `boolean` | `false` | 隐藏后代输入/选择控件的提示；子控件显式 hide-placeholder=false 或 ignore-parent-hide-placeholder 可覆盖。 [使用案例](#readonly.vue) |  |
+| content-width | `number \| string` | `undefined` | inline 表单项内容宽度；数字单位为 px，字符串接受 CSS 长度。 [使用案例](#readonly.vue) |  |
 
 #### FormItemRule Type
 
@@ -131,9 +135,3 @@ feedback-style.vue
 | default  | `()` | 内容           |
 | feedback | `()` | 表项的反馈信息 | 2.24.0 |
 | label    | `()` | 标签内容       |        |
-
-## HIS 定制
-
-`readonly` 向控件提供只读状态，选择类控件以禁用交互实现；`hide-placeholder` 隐藏提示；`content-width: string | number` 设置 inline 表单项内容宽度。文本和选择控件可用 ignore-parent-readonly、hide-placeholder=false 或 ignore-parent-hide-placeholder="form" 局部覆盖。readonlyRaw 已移除。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).

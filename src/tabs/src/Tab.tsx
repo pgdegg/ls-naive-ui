@@ -8,6 +8,7 @@ import { omit, render } from '../../_utils'
 import { NIcon } from '../../icon'
 import { tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
+import { isCardType } from './utils'
 
 export const tabProps = {
   internalType: String as PropType<TabsType>,
@@ -36,6 +37,7 @@ export default defineComponent({
       valueRef,
       typeRef,
       closableRef,
+      closeButtonDisplayRef,
       tabStyleRef,
       addTabStyleRef,
       tabClassRef,
@@ -49,6 +51,9 @@ export default defineComponent({
     } = inject(tabsInjectionKey)!
     return {
       trigger: triggerRef,
+      mergedCloseButtonDisplay: computed(
+        () => props.closeButtonDisplay ?? closeButtonDisplayRef.value
+      ),
       mergedClosable: computed(() => {
         if (props.internalAddable)
           return false
@@ -137,6 +142,8 @@ export default defineComponent({
                 value === name && `${clsPrefix}-tabs-tab--active`,
                 disabled && `${clsPrefix}-tabs-tab--disabled`,
                 mergedClosable && `${clsPrefix}-tabs-tab--closable`,
+                this.mergedCloseButtonDisplay === 'always'
+                && `${clsPrefix}-tabs-tab--close-always`,
                 internalAddable && `${clsPrefix}-tabs-tab--addable`,
                 internalAddable ? this.addTabClass : this.tabClass
               ],
@@ -172,7 +179,7 @@ export default defineComponent({
               render(mergedTab ?? name)
             )}
           </span>
-          {mergedClosable && this.type === 'card' ? (
+          {mergedClosable && isCardType(this.type) ? (
             <NBaseClose
               clsPrefix={clsPrefix}
               class={`${clsPrefix}-tabs-tab__close`}

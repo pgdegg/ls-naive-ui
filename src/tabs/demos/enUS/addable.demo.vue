@@ -1,7 +1,7 @@
 <markdown>
 # Addable
 
-Add some tabs. Only work with `'card'` type.
+Add tabs with `card`, `card-group` or `border-card`. Close buttons release their width on mouse leave. Tabs use their natural content width without an extra minimum width.
 </markdown>
 
 <script lang="ts" setup>
@@ -47,7 +47,6 @@ function handleClose(name: number) {
     type="card"
     :addable="addable"
     :closable="closable"
-    tab-style="min-width: 80px;"
     @close="handleClose"
     @add="handleAdd"
   >

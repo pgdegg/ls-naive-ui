@@ -35,6 +35,8 @@ export default defineComponent({
 ## 演示
 
 ```demo
+height.vue
+confirm.vue
 basic.vue
 async.vue
 use-component.vue
@@ -57,6 +59,8 @@ rtl-debug.vue
 | info | `(options: DialogOptions) => DialogReactive` | 调用 `info` 类型的对话框 |
 | success | `(options: DialogOptions) => DialogReactive` | 调用 `success` 类型的对话框 |
 | warning | `(options: DialogOptions) => DialogReactive` | 调用 `warning` 类型的对话框 |
+| confirm | `(options?: DialogConfirmOptions) => Promise<'confirm' \| 'cancel' \| 'close'>` | 创建确认框；确认 resolve('confirm')，取消默认 reject('cancel')。异步按钮回调返回 false 时保持打开且 Promise 不结算。 |
+| setConfirmDefaults | `(options: DialogConfirmOptions) => void` | 合并此 DialogProvider 下后续 confirm 调用的默认选项；单次调用的配置优先。 |
 
 ### useDialogReactiveList API
 
@@ -102,6 +106,8 @@ rtl-debug.vue
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |  |
+| reset-on-resize | `boolean` | `false` | 可拖拽对话框在窗口 resize 后防抖重置拖拽位移，恢复初始位置。 [使用案例](#height.vue) |  |
+| height | `number \| string` | `undefined` | 内容区高度；数字单位为 px，超出时滚动，与 Dialog height 一致。 [使用案例](#height.vue) |  |
 
 ### DialogReactive API
 
@@ -176,6 +182,7 @@ rtl-debug.vue
 | on-close | `() => void` | `undefined` | 点击关闭时执行的回调函数 |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | 执行 `negative` 时执行的回调函数 |  |
 | on-positive-click | `(e: MouseEvent) => void` | `undefined` | 执行 `positive` 时执行的回调函数 |  |
+| height | `number \| string` | `undefined` | 对话框内容区域高度；数字单位为 px，字符串支持 CSS 长度。 [使用案例](#height.vue) |  |
 
 ### Dialog Slots
 
@@ -187,8 +194,11 @@ rtl-debug.vue
 | icon    | `()` | `icon` 内容   |        |
 | close   | `()` | `close` 内容  | 2.36.0 |
 
-## HIS 定制
+### DialogConfirmOptions Properties
 
-`height: string | number` 设置正文高度。useDialog().create 支持 resetOnResize；confirm(options) 返回确认动作 Promise，setConfirmDefaults 设置 provider 内默认值。resolveOnCancel 默认 false；distinguishCancelAndClose 区分 close；异步按钮回调返回 false 阻止关闭。
+继承上述 DialogOptions；以下选项仅用于 `useDialog().confirm()` 和 `setConfirmDefaults()`，不是 NDialog 组件属性。
 
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| resolveOnCancel | `boolean` | `false` | 取消或关闭也让 Promise resolve 对应动作；默认会 reject。 |
+| distinguishCancelAndClose | `boolean` | `false` | 将关闭动作区分为 'close'；默认将关闭归为 'cancel'。 |

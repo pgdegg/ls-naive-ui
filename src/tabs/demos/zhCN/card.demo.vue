@@ -1,7 +1,7 @@
 <markdown>
 # 卡片类型
 
-设定 `type='card'`。
+设定 `type='card'`。关闭按钮默认移入时展开，移出后释放宽度和间距；本例不设置最小标签宽度。若通过 tab-style 主动设置 min-width，该限制会继续生效。
 </markdown>
 
 <script lang="ts" setup>
@@ -31,13 +31,7 @@ const panels = panelsRef
 </script>
 
 <template>
-  <n-tabs
-    v-model:value="name"
-    type="card"
-    closable
-    tab-style="min-width: 80px;"
-    @close="handleClose"
-  >
+  <n-tabs v-model:value="name" type="card" closable @close="handleClose">
     <n-tab-pane
       v-for="panel in panels"
       :key="panel"

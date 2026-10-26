@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+search-model.vue
 basic.vue
 primitive-options.vue
 size.vue
@@ -98,6 +99,19 @@ create-debug.vue
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
+| readonly | `boolean` | `undefined` | 只读状态，与表单 readonly 合并；禁用始终优先。 [使用案例](#search-model.vue) |  |
+| ignore-parent-readonly | `boolean` | `false` | 不继承表单的 readonly；不解除组件自身只读或任何禁用状态。 [使用案例](#search-model.vue) |  |
+| hide-placeholder | `boolean` | `undefined` | 隐藏提示文字；未指定时继承表单配置，显式 false 可覆盖表单隐藏设置。 [使用案例](#search-model.vue) |  |
+| ignore-parent-hide-placeholder | `string \| string[]` | `undefined` | 传入 `'form'` 或包含 `'form'` 的数组时，不继承表单的 hide-placeholder。 [使用案例](#search-model.vue) |  |
+| filter-value | `string` | `undefined` | 受控搜索文本；未指定时由组件维护。支持 v-model:filter-value。 [使用案例](#search-model.vue) |  |
+| filter-keys | `string[]` | `undefined` | 与 label-field 一起搜索的附加字段；不传时使用原有过滤规则。 [使用案例](#search-model.vue) |  |
+| on-update:filter-value | `(value: string) => void` | `undefined` | 搜索文本变化时触发，参数为新文本。 [使用案例](#search-model.vue) |  |
+| on-update-filter-value | `(value: string) => void` | `undefined` | on-update:filter-value 的驼峰事件属性别名；两个回调均配置时分别触发。 [使用案例](#search-model.vue) |  |
+| on-query-change | `(value: string) => void` | `undefined` | 搜索文本变化的额外通知；不替代原有搜索事件。 [使用案例](#search-model.vue) |  |
+| separator | `string` | `undefined` | 多选时支持绑定分隔字符串；未设置时仍使用数组，分隔模型对应的标签通知也输出分隔字符串。 [使用案例](#search-model.vue) |  |
+| remote-show-on-input | `boolean` | `false` | remote 模式下仅在输入搜索文本后显示菜单，空查询时隐藏。 [使用案例](#search-model.vue) |  |
+| on-update:label | `(value: string \| string[]) => void` | `undefined` | 选择变化时输出所选标签；单选为字符串，多选为数组，separator 字符串模型为拼接字符串。 [使用案例](#search-model.vue) |  |
+| on-update-label | `(value: string \| string[]) => void` | `undefined` | on-update:label 的驼峰事件属性别名。 [使用案例](#search-model.vue) |  |
 
 #### SelectOption Properties
 
@@ -131,15 +145,14 @@ create-debug.vue
 
 ### Select Methods
 
-| 名称       | 类型         | 说明     | 版本   |
-| ---------- | ------------ | -------- | ------ |
-| focus      | `() => void` | 聚焦     | 2.24.2 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| focus | `() => void` | 聚焦 | 2.24.2 |
 | focusInput | `() => void` | 输入聚焦 | 2.35.0 |
-| blur       | `() => void` | 失焦     | 2.24.2 |
-| blurInput  | `() => void` | 输入失焦 | 2.35.0 |
+| blur | `() => void` | 失焦 | 2.24.2 |
+| blurInput | `() => void` | 输入失焦 | 2.35.0 |
+| inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
 
-## HIS 定制
+### 对象模型适配
 
-`multiple` + `separator` 支持分隔字符串模型；`update:label` 输出标签（分隔模型输出标签字符串），没有 label 输入属性。`filter-value` / `update:filter-value` 控制查询，`filter-keys` 搜索附加字段，`on-query-change` 通知查询，`remote-show-on-input` 限制空查询弹出。保留原生 on-search、filter 和虚拟滚动。支持只读、提示覆盖、inputElement；对象模型使用 createOptionModelAdapter。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
+`createOptionModelAdapter(() => ({ options, valueKey, valueField, labelField, multiple }))` 可在业务对象与原生值模型间转换：将 `decode(model)` 传给 value，使用 `encode(value)` 写回业务模型。`labels(value)` 返回标签；`defaults(field)` 按标记选取可见、未禁用的默认项。它是导出的组合工具，不是 Select props。

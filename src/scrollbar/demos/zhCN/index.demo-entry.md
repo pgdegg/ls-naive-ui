@@ -5,6 +5,7 @@
 ## 演示
 
 ```demo
+thickness.vue
 basic.vue
 x.vue
 trigger.vue
@@ -28,6 +29,8 @@ placement.vue
 | x-placement | `'top' \| 'bottom'` | `bottom` | 横向滚动时滚动条的位置 | 2.40.0 |
 | y-placement | `'left' \| 'right'` | `right` | 纵向滚动时滚动条的位置 | 2.40.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 滚动的回调 |  |
+| overflow-width | `number` | `undefined` | 垂直滚动条宽度，单位像素；省略时使用主题宽度。 [使用案例](#thickness.vue) |  |
+| overflow-height | `number` | `undefined` | 水平滚动条高度，单位像素；省略时使用主题高度。 [使用案例](#thickness.vue) |  |
 
 ### Scrollbar Slots
 
@@ -41,9 +44,3 @@ placement.vue
 | --- | --- | --- |
 | scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动特定距离 |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 |
-
-## HIS 定制
-
-`overflow-width` 设置垂直滚动条宽度，`overflow-height` 设置水平滚动条高度，单位为像素；未设置时沿用主题尺寸。
-
-完整 API 迁移、共享组合函数和演示见 [HIS 定制](../docs/his-customization).
