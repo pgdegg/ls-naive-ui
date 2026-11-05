@@ -69,3 +69,7 @@ export function getRgb(colorName) {
   return rgbColor
 }
 ```
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看当前完整显示内容，内容变更时自动更新，清空后移除自动提示。显式设置的 `title` 优先。

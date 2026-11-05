@@ -5,6 +5,7 @@ import type { RenderLabelImpl, RenderOptionImpl } from './interface'
 import { useMemo } from 'vooks'
 import { defineComponent, h, inject, Transition } from 'vue'
 import { mergeEventHandlers, render } from '../../../_utils'
+import { getSelectionTitle } from '../../../_utils/naive/selection-title'
 import { NBaseIcon } from '../../icon'
 import { CheckmarkIcon } from '../../icons'
 import { internalSelectionMenuInjectionKey } from './interface'
@@ -144,6 +145,7 @@ export default defineComponent({
     const attrs = nodeProps?.(rawNode)
     const node = (
       <div
+        title={getSelectionTitle(rawNode, this.labelField, 'value', false)}
         {...attrs}
         class={[
           `${clsPrefix}-base-select-option`,

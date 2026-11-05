@@ -111,3 +111,9 @@ textarea-resize-debug.vue
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | 滚动到 | 2.32.0 |
 | select | `() => void` | 选中输入框内容 |  |
 | inputElement | `HTMLInputElement \| HTMLTextAreaElement \| null` | 当前原生输入元素；可通过 inputElementRegistrationKey 自动注册，卸载或 KeepAlive 停用时清理。 |  |
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看当前完整显示内容，内容变更时自动更新，清空后移除自动提示。显式设置的 `title` 优先。
+
+文本输入、文本域、成对输入、只读和禁用输入均支持此提示；密码输入不会自动生成明文提示。可通过 `input-props.title` 覆盖自动提示。

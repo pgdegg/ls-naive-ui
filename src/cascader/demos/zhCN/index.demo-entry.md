@@ -28,6 +28,7 @@ default-value-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| show-value-in-title | `boolean` | `false` | 是否在原生 title 提示中同时展示 value 和「label」，开启后格式为 `value「label」`；不改变控件内显示的标签 |  |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `value` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | bordered | `boolean` | `undefined` | 是否显示输入框边框 |  |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |  |
@@ -113,3 +114,7 @@ default-value-debug.vue
 ### 级联模型适配
 
 `createCascaderModelAdapter` 是导出的业务模型适配工具，不是 Cascader props。通过 `decode` / `encode` 支持对象 valueKey、路径 bindPath 和 middleFields；调用方提供含 data、value、label、text、pathNodes 的节点信息，不依赖其它组件库的内部 Node。组件本身继续使用原生 value/update:value 模型。
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看完整已选标签，无需展开菜单。多选提示包含折叠隐藏的所有已选项，每项独占一行；级联和树选择器按 `show-path` 和 `separator` 展示路径。设置 `show-value-in-title` 后，提示显示为 `value「label」`。该属性不改变绑定值、筛选内容或控件内显示的标签。清空后移除自动提示。

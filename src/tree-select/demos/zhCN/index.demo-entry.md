@@ -30,6 +30,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| show-value-in-title | `boolean` | `false` | 是否在原生 title 提示中同时展示 value 和「label」，开启后格式为 `value「label」`；不改变控件内显示的标签 |  |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `value` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |  |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |  |
@@ -121,3 +122,7 @@ rtl-debug.vue
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
 | inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看完整已选标签，无需展开菜单。多选提示包含折叠隐藏的所有已选项，每项独占一行；级联和树选择器按 `show-path` 和 `separator` 展示路径。设置 `show-value-in-title` 后，提示显示为 `value「label」`。该属性不改变绑定值、筛选内容或控件内显示的标签。清空后移除自动提示。

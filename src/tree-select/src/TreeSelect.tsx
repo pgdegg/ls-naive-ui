@@ -95,6 +95,7 @@ export const treeSelectProps = {
   'onUpdate:filterValue': Function as PropType<(value: string) => void>,
   onQueryChange: Function as PropType<(value: string) => void>,
   ...formControlProps,
+  showValueInTitle: Boolean,
   ...(useTheme.props as ThemeProps<TreeSelectTheme, TreeSelectThemeOverrides>),
   bordered: {
     type: Boolean,
@@ -951,6 +952,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      showValueInTitle={this.showValueInTitle}
                       ref="triggerInstRef"
                       onResize={this.handleTriggerOrMenuResize}
                       status={this.mergedStatus}

@@ -35,13 +35,8 @@ import {
 } from 'vue'
 import { VOverflow } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import {
-  createKey,
-  getTitleAttribute,
-  render,
-  useOnResize,
-  Wrapper
-} from '../../../_utils'
+import { createKey, render, useOnResize, Wrapper } from '../../../_utils'
+import { getSelectionTitle } from '../../../_utils/naive/selection-title'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import Suffix from '../../suffix'
@@ -92,6 +87,7 @@ export default defineComponent({
       default: 'value'
     },
     multiple: Boolean,
+    showValueInTitle: Boolean,
     filterable: Boolean,
     clearable: Boolean,
     disabled: Boolean,
@@ -180,6 +176,22 @@ export default defineComponent({
       if (!option)
         return undefined
       return option[props.labelField]
+    })
+    function getOptionTitle(option: SelectBaseOption): string | undefined {
+      return getSelectionTitle(
+        option,
+        props.labelField,
+        props.valueField,
+        props.showValueInTitle
+      )
+    }
+    const selectionTitleRef = computed(() => {
+      const options = props.multiple
+        ? props.selectedOptions || []
+        : props.selectedOption
+          ? [props.selectedOption]
+          : []
+      return options.map(getOptionTitle).filter(Boolean).join('\n') || undefined
     })
     const selectedRef = computed(() => {
       if (props.multiple) {
@@ -569,6 +581,8 @@ export default defineComponent({
       filterablePlaceholder: filterablePlaceholderRef,
       label: labelRef,
       selected: selectedRef,
+      selectionTitle: selectionTitleRef,
+      getOptionTitle,
       showTagsPanel: showTagsPopoverRef,
       isComposing: isComposingRef,
       // DOM ref
@@ -659,6 +673,7 @@ export default defineComponent({
         <div
           class={`${clsPrefix}-base-selection-tag-wrapper`}
           key={option.value}
+          title={this.getOptionTitle(option)}
         >
           {renderTag ? (
             renderTag({
@@ -887,11 +902,6 @@ export default defineComponent({
           <div
             ref="patternInputWrapperRef"
             class={`${clsPrefix}-base-selection-label`}
-            title={
-              this.patternInputFocused
-                ? undefined
-                : getTitleAttribute(this.label)
-            }
           >
             <input
               {...this.inputProps}
@@ -948,11 +958,7 @@ export default defineComponent({
             tabindex={this.disabled ? undefined : 0}
           >
             {this.label !== undefined ? (
-              <div
-                class={`${clsPrefix}-base-selection-input`}
-                title={getTitleAttribute(this.label)}
-                key="input"
-              >
+              <div class={`${clsPrefix}-base-selection-input`} key="input">
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
@@ -982,6 +988,7 @@ export default defineComponent({
     return (
       <div
         ref="selfRef"
+        title={this.selectionTitle}
         class={[
           `${clsPrefix}-base-selection`,
           this.rtlEnabled && `${clsPrefix}-base-selection--rtl`,

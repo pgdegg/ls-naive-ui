@@ -60,6 +60,7 @@ import {
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { getSelectionTitle } from '../../_utils/naive/selection-title'
 import { useInputElement } from '../../composables/use-input-element'
 import { NInput } from '../../input'
 import { createTmOptions } from '../../select/src/utils'
@@ -68,6 +69,7 @@ import style from './styles/index.cssr'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
+  showValueInTitle: Boolean,
   fetchSuggestions: Function as PropType<
     (
       query: string,
@@ -424,6 +426,18 @@ export default defineComponent({
       inputInstRef: inputInstRef as unknown,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
+      selectionTitle: computed(() => {
+        const value = mergedValueRef.value
+        if (value === null || value === '')
+          return undefined
+        const option = treeMateRef.value.getNode(value)?.rawNode
+        return getSelectionTitle(
+          option || { value, label: value },
+          'label',
+          'value',
+          props.showValueInTitle
+        )
+      }),
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       // 精简 dts：仅字符串 ref，类型在 render 中未使用
@@ -504,7 +518,10 @@ export default defineComponent({
                         ignoreParentHidePlaceholder={
                           this.ignoreParentHidePlaceholder
                         }
-                        inputProps={this.inputProps}
+                        inputProps={{
+                          ...this.inputProps,
+                          title: this.inputProps?.title ?? this.selectionTitle
+                        }}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}

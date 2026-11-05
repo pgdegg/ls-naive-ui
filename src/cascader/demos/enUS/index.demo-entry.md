@@ -27,6 +27,7 @@ status.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| show-value-in-title | `boolean` | `false` | 是否在原生 title 提示中同时展示 value 和「label」，开启后格式为 `value「label」`；不改变控件内显示的标签 |  |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `value` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |  |
 | check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked (not working in single select mode). `child` means showing all child node. |  |
@@ -111,3 +112,7 @@ status.vue
 ### Cascader model adapter
 
 `createCascaderModelAdapter` is an exported business-model helper, not Cascader props. Its `decode` / `encode` support object valueKey, bindPath and middleFields. Supply nodes with data, value, label, text and pathNodes rather than another library's internal Node. The component keeps its native value/update:value model.
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看完整已选标签，无需展开菜单。多选提示包含折叠隐藏的所有已选项，每项独占一行；级联和树选择器按 `show-path` 和 `separator` 展示路径。设置 `show-value-in-title` 后，提示显示为 `value「label」`。该属性不改变绑定值、筛选内容或控件内显示的标签。清空后移除自动提示。

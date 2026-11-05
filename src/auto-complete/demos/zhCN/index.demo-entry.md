@@ -23,6 +23,7 @@ append.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| show-value-in-title | `boolean` | `false` | 是否在原生 title 提示中同时展示 value 和「label」，开启后格式为 `value「label」`；不改变控件内显示的标签 |  |
 | append | `boolean` | `false` | 选中后是否追加 | 2.38.0 |
 | blur-after-select | `boolean` | `false` | 选中后是否 blur |  |
 | bordered | `boolean` | `undefined` | 是否显示输入框边框 |  |
@@ -93,3 +94,7 @@ append.vue
 | focus | `() => void` | Focus input 元素 | 2.26.2 |
 | inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
 | loading | `boolean` | 只读的异步建议请求加载状态。 |  |
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看完整已选标签，无需展开菜单。设置 `show-value-in-title` 后，提示显示为 `value「label」`。该属性不改变绑定值、筛选内容或控件内显示的标签。清空后移除自动提示；通过 `input-props.title` 显式设置的提示优先；未匹配选项时使用当前输入内容。

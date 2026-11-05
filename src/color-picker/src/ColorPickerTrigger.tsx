@@ -34,6 +34,7 @@ export default defineComponent({
       const renderLabel = colorPickerSlots.label || renderLabelRef.value
       return (
         <div
+          title={value || undefined}
           class={[
             `${clsPrefix}-color-picker`,
             disabled && `${clsPrefix}-color-picker--disabled`

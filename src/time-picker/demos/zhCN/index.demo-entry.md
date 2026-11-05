@@ -80,3 +80,7 @@ timezone-debug.vue
 | focus | `() => void` | 聚焦 | 2.24.2 |
 | blur | `() => void` | 失焦 | 2.24.2 |
 | inputElement | `HTMLElement \| null` | 当前可用输入元素；通过 inputElementRegistrationKey 提供注册器可自动注册并在卸载或停用时清理。 |  |
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看当前完整显示内容，内容变更时自动更新，清空后移除自动提示。显式设置的 `title` 优先。

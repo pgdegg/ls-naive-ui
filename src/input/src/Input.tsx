@@ -1158,6 +1158,14 @@ export default defineComponent({
     const control = (
       <div
         ref="wrapperElRef"
+        title={
+          type === 'password'
+            ? undefined
+            : (this.inputProps?.title
+              ?? (Array.isArray(this.mergedValue)
+                ? this.mergedValue.filter(Boolean).join(' ～ ')
+                : this.mergedValue || undefined))
+        }
         class={[
           `${mergedClsPrefix}-input`,
           `${mergedClsPrefix}-input--${this.mergedSize}-size`,

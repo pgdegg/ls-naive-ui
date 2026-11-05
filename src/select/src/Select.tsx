@@ -91,6 +91,7 @@ export const selectProps = {
   'onUpdate:filterValue': Function as PropType<(value: string) => void>,
   onQueryChange: Function as PropType<(value: string) => void>,
   ...formControlProps,
+  showValueInTitle: Boolean,
   ...(useTheme.props as ThemeProps<SelectTheme, SelectThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -1076,6 +1077,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      showValueInTitle={this.showValueInTitle}
                       ref="triggerRef"
                       inlineThemeDisabled={this.inlineThemeDisabled}
                       status={this.mergedStatus}

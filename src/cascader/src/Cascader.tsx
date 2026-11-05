@@ -78,6 +78,7 @@ export const cascaderProps = {
   'onUpdate:filterValue': Function as PropType<(value: string) => void>,
   onQueryChange: Function as PropType<(value: string) => void>,
   ...formControlProps,
+  showValueInTitle: Boolean,
   ...(useTheme.props as ThemeProps<CascaderTheme, CascaderThemeOverrides>),
   allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
@@ -1149,6 +1150,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      showValueInTitle={this.showValueInTitle}
                       onResize={this.handleTriggerResize}
                       ref="triggerInstRef"
                       status={this.mergedStatus}

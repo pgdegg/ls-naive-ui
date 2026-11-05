@@ -2,6 +2,7 @@ import type { HTMLAttributes, PropType } from 'vue'
 import type { TmNode } from './interface'
 import { defineComponent, h, inject, ref } from 'vue'
 import { render } from '../../_utils'
+import { getTitleText } from '../../_utils/naive/selection-title'
 import { treeInjectionKey } from './interface'
 
 export default defineComponent({
@@ -62,6 +63,10 @@ export default defineComponent({
     } = this
     return (
       <span
+        title={
+          getTitleText(typeof label === 'function' ? label() : label)
+          || undefined
+        }
         {...nodeProps}
         ref="selfRef"
         class={[`${clsPrefix}-tree-node-content`, nodeProps?.class]}

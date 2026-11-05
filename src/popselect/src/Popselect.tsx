@@ -6,16 +6,26 @@ import type { PopoverInst, PopoverTrigger } from '../../popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme, PopselectThemeOverrides } from '../styles'
 import type { PopselectInst } from './interface'
-import { defineComponent, h, provide, ref } from 'vue'
+import { createTreeMate } from 'treemate'
+import { cloneVNode, computed, defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
-import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
+import {
+  createRefSetter,
+  getFirstSlotVNode,
+  keep,
+  mergeEventHandlers,
+  omit
+} from '../../_utils'
+import { getSelectionTitle } from '../../_utils/naive/selection-title'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
+import { createTmOptions } from '../../select/src/utils'
 import { popselectLight } from '../styles'
 import { popselectInjectionKey } from './interface'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 
 export const popselectProps = {
+  showValueInTitle: Boolean,
   ...(useTheme.props as ThemeProps<PopselectTheme, PopselectThemeOverrides>),
   ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {
@@ -57,6 +67,30 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
+    const treeMateRef = computed(() =>
+      createTreeMate(props.options, createTmOptions('value', 'children'))
+    )
+    const selectionTitleRef = computed(() => {
+      const values = Array.isArray(props.value)
+        ? props.value
+        : props.value === null
+          ? []
+          : [props.value]
+      return (
+        values
+          .map((value) => {
+            const option = treeMateRef.value.getNode(value)?.rawNode
+            return getSelectionTitle(
+              option || { value, label: value },
+              'label',
+              'value',
+              props.showValueInTitle
+            )
+          })
+          .filter(Boolean)
+          .join('\n') || undefined
+      )
+    })
     function syncPosition(): void {
       popoverInstRef.value?.syncPosition()
     }
@@ -75,6 +109,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      selectionTitle: selectionTitleRef,
       // 减小 dts 体积：render 中只用到字符串 ref，类型用不上
       popoverInstRef: popoverInstRef as unknown,
       mergedTheme: themeRef
@@ -124,12 +159,19 @@ export default defineComponent({
     }
     return (
       <NPopover
-        {...omit(this.$props, panelPropKeys)}
+        {...omit(this.$props, [...panelPropKeys, 'showValueInTitle'])}
         {...popoverProps}
         internalDeactivateImmediately
       >
         {{
-          trigger: () => this.$slots.default?.()
+          trigger: () => {
+            const node = getFirstSlotVNode(this.$slots)
+            return node
+              ? cloneVNode(node, {
+                  title: node.props?.title ?? this.selectionTitle
+                })
+              : null
+          }
         }}
       </NPopover>
     )

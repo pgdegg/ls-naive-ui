@@ -5,6 +5,7 @@ Select something!
 ## Demo
 
 ```demo
+native-title.vue
 search-model.vue
 basic.vue
 primitive-options.vue
@@ -39,6 +40,7 @@ custom-field.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| show-value-in-title | `boolean` | `false` | 是否在原生 title 提示中同时展示 value 和「label」，开启后格式为 `value「label」`；不改变控件内显示的标签 |  |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as the select trigger element. Setting it to `false` will also disable `virtual-scroll`. |  |
 | children-field | `string` | `'children'` | Field name of group option children. | 2.29.1 |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
@@ -145,3 +147,7 @@ custom-field.vue
 ### Object model adapter
 
 `createOptionModelAdapter(() => ({ options, valueKey, valueField, labelField, multiple }))` converts business objects to native values: pass `decode(model)` as value and write `encode(value)` back to the business model. `labels(value)` returns labels; `defaults(field)` selects visible, enabled defaults by marker. This is an exported helper, not Select props.
+
+### 完整内容提示
+
+悬停控件可通过浏览器原生 `title` 查看完整已选标签，无需展开菜单。多选提示包含折叠隐藏的所有已选项，每项独占一行。设置 `show-value-in-title` 后，提示显示为 `value「label」`。该属性不改变绑定值、筛选内容或控件内显示的标签。清空后移除自动提示。

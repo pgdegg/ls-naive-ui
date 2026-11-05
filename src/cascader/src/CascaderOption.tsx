@@ -5,6 +5,7 @@ import { useMemo } from 'vooks'
 import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
+import { getTitleText } from '../../_utils/naive/selection-title'
 import { NCheckbox } from '../../checkbox'
 import { cascaderInjectionKey } from './interface'
 
@@ -275,6 +276,7 @@ export default defineComponent({
     )
     return (
       <div
+        title={getTitleText(this.label) || undefined}
         class={[
           `${mergedClsPrefix}-cascader-option`,
           this.keyboardPending
