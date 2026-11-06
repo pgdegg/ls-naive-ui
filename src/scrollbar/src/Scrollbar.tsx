@@ -22,7 +22,7 @@ export interface ScrollbarInst {
   scrollBy: ScrollBy
 }
 
-export const scrollbarProps = {
+export const ScrollbarDefaultValueProps = {
   overflowWidth: Number,
   overflowHeight: Number,
   ...(useTheme.props as ThemeProps<ScrollbarTheme, ScrollbarThemeOverrides>),
@@ -41,11 +41,13 @@ export const scrollbarProps = {
   }
 } as const
 
-export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
+export type ScrollbarProps = ExtractPublicPropTypes<
+  typeof ScrollbarDefaultValueProps
+>
 
 const Scrollbar = defineComponent({
   name: 'Scrollbar',
-  props: scrollbarProps,
+  props: ScrollbarDefaultValueProps,
   setup() {
     const scrollbarInstRef = ref<InternalScrollbarInst | null>(null)
     const exposedMethods: ScrollbarInst = {

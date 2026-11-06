@@ -35,7 +35,7 @@ import { NInput } from '../../input'
 import inputOtpLight from '../styles/light'
 import style from './styles/index.cssr'
 
-export const inputOtpProps = {
+export const InputOtpDefaultValueProps = {
   ...(useTheme.props as ThemeProps<InputOtpTheme, InputOtpThemeOverrides>),
   defaultValue: { type: Array as PropType<string[]>, default: [] },
   value: Array as PropType<null | string[]>,
@@ -63,11 +63,13 @@ export const inputOtpProps = {
   onFinish: [Function, Array] as PropType<MaybeArray<InputOtpOnFinish>>
 }
 
-export type InputOtpProps = ExtractPublicPropTypes<typeof inputOtpProps>
+export type InputOtpProps = ExtractPublicPropTypes<
+  typeof InputOtpDefaultValueProps
+>
 
 export default defineComponent({
   name: 'InputOtp',
-  props: inputOtpProps,
+  props: InputOtpDefaultValueProps,
   slots: Object as SlotsType<InputOtpSlots>,
   setup(props) {
     const {

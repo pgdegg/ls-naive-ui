@@ -1,7 +1,13 @@
-export { imageProps, default as NImage } from './src/Image'
+export { ImageDefaultValueProps, default as NImage } from './src/Image'
 export type { ImageProps } from './src/Image'
-export { imageGroupProps, default as NImageGroup } from './src/ImageGroup'
+export {
+  ImageGroupDefaultValueProps,
+  default as NImageGroup
+} from './src/ImageGroup'
 export type { ImageGroupProps } from './src/ImageGroup'
-export { imagePreviewProps, default as NImagePreview } from './src/ImagePreview'
+export {
+  ImagePreviewDefaultValueProps,
+  default as NImagePreview
+} from './src/ImagePreview'
 export type { ImagePreviewProps } from './src/ImagePreview'
 export type * from './src/public-types'

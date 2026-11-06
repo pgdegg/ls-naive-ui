@@ -4,12 +4,12 @@ import { cloneVNode, defineComponent, mergeProps } from 'vue'
 import { readonlyControlProps } from '../../_mixins'
 import { omit } from '../../_utils'
 import {
-  colorPickerProps,
+  ColorPickerDefaultValueProps,
   setupColorPicker
 } from '../../color-picker/src/ColorPicker'
 
-export const colorPickerPanelProps = {
-  ...omit(colorPickerProps, [
+export const ColorPickerPanelDefaultValueProps = {
+  ...omit(ColorPickerDefaultValueProps, [
     'show',
     'defaultShow',
     'placement',
@@ -23,7 +23,7 @@ export const colorPickerPanelProps = {
 } as const
 
 export type ColorPickerPanelProps = ExtractPublicPropTypes<
-  typeof colorPickerPanelProps
+  typeof ColorPickerPanelDefaultValueProps
 >
 
 export interface ColorPickerPanelSlots {
@@ -37,7 +37,7 @@ export interface ColorPickerPanelInst {
 export default defineComponent({
   name: 'ColorPickerPanel',
   inheritAttrs: false,
-  props: colorPickerPanelProps,
+  props: ColorPickerPanelDefaultValueProps,
   slots: Object as SlotsType<ColorPickerPanelSlots>,
   setup(props, context) {
     return setupColorPicker(props, context, true)

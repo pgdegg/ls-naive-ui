@@ -10,7 +10,7 @@ import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, flatten, getSlot } from '../../_utils'
 import { flexLight } from '../styles'
 
-export const flexProps = {
+export const FlexDefaultValueProps = {
   ...(useTheme.props as ThemeProps<FlexTheme, FlexThemeOverrides>),
   align: String as PropType<FlexAlign>,
   justify: {
@@ -32,11 +32,11 @@ export const flexProps = {
   }
 } as const
 
-export type FlexProps = ExtractPublicPropTypes<typeof flexProps>
+export type FlexProps = ExtractPublicPropTypes<typeof FlexDefaultValueProps>
 
 export default defineComponent({
   name: 'Flex',
-  props: flexProps,
+  props: FlexDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(

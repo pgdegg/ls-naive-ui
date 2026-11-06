@@ -35,7 +35,7 @@ import { format, isWipValue, parse, parseNumber, validator } from './utils'
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
 
-export const inputNumberProps = {
+export const InputNumberDefaultValueProps = {
   ...formControlProps,
   ...(useTheme.props as ThemeProps<
     InputNumberTheme,
@@ -111,7 +111,9 @@ export const inputNumberProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 }
 
-export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
+export type InputNumberProps = ExtractPublicPropTypes<
+  typeof InputNumberDefaultValueProps
+>
 
 export interface InputNumberSlots {
   prepend?: () => VNode[]
@@ -124,7 +126,7 @@ export interface InputNumberSlots {
 
 export default defineComponent({
   name: 'InputNumber',
-  props: inputNumberProps,
+  props: InputNumberDefaultValueProps,
   slots: Object as SlotsType<InputNumberSlots>,
   setup(props) {
     if (__DEV__) {

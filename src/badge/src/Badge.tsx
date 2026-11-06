@@ -16,7 +16,7 @@ import {
 import { badgeLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const badgeProps = {
+export const BadgeDefaultValueProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme, BadgeThemeOverrides>),
   value: [String, Number] as PropType<string | number>,
   max: Number,
@@ -39,11 +39,11 @@ export const badgeProps = {
   >
 } as const
 
-export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
+export type BadgeProps = ExtractPublicPropTypes<typeof BadgeDefaultValueProps>
 
 export default defineComponent({
   name: 'Badge',
-  props: badgeProps,
+  props: BadgeDefaultValueProps,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)

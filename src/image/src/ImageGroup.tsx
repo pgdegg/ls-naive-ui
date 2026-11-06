@@ -8,7 +8,7 @@ import { useConfig } from '../../_mixins'
 import { call, createInjectionKey, throwError } from '../../_utils'
 
 import NImagePreview from './ImagePreview'
-import { imagePreviewSharedProps } from './interface'
+import { ImagePreviewSharedDefaultValueProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
   ImagePreviewInst & {
@@ -20,8 +20,8 @@ export const imageGroupInjectionKey = createInjectionKey<
   }
 >('n-image-group')
 
-export const imageGroupProps = {
-  ...imagePreviewSharedProps,
+export const ImageGroupDefaultValueProps = {
+  ...ImagePreviewSharedDefaultValueProps,
   srcList: Array as PropType<string[]>,
   current: Number,
   defaultCurrent: {
@@ -47,11 +47,13 @@ export const imageGroupProps = {
   >
 }
 
-export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
+export type ImageGroupProps = ExtractPublicPropTypes<
+  typeof ImageGroupDefaultValueProps
+>
 
 export default defineComponent({
   name: 'ImageGroup',
-  props: imageGroupProps,
+  props: ImageGroupDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`

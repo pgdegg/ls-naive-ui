@@ -29,7 +29,7 @@ export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
 }
 
-export const baseAnchorProps = {
+export const BaseAnchorDefaultValueProps = {
   type: {
     type: String as PropType<'block' | 'rail'>,
     default: 'rail'
@@ -53,12 +53,12 @@ export const baseAnchorProps = {
   >
 } as const
 
-export const baseAnchorPropKeys = keysOf(baseAnchorProps)
+export const baseAnchorPropKeys = keysOf(BaseAnchorDefaultValueProps)
 
 export default defineComponent({
   name: 'BaseAnchor',
   props: {
-    ...baseAnchorProps,
+    ...BaseAnchorDefaultValueProps,
     mergedClsPrefix: {
       type: String,
       required: true

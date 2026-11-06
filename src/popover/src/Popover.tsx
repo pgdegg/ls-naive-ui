@@ -42,10 +42,10 @@ import {
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
-import NPopoverBody, { popoverBodyProps } from './PopoverBody'
+import NPopoverBody, { PopoverBodyDefaultValueProps } from './PopoverBody'
 
-const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
-  keyof typeof popoverBodyProps
+const bodyPropKeys = Object.keys(PopoverBodyDefaultValueProps) as Array<
+  keyof typeof PopoverBodyDefaultValueProps
 >
 
 const triggerEventMap = {
@@ -110,7 +110,7 @@ export interface PopoverInjection {
   extraClassRef: Ref<string[]>
 }
 
-export const popoverBaseProps = {
+export const PopoverBaseDefaultValueProps = {
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -211,15 +211,19 @@ export const popoverBaseProps = {
   maxWidth: Number
 }
 
-export const popoverProps = {
+export const PopoverDefaultValueProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme, PopoverThemeOverrides>),
-  ...popoverBaseProps,
+  ...PopoverBaseDefaultValueProps,
   internalOnAfterLeave: Function as PropType<() => void>,
   internalRenderBody: Function as PropType<InternalRenderBody>
 }
 
-export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
-export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
+export type PopoverProps = ExtractPublicPropTypes<
+  typeof PopoverBaseDefaultValueProps
+>
+export type PopoverInternalProps = ExtractInternalPropTypes<
+  typeof PopoverDefaultValueProps
+>
 
 export interface PopoverSlots {
   trigger?: () => VNode[]
@@ -231,7 +235,7 @@ export interface PopoverSlots {
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
-  props: popoverProps,
+  props: PopoverDefaultValueProps,
   slots: Object as SlotsType<PopoverSlots>,
   __popover__: true,
   setup(props) {

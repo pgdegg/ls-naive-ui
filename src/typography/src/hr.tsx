@@ -6,11 +6,13 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/hr.cssr'
 
+export const HrDefaultValueProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>)
+}
+
 export default defineComponent({
   name: 'Hr',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>)
-  },
+  props: HrDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

@@ -64,7 +64,7 @@ import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
-import { datePickerProps } from './props'
+import { DatePickerDefaultValueProps } from './props'
 import style from './styles/index.cssr'
 import { strictParse } from './utils'
 import {
@@ -72,7 +72,9 @@ import {
   uniCalendarValidation
 } from './validation-utils'
 
-export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
+export type DatePickerSetupProps = ExtractPropTypes<
+  typeof DatePickerDefaultValueProps
+>
 
 export interface DatePickerSlots {
   prepend?: () => VNode[]
@@ -95,7 +97,7 @@ export interface DatePickerSlots {
 
 export default defineComponent({
   name: 'DatePicker',
-  props: datePickerProps,
+  props: DatePickerDefaultValueProps,
   slots: Object as SlotsType<DatePickerSlots>,
   setup(props, { slots }) {
     if (__DEV__) {

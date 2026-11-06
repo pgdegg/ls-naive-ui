@@ -4,13 +4,13 @@ import { useMergedClsPrefix } from '../../_mixins/use-config'
 import Ellipsis, {
   createCursorClass,
   createLineClampClass,
-  ellipsisProps
+  EllipsisDefaultValueProps
 } from './Ellipsis'
 import style from './styles/index.cssr'
 
 export const NPerformantEllipsis = defineComponent({
   name: 'PerformantEllipsis',
-  props: ellipsisProps,
+  props: EllipsisDefaultValueProps,
   inheritAttrs: false,
   setup(props, { attrs, slots }) {
     const mouseEnteredRef = ref(false)

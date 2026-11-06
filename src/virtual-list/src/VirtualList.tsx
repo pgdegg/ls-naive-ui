@@ -13,7 +13,7 @@ import { NxScrollbar } from '../../_internal'
 
 export { type VirtualListInst } from 'vueuc'
 
-export const virtualListProps = {
+export const VirtualListDefaultValueProps = {
   scrollbarProps: Object as PropType<ScrollbarProps>,
   items: {
     type: Array as PropType<VirtualListItemData[]>,
@@ -50,11 +50,13 @@ export const virtualListProps = {
   }
 } as const
 
-export type VirtualListProps = ExtractPublicPropTypes<typeof virtualListProps>
+export type VirtualListProps = ExtractPublicPropTypes<
+  typeof VirtualListDefaultValueProps
+>
 
 export default defineComponent({
   name: 'VirtualList',
-  props: virtualListProps,
+  props: VirtualListDefaultValueProps,
   setup(props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListInstRef = ref<VirtualListInst | null>(null)

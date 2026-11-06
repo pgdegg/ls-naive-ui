@@ -10,20 +10,20 @@ import { createKey, resolveWrappedSlot } from '../../_utils'
 import { useInputElement } from '../../composables/use-input-element'
 import { radioLight } from '../styles'
 import style from './styles/radio.cssr'
-import { radioBaseProps, setup } from './use-radio'
+import { RadioBaseDefaultValueProps, setup } from './use-radio'
 
-export const radioProps = {
+export const RadioDefaultValueProps = {
   hideCircle: Boolean,
   ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
-  ...radioBaseProps
+  ...RadioBaseDefaultValueProps
 } as const
 
-export type RadioProps = ExtractPublicPropTypes<typeof radioProps>
+export type RadioProps = ExtractPublicPropTypes<typeof RadioDefaultValueProps>
 
 export default defineComponent({
   name: 'Radio',
-  props: radioProps,
+  props: RadioDefaultValueProps,
   setup(props) {
     const inputElement = useInputElement()
     const radio = setup(props)

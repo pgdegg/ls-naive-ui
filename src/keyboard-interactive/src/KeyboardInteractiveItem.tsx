@@ -3,7 +3,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { defineComponent, h, inject, onBeforeUnmount, ref } from 'vue'
 import { keyboardInteractiveInjectionKey } from './context'
 
-export const keyboardInteractiveItemProps = {
+export const KeyboardInteractiveItemDefaultValueProps = {
   order: Number,
   ignore: Boolean,
   path: String,
@@ -13,7 +13,7 @@ export const keyboardInteractiveItemProps = {
 }
 
 export type KeyboardInteractiveItemProps = ExtractPublicPropTypes<
-  typeof keyboardInteractiveItemProps
+  typeof KeyboardInteractiveItemDefaultValueProps
 >
 
 export interface KeyboardInteractiveItemSlots {
@@ -22,7 +22,7 @@ export interface KeyboardInteractiveItemSlots {
 
 export default defineComponent({
   name: 'KeyboardInteractiveItem',
-  props: keyboardInteractiveItemProps,
+  props: KeyboardInteractiveItemDefaultValueProps,
   slots: Object as SlotsType<KeyboardInteractiveItemSlots>,
   setup(props) {
     const element = ref<HTMLElement | null>(null)

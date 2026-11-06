@@ -9,7 +9,7 @@ import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
 import style from './styles/input-group-label.cssr'
 
-export const inputGroupLabelProps = {
+export const InputGroupLabelDefaultValueProps = {
   ...(useTheme.props as ThemeProps<InputTheme, InputThemeOverrides>),
   size: String as PropType<InputSize>,
   bordered: {
@@ -19,12 +19,12 @@ export const inputGroupLabelProps = {
 } as const
 
 export type InputGroupLabelProps = ExtractPublicPropTypes<
-  typeof inputGroupLabelProps
+  typeof InputGroupLabelDefaultValueProps
 >
 
 export default defineComponent({
   name: 'InputGroupLabel',
-  props: inputGroupLabelProps,
+  props: InputGroupLabelDefaultValueProps,
   setup(props) {
     const {
       mergedBorderedRef,

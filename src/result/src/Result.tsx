@@ -31,7 +31,7 @@ const iconRenderMap = {
   error: () => <ErrorIcon />
 }
 
-export const resultProps = {
+export const ResultDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ResultTheme, ResultThemeOverrides>),
   size: String as PropType<ResultSize>,
   status: {
@@ -44,7 +44,7 @@ export const resultProps = {
   description: String
 }
 
-export type ResultProps = ExtractPublicPropTypes<typeof resultProps>
+export type ResultProps = ExtractPublicPropTypes<typeof ResultDefaultValueProps>
 
 export interface ResultSlots {
   default?: () => VNode[]
@@ -54,7 +54,7 @@ export interface ResultSlots {
 
 export default defineComponent({
   name: 'Result',
-  props: resultProps,
+  props: ResultDefaultValueProps,
   slots: Object as SlotsType<ResultSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }

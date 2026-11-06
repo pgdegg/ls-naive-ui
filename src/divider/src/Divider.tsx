@@ -7,7 +7,7 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { dividerLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const dividerProps = {
+export const DividerDefaultValueProps = {
   ...(useTheme.props as ThemeProps<DividerTheme, DividerThemeOverrides>),
   titlePlacement: {
     type: String as PropType<'left' | 'center' | 'right'>,
@@ -17,11 +17,13 @@ export const dividerProps = {
   vertical: Boolean
 } as const
 
-export type DividerProps = ExtractPublicPropTypes<typeof dividerProps>
+export type DividerProps = ExtractPublicPropTypes<
+  typeof DividerDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Divider',
-  props: dividerProps,
+  props: DividerDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

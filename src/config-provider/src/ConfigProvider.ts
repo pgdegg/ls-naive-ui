@@ -21,7 +21,7 @@ import { defaultClsPrefix } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
 
-export const configProviderProps = {
+export const ConfigProviderDefaultValueProps = {
   abstract: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -61,13 +61,13 @@ export const configProviderProps = {
 } as const
 
 export type ConfigProviderProps = Partial<
-  ExtractPropTypes<typeof configProviderProps>
+  ExtractPropTypes<typeof ConfigProviderDefaultValueProps>
 >
 
 export default defineComponent({
   name: 'ConfigProvider',
   alias: ['App'],
-  props: configProviderProps,
+  props: ConfigProviderDefaultValueProps,
   setup(props) {
     const NConfigProvider = inject(configProviderInjectionKey, null)
     const mergedThemeRef = computed(() => {

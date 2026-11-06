@@ -31,7 +31,7 @@ import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-export const drawerProps = {
+export const DrawerDefaultValueProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme, DrawerThemeOverrides>),
   show: Boolean,
   width: [Number, String] as PropType<string | number>,
@@ -120,12 +120,12 @@ export const drawerProps = {
   onHide: Function as PropType<(value: boolean) => void>
 } as const
 
-export type DrawerProps = ExtractPublicPropTypes<typeof drawerProps>
+export type DrawerProps = ExtractPublicPropTypes<typeof DrawerDefaultValueProps>
 
 export default defineComponent({
   name: 'Drawer',
   inheritAttrs: false,
-  props: drawerProps,
+  props: DrawerDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

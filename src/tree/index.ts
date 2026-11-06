@@ -7,6 +7,6 @@ export type {
   TreeOverrideNodeClickBehaviorReturn
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NTree, treeProps } from './src/Tree'
+export { default as NTree, TreeDefaultValueProps } from './src/Tree'
 export type { TreeProps, TreeSlots } from './src/Tree'
 export { treeGetClickTarget } from './src/utils'

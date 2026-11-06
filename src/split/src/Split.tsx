@@ -13,7 +13,7 @@ import { call, resolveSlot } from '../../_utils'
 import { splitLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const splitProps = {
+export const SplitDefaultValueProps = {
   ...(useTheme.props as ThemeProps<SplitTheme, SplitThemeOverrides>),
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
@@ -53,7 +53,7 @@ export const splitProps = {
   watchProps: Array as PropType<Array<'defaultSize'>>
 } as const
 
-export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
+export type SplitProps = ExtractPublicPropTypes<typeof SplitDefaultValueProps>
 
 export interface SplitSlots {
   default?: () => VNode[]
@@ -64,7 +64,7 @@ export interface SplitSlots {
 
 export default defineComponent({
   name: 'Split',
-  props: splitProps,
+  props: SplitDefaultValueProps,
   slots: Object as SlotsType<SplitSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

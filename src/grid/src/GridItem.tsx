@@ -14,7 +14,7 @@ interface GridItemVNodeProps {
   privateShow?: boolean
 }
 
-export const gridItemProps = {
+export const GridItemDefaultValueProps = {
   span: {
     type: [Number, String] as PropType<string | number>,
     default: defaultSpan
@@ -34,15 +34,17 @@ export const gridItemProps = {
   }
 } as const
 
-export const gridItemPropKeys = keysOf(gridItemProps)
+export const gridItemPropKeys = keysOf(GridItemDefaultValueProps)
 
-export type GridItemProps = ExtractPublicPropTypes<typeof gridItemProps>
+export type GridItemProps = ExtractPublicPropTypes<
+  typeof GridItemDefaultValueProps
+>
 
 export default defineComponent({
   __GRID_ITEM__: true,
   name: 'GridItem',
   alias: ['Gi'],
-  props: gridItemProps,
+  props: GridItemDefaultValueProps,
   setup() {
     const {
       isSsrRef,

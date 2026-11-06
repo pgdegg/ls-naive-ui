@@ -9,7 +9,7 @@ import { createKey, warn } from '../../_utils'
 import { typographyLight } from '../styles'
 import style from './styles/text.cssr'
 
-export const textProps = {
+export const TextDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   code: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -38,7 +38,7 @@ export const textProps = {
   }
 } as const
 
-export type TextProps = ExtractPublicPropTypes<typeof textProps>
+export type TextProps = ExtractPublicPropTypes<typeof TextDefaultValueProps>
 
 export interface TextInst {
   readonly isTruncated: boolean
@@ -50,7 +50,7 @@ export interface TextSlots {
 
 export default defineComponent({
   name: 'Text',
-  props: textProps,
+  props: TextDefaultValueProps,
   slots: Object as SlotsType<TextSlots>,
   setup(props, { expose }) {
     const textRef = ref<HTMLElement | null>(null)

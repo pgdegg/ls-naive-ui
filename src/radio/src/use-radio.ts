@@ -7,7 +7,7 @@ import { inject, ref, toRef, watchEffect } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
 
-export const radioBaseProps = {
+export const RadioBaseDefaultValueProps = {
   name: String,
   value: {
     type: [String, Number, Boolean] as PropType<string | number | boolean>,
@@ -63,7 +63,9 @@ export interface UseRadio {
   handleRadioInputFocus: () => void
 }
 
-function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
+function setup(
+  props: ExtractPropTypes<typeof RadioBaseDefaultValueProps>
+): UseRadio {
   if (__DEV__) {
     watchEffect(() => {
       if (props.checkedValue !== undefined) {
@@ -186,5 +188,5 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   }
 }
 
-export type RadioBaseProps = ExtractPropTypes<typeof radioBaseProps>
+export type RadioBaseProps = ExtractPropTypes<typeof RadioBaseDefaultValueProps>
 export { setup }

@@ -25,7 +25,7 @@ const defaultCols = 24
 
 const SSR_ATTR_NAME = '__ssr__'
 
-export const gridProps = {
+export const GridDefaultValueProps = {
   layoutShiftDisabled: Boolean,
   responsive: {
     type: [String, Boolean] as PropType<'self' | 'screen'>,
@@ -61,12 +61,12 @@ export interface NGridInjection {
   layoutShiftDisabledRef: Ref<boolean>
 }
 
-export type GridProps = ExtractPublicPropTypes<typeof gridProps>
+export type GridProps = ExtractPublicPropTypes<typeof GridDefaultValueProps>
 
 export default defineComponent({
   name: 'Grid',
   inheritAttrs: false,
-  props: gridProps,
+  props: GridDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedBreakpointsRef } = useConfig(props)
     const numRegex = /^\d+$/

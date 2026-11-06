@@ -1,2 +1,2 @@
-export { iconProps, NIcon } from './src/Icon'
+export { IconDefaultValueProps, NIcon } from './src/Icon'
 export type { IconProps } from './src/Icon'

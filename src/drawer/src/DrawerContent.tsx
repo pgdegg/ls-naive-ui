@@ -6,7 +6,7 @@ import { NBaseClose, NScrollbar } from '../../_internal'
 import { throwError } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
-export const drawerContentProps = {
+export const DrawerContentDefaultValueProps = {
   title: String,
   headerClass: String,
   headerStyle: [Object, String] as PropType<string | CSSProperties>,
@@ -22,7 +22,7 @@ export const drawerContentProps = {
 }
 
 export type DrawerContentProps = ExtractPublicPropTypes<
-  typeof drawerContentProps
+  typeof DrawerContentDefaultValueProps
 >
 
 export interface DrawerContentSlots {
@@ -33,7 +33,7 @@ export interface DrawerContentSlots {
 
 export default defineComponent({
   name: 'DrawerContent',
-  props: drawerContentProps,
+  props: DrawerContentDefaultValueProps,
   slots: Object as SlotsType<DrawerContentSlots>,
   setup() {
     const NDrawer = inject(drawerInjectionKey, null)

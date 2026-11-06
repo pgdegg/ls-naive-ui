@@ -44,7 +44,7 @@ export interface CheckboxGroupInst {
   toggleAll: (checked?: boolean) => void
 }
 
-export const checkboxGroupProps = {
+export const CheckboxGroupDefaultValueProps = {
   ...readonlyControlProps,
   min: Number,
   max: Number,
@@ -96,12 +96,12 @@ export const checkboxGroupProps = {
 } as const
 
 export type CheckboxGroupProps = ExtractPublicPropTypes<
-  typeof checkboxGroupProps
+  typeof CheckboxGroupDefaultValueProps
 >
 
 export default defineComponent({
   name: 'CheckboxGroup',
-  props: checkboxGroupProps,
+  props: CheckboxGroupDefaultValueProps,
   setup(props, { expose }) {
     const inputElement = useInputElement()
     if (__DEV__) {

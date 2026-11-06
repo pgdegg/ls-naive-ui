@@ -1,5 +1,5 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { datePickerProps } from './props'
+import type { DatePickerDefaultValueProps } from './props'
 
 export type DatePickerSize = 'small' | 'medium' | 'large'
 
@@ -9,7 +9,9 @@ export interface DatePickerInst {
   blur: () => void
 }
 
-export type DatePickerProps = ExtractPublicPropTypes<typeof datePickerProps>
+export type DatePickerProps = ExtractPublicPropTypes<
+  typeof DatePickerDefaultValueProps
+>
 
 export type DatePickerClearSlotOnClear = () => void
 export interface DatePickerClearSlotProps {

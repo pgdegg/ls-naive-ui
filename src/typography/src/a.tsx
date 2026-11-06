@@ -7,15 +7,15 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/a.cssr'
 
-export const aProps = {
+export const ADefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>)
 } as const
 
-export type AProps = ExtractPublicPropTypes<typeof aProps>
+export type AProps = ExtractPublicPropTypes<typeof ADefaultValueProps>
 
 export default defineComponent({
   name: 'A',
-  props: aProps,
+  props: ADefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

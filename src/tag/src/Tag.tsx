@@ -34,7 +34,7 @@ export interface TagRef extends TagPublicMethods {
   $el: HTMLElement
 }
 
-export const tagProps = {
+export const TagDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TagTheme, TagThemeOverrides>),
   ...commonProps,
   bordered: {
@@ -69,7 +69,7 @@ interface TagInjection {
 
 export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 
-export type TagProps = ExtractPublicPropTypes<typeof tagProps>
+export type TagProps = ExtractPublicPropTypes<typeof TagDefaultValueProps>
 
 export interface TagSlots {
   default?: () => VNode[]
@@ -79,7 +79,7 @@ export interface TagSlots {
 
 export default defineComponent({
   name: 'Tag',
-  props: tagProps,
+  props: TagDefaultValueProps,
   slots: Object as SlotsType<TagSlots>,
   setup(props) {
     if (__DEV__) {

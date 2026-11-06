@@ -7,7 +7,7 @@ import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { thingLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const thingProps = {
+export const ThingDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ThingTheme, ThingThemeOverrides>),
   title: String,
   titleExtra: String,
@@ -20,7 +20,7 @@ export const thingProps = {
   contentIndented: Boolean
 }
 
-export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
+export type ThingProps = ExtractPublicPropTypes<typeof ThingDefaultValueProps>
 
 export interface ThingSlots {
   action?: () => VNode[]
@@ -34,7 +34,7 @@ export interface ThingSlots {
 
 export default defineComponent({
   name: 'Thing',
-  props: thingProps,
+  props: ThingDefaultValueProps,
   slots: Object as SlotsType<ThingSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }

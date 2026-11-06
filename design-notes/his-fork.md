@@ -4,6 +4,10 @@
 
 Run `pnpm build` to build and validate the package, then create a content-hashed archive in `D:/his-dependence`. Install the generated archive in another project with `pnpm add "file:D:/his-dependence/naive-ui-<hash>.tgz"`. See [local packaging](./local-package.md) for custom destinations and optional consumer dependency updates.
 
+## Component props exports
+
+Component props definitions use `<ComponentName>DefaultValueProps`, such as `ButtonDefaultValueProps`, and are exported from the component entry and package entry. Replace imports of the previous lower-camel-case names, such as `buttonProps`, with the new names. These constants contain Vue prop definitions, including validators and default factories, rather than resolved default values. Component aliases use their own prefix, such as `GiDefaultValueProps` and `LayoutContentDefaultValueProps`, while sharing the same definition object.
+
 ## Remotes and branches
 
 - `upstream`: https://github.com/tusen-ai/naive-ui.git

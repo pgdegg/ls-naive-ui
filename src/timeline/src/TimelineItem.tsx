@@ -12,7 +12,7 @@ import {
 } from '../../_utils'
 import { timelineInjectionKey } from './Timeline'
 
-export const timelineItemProps = {
+export const TimelineItemDefaultValueProps = {
   time: [String, Number] as PropType<string | number>,
   title: String,
   content: String,
@@ -29,7 +29,9 @@ export const timelineItemProps = {
   }
 }
 
-export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
+export type TimelineItemProps = ExtractPublicPropTypes<
+  typeof TimelineItemDefaultValueProps
+>
 
 export interface TimelineItemSlots {
   default?: () => VNode[]
@@ -40,7 +42,7 @@ export interface TimelineItemSlots {
 
 export default defineComponent({
   name: 'TimelineItem',
-  props: timelineItemProps,
+  props: TimelineItemDefaultValueProps,
   slots: Object as SlotsType<TimelineItemSlots>,
   setup(props) {
     const NTimeline = inject(timelineInjectionKey)

@@ -27,7 +27,7 @@ import NTransferHeader from './TransferHeader'
 import NTransferList from './TransferList'
 import { useTransferData } from './use-transfer-data'
 
-export const transferProps = {
+export const TransferDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TransferTheme, TransferThemeOverrides>),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {
@@ -79,11 +79,13 @@ export const transferProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
+export type TransferProps = ExtractPublicPropTypes<
+  typeof TransferDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Transfer',
-  props: transferProps,
+  props: TransferDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

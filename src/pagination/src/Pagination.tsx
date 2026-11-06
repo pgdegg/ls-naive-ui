@@ -63,7 +63,7 @@ import { paginationLight } from '../styles'
 import style from './styles/index.cssr'
 import { createPageItemsInfo, getDefaultPageSize } from './utils'
 
-export const paginationProps = {
+export const PaginationDefaultValueProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme, PaginationThemeOverrides>),
   simple: Boolean,
   page: Number,
@@ -127,7 +127,9 @@ export const paginationProps = {
   onChange: [Function, Array] as PropType<MaybeArray<(page: number) => void>>
 } as const
 
-export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
+export type PaginationProps = ExtractPublicPropTypes<
+  typeof PaginationDefaultValueProps
+>
 
 export interface PaginationSlots {
   default?: () => VNode[]
@@ -141,7 +143,7 @@ export interface PaginationSlots {
 
 export default defineComponent({
   name: 'Pagination',
-  props: paginationProps,
+  props: PaginationDefaultValueProps,
   slots: Object as SlotsType<PaginationSlots>,
   setup(props) {
     if (__DEV__) {

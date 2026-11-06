@@ -16,7 +16,7 @@ import {
 } from '../../_utils'
 import { stepsInjectionKey } from './Steps'
 
-export const stepProps = {
+export const StepDefaultValueProps = {
   status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
   title: String,
   description: String,
@@ -28,7 +28,7 @@ export const stepProps = {
   }
 } as const
 
-export type StepProps = ExtractPublicPropTypes<typeof stepProps>
+export type StepProps = ExtractPublicPropTypes<typeof StepDefaultValueProps>
 
 export interface StepSlots {
   default?: () => VNode[]
@@ -38,7 +38,7 @@ export interface StepSlots {
 
 export default defineComponent({
   name: 'Step',
-  props: stepProps,
+  props: StepDefaultValueProps,
   slots: Object as SlotsType<StepSlots>,
   setup(props) {
     const NSteps = inject(stepsInjectionKey, null)

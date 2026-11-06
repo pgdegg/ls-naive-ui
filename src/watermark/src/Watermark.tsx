@@ -24,7 +24,7 @@ function getRatio(context: any): number {
   return (window.devicePixelRatio || 1) / backingStore
 }
 
-export const watermarkProps = {
+export const WatermarkDefaultValueProps = {
   ...(useTheme.props as ThemeProps<WatermarkTheme, WatermarkThemeOverrides>),
   debug: Boolean,
   cross: Boolean,
@@ -111,11 +111,13 @@ export const watermarkProps = {
   }
 } as const
 
-export type WatermarkProps = ExtractPublicPropTypes<typeof watermarkProps>
+export type WatermarkProps = ExtractPublicPropTypes<
+  typeof WatermarkDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Watermark',
-  props: watermarkProps,
+  props: WatermarkDefaultValueProps,
   setup(props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(

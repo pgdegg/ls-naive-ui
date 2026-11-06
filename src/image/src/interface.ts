@@ -12,7 +12,7 @@ export interface MoveStrategy {
   deltaVertical: number
 }
 
-export const imagePreviewSharedProps = {
+export const ImagePreviewSharedDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ImageTheme, ImageThemeOverrides>),
   onPreviewPrev: Function as PropType<() => void>,
   onPreviewNext: Function as PropType<() => void>,

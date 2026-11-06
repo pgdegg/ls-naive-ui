@@ -21,7 +21,7 @@ import { useConfig } from '../../_mixins'
 import { eventEffectNotPerformed } from '../../_utils/event'
 import { keyboardInteractiveInjectionKey } from './context'
 
-export const keyboardInteractiveProps = {
+export const KeyboardInteractiveDefaultValueProps = {
   disabled: Boolean,
   defaultFocusFirst: { type: Boolean, default: true },
   loopFocus: Boolean,
@@ -39,7 +39,7 @@ export const keyboardInteractiveProps = {
 }
 
 export type KeyboardInteractiveProps = ExtractPublicPropTypes<
-  typeof keyboardInteractiveProps
+  typeof KeyboardInteractiveDefaultValueProps
 >
 
 export interface KeyboardInteractiveSlots {
@@ -51,7 +51,7 @@ const controlSelector
 
 export default defineComponent({
   name: 'KeyboardInteractive',
-  props: keyboardInteractiveProps,
+  props: KeyboardInteractiveDefaultValueProps,
   slots: Object as SlotsType<KeyboardInteractiveSlots>,
   setup(props, { expose }) {
     const { mergedClsPrefixRef } = useConfig(props)

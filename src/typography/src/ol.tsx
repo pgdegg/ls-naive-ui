@@ -7,16 +7,16 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/list.cssr'
 
-export const olProps = {
+export const OlDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   alignText: Boolean
 }
 
-export type OlProps = ExtractPublicPropTypes<typeof olProps>
+export type OlProps = ExtractPublicPropTypes<typeof OlDefaultValueProps>
 
 export default defineComponent({
   name: 'Ol',
-  props: olProps,
+  props: OlDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

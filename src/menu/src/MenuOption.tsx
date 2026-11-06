@@ -8,7 +8,7 @@ import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
 
-export const menuItemProps = {
+export const MenuOptionDefaultValueProps = {
   ...useMenuChildProps,
   tmNode: {
     type: Object as PropType<TmNode>,
@@ -19,11 +19,11 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
-export const menuItemPropKeys = keysOf(menuItemProps)
+export const menuItemPropKeys = keysOf(MenuOptionDefaultValueProps)
 
 export const NMenuOption = defineComponent({
   name: 'MenuOption',
-  props: menuItemProps,
+  props: MenuOptionDefaultValueProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
     const { NSubmenu, NMenu, NMenuOptionGroup } = MenuChild

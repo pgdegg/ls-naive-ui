@@ -7,7 +7,7 @@ import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { elementLight } from '../styles'
 
-export const elementProps = {
+export const ElementDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ElementTheme, ElementThemeOverrides>),
   tag: {
     type: String,
@@ -15,12 +15,14 @@ export const elementProps = {
   }
 } as const
 
-export type ElementProps = ExtractPublicPropTypes<typeof elementProps>
+export type ElementProps = ExtractPublicPropTypes<
+  typeof ElementDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Element',
   alias: ['El'],
-  props: elementProps,
+  props: ElementDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

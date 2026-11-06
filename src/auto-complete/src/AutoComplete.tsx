@@ -68,7 +68,7 @@ import { autoCompleteLight } from '../styles'
 import style from './styles/index.cssr'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
-export const autoCompleteProps = {
+export const AutoCompleteDefaultValueProps = {
   showValueInTitle: Boolean,
   fetchSuggestions: Function as PropType<
     (
@@ -137,7 +137,9 @@ export const autoCompleteProps = {
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
-export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
+export type AutoCompleteProps = ExtractPublicPropTypes<
+  typeof AutoCompleteDefaultValueProps
+>
 
 export interface AutoCompleteSlots {
   default?: (options: AutoCompleteDefaultSlotProps) => VNode[]
@@ -148,7 +150,7 @@ export interface AutoCompleteSlots {
 
 export default defineComponent({
   name: 'AutoComplete',
-  props: autoCompleteProps,
+  props: AutoCompleteDefaultValueProps,
   slots: Object as SlotsType<AutoCompleteSlots>,
   setup(props) {
     if (__DEV__) {

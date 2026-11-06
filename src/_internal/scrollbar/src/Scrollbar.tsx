@@ -84,7 +84,7 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
   containerScrollTop: number
 }
 
-const scrollbarProps = {
+export const InternalScrollbarDefaultValueProps = {
   overflowWidth: Number,
   overflowHeight: Number,
   ...(useTheme.props as ThemeProps<ScrollbarTheme, ScrollbarThemeOverrides>),
@@ -130,14 +130,16 @@ const scrollbarProps = {
   }
 } as const
 
-export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
+export type ScrollbarProps = ExtractPublicPropTypes<
+  typeof InternalScrollbarDefaultValueProps
+>
 export type ScrollbarInternalProps = ExtractInternalPropTypes<
-  typeof scrollbarProps
+  typeof InternalScrollbarDefaultValueProps
 >
 
 const Scrollbar = defineComponent({
   name: 'Scrollbar',
-  props: scrollbarProps,
+  props: InternalScrollbarDefaultValueProps,
   inheritAttrs: false,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }

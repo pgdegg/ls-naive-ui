@@ -10,7 +10,7 @@ import { createKey } from '../../_utils'
 import { tableLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const tableProps = {
+export const TableDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TableTheme, TableThemeOverrides>),
   bordered: {
     type: Boolean,
@@ -29,11 +29,11 @@ export const tableProps = {
   size: String as PropType<TableSize>
 }
 
-export type TableProps = ExtractPublicPropTypes<typeof tableProps>
+export type TableProps = ExtractPublicPropTypes<typeof TableDefaultValueProps>
 
 export default defineComponent({
   name: 'Table',
-  props: tableProps,
+  props: TableDefaultValueProps,
   setup(props) {
     const {
       mergedClsPrefixRef,

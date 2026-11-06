@@ -1,11 +1,14 @@
-export { descriptionsProps, default as NDescriptions } from './src/Descriptions'
+export {
+  DescriptionsDefaultValueProps,
+  default as NDescriptions
+} from './src/Descriptions'
 export type {
   DescriptionProps,
   DescriptionsProps,
   DescriptionsSlots
 } from './src/Descriptions'
 export {
-  descriptionsItemProps,
+  DescriptionsItemDefaultValueProps,
   default as NDescriptionsItem
 } from './src/DescriptionsItem'
 export type {

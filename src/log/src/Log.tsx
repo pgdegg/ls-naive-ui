@@ -43,7 +43,7 @@ export interface LogInst {
   & ((options: { silent?: boolean, top: number }) => void)
 }
 
-export const logProps = {
+export const LogDefaultValueProps = {
   ...(useTheme.props as ThemeProps<LogTheme, LogThemeOverrides>),
   loading: Boolean,
   trim: Boolean,
@@ -80,11 +80,11 @@ export const logProps = {
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
 } as const
 
-export type LogProps = ExtractPublicPropTypes<typeof logProps>
+export type LogProps = ExtractPublicPropTypes<typeof LogDefaultValueProps>
 
 export default defineComponent({
   name: 'Log',
-  props: logProps,
+  props: LogDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const silentRef = ref(false)

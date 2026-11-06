@@ -36,7 +36,7 @@ import { popselectLight } from '../styles'
 import { popselectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-export const panelProps = {
+export const PopselectPanelDefaultValueProps = {
   multiple: Boolean,
   value: {
     type: [String, Number, Array] as PropType<Value | null>,
@@ -64,11 +64,11 @@ export const panelProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
-export const panelPropKeys = keysOf(panelProps)
+export const panelPropKeys = keysOf(PopselectPanelDefaultValueProps)
 
 export default defineComponent({
   name: 'PopselectPanel',
-  props: panelProps,
+  props: PopselectPanelDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

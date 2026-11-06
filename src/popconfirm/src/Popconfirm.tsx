@@ -10,15 +10,15 @@ import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { call, keep, omit } from '../../_utils'
 import { NPopover } from '../../popover'
-import { popoverBaseProps } from '../../popover/src/Popover'
+import { PopoverBaseDefaultValueProps } from '../../popover/src/Popover'
 import { popconfirmLight } from '../styles'
 import { popconfirmInjectionKey } from './interface'
 import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
 import style from './styles/index.cssr'
 
-export const popconfirmProps = {
+export const PopconfirmDefaultValueProps = {
   ...(useTheme.props as ThemeProps<PopconfirmTheme, PopconfirmThemeOverrides>),
-  ...popoverBaseProps,
+  ...PopoverBaseDefaultValueProps,
   positiveText: String as PropType<string | null>,
   negativeText: String as PropType<string | null>,
   showIcon: {
@@ -39,9 +39,13 @@ export const popconfirmProps = {
   >
 }
 
-export type PopconfirmProps = ExtractPublicPropTypes<typeof popconfirmProps>
+export type PopconfirmProps = ExtractPublicPropTypes<
+  typeof PopconfirmDefaultValueProps
+>
 
-export type PopconfirmSetupProps = ExtractPropTypes<typeof popconfirmProps>
+export type PopconfirmSetupProps = ExtractPropTypes<
+  typeof PopconfirmDefaultValueProps
+>
 
 export interface PopconfirmSlots {
   action?: () => VNode[]
@@ -52,7 +56,7 @@ export interface PopconfirmSlots {
 
 export default defineComponent({
   name: 'Popconfirm',
-  props: popconfirmProps,
+  props: PopconfirmDefaultValueProps,
   slots: Object as SlotsType<PopconfirmSlots>,
   __popover__: true,
   setup(props) {

@@ -47,7 +47,7 @@ import commonProps from '../../tag/src/common-props'
 import { dynamicTagsLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const dynamicTagsProps = {
+export const DynamicTagsDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     DynamicTagsTheme,
     DynamicTagsThemeOverrides
@@ -83,7 +83,9 @@ export const dynamicTagsProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
-export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
+export type DynamicTagsProps = ExtractPublicPropTypes<
+  typeof DynamicTagsDefaultValueProps
+>
 
 export interface DynamicTagsSlots {
   input?: (props: DynamicTagsInputSlotProps) => VNode[]
@@ -93,7 +95,7 @@ export interface DynamicTagsSlots {
 
 export default defineComponent({
   name: 'DynamicTags',
-  props: dynamicTagsProps,
+  props: DynamicTagsDefaultValueProps,
   slots: Object as SlotsType<DynamicTagsSlots>,
   setup(props) {
     if (__DEV__) {

@@ -20,7 +20,7 @@ const iconRenderMap = {
   default: () => null
 }
 
-export const notificationProps = {
+export const NotificationDefaultValueProps = {
   closable: {
     type: Boolean,
     default: true
@@ -46,11 +46,11 @@ export const notificationProps = {
   onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const
 
-export const notificationPropKeys = keysOf(notificationProps)
+export const notificationPropKeys = keysOf(NotificationDefaultValueProps)
 
 export const Notification = defineComponent({
   name: 'Notification',
-  props: notificationProps,
+  props: NotificationDefaultValueProps,
   setup(props) {
     const {
       mergedClsPrefixRef,

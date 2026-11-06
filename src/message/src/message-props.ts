@@ -3,7 +3,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MessageSpinProps } from './public-types'
 import type { MessageType } from './types'
 
-export const messageProps = {
+export const MessageDefaultValueProps = {
   icon: Function as PropType<() => VNodeChild>,
   type: {
     type: String as PropType<MessageType>,
@@ -24,5 +24,9 @@ export const messageProps = {
   onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const
 
-export type MessageProps = ExtractPublicPropTypes<typeof messageProps>
-export type MessageSetupProps = ExtractPropTypes<typeof messageProps>
+export type MessageProps = ExtractPublicPropTypes<
+  typeof MessageDefaultValueProps
+>
+export type MessageSetupProps = ExtractPropTypes<
+  typeof MessageDefaultValueProps
+>

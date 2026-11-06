@@ -7,7 +7,7 @@ import { formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const iconWrapperProps = {
+export const IconWrapperDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     IconWrapperTheme,
     IconWrapperThemeOverrides
@@ -24,11 +24,13 @@ export const iconWrapperProps = {
   iconColor: String
 } as const
 
-export type IconWrapperProps = ExtractPublicPropTypes<typeof iconWrapperProps>
+export type IconWrapperProps = ExtractPublicPropTypes<
+  typeof IconWrapperDefaultValueProps
+>
 
 export const NIconWrapper = defineComponent({
   name: 'IconWrapper',
-  props: iconWrapperProps,
+  props: IconWrapperDefaultValueProps,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

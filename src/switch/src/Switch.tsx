@@ -20,7 +20,7 @@ import {
 import { switchLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const switchProps = {
+export const SwitchDefaultValueProps = {
   ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<SwitchTheme, SwitchThemeOverrides>),
   size: String as PropType<SwitchSize>,
@@ -65,7 +65,7 @@ export const switchProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
-export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
+export type SwitchProps = ExtractPublicPropTypes<typeof SwitchDefaultValueProps>
 
 export interface SwitchSlots {
   checked?: () => VNode[]
@@ -79,7 +79,7 @@ let supportCssMax: boolean | undefined
 
 export default defineComponent({
   name: 'Switch',
-  props: switchProps,
+  props: SwitchDefaultValueProps,
   slots: Object as SlotsType<SwitchSlots>,
   setup(props) {
     if (__DEV__) {

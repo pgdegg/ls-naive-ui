@@ -48,7 +48,7 @@ import style from './styles/index.cssr'
 
 const globalDataKeyMap = new WeakMap()
 
-export const dynamicInputProps = {
+export const DynamicInputDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     DynamicInputTheme,
     DynamicInputThemeOverrides
@@ -97,7 +97,9 @@ export const dynamicInputProps = {
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
+export type DynamicInputProps = ExtractPublicPropTypes<
+  typeof DynamicInputDefaultValueProps
+>
 
 export interface DynamicInputSlots {
   action?: (props: DynamicInputActionSlotProps) => VNode[]
@@ -108,7 +110,7 @@ export interface DynamicInputSlots {
 
 export default defineComponent({
   name: 'DynamicInput',
-  props: dynamicInputProps,
+  props: DynamicInputDefaultValueProps,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {

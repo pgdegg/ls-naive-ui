@@ -32,10 +32,13 @@ import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey, modalProviderInjectionKey } from './interface'
-import { forwardedPresetPropsKeys, presetProps } from './presetProps'
+import {
+  forwardedPresetPropsKeys,
+  ModalPresetDefaultValueProps
+} from './presetProps'
 import style from './styles/index.cssr'
 
-export const modalProps = {
+export const ModalDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ModalTheme, ModalThemeOverrides>),
   show: Boolean,
   showMask: {
@@ -70,7 +73,7 @@ export const modalProps = {
     default: true
   },
   blockScroll: { type: Boolean, default: true },
-  ...presetProps,
+  ...ModalPresetDefaultValueProps,
   draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
   resetOnResize: Boolean,
   // 事件
@@ -106,7 +109,7 @@ export const modalProps = {
   }
 }
 
-export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
+export type ModalProps = ExtractPublicPropTypes<typeof ModalDefaultValueProps>
 
 export type ModalSlots = Omit<CardSlots & DialogSlots, 'default'> & {
   default?: (props: { draggableClass: string }) => VNode[]
@@ -115,7 +118,7 @@ export type ModalSlots = Omit<CardSlots & DialogSlots, 'default'> & {
 export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
-  props: modalProps,
+  props: ModalDefaultValueProps,
   slots: Object as SlotsType<ModalSlots>,
   setup(props) {
     if (__DEV__) {

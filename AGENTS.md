@@ -74,7 +74,7 @@ naive-ui/
 
 ## Component Conventions
 
-- Props are declared as `componentProps` and exported from `index.ts`.
+- Props are declared as `<ComponentName>DefaultValueProps` (for example, `ButtonDefaultValueProps`) and exported from `index.ts`.
 - Component implementation lives in `src/Component.tsx` using `defineComponent` + JSX.
 - Styles live in `src/styles/index.cssr.ts` as CSS-render strings.
 - Theme variables live in `styles/light.ts`, `styles/dark.ts`, and `styles/_common.ts`.

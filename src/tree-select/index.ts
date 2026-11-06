@@ -12,5 +12,8 @@ export type {
   TreeSelectRenderTag
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NTreeSelect, treeSelectProps } from './src/TreeSelect'
+export {
+  default as NTreeSelect,
+  TreeSelectDefaultValueProps
+} from './src/TreeSelect'
 export type { TreeSelectProps, TreeSelectSlots } from './src/TreeSelect'

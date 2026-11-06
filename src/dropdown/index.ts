@@ -1,4 +1,4 @@
-export { dropdownProps, default as NDropdown } from './src/Dropdown'
+export { DropdownDefaultValueProps, default as NDropdown } from './src/Dropdown'
 export type { DropdownProps } from './src/Dropdown'
 export type {
   DropdownDividerOption,

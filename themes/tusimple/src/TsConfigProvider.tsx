@@ -1,7 +1,7 @@
 import type { CNode } from 'css-render'
 import type { PropType } from 'vue'
 import { merge } from 'lodash-es'
-import { configProviderProps, NConfigProvider } from 'naive-ui'
+import { ConfigProviderDefaultValueProps, NConfigProvider } from 'naive-ui'
 import { defineComponent, h, onBeforeUnmount, toRef, watch } from 'vue'
 import { renderFilter, renderSorter } from './data-table'
 import { icons as tusimpleIcons } from './icons'
@@ -40,7 +40,7 @@ export default defineComponent({
       type: String as PropType<'light' | 'dark'>,
       default: 'light'
     },
-    ...configProviderProps
+    ...ConfigProviderDefaultValueProps
   },
   setup(props) {
     let currentUnconfigurableStyle: CNode | null = null

@@ -7,7 +7,7 @@ import { keysOf, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { NButton } from '../../button'
 import { popconfirmInjectionKey } from './interface'
 
-export const panelProps = {
+export const PopconfirmPanelDefaultValueProps = {
   positiveText: String as PropType<string | null>,
   negativeText: String as PropType<string | null>,
   showIcon: {
@@ -24,11 +24,11 @@ export const panelProps = {
   }
 } as const
 
-export const panelPropKeys = keysOf(panelProps)
+export const panelPropKeys = keysOf(PopconfirmPanelDefaultValueProps)
 
 export default defineComponent({
   name: 'NPopconfirmPanel',
-  props: panelProps,
+  props: PopconfirmPanelDefaultValueProps,
   setup(props) {
     const { localeRef } = useLocale('Popconfirm')
     const { inlineThemeDisabled } = useConfig()

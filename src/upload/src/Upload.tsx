@@ -297,7 +297,7 @@ function submitImpl(
   }
 }
 
-export const uploadProps = {
+export const UploadDefaultValueProps = {
   ...(useTheme.props as ThemeProps<UploadTheme, UploadThemeOverrides>),
   name: {
     type: String,
@@ -403,11 +403,11 @@ export const uploadProps = {
   renderIcon: Function as PropType<RenderIcon>
 } as const
 
-export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
+export type UploadProps = ExtractPublicPropTypes<typeof UploadDefaultValueProps>
 
 export default defineComponent({
   name: 'Upload',
-  props: uploadProps,
+  props: UploadDefaultValueProps,
   setup(props) {
     if (props.abstract && props.listType === 'image-card') {
       throwError(

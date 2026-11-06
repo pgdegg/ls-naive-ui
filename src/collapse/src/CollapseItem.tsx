@@ -23,14 +23,16 @@ import {
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
 
-export const collapseItemProps = {
+export const CollapseItemDefaultValueProps = {
   title: String,
   name: [String, Number] as PropType<string | number>,
   disabled: Boolean,
   displayDirective: String as PropType<'if' | 'show'>
 } as const
 
-export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
+export type CollapseItemProps = ExtractPublicPropTypes<
+  typeof CollapseItemDefaultValueProps
+>
 
 export interface CollapseItemSlots {
   default?: () => VNode[]
@@ -41,7 +43,7 @@ export interface CollapseItemSlots {
 
 export default defineComponent({
   name: 'CollapseItem',
-  props: collapseItemProps,
+  props: CollapseItemDefaultValueProps,
   setup(props) {
     const { mergedRtlRef } = useConfig(props)
     const randomName = createId()

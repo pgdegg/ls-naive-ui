@@ -1,2 +1,5 @@
-export { default as NWatermark, watermarkProps } from './src/Watermark'
+export {
+  default as NWatermark,
+  WatermarkDefaultValueProps
+} from './src/Watermark'
 export type { WatermarkProps } from './src/Watermark'

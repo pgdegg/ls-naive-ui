@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import type { exposedDialogEnvProps } from './DialogEnvironment'
+import type { DialogEnvironmentExposedDefaultValueProps } from './DialogEnvironment'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
@@ -13,7 +13,9 @@ import {
 } from './context'
 import { NDialogEnvironment } from './DialogEnvironment'
 
-type ExposedDialogEnvPropTypes = ExtractPropTypes<typeof exposedDialogEnvProps>
+type ExposedDialogEnvPropTypes = ExtractPropTypes<
+  typeof DialogEnvironmentExposedDefaultValueProps
+>
 
 export interface DialogOptions extends Mutable<
   Omit<Partial<ExposedDialogEnvPropTypes>, 'internalStyle'> & {
@@ -66,13 +68,13 @@ interface DialogInst {
 
 export type DialogProviderInst = DialogApiInjection
 
-export const dialogProviderProps = {
+export const DialogProviderDefaultValueProps = {
   injectionKey: String,
   to: [String, Object] as PropType<string | HTMLElement>
 }
 
 export type DialogProviderProps = ExtractPublicPropTypes<
-  typeof dialogProviderProps
+  typeof DialogProviderDefaultValueProps
 >
 
 interface DialogProviderSetup extends DialogApiInjection {
@@ -83,7 +85,7 @@ interface DialogProviderSetup extends DialogApiInjection {
 
 export const NDialogProvider = defineComponent({
   name: 'DialogProvider',
-  props: dialogProviderProps,
+  props: DialogProviderDefaultValueProps,
   setup(): DialogProviderSetup {
     const { localeRef } = useLocale('Popconfirm')
     const confirmDefaults: DialogConfirmOptions = {}

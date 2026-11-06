@@ -26,7 +26,7 @@ export function createCursorClass(clsPrefix: string, cursor: string): string {
   return `${clsPrefix}-ellipsis--cursor-${cursor}`
 }
 
-export const ellipsisProps = {
+export const EllipsisDefaultValueProps = {
   ...(useTheme.props as ThemeProps<EllipsisTheme, EllipsisThemeOverrides>),
   expandTrigger: String as PropType<'click'>,
   lineClamp: [Number, String] as PropType<string | number>,
@@ -36,7 +36,9 @@ export const ellipsisProps = {
   }
 } as const
 
-export type EllipsisProps = ExtractPublicPropTypes<typeof ellipsisProps>
+export type EllipsisProps = ExtractPublicPropTypes<
+  typeof EllipsisDefaultValueProps
+>
 
 export interface EllipsisSlots {
   default?: () => VNode[]
@@ -46,7 +48,7 @@ export interface EllipsisSlots {
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
-  props: ellipsisProps,
+  props: EllipsisDefaultValueProps,
   slots: Object as SlotsType<EllipsisSlots>,
   setup(props, { slots, attrs }) {
     const mergedClsPrefixRef = useMergedClsPrefix()

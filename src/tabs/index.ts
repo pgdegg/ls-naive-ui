@@ -6,9 +6,9 @@ export type {
   TabsType
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NTab, tabProps } from './src/Tab'
+export { default as NTab, TabDefaultValueProps } from './src/Tab'
 export type { TabProps, TabSlots } from './src/Tab'
-export { default as NTabPane, tabPaneProps } from './src/TabPane'
+export { default as NTabPane, TabPaneDefaultValueProps } from './src/TabPane'
 export type { TabPaneProps, TabPaneSlots } from './src/TabPane'
-export { default as NTabs, tabsProps } from './src/Tabs'
+export { default as NTabs, TabsDefaultValueProps } from './src/Tabs'
 export type { TabsProps, TabsSlots } from './src/Tabs'

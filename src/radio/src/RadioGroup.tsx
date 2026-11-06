@@ -98,7 +98,7 @@ export interface RadioGroupOption {
   [key: string]: unknown
 }
 
-export const radioGroupProps = {
+export const RadioGroupDefaultValueProps = {
   ...readonlyControlProps,
   ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
   name: String,
@@ -129,11 +129,13 @@ export const radioGroupProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
+export type RadioGroupProps = ExtractPublicPropTypes<
+  typeof RadioGroupDefaultValueProps
+>
 
 export default defineComponent({
   name: 'RadioGroup',
-  props: radioGroupProps,
+  props: RadioGroupDefaultValueProps,
   setup(props) {
     const inputElement = useInputElement()
     const selfElRef = ref<HTMLDivElement | null>(null)

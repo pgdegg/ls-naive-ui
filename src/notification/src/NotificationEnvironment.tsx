@@ -12,12 +12,12 @@ import { keep, mergeEventHandlers } from '../../_utils'
 import { notificationProviderInjectionKey } from './context'
 import {
   Notification,
-  notificationPropKeys,
-  notificationProps
+  NotificationDefaultValueProps,
+  notificationPropKeys
 } from './Notification'
 
 export const notificationEnvOptions = {
-  ...notificationProps,
+  ...NotificationDefaultValueProps,
   duration: Number,
   onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
   onLeave: Function as PropType<() => void>,

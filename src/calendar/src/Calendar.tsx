@@ -29,7 +29,7 @@ import { dateArray } from '../../date-picker/src/utils'
 import { calendarLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const calendarProps = {
+export const CalendarDefaultValueProps = {
   ...(useTheme.props as ThemeProps<CalendarTheme, CalendarThemeOverrides>),
   isDateDisabled: Function as PropType<(date: number) => boolean | undefined>,
   value: Number,
@@ -42,7 +42,9 @@ export const calendarProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
+export type CalendarProps = ExtractPublicPropTypes<
+  typeof CalendarDefaultValueProps
+>
 
 export interface CalendarSlots {
   default?: (props: CalendarDefaultSlotProps) => VNode[]
@@ -51,7 +53,7 @@ export interface CalendarSlots {
 
 export default defineComponent({
   name: 'Calendar',
-  props: calendarProps,
+  props: CalendarDefaultValueProps,
   slots: Object as SlotsType<CalendarSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

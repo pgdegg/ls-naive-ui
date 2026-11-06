@@ -93,7 +93,7 @@ function validateUnits(value: MaybeArray<number>, max: number): boolean {
   }
 }
 
-export const timePickerProps = {
+export const TimePickerDefaultValueProps = {
   quickInput: Boolean,
   defaultToExtreme: String as PropType<'min' | 'max'>,
   ...formControlProps,
@@ -184,7 +184,9 @@ export const timePickerProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
-export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
+export type TimePickerProps = ExtractPublicPropTypes<
+  typeof TimePickerDefaultValueProps
+>
 
 export interface TimePickerSlots {
   prepend?: () => VNode[]
@@ -195,7 +197,7 @@ export interface TimePickerSlots {
 
 export default defineComponent({
   name: 'TimePicker',
-  props: timePickerProps,
+  props: TimePickerDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

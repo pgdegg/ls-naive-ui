@@ -45,7 +45,7 @@ import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { useDragModal } from './composables'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
-import { presetProps } from './presetProps'
+import { ModalPresetDefaultValueProps } from './presetProps'
 
 export default defineComponent({
   name: 'ModalBody',
@@ -76,7 +76,7 @@ export default defineComponent({
       default: false
     },
     maskHidden: Boolean,
-    ...presetProps,
+    ...ModalPresetDefaultValueProps,
     // 事件
     onClickoutside: {
       type: Function as PropType<(e: MouseEvent) => void>,

@@ -1,4 +1,6 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { highlightProps } from './Highlight'
+import type { HighlightDefaultValueProps } from './Highlight'
 
-export type HighlightProps = ExtractPublicPropTypes<typeof highlightProps>
+export type HighlightProps = ExtractPublicPropTypes<
+  typeof HighlightDefaultValueProps
+>

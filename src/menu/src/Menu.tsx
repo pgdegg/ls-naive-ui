@@ -49,7 +49,7 @@ import { NSubmenu } from './Submenu'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { isIgnoredNode, itemRenderer } from './utils'
 
-export const menuProps = {
+export const MenuDefaultValueProps = {
   ...(useTheme.props as ThemeProps<MenuTheme, MenuThemeOverrides>),
   options: {
     type: Array as PropType<MenuMixedOption[]>,
@@ -147,14 +147,14 @@ export const menuProps = {
   defaultExpandedNames: Array as PropType<Key[]>
 } as const
 
-export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
+export type MenuSetupProps = ExtractPropTypes<typeof MenuDefaultValueProps>
 
 export type MenuProps = Partial<MenuSetupProps>
 
 export default defineComponent({
   name: 'Menu',
   inheritAttrs: false,
-  props: menuProps,
+  props: MenuDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       useCheckDeprecated(props)

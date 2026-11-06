@@ -15,7 +15,7 @@ import { keysOf, warn } from '../../_utils'
 import style from './styles/index.cssr'
 import { getRect, getScrollTop } from './utils'
 
-export const affixProps = {
+export const AffixDefaultValueProps = {
   listenTo: [String, Object, Function] as PropType<
     string | ScrollTarget | (() => HTMLElement) | undefined
   >,
@@ -66,13 +66,13 @@ export const affixProps = {
   }
 } as const
 
-export const affixPropKeys = keysOf(affixProps)
+export const affixPropKeys = keysOf(AffixDefaultValueProps)
 
-export type AffixProps = ExtractPublicPropTypes<typeof affixProps>
+export type AffixProps = ExtractPublicPropTypes<typeof AffixDefaultValueProps>
 
 export default defineComponent({
   name: 'Affix',
-  props: affixProps,
+  props: AffixDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useStyle('-affix', style, mergedClsPrefixRef)

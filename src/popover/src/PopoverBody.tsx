@@ -45,7 +45,7 @@ import { popoverLight } from '../styles'
 import { popoverBodyInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-export const popoverBodyProps = {
+export const PopoverBodyDefaultValueProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme, PopoverThemeOverrides>),
   to: useAdjustedTo.propTo,
   show: Boolean,
@@ -117,7 +117,7 @@ export function renderArrow({
 export default defineComponent({
   name: 'PopoverBody',
   inheritAttrs: false,
-  props: popoverBodyProps,
+  props: PopoverBodyDefaultValueProps,
   setup(props, { slots, attrs }) {
     const {
       namespaceRef,

@@ -8,7 +8,7 @@ import { createKey } from '../../_utils'
 import { typographyLight } from '../styles'
 import style from './styles/header.cssr'
 
-export const headerProps = {
+export const HeaderDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   type: {
     type: String as PropType<
@@ -20,12 +20,12 @@ export const headerProps = {
   alignText: Boolean
 } as const
 
-export type HeaderProps = ExtractPublicPropTypes<typeof headerProps>
+export type HeaderProps = ExtractPublicPropTypes<typeof HeaderDefaultValueProps>
 
 export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
   defineComponent({
     name: `H${level}`,
-    props: headerProps,
+    props: HeaderDefaultValueProps,
     setup(props) {
       const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
       const themeRef = useTheme(

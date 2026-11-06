@@ -4,7 +4,7 @@ import type { ButtonProps } from '../../button'
 import type { IconPlacement } from './interface'
 import { keysOf } from '../../_utils'
 
-const dialogProps = {
+const DialogDefaultValueProps = {
   height: [Number, String] as PropType<number | string>,
   icon: Function as PropType<() => VNodeChild>,
   type: {
@@ -43,6 +43,6 @@ const dialogProps = {
   closeFocusable: Boolean
 } as const
 
-export type DialogProps = ExtractPublicPropTypes<typeof dialogProps>
-export { dialogProps }
-export const dialogPropKeys = keysOf(dialogProps)
+export type DialogProps = ExtractPublicPropTypes<typeof DialogDefaultValueProps>
+export { DialogDefaultValueProps }
+export const dialogPropKeys = keysOf(DialogDefaultValueProps)

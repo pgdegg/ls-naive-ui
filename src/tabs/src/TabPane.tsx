@@ -12,7 +12,7 @@ import { throwError, warnOnce } from '../../_utils'
 import { tabPaneActiveContextKey } from './active-context'
 import { tabsInjectionKey } from './interface'
 
-export const tabPaneProps = {
+export const TabPaneDefaultValueProps = {
   icon: [String, Object, Function] as PropType<
     string | VNode | (() => VNodeChild)
   >,
@@ -41,7 +41,9 @@ export const tabPaneProps = {
   >
 } as const
 
-export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
+export type TabPaneProps = ExtractPublicPropTypes<
+  typeof TabPaneDefaultValueProps
+>
 
 export interface TabPaneSlots {
   icon?: () => VNode[]
@@ -55,7 +57,7 @@ export default defineComponent({
   __TAB_PANE__: true,
   name: 'TabPane',
   alias: ['TabPanel'],
-  props: tabPaneProps,
+  props: TabPaneDefaultValueProps,
   slots: Object as SlotsType<TabPaneSlots>,
   setup(props) {
     if (__DEV__) {

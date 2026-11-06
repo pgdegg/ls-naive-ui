@@ -12,7 +12,7 @@ import Line from './Line'
 import MultipleCircle from './MultipleCircle'
 import style from './styles/index.cssr'
 
-export const progressProps = {
+export const ProgressDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme, ProgressThemeOverrides>),
   processing: Boolean,
   type: {
@@ -70,11 +70,13 @@ export const progressProps = {
   offsetDegree: Number
 } as const
 
-export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
+export type ProgressProps = ExtractPublicPropTypes<
+  typeof ProgressDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Progress',
-  props: progressProps,
+  props: ProgressDefaultValueProps,
   setup(props) {
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition

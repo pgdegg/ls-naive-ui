@@ -41,7 +41,7 @@ export interface ClosestMark {
 // 参考：https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
 const eventButtonLeft = 0
 
-export const sliderProps = {
+export const SliderDefaultValueProps = {
   ...(useTheme.props as ThemeProps<SliderTheme, SliderThemeOverrides>),
   to: useAdjustedTo.propTo,
   defaultValue: {
@@ -93,7 +93,7 @@ export const sliderProps = {
   onDragend: [Function] as PropType<() => void>
 } as const
 
-export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
+export type SliderProps = ExtractPublicPropTypes<typeof SliderDefaultValueProps>
 
 export interface SliderSlots {
   thumb?: () => VNode[]
@@ -102,7 +102,7 @@ export interface SliderSlots {
 
 export default defineComponent({
   name: 'Slider',
-  props: sliderProps,
+  props: SliderDefaultValueProps,
   slots: Object as SlotsType<SliderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }

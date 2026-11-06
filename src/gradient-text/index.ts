@@ -1,2 +1,5 @@
-export { gradientTextProps, default as NGradientText } from './src/GradientText'
+export {
+  GradientTextDefaultValueProps,
+  default as NGradientText
+} from './src/GradientText'
 export type { GradientTextProps } from './src/GradientText'

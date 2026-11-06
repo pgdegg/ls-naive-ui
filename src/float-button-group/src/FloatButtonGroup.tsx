@@ -15,7 +15,7 @@ export interface ButtonGroupInjection {
   shapeRef: Ref<'circle' | 'square'>
 }
 
-export const floatButtonGroupProps = {
+export const FloatButtonGroupDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     FloatButtonGroupTheme,
     FloatButtonGroupThemeOverrides
@@ -35,7 +35,7 @@ export const floatButtonGroupProps = {
 } as const
 
 export type FloatButtonGroupProps = ExtractPublicPropTypes<
-  typeof floatButtonGroupProps
+  typeof FloatButtonGroupDefaultValueProps
 >
 
 export const floatButtonGroupInjectionKey
@@ -43,7 +43,7 @@ export const floatButtonGroupInjectionKey
 
 export default defineComponent({
   name: 'FloatButtonGroup',
-  props: floatButtonGroupProps,
+  props: FloatButtonGroupDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

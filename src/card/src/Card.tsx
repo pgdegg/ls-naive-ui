@@ -27,7 +27,7 @@ export interface CardSegmented {
   action?: boolean | 'soft'
 }
 
-export const cardBaseProps = {
+export const CardBaseDefaultValueProps = {
   disabled: Boolean,
   title: [String, Function] as PropType<string | (() => VNodeChild)>,
   contentClass: String,
@@ -65,14 +65,14 @@ export const cardBaseProps = {
   closeFocusable: Boolean
 } as const
 
-export const cardBasePropKeys = keysOf(cardBaseProps)
+export const cardBasePropKeys = keysOf(CardBaseDefaultValueProps)
 
-export const cardProps = {
+export const CardDefaultValueProps = {
   ...(useTheme.props as ThemeProps<CardTheme, CardThemeOverrides>),
-  ...cardBaseProps
+  ...CardBaseDefaultValueProps
 }
 
-export type CardProps = ExtractPublicPropTypes<typeof cardProps>
+export type CardProps = ExtractPublicPropTypes<typeof CardDefaultValueProps>
 
 export interface CardSlots {
   default?: () => VNode[]
@@ -85,7 +85,7 @@ export interface CardSlots {
 
 export default defineComponent({
   name: 'Card',
-  props: cardProps,
+  props: CardDefaultValueProps,
   slots: Object as SlotsType<CardSlots>,
   setup(props) {
     const parentDisabled = inject(componentDisabledInjectionKey, null)

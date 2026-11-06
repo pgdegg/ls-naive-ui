@@ -3,7 +3,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { defineComponent } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
-export const descriptionsItemProps = {
+export const DescriptionsItemDefaultValueProps = {
   label: String,
   span: {
     type: Number,
@@ -16,7 +16,7 @@ export const descriptionsItemProps = {
 } as const
 
 export type DescriptionItemProps = ExtractPublicPropTypes<
-  typeof descriptionsItemProps
+  typeof DescriptionsItemDefaultValueProps
 >
 
 export interface DescriptionItemSlots {
@@ -27,7 +27,7 @@ export interface DescriptionItemSlots {
 export default defineComponent({
   name: 'DescriptionsItem',
   [DESCRIPTION_ITEM_FLAG]: true,
-  props: descriptionsItemProps,
+  props: DescriptionsItemDefaultValueProps,
   slots: Object as SlotsType<DescriptionItemSlots>,
   render() {
     return null

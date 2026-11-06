@@ -28,7 +28,7 @@ import { floatButtonGroupInjectionKey } from '../../float-button-group/src/Float
 import { floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const floatButtonProps = {
+export const FloatButtonDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     FloatButtonTheme,
     FloatButtonThemeOverrides
@@ -66,7 +66,9 @@ export const floatButtonProps = {
   }
 } as const
 
-export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
+export type FloatButtonProps = ExtractPublicPropTypes<
+  typeof FloatButtonDefaultValueProps
+>
 
 export interface FloatButtonSlots {
   default?: () => VNode[]
@@ -76,7 +78,7 @@ export interface FloatButtonSlots {
 
 export default defineComponent({
   name: 'FloatButton',
-  props: floatButtonProps,
+  props: FloatButtonDefaultValueProps,
   slots: Object as SlotsType<FloatButtonSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

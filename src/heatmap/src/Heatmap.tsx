@@ -41,7 +41,7 @@ interface Col {
   month: string
 }
 
-export const heatmapProps = {
+export const HeatmapDefaultValueProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme, HeatmapThemeOverrides>),
   activeColors: Array as PropType<string[]>,
   colorTheme: String as PropType<HeatmapColorTheme>,
@@ -78,12 +78,14 @@ export const heatmapProps = {
   yGap: [Number, String] as PropType<number | string>
 } as const
 
-export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
+export type HeatmapProps = ExtractPublicPropTypes<
+  typeof HeatmapDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Heatmap',
   slots: Object as SlotsType<HeatmapSlots>,
-  props: heatmapProps,
+  props: HeatmapDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)

@@ -7,7 +7,7 @@ import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
 import { codeLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const codeProps = {
+export const CodeDefaultValueProps = {
   ...(useTheme.props as ThemeProps<CodeTheme, CodeThemeOverrides>),
   language: String,
   code: {
@@ -28,11 +28,11 @@ export const codeProps = {
   internalNoHighlight: Boolean
 }
 
-export type CodeProps = ExtractPublicPropTypes<typeof codeProps>
+export type CodeProps = ExtractPublicPropTypes<typeof CodeDefaultValueProps>
 
 export default defineComponent({
   name: 'Code',
-  props: codeProps,
+  props: CodeDefaultValueProps,
   setup(props, { slots }) {
     const { internalNoHighlight } = props
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig()

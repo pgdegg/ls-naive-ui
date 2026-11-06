@@ -35,7 +35,7 @@ import { mentionLight } from '../styles'
 import style from './styles/index.cssr'
 import { getRelativePosition } from './utils'
 
-export const mentionProps = {
+export const MentionDefaultValueProps = {
   ...(useTheme.props as ThemeProps<MentionTheme, MentionThemeOverrides>),
   to: useAdjustedTo.propTo,
   autosize: [Boolean, Object] as PropType<
@@ -125,7 +125,9 @@ export const mentionProps = {
   internalDebug: Boolean
 } as const
 
-export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
+export type MentionProps = ExtractPublicPropTypes<
+  typeof MentionDefaultValueProps
+>
 
 export interface MentionSlots {
   default?: () => VNode[]
@@ -134,7 +136,7 @@ export interface MentionSlots {
 
 export default defineComponent({
   name: 'Mention',
-  props: mentionProps,
+  props: MentionDefaultValueProps,
   slots: Object as SlotsType<MentionSlots>,
   setup(props) {
     const {

@@ -7,16 +7,18 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/blockquote.cssr'
 
-export const blockquoteProps = {
+export const BlockquoteDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   alignText: Boolean
 } as const
 
-export type BlockquoteProps = ExtractPublicPropTypes<typeof blockquoteProps>
+export type BlockquoteProps = ExtractPublicPropTypes<
+  typeof BlockquoteDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Blockquote',
-  props: blockquoteProps,
+  props: BlockquoteDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

@@ -1,5 +1,5 @@
 export {
-  buttonProps,
+  ButtonDefaultValueProps,
   default as NButton,
   XButton as NxButton
 } from './src/Button'

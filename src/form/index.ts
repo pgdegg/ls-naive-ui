@@ -1,10 +1,10 @@
-export { formProps, default as NForm } from './src/Form'
+export { FormDefaultValueProps, default as NForm } from './src/Form'
 export type { FormProps } from './src/Form'
-export { formItemProps, default as NFormItem } from './src/FormItem'
+export { FormItemDefaultValueProps, default as NFormItem } from './src/FormItem'
 export type { FormItemProps } from './src/FormItem'
 export {
-  formItemGiProps,
-  formItemGiProps as formItemGridItemProps,
+  FormItemGiDefaultValueProps,
+  FormItemGiDefaultValueProps as FormItemGridItemDefaultValueProps,
   default as NFormItemGi,
   default as NFormItemGridItem
 } from './src/FormItemGridItem'

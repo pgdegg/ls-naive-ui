@@ -53,7 +53,7 @@ interface PrivateMessageRef extends MessageReactive {
 
 export type MessageProviderInst = MessageApiInjection
 
-export const messageProviderProps = {
+export const MessageProviderDefaultValueProps = {
   ...(useTheme.props as ThemeProps<MessageTheme, MessageThemeOverrides>),
   to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
@@ -79,16 +79,16 @@ export const messageProviderProps = {
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
-  typeof messageProviderProps
+  typeof MessageProviderDefaultValueProps
 >
 
 export type MessageProviderSetupProps = ExtractPropTypes<
-  typeof messageProviderProps
+  typeof MessageProviderDefaultValueProps
 >
 
 export default defineComponent({
   name: 'MessageProvider',
-  props: messageProviderProps,
+  props: MessageProviderDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])

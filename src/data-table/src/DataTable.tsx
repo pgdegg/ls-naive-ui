@@ -28,7 +28,7 @@ import {
 import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
 import { NPagination } from '../../pagination'
 import { dataTableLight } from '../styles'
-import { dataTableInjectionKey, dataTableProps } from './interface'
+import { DataTableDefaultValueProps, dataTableInjectionKey } from './interface'
 import MainTable from './MainTable'
 import style from './styles/index.cssr'
 import { useCheck } from './use-check'
@@ -42,7 +42,7 @@ import { generateCsv } from './utils'
 export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
-  props: dataTableProps,
+  props: DataTableDefaultValueProps,
   slots: Object as SlotsType<DataTableSlots>,
   setup(props, { slots }) {
     if (__DEV__) {

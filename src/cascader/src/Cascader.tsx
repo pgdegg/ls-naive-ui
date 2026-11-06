@@ -70,7 +70,7 @@ import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { getPathLabel, getRawNodePath } from './utils'
 
-export const cascaderProps = {
+export const CascaderDefaultValueProps = {
   defaultFirstOption: { type: Boolean, default: true },
   filterValue: String,
   filterKeys: Array as PropType<string[]>,
@@ -201,7 +201,9 @@ export const cascaderProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
-export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
+export type CascaderProps = ExtractPublicPropTypes<
+  typeof CascaderDefaultValueProps
+>
 
 export interface CascaderSlots {
   action?: () => VNode[]
@@ -212,7 +214,7 @@ export interface CascaderSlots {
 
 export default defineComponent({
   name: 'Cascader',
-  props: cascaderProps,
+  props: CascaderDefaultValueProps,
   slots: Object as SlotsType<CascaderSlots>,
   setup(props, { slots }) {
     const inputElement = useInputElement()

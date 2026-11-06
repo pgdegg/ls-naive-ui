@@ -6,11 +6,11 @@ import { defineComponent, h, normalizeClass, ref } from 'vue'
 import { keep } from '../../_utils'
 import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
-import { dialogPropKeys, dialogProps } from './dialogProps'
+import { DialogDefaultValueProps, dialogPropKeys } from './dialogProps'
 
-export const exposedDialogEnvProps = {
+export const DialogEnvironmentExposedDefaultValueProps = {
   resetOnResize: Boolean,
-  ...dialogProps,
+  ...DialogDefaultValueProps,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
   transformOrigin: String as PropType<'center' | 'mouse'>,
@@ -41,7 +41,7 @@ export const exposedDialogEnvProps = {
 export const NDialogEnvironment = defineComponent({
   name: 'DialogEnvironment',
   props: {
-    ...exposedDialogEnvProps,
+    ...DialogEnvironmentExposedDefaultValueProps,
     internalKey: {
       type: String,
       required: true

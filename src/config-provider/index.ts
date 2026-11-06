@@ -1,5 +1,5 @@
 export {
-  configProviderProps,
+  ConfigProviderDefaultValueProps,
   default as NConfigProvider
 } from './src/ConfigProvider'
 export type { ConfigProviderProps } from './src/ConfigProvider'

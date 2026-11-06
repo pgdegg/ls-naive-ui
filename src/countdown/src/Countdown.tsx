@@ -19,7 +19,7 @@ export interface CountdownInst {
   reset: () => void
 }
 
-export const countdownProps = {
+export const CountdownDefaultValueProps = {
   duration: {
     type: Number,
     default: 0
@@ -36,11 +36,13 @@ export const countdownProps = {
   onFinish: Function as PropType<() => void>
 }
 
-export type CountdownProps = ExtractPublicPropTypes<typeof countdownProps>
+export type CountdownProps = ExtractPublicPropTypes<
+  typeof CountdownDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Countdown',
-  props: countdownProps,
+  props: CountdownDefaultValueProps,
   setup(props) {
     let timerId: number | null = null
     let elapsed = 0

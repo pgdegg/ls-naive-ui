@@ -38,7 +38,7 @@ import { avatarLight } from '../styles'
 import { avatarGroupInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-export const avatarProps = {
+export const AvatarDefaultValueProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme, AvatarThemeOverrides>),
   size: [String, Number] as PropType<Size>,
   src: String,
@@ -67,7 +67,7 @@ export const avatarProps = {
   color: String
 } as const
 
-export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
+export type AvatarProps = ExtractPublicPropTypes<typeof AvatarDefaultValueProps>
 
 export interface AvatarSlots {
   default?: () => VNode[]
@@ -77,7 +77,7 @@ export interface AvatarSlots {
 
 export default defineComponent({
   name: 'Avatar',
-  props: avatarProps,
+  props: AvatarDefaultValueProps,
   slots: Object as SlotsType<AvatarSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

@@ -25,7 +25,7 @@ export type NotificationPlacement
   = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top' | 'bottom'
 
 export interface NotificationProviderInjection {
-  props: ExtractPropTypes<typeof notificationProviderProps>
+  props: ExtractPropTypes<typeof NotificationProviderDefaultValueProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
   wipTransitionCountRef: Ref<number>
@@ -67,7 +67,7 @@ interface NotificationRef {
   hide: () => void
 }
 
-export const notificationProviderProps = {
+export const NotificationProviderDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     NotificationTheme,
     NotificationThemeOverrides
@@ -88,12 +88,12 @@ export const notificationProviderProps = {
 }
 
 export type NotificationProviderProps = ExtractPublicPropTypes<
-  typeof notificationProviderProps
+  typeof NotificationProviderDefaultValueProps
 >
 
 export default defineComponent({
   name: 'NotificationProvider',
-  props: notificationProviderProps,
+  props: NotificationProviderDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const notificationListRef = ref<NotificationReactive[]>([])

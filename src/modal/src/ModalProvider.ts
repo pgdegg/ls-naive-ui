@@ -7,7 +7,7 @@ import type {
   VNodeChild
 } from 'vue'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import type { modalProps } from './Modal'
+import type { ModalDefaultValueProps } from './Modal'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
@@ -20,7 +20,10 @@ import {
 import { NModalEnvironment } from './ModalEnvironment'
 
 export type ModalOptions = Mutable<
-  Omit<Partial<ExtractPropTypes<typeof modalProps>>, 'internalStyle'> & {
+  Omit<
+    Partial<ExtractPropTypes<typeof ModalDefaultValueProps>>,
+    'internalStyle'
+  > & {
     class?: any
     style?: string | CSSProperties
     render?: () => VNodeChild
@@ -58,18 +61,18 @@ interface ModalInst {
 
 export type ModalProviderInst = ModalApiInjection
 
-export const modalProviderProps = {
+export const ModalProviderDefaultValueProps = {
   to: [String, Object] as PropType<string | HTMLElement>
 }
 
 export type ModalProviderProps = ExtractPublicPropTypes<
-  typeof modalProviderProps
+  typeof ModalProviderDefaultValueProps
 >
 
 export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
   = defineComponent({
     name: 'ModalProvider',
-    props: modalProviderProps,
+    props: ModalProviderDefaultValueProps,
     setup() {
       const modalListRef = ref<TypeSafeModalReactive[]>([])
       const modalInstRefs: Record<string, ModalInst | undefined> = {}

@@ -7,16 +7,16 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/p.cssr'
 
-export const pProps = {
+export const PDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>
 }
 
-export type PProps = ExtractPublicPropTypes<typeof pProps>
+export type PProps = ExtractPublicPropTypes<typeof PDefaultValueProps>
 
 export default defineComponent({
   name: 'P',
-  props: pProps,
+  props: PDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

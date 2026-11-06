@@ -17,7 +17,7 @@ import { createKey } from '../../_utils'
 import { emptyLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const emptyProps = {
+export const EmptyDefaultValueProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme, EmptyThemeOverrides>),
   description: String,
   showDescription: {
@@ -35,7 +35,7 @@ export const emptyProps = {
   renderIcon: Function as PropType<() => VNodeChild>
 }
 
-export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
+export type EmptyProps = ExtractPublicPropTypes<typeof EmptyDefaultValueProps>
 
 export interface EmptySlots {
   default?: () => VNode[]
@@ -45,7 +45,7 @@ export interface EmptySlots {
 
 export default defineComponent({
   name: 'Empty',
-  props: emptyProps,
+  props: EmptyDefaultValueProps,
   slots: Object as SlotsType<EmptySlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }

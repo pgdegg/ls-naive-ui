@@ -12,7 +12,7 @@ import { useSpriteIcon } from './use-sprite-icon'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
-export const iconProps = {
+export const IconDefaultValueProps = {
   symbol: String,
   prefix: [String, Array] as PropType<string | string[]>,
   symbolVersion: [String, Number] as PropType<string | number>,
@@ -24,13 +24,13 @@ export const iconProps = {
   component: [Object, Function] as PropType<Component>
 } as const
 
-export type IconProps = ExtractPublicPropTypes<typeof iconProps>
+export type IconProps = ExtractPublicPropTypes<typeof IconDefaultValueProps>
 
 export const NIcon = defineComponent({
   _n_icon__: true,
   name: 'Icon',
   inheritAttrs: false,
-  props: iconProps,
+  props: IconDefaultValueProps,
   setup(props) {
     const elementRef = ref<HTMLElement | null>(null)
     const sprite = useSpriteIcon(props, elementRef)

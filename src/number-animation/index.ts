@@ -1,6 +1,6 @@
 export {
   default as NNumberAnimation,
-  numberAnimationProps
+  NumberAnimationDefaultValueProps
 } from './src/NumberAnimation'
 export type { NumberAnimationProps } from './src/NumberAnimation'
 export type { NumberAnimationInst } from './src/NumberAnimation'

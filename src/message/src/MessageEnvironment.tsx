@@ -2,12 +2,12 @@ import type { PropType } from 'vue'
 import { defineComponent, h, onMounted, ref } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import NMessage from './Message'
-import { messageProps } from './message-props'
+import { MessageDefaultValueProps } from './message-props'
 
 export default defineComponent({
   name: 'MessageEnvironment',
   props: {
-    ...messageProps,
+    ...MessageDefaultValueProps,
     duration: {
       type: Number,
       default: 3000

@@ -8,19 +8,21 @@ import { layoutLight } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
 
-export const headerProps = {
+export const LayoutHeaderDefaultValueProps = {
   position: positionProp,
   inverted: Boolean,
   bordered: Boolean
 } as const
 
-export type LayoutHeaderProps = ExtractPublicPropTypes<typeof headerProps>
+export type LayoutHeaderProps = ExtractPublicPropTypes<
+  typeof LayoutHeaderDefaultValueProps
+>
 
 export default defineComponent({
   name: 'LayoutHeader',
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
-    ...headerProps
+    ...LayoutHeaderDefaultValueProps
   },
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

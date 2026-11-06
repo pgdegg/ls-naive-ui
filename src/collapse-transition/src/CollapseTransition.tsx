@@ -22,7 +22,7 @@ import { warnOnce } from '../../_utils'
 import { collapseTransitionLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const collapseTransitionProps = {
+export const CollapseTransitionDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     CollapseTransitionTheme,
     CollapseTransitionThemeOverrides
@@ -47,12 +47,12 @@ export const collapseTransitionProps = {
 } as const
 
 export type CollapseTransitionProps = ExtractPublicPropTypes<
-  typeof collapseTransitionProps
+  typeof CollapseTransitionDefaultValueProps
 >
 
 export default defineComponent({
   name: 'CollapseTransition',
-  props: collapseTransitionProps,
+  props: CollapseTransitionDefaultValueProps,
   inheritAttrs: false,
   setup(props) {
     if (__DEV__) {

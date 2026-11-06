@@ -10,7 +10,7 @@ import { useRtl } from '../../_mixins/use-rtl'
 import { pageHeaderLight } from '../styles/light'
 import style from './styles/index.cssr'
 
-export const pageHeaderProps = {
+export const PageHeaderDefaultValueProps = {
   ...(useTheme.props as ThemeProps<PageHeaderTheme, PageHeaderThemeOverrides>),
   title: String,
   subtitle: String,
@@ -18,7 +18,9 @@ export const pageHeaderProps = {
   onBack: Function as PropType<() => void>
 }
 
-export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
+export type PageHeaderProps = ExtractPublicPropTypes<
+  typeof PageHeaderDefaultValueProps
+>
 
 export interface PageHeaderSlots {
   avatar?: () => VNode[]
@@ -33,7 +35,7 @@ export interface PageHeaderSlots {
 
 export default defineComponent({
   name: 'PageHeader',
-  props: pageHeaderProps,
+  props: PageHeaderDefaultValueProps,
   slots: Object as SlotsType<PageHeaderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }

@@ -23,7 +23,7 @@ import type {
   TabsType
 } from './interface'
 import type { TabsSize } from './public-types'
-import type { tabPaneProps } from './TabPane'
+import type { TabPaneDefaultValueProps } from './TabPane'
 import { throttle as _throttle } from 'lodash-es'
 import { getPadding } from 'seemly'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
@@ -77,11 +77,11 @@ function getTabSlots(node: VNode): Record<string, () => VNode[]> | undefined {
   return Object.keys(result).length ? result : undefined
 }
 
-type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
+type TabPaneProps = ExtractPropTypes<typeof TabPaneDefaultValueProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
 }
 
-export const tabsProps = {
+export const TabsDefaultValueProps = {
   leftType: String as PropType<TabsType>,
   rightType: String as PropType<TabsType>,
   ...(useTheme.props as ThemeProps<TabsTheme, TabsThemeOverrides>),
@@ -145,7 +145,7 @@ export const tabsProps = {
   centerActiveTab: Boolean
 } as const
 
-export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
+export type TabsProps = ExtractPublicPropTypes<typeof TabsDefaultValueProps>
 
 export interface TabsSlots {
   'header-left'?: () => VNode[]
@@ -160,7 +160,7 @@ export interface TabsSlots {
 
 export default defineComponent({
   name: 'Tabs',
-  props: tabsProps,
+  props: TabsDefaultValueProps,
   slots: Object as SlotsType<TabsSlots>,
   setup(props, { slots }) {
     if (__DEV__) {

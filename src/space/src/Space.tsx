@@ -23,7 +23,7 @@ type Align
 export type Justify
   = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly'
 
-export const spaceProps = {
+export const SpaceDefaultValueProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme, SpaceThemeOverrides>),
   align: String as PropType<Align>,
   justify: {
@@ -51,11 +51,11 @@ export const spaceProps = {
   }
 } as const
 
-export type SpaceProps = ExtractPublicPropTypes<typeof spaceProps>
+export type SpaceProps = ExtractPublicPropTypes<typeof SpaceDefaultValueProps>
 
 export default defineComponent({
   name: 'Space',
-  props: spaceProps,
+  props: SpaceDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, mergedComponentPropsRef }
       = useConfig(props)

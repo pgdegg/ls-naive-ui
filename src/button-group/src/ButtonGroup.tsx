@@ -14,7 +14,7 @@ export interface ButtonGroupInjection {
   size?: ButtonSize | undefined
 }
 
-export const buttonGroupProps = {
+export const ButtonGroupDefaultValueProps = {
   size: String as PropType<ButtonSize | undefined>,
   vertical: Boolean,
   disabled: { type: Boolean, default: undefined },
@@ -22,11 +22,13 @@ export const buttonGroupProps = {
   text: { type: Boolean, default: undefined }
 } as const
 
-export type ButtonGroupProps = ExtractPublicPropTypes<typeof buttonGroupProps>
+export type ButtonGroupProps = ExtractPublicPropTypes<
+  typeof ButtonGroupDefaultValueProps
+>
 
 export default defineComponent({
   name: 'ButtonGroup',
-  props: buttonGroupProps,
+  props: ButtonGroupDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     useStyle('-button-group', style, mergedClsPrefixRef)

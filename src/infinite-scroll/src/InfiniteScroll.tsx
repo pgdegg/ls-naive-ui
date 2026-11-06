@@ -6,7 +6,7 @@ import { defineComponent, h, ref } from 'vue'
 import { NxScrollbar } from '../../_internal'
 import { resolveSlot } from '../../_utils'
 
-export const infiniteScrollProps = {
+export const InfiniteScrollDefaultValueProps = {
   distance: {
     type: Number,
     default: 0
@@ -16,12 +16,12 @@ export const infiniteScrollProps = {
 } as const
 
 export type InfiniteScrollProps = ExtractPublicPropTypes<
-  typeof infiniteScrollProps
+  typeof InfiniteScrollDefaultValueProps
 >
 
 export default defineComponent({
   name: 'InfiniteScroll',
-  props: infiniteScrollProps,
+  props: InfiniteScrollDefaultValueProps,
   setup(props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
 

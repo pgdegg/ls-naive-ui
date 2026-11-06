@@ -4,7 +4,7 @@ import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
 import { breadcrumbInjectionKey } from './Breadcrumb'
 
-export const breadcrumbItemProps = {
+export const BreadcrumbItemDefaultValueProps = {
   separator: String,
   href: String,
   clickable: {
@@ -19,7 +19,7 @@ export const breadcrumbItemProps = {
 } as const
 
 export type BreadcrumbItemProps = Partial<
-  ExtractPropTypes<typeof breadcrumbItemProps>
+  ExtractPropTypes<typeof BreadcrumbItemDefaultValueProps>
 >
 
 export interface BreadcrumbItemSlots {
@@ -29,7 +29,7 @@ export interface BreadcrumbItemSlots {
 
 export default defineComponent({
   name: 'BreadcrumbItem',
-  props: breadcrumbItemProps,
+  props: BreadcrumbItemDefaultValueProps,
   slots: Object as SlotsType<BreadcrumbItemSlots>,
   setup(props, { slots }) {
     const NBreadcrumb = inject(breadcrumbInjectionKey, null)

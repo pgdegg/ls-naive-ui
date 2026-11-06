@@ -5,7 +5,7 @@ import { computed, defineComponent, onMounted, ref, watchEffect } from 'vue'
 import { useLocale } from '../../_mixins'
 import { tween } from './utils'
 
-export const numberAnimationProps = {
+export const NumberAnimationDefaultValueProps = {
   to: {
     type: Number,
     default: 0
@@ -29,7 +29,7 @@ export const numberAnimationProps = {
 }
 
 export type NumberAnimationProps = ExtractPublicPropTypes<
-  typeof numberAnimationProps
+  typeof NumberAnimationDefaultValueProps
 >
 
 export interface NumberAnimationInst {
@@ -38,7 +38,7 @@ export interface NumberAnimationInst {
 
 export default defineComponent({
   name: 'NumberAnimation',
-  props: numberAnimationProps,
+  props: NumberAnimationDefaultValueProps,
   setup(props) {
     const { localeRef } = useLocale('name')
     const { duration } = props

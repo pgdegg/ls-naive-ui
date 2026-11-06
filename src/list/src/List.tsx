@@ -8,7 +8,7 @@ import { createInjectionKey } from '../../_utils'
 import { listLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const listProps = {
+export const ListDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ListTheme, ListThemeOverrides>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
@@ -23,7 +23,7 @@ export const listProps = {
   }
 }
 
-export type ListProps = ExtractPublicPropTypes<typeof listProps>
+export type ListProps = ExtractPublicPropTypes<typeof ListDefaultValueProps>
 
 export interface ListSlots {
   default?: () => VNode[]
@@ -40,7 +40,7 @@ export const listInjectionKey = createInjectionKey<ListInjection>('n-list')
 
 export default defineComponent({
   name: 'List',
-  props: listProps,
+  props: ListDefaultValueProps,
   slots: Object as SlotsType<ListSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }

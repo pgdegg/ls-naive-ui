@@ -28,7 +28,7 @@ import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 
-export const dataTableProps = {
+export const DataTableDefaultValueProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme, DataTableThemeOverrides>),
   onUnstableColumnResize: Function as PropType<
     (
@@ -575,8 +575,12 @@ export type DataTableOnLoad = (node: RowData) => Promise<void>
 
 export type DataTableSelectionOption = 'all' | 'none'
 
-export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
-export type DataTableSetupProps = ExtractPropTypes<typeof dataTableProps>
+export type DataTableProps = ExtractPublicPropTypes<
+  typeof DataTableDefaultValueProps
+>
+export type DataTableSetupProps = ExtractPropTypes<
+  typeof DataTableDefaultValueProps
+>
 
 export interface CsvOptionsType {
   fileName?: string

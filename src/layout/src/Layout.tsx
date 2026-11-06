@@ -12,7 +12,7 @@ import { layoutLight } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout.cssr'
 
-export const layoutProps = {
+export const LayoutDefaultValueProps = {
   embedded: Boolean,
   position: positionProp,
   nativeScrollbar: {
@@ -33,17 +33,19 @@ export const layoutProps = {
   }
 } as const
 
-export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
+export type LayoutProps = ExtractPublicPropTypes<typeof LayoutDefaultValueProps>
 
 export const layoutInjectionKey
-  = createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
+  = createInjectionKey<ExtractPropTypes<typeof LayoutDefaultValueProps>>(
+    'n-layout'
+  )
 
 export function createLayoutComponent(isContent: boolean) {
   return defineComponent({
     name: isContent ? 'LayoutContent' : 'Layout',
     props: {
       ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
-      ...layoutProps
+      ...LayoutDefaultValueProps
     },
     setup(props) {
       const scrollableElRef = ref<HTMLElement | null>(null)

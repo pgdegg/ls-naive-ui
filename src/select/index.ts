@@ -11,5 +11,5 @@ export type {
   SelectOption
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NSelect, selectProps } from './src/Select'
+export { default as NSelect, SelectDefaultValueProps } from './src/Select'
 export type { SelectProps, SelectSlots } from './src/Select'

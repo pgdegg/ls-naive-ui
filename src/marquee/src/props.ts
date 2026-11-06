@@ -3,7 +3,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MarqueeTheme, MarqueeThemeOverrides } from '../styles'
 import { useTheme } from '../../_mixins'
 
-export const marqueeProps = {
+export const MarqueeDefaultValueProps = {
   ...(useTheme.props as ThemeProps<MarqueeTheme, MarqueeThemeOverrides>),
   autoFill: Boolean,
   speed: {
@@ -12,4 +12,6 @@ export const marqueeProps = {
   }
 }
 
-export type MarqueeProps = ExtractPublicPropTypes<typeof marqueeProps>
+export type MarqueeProps = ExtractPublicPropTypes<
+  typeof MarqueeDefaultValueProps
+>

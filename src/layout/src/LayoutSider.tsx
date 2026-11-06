@@ -16,7 +16,7 @@ import style from './styles/layout-sider.cssr'
 import ToggleBar from './ToggleBar'
 import ToggleButton from './ToggleButton'
 
-export const layoutSiderProps = {
+export const LayoutSiderDefaultValueProps = {
   position: positionProp,
   bordered: Boolean,
   collapsedWidth: {
@@ -75,13 +75,15 @@ export const layoutSiderProps = {
   onScroll: Function as PropType<(e: Event) => void>
 } as const
 
-export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
+export type LayoutSiderProps = ExtractPublicPropTypes<
+  typeof LayoutSiderDefaultValueProps
+>
 
 export default defineComponent({
   name: 'LayoutSider',
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
-    ...layoutSiderProps
+    ...LayoutSiderDefaultValueProps
   },
   setup(props) {
     const layoutProps = inject(layoutInjectionKey)

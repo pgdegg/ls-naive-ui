@@ -29,7 +29,7 @@ function stepsWithIndex(steps: VNodeChild[]): Array<VNode | null> {
   return steps.map((step, i) => stepWithIndex(step, i))
 }
 
-export const stepsProps = {
+export const StepsDefaultValueProps = {
   ...(useTheme.props as ThemeProps<StepsTheme, StepsThemeOverrides>),
   current: Number,
   status: {
@@ -54,13 +54,13 @@ export const stepsProps = {
 }
 
 export interface StepsInjection {
-  props: ExtractPropTypes<typeof stepsProps>
+  props: ExtractPropTypes<typeof StepsDefaultValueProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
   stepsSlots: StepsSlots
 }
 
-export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
+export type StepsProps = ExtractPublicPropTypes<typeof StepsDefaultValueProps>
 
 export interface StepsSlots {
   default?: () => VNode[]
@@ -72,7 +72,7 @@ export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 
 export default defineComponent({
   name: 'Steps',
-  props: stepsProps,
+  props: StepsDefaultValueProps,
   slots: Object as SlotsType<StepsSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)

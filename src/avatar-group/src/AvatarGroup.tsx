@@ -20,7 +20,7 @@ export interface AvatarGroupInjection {
   size?: Size | undefined
 }
 
-export const avatarGroupProps = {
+export const AvatarGroupDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     AvatarGroupTheme,
     AvatarGroupThemeOverrides
@@ -36,7 +36,9 @@ export const avatarGroupProps = {
   size: [String, Number] as PropType<Size | undefined>
 } as const
 
-export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
+export type AvatarGroupProps = ExtractPublicPropTypes<
+  typeof AvatarGroupDefaultValueProps
+>
 
 export interface AvatarGroupSlots {
   avatar?: (props: AvatarGroupAvatarSlotProps) => VNode[]
@@ -46,7 +48,7 @@ export interface AvatarGroupSlots {
 
 export default defineComponent({
   name: 'AvatarGroup',
-  props: avatarGroupProps,
+  props: AvatarGroupDefaultValueProps,
   slots: Object as SlotsType<AvatarGroupSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)

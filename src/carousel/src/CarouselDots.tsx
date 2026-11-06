@@ -5,7 +5,7 @@ import { defineComponent, h, onBeforeUpdate, ref } from 'vue'
 import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
 
-const carouselDotsProps = {
+export const CarouselDotsDefaultValueProps = {
   total: {
     type: Number,
     default: 0
@@ -25,11 +25,13 @@ const carouselDotsProps = {
   keyboard: Boolean
 }
 
-export type CarouselDotsProps = ExtractPublicPropTypes<typeof carouselDotsProps>
+export type CarouselDotsProps = ExtractPublicPropTypes<
+  typeof CarouselDotsDefaultValueProps
+>
 
 export default defineComponent({
   name: 'CarouselDots',
-  props: carouselDotsProps,
+  props: CarouselDotsDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const dotElsRef = ref<HTMLElement[]>([])

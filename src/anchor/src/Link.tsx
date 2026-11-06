@@ -25,16 +25,18 @@ export interface AnchorInjection {
 export const anchorInjectionKey
   = createInjectionKey<AnchorInjection>('n-anchor')
 
-export const anchorLinkProps = {
+export const AnchorLinkDefaultValueProps = {
   title: String,
   href: String
 } as const
 
-export type AnchorLinkProps = ExtractPublicPropTypes<typeof anchorLinkProps>
+export type AnchorLinkProps = ExtractPublicPropTypes<
+  typeof AnchorLinkDefaultValueProps
+>
 
 export default defineComponent({
   name: 'AnchorLink',
-  props: anchorLinkProps,
+  props: AnchorLinkDefaultValueProps,
   slots: Object as SlotsType<AnchorLinkSlots>,
   setup(props, { slots }) {
     const titleRef = ref<HTMLElement | null>(null)

@@ -1,8 +1,8 @@
-export { drawerProps, default as NDrawer } from './src/Drawer'
+export { DrawerDefaultValueProps, default as NDrawer } from './src/Drawer'
 export type { DrawerProps } from './src/Drawer'
 export type { Placement as DrawerPlacement } from './src/DrawerBodyWrapper'
 export {
-  drawerContentProps,
+  DrawerContentDefaultValueProps,
   default as NDrawerContent
 } from './src/DrawerContent'
 export type {

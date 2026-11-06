@@ -8,18 +8,20 @@ import { layoutLight } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-footer.cssr'
 
-export const layoutFooterProps = {
+export const LayoutFooterDefaultValueProps = {
   ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
   inverted: Boolean,
   position: positionProp,
   bordered: Boolean
 }
 
-export type LayoutFooterProps = ExtractPublicPropTypes<typeof layoutFooterProps>
+export type LayoutFooterProps = ExtractPublicPropTypes<
+  typeof LayoutFooterDefaultValueProps
+>
 
 export default defineComponent({
   name: 'LayoutFooter',
-  props: layoutFooterProps,
+  props: LayoutFooterDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

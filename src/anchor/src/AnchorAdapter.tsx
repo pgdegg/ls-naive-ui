@@ -7,27 +7,30 @@ import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { keep } from '../../_utils'
 import { NAffix } from '../../affix'
-import { affixPropKeys, affixProps } from '../../affix/src/Affix'
+import { AffixDefaultValueProps, affixPropKeys } from '../../affix/src/Affix'
 import { anchorLight } from '../styles'
-import NBaseAnchor, { baseAnchorPropKeys, baseAnchorProps } from './BaseAnchor'
+import NBaseAnchor, {
+  BaseAnchorDefaultValueProps,
+  baseAnchorPropKeys
+} from './BaseAnchor'
 import style from './styles/index.cssr'
 
 export interface AnchorInst {
   scrollTo: (href: string) => void
 }
 
-export const anchorProps = {
+export const AnchorDefaultValueProps = {
   ...(useTheme.props as ThemeProps<AnchorTheme, AnchorThemeOverrides>),
   affix: Boolean,
-  ...affixProps,
-  ...baseAnchorProps
+  ...AffixDefaultValueProps,
+  ...BaseAnchorDefaultValueProps
 } as const
 
-export type AnchorProps = ExtractPublicPropTypes<typeof anchorProps>
+export type AnchorProps = ExtractPublicPropTypes<typeof AnchorDefaultValueProps>
 
 export default defineComponent({
   name: 'Anchor',
-  props: anchorProps,
+  props: AnchorDefaultValueProps,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

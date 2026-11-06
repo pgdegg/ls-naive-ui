@@ -7,16 +7,16 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/list.cssr'
 
-export const ulProps = {
+export const UlDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   alignText: Boolean
 } as const
 
-export type UlProps = ExtractPublicPropTypes<typeof ulProps>
+export type UlProps = ExtractPublicPropTypes<typeof UlDefaultValueProps>
 
 export default defineComponent({
   name: 'Ul',
-  props: ulProps,
+  props: UlDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

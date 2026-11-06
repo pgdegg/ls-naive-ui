@@ -4,7 +4,7 @@ export type {
   KeyboardInteractiveInst
 } from './src/interface'
 export {
-  keyboardInteractiveProps,
+  KeyboardInteractiveDefaultValueProps,
   default as NKeyboardInteractive
 } from './src/KeyboardInteractive'
 export type {
@@ -12,7 +12,7 @@ export type {
   KeyboardInteractiveSlots
 } from './src/KeyboardInteractive'
 export {
-  keyboardInteractiveItemProps,
+  KeyboardInteractiveItemDefaultValueProps,
   default as NKeyboardInteractiveItem
 } from './src/KeyboardInteractiveItem'
 export type {

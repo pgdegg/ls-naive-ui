@@ -39,7 +39,7 @@ import {
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { call, createKey, createRefSetter, keep } from '../../_utils'
 import { NPopover } from '../../popover'
-import { popoverBaseProps } from '../../popover/src/Popover'
+import { PopoverBaseDefaultValueProps } from '../../popover/src/Popover'
 import { dropdownLight } from '../styles'
 import { dropdownInjectionKey } from './context'
 import NDropdownMenu from './DropdownMenu'
@@ -64,7 +64,7 @@ export interface DropdownInjection {
   doUpdateShow: (value: boolean) => void
 }
 
-const dropdownBaseProps = {
+export const DropdownBaseDefaultValueProps = {
   animated: {
     type: Boolean,
     default: true
@@ -106,22 +106,24 @@ const dropdownBaseProps = {
   value: [String, Number] as PropType<Key | null>
 } as const
 
-const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
-  keyof typeof popoverBaseProps
+const popoverPropKeys = Object.keys(PopoverBaseDefaultValueProps) as Array<
+  keyof typeof PopoverBaseDefaultValueProps
 >
 
-export const dropdownProps = {
-  ...popoverBaseProps,
-  ...dropdownBaseProps,
+export const DropdownDefaultValueProps = {
+  ...PopoverBaseDefaultValueProps,
+  ...DropdownBaseDefaultValueProps,
   ...(useTheme.props as ThemeProps<DropdownTheme, DropdownThemeOverrides>)
 } as const
 
-export type DropdownProps = ExtractPublicPropTypes<typeof dropdownProps>
+export type DropdownProps = ExtractPublicPropTypes<
+  typeof DropdownDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Dropdown',
   inheritAttrs: false,
-  props: dropdownProps,
+  props: DropdownDefaultValueProps,
   setup(props) {
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(

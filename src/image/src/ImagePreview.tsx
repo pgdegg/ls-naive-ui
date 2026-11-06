@@ -38,13 +38,16 @@ import { call, download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
-import { imageContextKey, imagePreviewSharedProps } from './interface'
+import {
+  imageContextKey,
+  ImagePreviewSharedDefaultValueProps
+} from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32
 
-export const imagePreviewProps = {
-  ...imagePreviewSharedProps,
+export const ImagePreviewDefaultValueProps = {
+  ...ImagePreviewSharedDefaultValueProps,
   src: String,
   show: {
     type: Boolean,
@@ -62,11 +65,13 @@ export const imagePreviewProps = {
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 }
 
-export type ImagePreviewProps = ExtractPublicPropTypes<typeof imagePreviewProps>
+export type ImagePreviewProps = ExtractPublicPropTypes<
+  typeof ImagePreviewDefaultValueProps
+>
 
 export default defineComponent({
   name: 'ImagePreview',
-  props: imagePreviewProps,
+  props: ImagePreviewDefaultValueProps,
   setup(props) {
     const { src } = toRefs(props)
 

@@ -4,12 +4,12 @@ import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import { marqueeLight } from '../styles'
-import { marqueeProps } from './props'
+import { MarqueeDefaultValueProps } from './props'
 import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Marquee',
-  props: marqueeProps,
+  props: MarqueeDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme(

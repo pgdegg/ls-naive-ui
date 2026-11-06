@@ -63,7 +63,7 @@ import style, { safariStyle } from './styles/input.cssr'
 import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 
-export const inputProps = {
+export const InputDefaultValueProps = {
   ...formControlProps,
   ...(useTheme.props as ThemeProps<InputTheme, InputThemeOverrides>),
   bordered: {
@@ -170,7 +170,7 @@ export const inputProps = {
   showPasswordToggle: Boolean
 }
 
-export type InputProps = ExtractPublicPropTypes<typeof inputProps>
+export type InputProps = ExtractPublicPropTypes<typeof InputDefaultValueProps>
 
 export interface InputSlots {
   prepend?: () => VNode[]
@@ -186,7 +186,7 @@ export interface InputSlots {
 
 export default defineComponent({
   name: 'Input',
-  props: inputProps,
+  props: InputDefaultValueProps,
   slots: Object as SlotsType<InputSlots>,
   setup(props) {
     const {

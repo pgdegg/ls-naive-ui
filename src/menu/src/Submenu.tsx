@@ -12,7 +12,7 @@ import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
 import { itemRenderer } from './utils'
 
-export const submenuProps = {
+export const SubmenuDefaultValueProps = {
   ...useMenuChildProps,
   rawNodes: {
     type: Array as PropType<MenuMixedOption[]>,
@@ -37,11 +37,11 @@ export const submenuProps = {
   isEllipsisPlaceholder: Boolean
 } as const
 
-export const submenuPropKeys = keysOf(submenuProps)
+export const submenuPropKeys = keysOf(SubmenuDefaultValueProps)
 
 export const NSubmenu = defineComponent({
   name: 'Submenu',
-  props: submenuProps,
+  props: SubmenuDefaultValueProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild

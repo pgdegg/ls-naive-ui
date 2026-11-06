@@ -1,5 +1,5 @@
 export {
-  loadingBarProviderProps,
+  LoadingBarProviderDefaultValueProps,
   default as NLoadingBarProvider
 } from './src/LoadingBarProvider'
 export type {

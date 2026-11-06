@@ -3,7 +3,7 @@ import { computed, defineComponent, h } from 'vue'
 import { useConfig } from '../../_mixins'
 import { splitAndMarkByRegex } from './utils'
 
-export const highlightProps = {
+export const HighlightDefaultValueProps = {
   highlightTag: {
     type: String,
     default: 'mark'
@@ -24,7 +24,7 @@ export const highlightProps = {
 
 export default defineComponent({
   name: 'Highlight',
-  props: highlightProps,
+  props: HighlightDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig()
 

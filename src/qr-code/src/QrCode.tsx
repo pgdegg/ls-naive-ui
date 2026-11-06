@@ -17,7 +17,7 @@ const ERROR_CORRECTION_LEVEL: Record<string, qrcodegen.QrCode.Ecc> = {
   H: qrcodegen.QrCode.Ecc.HIGH
 }
 
-export const qrCodeProps = {
+export const QrCodeDefaultValueProps = {
   ...(useTheme.props as ThemeProps<QrCodeTheme, QrCodeThemeOverrides>),
   value: String,
   color: {
@@ -59,14 +59,14 @@ export const qrCodeProps = {
   }
 } as const
 
-export type QrCodeProps = ExtractPublicPropTypes<typeof qrCodeProps>
+export type QrCodeProps = ExtractPublicPropTypes<typeof QrCodeDefaultValueProps>
 
 // 用于 Retina 高清屏显示
 const UPSCALE_RATIO = 2
 
 export default defineComponent({
   name: 'QrCode',
-  props: qrCodeProps,
+  props: QrCodeDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 

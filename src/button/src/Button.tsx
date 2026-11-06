@@ -38,7 +38,7 @@ import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import { buttonLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const buttonProps = {
+export const ButtonDefaultValueProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme, ButtonThemeOverrides>),
   color: String,
   textColor: String,
@@ -92,7 +92,7 @@ export const buttonProps = {
   spinProps: Object as PropType<ButtonSpinProps>
 } as const
 
-export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
+export type ButtonProps = ExtractPublicPropTypes<typeof ButtonDefaultValueProps>
 
 export interface ButtonSlots {
   default?: () => VNode[]
@@ -101,7 +101,7 @@ export interface ButtonSlots {
 
 const Button = defineComponent({
   name: 'Button',
-  props: buttonProps,
+  props: ButtonDefaultValueProps,
   slots: Object as SlotsType<ButtonSlots>,
   setup(props) {
     if (__DEV__) {
@@ -696,7 +696,7 @@ const Button = defineComponent({
   }
 })
 
-type InternalButtonProps = ExtractPropTypes<typeof buttonProps>
+type InternalButtonProps = ExtractPropTypes<typeof ButtonDefaultValueProps>
 type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof InternalButtonProps>
 type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 

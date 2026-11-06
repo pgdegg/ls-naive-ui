@@ -18,7 +18,7 @@ import { descriptionsLight } from '../styles'
 import style from './styles/index.cssr'
 import { isDescriptionsItem } from './utils'
 
-export const descriptionsProps = {
+export const DescriptionsDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     DescriptionsTheme,
     DescriptionsThemeOverrides
@@ -49,7 +49,9 @@ export const descriptionsProps = {
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
-export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
+export type DescriptionsProps = ExtractPublicPropTypes<
+  typeof DescriptionsDefaultValueProps
+>
 /** @deprecated 你应该使用 `DescriptionsProps` */
 export type DescriptionProps = DescriptionsProps
 
@@ -60,7 +62,7 @@ export interface DescriptionsSlots {
 
 export default defineComponent({
   name: 'Descriptions',
-  props: descriptionsProps,
+  props: DescriptionsDefaultValueProps,
   slots: Object as SlotsType<DescriptionsSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }

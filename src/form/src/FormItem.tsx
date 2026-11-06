@@ -58,7 +58,7 @@ import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
 import { formItemMisc, formItemRule, formItemSize } from './utils'
 
-export const formItemProps = {
+export const FormItemDefaultValueProps = {
   ...(useTheme.props as ThemeProps<FormTheme, FormThemeOverrides>),
   label: String,
   labelWidth: [Number, String] as PropType<string | number>,
@@ -94,9 +94,13 @@ export const formItemProps = {
   contentStyle: [String, Object] as PropType<string | CSSProperties>
 } as const
 
-export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
-export type FormItemProps = ExtractPublicPropTypes<typeof formItemProps>
-export const formItemPropKeys = keysOf(formItemProps)
+export type FormItemSetupProps = ExtractPropTypes<
+  typeof FormItemDefaultValueProps
+>
+export type FormItemProps = ExtractPublicPropTypes<
+  typeof FormItemDefaultValueProps
+>
+export const formItemPropKeys = keysOf(FormItemDefaultValueProps)
 
 // 包装后的 Validator 会被传入 async-validator
 // 在 async-validator 的源码中，validator 可以是 asyncValidator。
@@ -154,7 +158,7 @@ function wrapValidator(
 
 export default defineComponent({
   name: 'FormItem',
-  props: formItemProps,
+  props: FormItemDefaultValueProps,
   slots: Object as SlotsType<FormItemSlots>,
   setup(props) {
     const keyboardElementRef = ref<HTMLElement | null>(null)

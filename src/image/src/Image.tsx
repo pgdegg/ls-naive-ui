@@ -19,10 +19,13 @@ import { resolveSlot } from '../../_utils'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'
-import { imageContextKey, imagePreviewSharedProps } from './interface'
+import {
+  imageContextKey,
+  ImagePreviewSharedDefaultValueProps
+} from './interface'
 import { observeIntersection } from './utils'
 
-export const imageProps = {
+export const ImageDefaultValueProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
@@ -43,16 +46,16 @@ export const imageProps = {
   loadDescription: String,
   onError: Function as PropType<(e: Event) => void>,
   onLoad: Function as PropType<(e: Event) => void>,
-  ...imagePreviewSharedProps
+  ...ImagePreviewSharedDefaultValueProps
 }
 
-export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
+export type ImageProps = ExtractPublicPropTypes<typeof ImageDefaultValueProps>
 
 let uuid = 0
 
 export default defineComponent({
   name: 'Image',
-  props: imageProps,
+  props: ImageDefaultValueProps,
   slots: Object as SlotsType<ImageSlots>,
   inheritAttrs: false,
   setup(props) {

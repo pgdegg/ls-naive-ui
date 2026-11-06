@@ -14,7 +14,7 @@ import { timePickerInjectionKey } from './interface'
 import PanelCol from './PanelCol'
 import { getAmPm, getTimeUnits, time } from './utils'
 
-const timePickerPanelProps = {
+export const TimePickerPanelDefaultValueProps = {
   actions: {
     type: Array as PropType<Array<'clear' | 'now' | 'confirm'> | null>,
     default: () => ['now', 'confirm']
@@ -94,7 +94,7 @@ const timePickerPanelProps = {
 
 export default defineComponent({
   name: 'TimePickerPanel',
-  props: timePickerPanelProps,
+  props: TimePickerPanelDefaultValueProps,
   setup(props) {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(
       timePickerInjectionKey

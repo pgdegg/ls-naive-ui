@@ -29,7 +29,7 @@ import {
 import { alertLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const alertProps = {
+export const AlertDefaultValueProps = {
   ...(useTheme.props as ThemeProps<AlertTheme, AlertThemeOverrides>),
   title: String,
   showIcon: {
@@ -53,7 +53,7 @@ export const alertProps = {
   onAfterHide: Function
 }
 
-export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
+export type AlertProps = ExtractPublicPropTypes<typeof AlertDefaultValueProps>
 
 export interface AlertSlots {
   default?: () => VNode[]
@@ -64,7 +64,7 @@ export interface AlertSlots {
 export default defineComponent({
   name: 'Alert',
   inheritAttrs: false,
-  props: alertProps,
+  props: AlertDefaultValueProps,
   slots: Object as SlotsType<AlertSlots>,
   setup(props) {
     if (__DEV__) {

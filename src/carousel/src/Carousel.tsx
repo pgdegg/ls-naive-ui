@@ -70,7 +70,7 @@ type TransitionStyle = Partial<
   Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
-export const carouselProps = {
+export const CarouselDefaultValueProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme, CarouselThemeOverrides>),
   defaultIndex: {
     type: Number,
@@ -144,7 +144,9 @@ export const carouselProps = {
   >
 }
 
-export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
+export type CarouselProps = ExtractPublicPropTypes<
+  typeof CarouselDefaultValueProps
+>
 
 export interface CarouselSlots {
   default?: () => VNode[]
@@ -157,7 +159,7 @@ let globalDragging = false
 
 export default defineComponent({
   name: 'Carousel',
-  props: carouselProps,
+  props: CarouselDefaultValueProps,
   slots: Object as SlotsType<CarouselSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

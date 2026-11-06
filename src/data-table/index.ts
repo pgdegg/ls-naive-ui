@@ -1,5 +1,5 @@
 export { default as NDataTable } from './src/DataTable'
-export { dataTableProps } from './src/interface'
+export { DataTableDefaultValueProps } from './src/interface'
 export type {
   TableBaseColumn as DataTableBaseColumn,
   TableColumn as DataTableColumn,

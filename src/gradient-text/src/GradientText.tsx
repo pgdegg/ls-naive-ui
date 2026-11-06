@@ -16,7 +16,7 @@ type Gradient
       to: string
     }
 
-export const gradientTextProps = {
+export const GradientTextDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     GradientTextTheme,
     GradientTextThemeOverrides
@@ -33,11 +33,13 @@ export const gradientTextProps = {
   gradient: [Object, String] as PropType<Gradient>
 } as const
 
-export type GradientTextProps = ExtractPublicPropTypes<typeof gradientTextProps>
+export type GradientTextProps = ExtractPublicPropTypes<
+  typeof GradientTextDefaultValueProps
+>
 
 export default defineComponent({
   name: 'GradientText',
-  props: gradientTextProps,
+  props: GradientTextDefaultValueProps,
   setup(props) {
     useHoudini()
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)

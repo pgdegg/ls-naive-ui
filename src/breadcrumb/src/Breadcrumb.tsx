@@ -16,7 +16,7 @@ export interface BreadcrumbInjection {
 export const breadcrumbInjectionKey
   = createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
-export const breadcrumbProps = {
+export const BreadcrumbDefaultValueProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme, BreadcrumbThemeOverrides>),
   separator: {
     type: String,
@@ -24,11 +24,13 @@ export const breadcrumbProps = {
   }
 } as const
 
-export type BreadcrumbProps = ExtractPublicPropTypes<typeof breadcrumbProps>
+export type BreadcrumbProps = ExtractPublicPropTypes<
+  typeof BreadcrumbDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Breadcrumb',
-  props: breadcrumbProps,
+  props: BreadcrumbDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

@@ -166,7 +166,7 @@ export type OnUpdateExpandedKeysImpl = (
     }
 ) => void
 
-export const treeSharedProps = {
+export const TreeSharedDefaultValueProps = {
   allowCheckingNotLoaded: Boolean,
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
@@ -213,7 +213,7 @@ export const treeSharedProps = {
     Function as PropType<TreeOverrideNodeClickBehavior>
 } as const
 
-export const treeProps = {
+export const TreeDefaultValueProps = {
   ...(useTheme.props as ThemeProps<TreeTheme, TreeThemeOverrides>),
   accordion: Boolean,
   showIrrelevantNodes: { type: Boolean, default: true },
@@ -316,7 +316,7 @@ export const treeProps = {
   'onUpdate:selectedKeys': [Function, Array] as PropType<
     MaybeArray<OnUpdateSelectedKeys>
   >,
-  ...treeSharedProps,
+  ...TreeSharedDefaultValueProps,
   // 供 tree-select 使用的内部 props
   internalTreeSelect: Boolean,
   internalScrollable: Boolean,
@@ -345,7 +345,7 @@ export const treeProps = {
   leafOnly: Boolean
 } as const
 
-export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
+export type TreeProps = ExtractPublicPropTypes<typeof TreeDefaultValueProps>
 
 export interface TreeSlots {
   default?: () => VNode[]
@@ -354,7 +354,7 @@ export interface TreeSlots {
 
 export default defineComponent({
   name: 'Tree',
-  props: treeProps,
+  props: TreeDefaultValueProps,
   slots: Object as SlotsType<TreeSlots>,
   setup(props) {
     if (__DEV__) {

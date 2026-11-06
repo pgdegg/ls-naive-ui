@@ -1,7 +1,7 @@
-export { checkboxProps, default as NCheckbox } from './src/Checkbox'
+export { CheckboxDefaultValueProps, default as NCheckbox } from './src/Checkbox'
 export type { CheckboxProps } from './src/Checkbox'
 export {
-  checkboxGroupProps,
+  CheckboxGroupDefaultValueProps,
   default as NCheckboxGroup
 } from './src/CheckboxGroup'
 export type {

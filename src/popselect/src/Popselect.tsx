@@ -18,30 +18,37 @@ import {
 } from '../../_utils'
 import { getSelectionTitle } from '../../_utils/naive/selection-title'
 import { NPopover } from '../../popover'
-import { popoverBaseProps } from '../../popover/src/Popover'
+import { PopoverBaseDefaultValueProps } from '../../popover/src/Popover'
 import { createTmOptions } from '../../select/src/utils'
 import { popselectLight } from '../styles'
 import { popselectInjectionKey } from './interface'
-import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
+import NPopselectPanel, {
+  panelPropKeys,
+  PopselectPanelDefaultValueProps
+} from './PopselectPanel'
 
-export const popselectProps = {
+export const PopselectDefaultValueProps = {
   showValueInTitle: Boolean,
   ...(useTheme.props as ThemeProps<PopselectTheme, PopselectThemeOverrides>),
-  ...omit(popoverBaseProps, ['showArrow', 'arrow']),
+  ...omit(PopoverBaseDefaultValueProps, ['showArrow', 'arrow']),
   placement: {
-    ...popoverBaseProps.placement,
+    ...PopoverBaseDefaultValueProps.placement,
     default: 'bottom'
   },
   trigger: {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  ...panelProps,
+  ...PopselectPanelDefaultValueProps,
   scrollbarProps: Object as PropType<ScrollbarProps>
 }
 
-export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>
-export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
+export type PopselectSetupProps = ExtractPropTypes<
+  typeof PopselectDefaultValueProps
+>
+export type PopselectProps = ExtractPublicPropTypes<
+  typeof PopselectDefaultValueProps
+>
 
 export interface PopselectSlots {
   default?: () => VNode[]
@@ -52,7 +59,7 @@ export interface PopselectSlots {
 
 export default defineComponent({
   name: 'Popselect',
-  props: popselectProps,
+  props: PopselectDefaultValueProps,
   slots: Object as SlotsType<PopselectSlots>,
   inheritAttrs: false,
   __popover__: true,

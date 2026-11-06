@@ -84,7 +84,7 @@ import {
   patternMatched
 } from './utils'
 
-export const selectProps = {
+export const SelectDefaultValueProps = {
   filterValue: String,
   filterKeys: Array as PropType<string[]>,
   onUpdateFilterValue: Function as PropType<(value: string) => void>,
@@ -237,7 +237,7 @@ export const selectProps = {
   items: Array as PropType<SelectMixedOption[]>
 } as const
 
-export type SelectProps = ExtractPublicPropTypes<typeof selectProps>
+export type SelectProps = ExtractPublicPropTypes<typeof SelectDefaultValueProps>
 
 export interface SelectSlots {
   default?: () => VNode[]
@@ -249,7 +249,7 @@ export interface SelectSlots {
 
 export default defineComponent({
   name: 'Select',
-  props: selectProps,
+  props: SelectDefaultValueProps,
   slots: Object as SlotsType<SelectSlots>,
   setup(props) {
     const inputElement = useInputElement()

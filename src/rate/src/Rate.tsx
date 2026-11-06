@@ -13,7 +13,7 @@ import { rateLight } from '../styles'
 import renderStarIcon from './StarIcon'
 import style from './styles/index.cssr'
 
-export const rateProps = {
+export const RateDefaultValueProps = {
   ...(useTheme.props as ThemeProps<RateTheme, RateThemeOverrides>),
   allowHalf: Boolean,
   count: {
@@ -42,11 +42,11 @@ export const rateProps = {
   >
 } as const
 
-export type RateProps = ExtractPublicPropTypes<typeof rateProps>
+export type RateProps = ExtractPublicPropTypes<typeof RateDefaultValueProps>
 
 export default defineComponent({
   name: 'Rate',
-  props: rateProps,
+  props: RateDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
       = useConfig(props)

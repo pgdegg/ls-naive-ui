@@ -5,5 +5,5 @@ export type {
   MenuNodeProps,
   MenuOption
 } from './src/interface'
-export { menuProps, default as NMenu } from './src/Menu'
+export { MenuDefaultValueProps, default as NMenu } from './src/Menu'
 export type { MenuProps } from './src/Menu'

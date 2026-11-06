@@ -76,7 +76,10 @@ import {
 import { useInputElement } from '../../composables/use-input-element'
 import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
-import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import {
+  createTreeMateOptions,
+  TreeSharedDefaultValueProps
+} from '../../tree/src/Tree'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
 import { treeSelectLight } from '../styles'
 import { treeSelectInjectionKey } from './interface'
@@ -88,7 +91,7 @@ import {
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
-export const treeSelectProps = {
+export const TreeSelectDefaultValueProps = {
   filterValue: String,
   filterKeys: Array as PropType<string[]>,
   onUpdateFilterValue: Function as PropType<(value: string) => void>,
@@ -163,7 +166,7 @@ export const treeSelectProps = {
   status: String as PropType<FormValidationStatus>,
   renderTag: Function as PropType<TreeSelectRenderTag>,
   ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
-  ...treeSharedProps,
+  ...TreeSharedDefaultValueProps,
   renderLabel: Function as PropType<TreeSelectRenderLabel>,
   renderPrefix: Function as PropType<TreeSelectRenderPrefix>,
   renderSuffix: Function as PropType<TreeSelectRenderSuffix>,
@@ -189,7 +192,9 @@ export const treeSelectProps = {
   leafOnly: Boolean
 } as const
 
-export type TreeSelectProps = ExtractPublicPropTypes<typeof treeSelectProps>
+export type TreeSelectProps = ExtractPublicPropTypes<
+  typeof TreeSelectDefaultValueProps
+>
 
 export interface TreeSelectSlots {
   header?: () => VNode[]
@@ -200,7 +205,7 @@ export interface TreeSelectSlots {
 
 export default defineComponent({
   name: 'TreeSelect',
-  props: treeSelectProps,
+  props: TreeSelectDefaultValueProps,
   slots: Object as SlotsType<TreeSelectSlots>,
   setup(props) {
     const inputElement = useInputElement()

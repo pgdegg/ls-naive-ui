@@ -1,5 +1,5 @@
 export type * from './src/public-types'
-export { default as NTable, tableProps } from './src/Table'
+export { default as NTable, TableDefaultValueProps } from './src/Table'
 export type { TableProps } from './src/Table'
 export { default as NTbody } from './src/Tbody'
 export { default as NTd } from './src/Td'

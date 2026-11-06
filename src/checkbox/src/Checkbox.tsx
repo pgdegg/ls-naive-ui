@@ -32,7 +32,7 @@ import renderCheckMark from './CheckMark'
 import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
-export const checkboxProps = {
+export const CheckboxDefaultValueProps = {
   hideCircle: Boolean,
   cancelDisabled: Boolean,
   ...readonlyControlProps,
@@ -77,11 +77,13 @@ export const checkboxProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>
 }
 
-export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
+export type CheckboxProps = ExtractPublicPropTypes<
+  typeof CheckboxDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Checkbox',
-  props: checkboxProps,
+  props: CheckboxDefaultValueProps,
   setup(props) {
     const inputElement = useInputElement()
     if (__DEV__) {

@@ -10,7 +10,7 @@ import { createKey, useHoudini } from '../../_utils'
 import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const skeletonProps = {
+export const SkeletonDefaultValueProps = {
   ...(useTheme.props as ThemeProps<SkeletonTheme, SkeletonThemeOverrides>),
   text: Boolean,
   round: Boolean,
@@ -32,12 +32,14 @@ export const skeletonProps = {
   }
 } as const
 
-export type SkeletonProps = ExtractPublicPropTypes<typeof skeletonProps>
+export type SkeletonProps = ExtractPublicPropTypes<
+  typeof SkeletonDefaultValueProps
+>
 
 export default defineComponent({
   name: 'Skeleton',
   inheritAttrs: false,
-  props: skeletonProps,
+  props: SkeletonDefaultValueProps,
   setup(props) {
     useHoudini()
     const { mergedClsPrefixRef, mergedComponentPropsRef } = useConfig(props)

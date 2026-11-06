@@ -18,7 +18,7 @@ import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, render } from '../../_utils'
 import { messageLight } from '../styles'
 import { messageProviderInjectionKey } from './context'
-import { messageProps } from './message-props'
+import { MessageDefaultValueProps } from './message-props'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {
@@ -32,7 +32,7 @@ const iconRenderMap = {
 export default defineComponent({
   name: 'Message',
   props: {
-    ...messageProps,
+    ...MessageDefaultValueProps,
     render: Function as PropType<MessageRenderMessage>
   },
   setup(props) {

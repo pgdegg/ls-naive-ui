@@ -33,7 +33,7 @@ import { backTopLight } from '../styles'
 import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
-export const backTopProps = {
+export const BackTopDefaultValueProps = {
   ...(useTheme.props as ThemeProps<BackTopTheme, BackTopThemeOverrides>),
   show: {
     type: Boolean as PropType<boolean | undefined>,
@@ -68,13 +68,15 @@ export const backTopProps = {
   onHide: Function as unknown as PropType<() => void>
 } as const
 
-export type BackTopProps = ExtractPublicPropTypes<typeof backTopProps>
+export type BackTopProps = ExtractPublicPropTypes<
+  typeof BackTopDefaultValueProps
+>
 
 export default defineComponent({
   name: 'BackTop',
   // 使样式应用于 back-top 按钮
   inheritAttrs: false,
-  props: backTopProps,
+  props: BackTopDefaultValueProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

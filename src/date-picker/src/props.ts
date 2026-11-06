@@ -23,7 +23,7 @@ import { useTheme } from '../../_mixins'
 import { formControlProps } from '../../_mixins/use-form-item'
 import { useAdjustedTo } from '../../_utils'
 
-export const datePickerProps = {
+export const DatePickerDefaultValueProps = {
   quickInput: Boolean,
   defaultToExtreme: String as PropType<'min' | 'max'>,
   ...formControlProps,

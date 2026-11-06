@@ -3,6 +3,9 @@ export type {
   PaginationRenderLabel,
   PaginationSizeOption
 } from './src/interface'
-export { default as NPagination, paginationProps } from './src/Pagination'
+export {
+  default as NPagination,
+  PaginationDefaultValueProps
+} from './src/Pagination'
 export type { PaginationProps, PaginationSlots } from './src/Pagination'
 export type * from './src/public-types'

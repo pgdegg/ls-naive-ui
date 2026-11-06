@@ -20,7 +20,7 @@ import {
 } from '../../_utils'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
-import { dialogProps } from './dialogProps'
+import { DialogDefaultValueProps } from './dialogProps'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {
@@ -47,7 +47,7 @@ export const NDialog = defineComponent({
   ],
   props: {
     ...(useTheme.props as ThemeProps<DialogTheme, DialogThemeOverrides>),
-    ...dialogProps
+    ...DialogDefaultValueProps
   },
   slots: Object as SlotsType<DialogSlots>,
   setup(props) {

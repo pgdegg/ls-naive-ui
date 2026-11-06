@@ -23,7 +23,7 @@ import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form.cssr'
 
-export const formProps = {
+export const FormDefaultValueProps = {
   ...(useTheme.props as ThemeProps<FormTheme, FormThemeOverrides>),
   inline: Boolean,
   readonly: Boolean,
@@ -64,8 +64,8 @@ export const formProps = {
   validateMessages: Object as PropType<Partial<FormValidateMessages>>
 } as const
 
-export type FormSetupProps = ExtractPropTypes<typeof formProps>
-export type FormProps = ExtractPublicPropTypes<typeof formProps>
+export type FormSetupProps = ExtractPropTypes<typeof FormDefaultValueProps>
+export type FormProps = ExtractPublicPropTypes<typeof FormDefaultValueProps>
 
 const defaultShouldRuleBeApplied: ShouldRuleBeApplied = () => true
 
@@ -96,7 +96,7 @@ function normalizeValidateFilter(filter: FormValidateFilter | undefined): {
 
 export default defineComponent({
   name: 'Form',
-  props: formProps,
+  props: FormDefaultValueProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)

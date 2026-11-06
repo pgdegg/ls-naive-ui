@@ -8,14 +8,16 @@ import { resolveWrappedSlot } from '../../_utils'
 import { statisticLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const statisticProps = {
+export const StatisticDefaultValueProps = {
   ...(useTheme.props as ThemeProps<StatisticTheme, StatisticThemeOverrides>),
   tabularNums: Boolean,
   label: String,
   value: [String, Number]
 }
 
-export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
+export type StatisticProps = ExtractPublicPropTypes<
+  typeof StatisticDefaultValueProps
+>
 
 export interface StatisticSlots {
   default?: () => VNode[]
@@ -26,7 +28,7 @@ export interface StatisticSlots {
 
 export default defineComponent({
   name: 'Statistic',
-  props: statisticProps,
+  props: StatisticDefaultValueProps,
   slots: Object as SlotsType<StatisticSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }

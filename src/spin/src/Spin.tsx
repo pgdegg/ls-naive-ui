@@ -6,7 +6,7 @@ import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
 import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
-import { exposedLoadingProps } from '../../_internal/loading/src/Loading'
+import { BaseLoadingExposedDefaultValueProps } from '../../_internal/loading/src/Loading'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
@@ -18,7 +18,7 @@ const STROKE_WIDTH = {
   large: 16
 }
 
-export const spinProps = {
+export const SpinDefaultValueProps = {
   ...(useTheme.props as ThemeProps<SpinTheme, SpinThemeOverrides>),
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
@@ -43,11 +43,11 @@ export const spinProps = {
     default: undefined
   },
   delay: Number,
-  ...exposedLoadingProps,
+  ...BaseLoadingExposedDefaultValueProps,
   strokeWidth: Number
 }
 
-export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
+export type SpinProps = ExtractPublicPropTypes<typeof SpinDefaultValueProps>
 
 export interface SpinSlots {
   default?: () => VNode[]
@@ -57,7 +57,7 @@ export interface SpinSlots {
 
 export default defineComponent({
   name: 'Spin',
-  props: spinProps,
+  props: SpinDefaultValueProps,
   slots: Object as SlotsType<SpinSlots>,
   setup(props) {
     if (__DEV__) {

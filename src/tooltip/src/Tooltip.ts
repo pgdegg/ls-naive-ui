@@ -7,23 +7,25 @@ import type { TooltipTheme, TooltipThemeOverrides } from '../styles'
 import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { NPopover } from '../../popover'
-import { popoverBaseProps } from '../../popover/src/Popover'
+import { PopoverBaseDefaultValueProps } from '../../popover/src/Popover'
 import { tooltipLight } from '../styles'
 
 export type TooltipInst = PopoverInst
 
-export const tooltipProps = {
-  ...popoverBaseProps,
+export const TooltipDefaultValueProps = {
+  ...PopoverBaseDefaultValueProps,
   ...(useTheme.props as ThemeProps<TooltipTheme, TooltipThemeOverrides>)
 }
 
-export type TooltipProps = ExtractPublicPropTypes<typeof tooltipProps>
+export type TooltipProps = ExtractPublicPropTypes<
+  typeof TooltipDefaultValueProps
+>
 
 export interface TooltipSlots extends PopoverSlots {}
 
 export default defineComponent({
   name: 'Tooltip',
-  props: tooltipProps,
+  props: TooltipDefaultValueProps,
   slots: Object as SlotsType<TooltipSlots>,
   __popover__: true,
   setup(props) {

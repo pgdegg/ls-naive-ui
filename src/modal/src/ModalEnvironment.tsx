@@ -3,12 +3,12 @@ import type { PropType } from 'vue'
 // this -> modal-index -> modal-style
 import { defineComponent, h, ref } from 'vue'
 import { call, omit } from '../../_utils'
-import NModal, { modalProps } from './Modal'
+import NModal, { ModalDefaultValueProps } from './Modal'
 
 export const NModalEnvironment = defineComponent({
   name: 'ModalEnvironment',
   props: {
-    ...modalProps,
+    ...ModalDefaultValueProps,
     internalKey: {
       type: String,
       required: true

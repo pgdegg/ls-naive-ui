@@ -89,7 +89,7 @@ import Pallete from './Pallete'
 import style from './styles/index.cssr'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 
-export const colorPickerProps = {
+export const ColorPickerDefaultValueProps = {
   ...(useTheme.props as ThemeProps<
     ColorPickerTheme,
     ColorPickerThemeOverrides
@@ -141,7 +141,9 @@ export const colorPickerProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
+export type ColorPickerProps = ExtractPublicPropTypes<
+  typeof ColorPickerDefaultValueProps
+>
 
 export interface ColorPickerSlots {
   default?: () => VNode[]
@@ -156,10 +158,12 @@ export interface ColorPickerSlots {
 
 type PopupProp = 'show' | 'defaultShow' | 'placement' | 'to'
 type ColorPickerSetupProps = Omit<
-  ExtractPropTypes<typeof colorPickerProps>,
+  ExtractPropTypes<typeof ColorPickerDefaultValueProps>,
   PopupProp
 >
-& Partial<Pick<ExtractPropTypes<typeof colorPickerProps>, PopupProp>>
+& Partial<
+  Pick<ExtractPropTypes<typeof ColorPickerDefaultValueProps>, PopupProp>
+>
 
 export function setupColorPicker(
   props: ColorPickerSetupProps,
@@ -791,7 +795,7 @@ export function setupColorPicker(
 export default defineComponent({
   name: 'ColorPicker',
   inheritAttrs: false,
-  props: colorPickerProps,
+  props: ColorPickerDefaultValueProps,
   slots: Object as SlotsType<ColorPickerSlots>,
   setup: setupColorPicker,
   render() {

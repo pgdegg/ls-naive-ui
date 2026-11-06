@@ -4,25 +4,30 @@ import type { FormItemInst, FormItemSlots } from './interface'
 import { defineComponent, h, ref } from 'vue'
 import { keep, keysOf } from '../../_utils'
 import NGridItem, {
-  gridItemPropKeys,
-  gridItemProps
+  GridItemDefaultValueProps,
+  gridItemPropKeys
 } from '../../grid/src/GridItem'
-import NFormItem, { formItemPropKeys, formItemProps } from './FormItem'
+import NFormItem, {
+  FormItemDefaultValueProps,
+  formItemPropKeys
+} from './FormItem'
 
-export const formItemGiProps = {
-  ...gridItemProps,
-  ...formItemProps
+export const FormItemGiDefaultValueProps = {
+  ...GridItemDefaultValueProps,
+  ...FormItemDefaultValueProps
 } as const
 
-export const formItemGiPropKeys = keysOf(formItemGiProps)
+export const formItemGiPropKeys = keysOf(FormItemGiDefaultValueProps)
 
-export type FormItemGiProps = ExtractPublicPropTypes<typeof formItemGiProps>
+export type FormItemGiProps = ExtractPublicPropTypes<
+  typeof FormItemGiDefaultValueProps
+>
 
 export default defineComponent({
   __GRID_ITEM__: true,
   name: 'FormItemGridItem',
   alias: ['FormItemGi'],
-  props: formItemGiProps,
+  props: FormItemGiDefaultValueProps,
   slots: Object as SlotsType<FormItemSlots>,
   setup() {
     const formItemInstRef = ref<FormItemInst | null>(null)

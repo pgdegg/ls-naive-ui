@@ -1,5 +1,6 @@
+export { MessageDefaultValueProps } from './src/message-props'
 export {
-  messageProviderProps,
+  MessageProviderDefaultValueProps,
   default as NMessageProvider
 } from './src/MessageProvider'
 export type {

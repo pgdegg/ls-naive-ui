@@ -8,7 +8,7 @@ import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
 import { itemRenderer } from './utils'
 
-export const menuItemGroupProps = {
+export const MenuOptionGroupDefaultValueProps = {
   ...useMenuChildProps,
   tmNode: {
     type: Object as PropType<TmNode>,
@@ -20,11 +20,11 @@ export const menuItemGroupProps = {
   }
 } as const
 
-export const menuItemGroupPropKeys = keysOf(menuItemGroupProps)
+export const menuItemGroupPropKeys = keysOf(MenuOptionGroupDefaultValueProps)
 
 export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',
-  props: menuItemGroupProps,
+  props: MenuOptionGroupDefaultValueProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
     const { NSubmenu } = MenuChild

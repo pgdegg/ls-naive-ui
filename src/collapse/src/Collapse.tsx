@@ -27,7 +27,7 @@ import { call, createInjectionKey, warn } from '../../_utils'
 import { collapseLight } from '../styles'
 import style from './styles/index.cssr'
 
-export const collapseProps = {
+export const CollapseDefaultValueProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme, CollapseThemeOverrides>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<
@@ -78,7 +78,9 @@ export const collapseProps = {
   }
 } as const
 
-export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
+export type CollapseProps = ExtractPublicPropTypes<
+  typeof CollapseDefaultValueProps
+>
 
 export interface CollapseSlots {
   default?: () => VNode[]
@@ -88,7 +90,7 @@ export interface CollapseSlots {
 }
 
 export interface NCollapseInjection {
-  props: ExtractPropTypes<typeof collapseProps>
+  props: ExtractPropTypes<typeof CollapseDefaultValueProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
   slots: CollapseSlots
@@ -104,7 +106,7 @@ export const collapseInjectionKey
 
 export default defineComponent({
   name: 'Collapse',
-  props: collapseProps,
+  props: CollapseDefaultValueProps,
   slots: Object as SlotsType<CollapseSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }

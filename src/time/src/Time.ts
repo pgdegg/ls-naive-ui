@@ -6,7 +6,7 @@ import { formatInTimeZone } from 'date-fns-tz'
 import { computed, createTextVNode, defineComponent, h } from 'vue'
 import { useLocale } from '../../_mixins'
 
-export const timeProps = {
+export const TimeDefaultValueProps = {
   time: {
     type: [Number, Date] as PropType<number | Date>,
     default: undefined // 在 unix 或非 unix 模式下，它应有不同的默认值
@@ -25,11 +25,11 @@ export const timeProps = {
   timeZone: String
 } as const
 
-export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
+export type TimeProps = ExtractPublicPropTypes<typeof TimeDefaultValueProps>
 
 export default defineComponent({
   name: 'Time',
-  props: timeProps,
+  props: TimeDefaultValueProps,
   setup(props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')

@@ -7,18 +7,18 @@ import { AddIcon } from '../../_internal/icons'
 import { omit, render } from '../../_utils'
 import { NIcon } from '../../icon'
 import { tabsInjectionKey } from './interface'
-import { tabPaneProps } from './TabPane'
+import { TabPaneDefaultValueProps } from './TabPane'
 import { isCardType } from './utils'
 
-export const tabProps = {
+export const TabDefaultValueProps = {
   internalType: String as PropType<TabsType>,
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
   internalCreatedByPane: Boolean,
-  ...omit(tabPaneProps, ['displayDirective'])
+  ...omit(TabPaneDefaultValueProps, ['displayDirective'])
 } as const
 
-export type TabProps = ExtractPublicPropTypes<typeof tabProps>
+export type TabProps = ExtractPublicPropTypes<typeof TabDefaultValueProps>
 
 export interface TabSlots {
   default?: () => VNode[]
@@ -29,7 +29,7 @@ export default defineComponent({
   __TAB__: true,
   inheritAttrs: false,
   name: 'Tab',
-  props: tabProps,
+  props: TabDefaultValueProps,
   slots: Object as SlotsType<TabSlots>,
   setup(props) {
     const {
